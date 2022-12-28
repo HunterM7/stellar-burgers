@@ -1,0 +1,39 @@
+//? === App Header ===
+
+// Imports
+@import '../../scss/vars';
+
+.header {
+	position: relative;
+	padding: 16px 0;
+
+	background-color: $bg-modal;
+}
+
+.container {
+}
+
+.nav {
+	display: grid;
+	grid-template-columns: repeat(2, min-content) auto;
+	align-items: center;
+	column-gap: 8px;
+
+	margin: 0 -20px;
+
+	& > a:last-of-type {
+		justify-self: end;
+	}
+}
+
+.logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}

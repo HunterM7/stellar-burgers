@@ -1,0 +1,37 @@
+//? === Index ===
+
+// Imports
+@import 'scss/normalize';
+@import 'scss/_fonts';
+@import 'scss/vars';
+
+h2 {
+	font-family: 'JetBrains Mono', sans-serif;
+	font-size: 36px;
+	font-weight: 700;
+	color: $text-primary;
+}
+
+h3 {
+	font-family: 'JetBrains Mono', sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+	color: $text-primary;
+}
+
+body {
+	font-family: 'JetBrains Mono', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: $text-primary;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+	width: 100%;
+	max-width: 1272px;
+	margin: 0 auto;
+	padding: 0 16px;
+}

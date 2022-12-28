@@ -1,0 +1,32 @@
+//? === Vars ===
+
+// Colors
+$text-primary: #f2f2f3;
+$text-secondary: #8585ad;
+$text-disabled: #3a3a55;
+
+$bg: #131316;
+$bg-modal: #1c1c21;
+$accent: #4c4cff;
+$input: #2f2f37;
+$success: #00cccc;
+$error: #e52b1a;
+
+// Gradients
+$gradient-button: linear-gradient(64deg, #801ab3 0%, #4c4cff 100%);
+$gradient-button-active: linear-gradient(
+		0deg,
+		rgba(0, 0, 0, 0.4),
+		rgba(0, 0, 0, 0.4)
+	),
+	$gradient-button;
+
+// Mixins
+@mixin noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* IE / Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
