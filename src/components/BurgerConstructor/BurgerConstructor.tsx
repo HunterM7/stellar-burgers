@@ -1,5 +1,5 @@
 // Files
-import styles from './BurgerConstructor.module.scss'
+// import styles from './BurgerConstructor.module.scss'
 
 const BurgerConstructor = () => {
 	return <section>BurgerConstructor</section>

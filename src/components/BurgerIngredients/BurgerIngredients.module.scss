@@ -23,17 +23,12 @@
 
 .ingredients {
 	overflow-y: auto;
+
+	// &__block {
+	// 	&:not(:last-of-type) {
+	// 		margin-bottom: 40px;
+	// 	}
+	// }
 }
 
-.list {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	column-gap: 24px;
-	row-gap: 32px;
 
-	padding: 0 16px;
-
-	&:not(:last-of-type) {
-		margin-bottom: 40px;
-	}
-}

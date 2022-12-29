@@ -3,6 +3,9 @@ import React from 'react'
 // Files
 import styles from './BurgerItem.module.scss'
 
+// Yandex Components
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+
 type BurgerItemType = {
 	img: string
 	price: number
@@ -21,7 +24,10 @@ const BurgerItem: React.FC<BurgerItemType> = ({
 				src={img}
 				alt='Ingredient'
 			/>
-			<div className={styles.price}>{price}</div>
+			<div className={styles.price}>
+				{price}
+				<CurrencyIcon type='primary' />
+			</div>
 			<p className={styles.title}>{title}</p>
 		</li>
 	)
