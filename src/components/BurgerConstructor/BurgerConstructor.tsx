@@ -2,7 +2,7 @@
 import styles from './BurgerConstructor.module.scss'
 
 const BurgerConstructor = () => {
-	return <div>BurgerConstructor</div>
+	return <section>BurgerConstructor</section>
 }
 
 export default BurgerConstructor

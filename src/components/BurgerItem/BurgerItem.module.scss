@@ -1,0 +1,30 @@
+//? === Burger Item ===
+
+.wrapper {
+	width: 100%;
+	max-width: 280px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 4px;
+}
+
+.img {
+	width: calc(100% - 16px * 2);
+	aspect-ratio: 2/1;
+
+	margin: 0 auto;
+}
+
+.price {
+	font-family: 'Iceland', Arial, Helvetica, sans-serif;
+	font-size: 28px;
+	line-height: 0.85;
+}
+
+.title {
+	height: 48px;
+	align-self: stretch;
+	text-align: center;
+}

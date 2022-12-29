@@ -34,9 +34,10 @@ const AppHeader = () => {
 		},
 	]
 
-	const headerLinks = linksList.map((link) => {
+	const headerLinks = linksList.map((link, i) => {
 		return (
 			<AppHeaderLink
+				key={i}
 				title={link.title}
 				link={link.link}
 				isActive={link.isActive}
@@ -48,7 +49,12 @@ const AppHeader = () => {
 
 	return (
 		<header className={styles.header}>
-			<div className={`container ${styles.container}`}>
+			<div
+				className={`
+					container
+					${styles.header__container}
+			`}
+			>
 				<nav className={styles.nav}>{headerLinks}</nav>
 
 				<div className={styles.logo}>

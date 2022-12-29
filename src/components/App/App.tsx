@@ -8,11 +8,14 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 
 function App() {
 	return (
-		<div className={styles.App}>
+		<>
 			<AppHeader />
-			<BurgerIngredients />
-			<BurgerConstructor />
-		</div>
+			<main className={`container ${styles.main}`}>
+				<h2 className={styles.title}>Соберите бургер</h2>
+				<BurgerIngredients />
+				<BurgerConstructor />
+			</main>
+		</>
 	)
 }
 
