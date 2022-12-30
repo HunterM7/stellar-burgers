@@ -1,5 +1,8 @@
 import React from 'react'
 
+// Types
+import { dataType } from '../../utils/data'
+
 // Files
 import styles from './IngredientsGroup.module.scss'
 
@@ -9,7 +12,7 @@ import BurgerItem from '../BurgerItem/BurgerItem'
 type IngredientsGroupType = {
 	id: number
 	title: string
-	data: any[]
+	data: dataType[]
 }
 
 const IngredientsGroup: React.FC<IngredientsGroupType> = ({
@@ -17,26 +20,25 @@ const IngredientsGroup: React.FC<IngredientsGroupType> = ({
 	title,
 	data,
 }) => {
+
 	// Items
-	const items = data.map((item) => {
-		return (
-			<BurgerItem
-				key={item._id}
-				img={item.image}
-				price={item.price}
-				title={item.name}
-			/>
-		)
-	})
+	const items = data.map((item) => (
+		<BurgerItem
+			key={item._id}
+			img={item.image}
+			price={item.price}
+			title={item.name}
+		/>
+	))
 
 	return (
-		<div
+		<li
 			id={`ingredients-block-${id}`}
-			className={styles.ingredients__block}
+			className={styles.wrapper}
 		>
 			<h3 className={styles.subtitle}>{title}</h3>
 			<ul className={styles.list}>{items}</ul>
-		</div>
+		</li>
 	)
 }
 

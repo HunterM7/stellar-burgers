@@ -1,1 +1,68 @@
 //? === Burger Constructor ===
+
+@import '../../scss/vars';
+
+.wrapper {
+	max-height: 100%;
+	overflow: auto;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: end;
+	row-gap: 40px;
+}
+
+.burgerConstructor {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	row-gap: 16px;
+
+	max-height: 100%;
+
+	overflow: auto;
+
+	&__items {
+		display: flex;
+		flex-direction: column;
+		row-gap: 16px;
+
+		padding: 0 16px;
+
+		@include scrollbar;
+	}
+}
+
+.blockedElement {
+	padding: 0 16px;
+}
+
+.draggableElement {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
+
+.orderBox {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	align-items: center;
+	column-gap: 40px;
+}
+
+.price {
+	@include font-digits-medium;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 8px;
+
+	svg {
+		width: 33px;
+		height: 33px;
+	}
+}

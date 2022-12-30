@@ -1,5 +1,7 @@
 //? === Burger Ingredients ===
 
+@import '../../scss/vars';
+
 .wrapper {
 	display: flex;
 	flex-direction: column;
@@ -7,8 +9,6 @@
 	max-height: 100%;
 
 	overflow-y: auto;
-
-	padding: 40px 0;
 }
 
 .tabs {
@@ -22,13 +22,9 @@
 }
 
 .ingredients {
-	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	row-gap: 40px;
 
-	// &__block {
-	// 	&:not(:last-of-type) {
-	// 		margin-bottom: 40px;
-	// 	}
-	// }
+	@include scrollbar;
 }
-
-

@@ -1,5 +1,14 @@
 //? === Ingredients Group ===
 
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	row-gap: 24px;
+}
+
+.title {
+}
+
 .list {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);

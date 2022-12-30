@@ -4,7 +4,10 @@ import React from 'react'
 import styles from './BurgerItem.module.scss'
 
 // Yandex Components
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import {
+	Counter,
+	CurrencyIcon,
+} from '@ya.praktikum/react-developer-burger-ui-components'
 
 type BurgerItemType = {
 	img: string
@@ -17,6 +20,9 @@ const BurgerItem: React.FC<BurgerItemType> = ({
 	price,
 	title,
 }) => {
+	// Count of BurgerItem
+	const [count, setCount] = React.useState<number>(0)
+
 	return (
 		<li className={styles.wrapper}>
 			<img
@@ -24,11 +30,17 @@ const BurgerItem: React.FC<BurgerItemType> = ({
 				src={img}
 				alt='Ingredient'
 			/>
+
 			<div className={styles.price}>
 				{price}
 				<CurrencyIcon type='primary' />
 			</div>
+
 			<p className={styles.title}>{title}</p>
+
+			{count ? (
+				<Counter count={count} size='default' />
+			) : null}
 		</li>
 	)
 }

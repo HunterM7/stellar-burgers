@@ -5,11 +5,12 @@
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: auto 1fr;
 	grid-template-areas: 'title title' 'block block';
-	grid-template-columns: auto 1fr;
 	column-gap: 40px;
 	row-gap: 20px;
 
 	flex: 1;
+
+	padding: 40px 0 52px;
 
 	overflow-y: auto;
 }
