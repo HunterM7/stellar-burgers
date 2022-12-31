@@ -4,20 +4,19 @@
 @import '../../scss/vars';
 
 .header {
-	position: relative;
 	padding: 16px 0;
 
-	background-color: $bg-modal;
+	position: relative;
+	z-index: 1000;
 
-	&__container {
-	}
+	background-color: $bg-modal;
 }
 
 .nav {
 	display: grid;
-	grid-template-columns: repeat(2, min-content) auto;
+	grid-template-columns: repeat(2, auto) 1fr;
 	align-items: center;
-	column-gap: 8px;
+	gap: 8px;
 
 	margin: 0 -20px;
 

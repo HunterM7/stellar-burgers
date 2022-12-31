@@ -1,38 +1,32 @@
+import React from 'react'
+
 // Files
 import styles from './AppHeader.module.scss'
 
 // Yandex Components
-import {
-	Logo,
-	ListIcon,
-	BurgerIcon,
-	ProfileIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components'
+import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Components
 import AppHeaderLink from './AppHeaderLink/AppHeaderLink'
 
-const AppHeader = () => {
+const AppHeader: React.FC = () => {
 	const linksList = [
 		{
 			title: 'Конструктор',
 			link: '#',
-			isActive: true,
-			children: <BurgerIcon type='primary' />,
 		},
 		{
 			title: 'Лента заказов',
 			link: '#',
-			isActive: false,
-			children: <ListIcon type='secondary' />,
 		},
 		{
 			title: 'Личный кабинет',
 			link: '#',
-			isActive: false,
-			children: <ProfileIcon type='secondary' />,
 		},
 	]
+
+	const [activeLink, setActiveLink] =
+		React.useState('Конструктор')
 
 	const headerLinks = linksList.map((link, i) => {
 		return (
@@ -40,21 +34,15 @@ const AppHeader = () => {
 				key={i}
 				title={link.title}
 				link={link.link}
-				isActive={link.isActive}
-			>
-				{link.children}
-			</AppHeaderLink>
+				isActive={activeLink === link.title}
+				setActiveLink={setActiveLink}
+			/>
 		)
 	})
 
 	return (
 		<header className={styles.header}>
-			<div
-				className={`
-					container
-					${styles.header__container}
-			`}
-			>
+			<div className='container'>
 				<nav className={styles.nav}>{headerLinks}</nav>
 
 				<div className={styles.logo}>

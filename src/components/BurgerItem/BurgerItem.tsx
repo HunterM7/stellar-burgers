@@ -2,6 +2,7 @@ import React from 'react'
 
 // Files
 import styles from './BurgerItem.module.scss'
+import { dataType } from '../../utils/data'
 
 // Yandex Components
 import {
@@ -9,38 +10,47 @@ import {
 	CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-type BurgerItemType = {
-	img: string
-	price: number
-	title: string
-}
+// Components
+import IngredientCard from '../IngredientCard/IngredientCard'
 
-const BurgerItem: React.FC<BurgerItemType> = ({
-	img,
-	price,
-	title,
-}) => {
+const BurgerItem: React.FC<dataType> = (data) => {
 	// Count of BurgerItem
 	const [count, setCount] = React.useState<number>(0)
+
+	// Modal PopUp
+	const [isPopupActive, setIsPopupActive] =
+		React.useState<boolean>(false)
+
+	const handlePopup = () => {
+		setIsPopupActive((prev) => !prev)
+	}
 
 	return (
 		<li className={styles.wrapper}>
 			<img
-				className={styles.img}
-				src={img}
+				src={data.image}
 				alt='Ingredient'
+				className={styles.img}
+				onClick={handlePopup}
 			/>
 
 			<div className={styles.price}>
-				{price}
+				{data.price}
 				<CurrencyIcon type='primary' />
 			</div>
 
-			<p className={styles.title}>{title}</p>
+			<p className={styles.title}>{data.name}</p>
 
 			{count ? (
 				<Counter count={count} size='default' />
 			) : null}
+
+			{isPopupActive && (
+				<IngredientCard
+					data={data}
+					handlePopup={handlePopup}
+				/>
+			)}
 		</li>
 	)
 }

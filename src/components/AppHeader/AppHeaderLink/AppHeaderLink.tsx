@@ -1,21 +1,55 @@
-import React, { PropsWithChildren } from 'react'
+import React, { SetStateAction } from 'react'
 
 // Files
 import styles from './AppHeaderLink.module.scss'
+
+// Yandex Components
+import {
+	BurgerIcon,
+	ListIcon,
+	ProfileIcon,
+} from '@ya.praktikum/react-developer-burger-ui-components'
 
 type AppHeaderLinkType = {
 	link: string
 	title: string
 	isActive: boolean
-	children: any
+	setActiveLink: React.Dispatch<SetStateAction<string>>
 }
 
-const AppHeaderLink: React.FC<
-	PropsWithChildren<AppHeaderLinkType>
-> = ({ link, title, isActive, children }) => {
+const AppHeaderLink: React.FC<AppHeaderLinkType> = ({
+	link,
+	title,
+	isActive,
+	setActiveLink,
+}) => {
+	// Handle click on link
+	const handleClick = () => {
+		setActiveLink(title)
+	}
+
 	return (
-		<a className={styles.wrapper} href={link}>
-			{children}
+		<a
+			className={styles.wrapper}
+			href={link}
+			onClick={handleClick}
+		>
+			{title === 'Конструктор' && (
+				<BurgerIcon
+					type={isActive ? 'primary' : 'secondary'}
+				/>
+			)}
+			{title === 'Лента заказов' && (
+				<ListIcon
+					type={isActive ? 'primary' : 'secondary'}
+				/>
+			)}
+			{title === 'Личный кабинет' && (
+				<ProfileIcon
+					type={isActive ? 'primary' : 'secondary'}
+				/>
+			)}
+
 			<span
 				className={`
 				${styles.text}

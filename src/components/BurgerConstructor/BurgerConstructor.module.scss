@@ -9,14 +9,14 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: end;
+	align-items: flex-end;
 	row-gap: 40px;
 }
 
 .burgerConstructor {
 	display: flex;
 	flex-direction: column;
-	align-items: end;
+	align-items: flex-end;
 	row-gap: 16px;
 
 	max-height: 100%;
@@ -48,7 +48,7 @@
 .orderBox {
 	display: flex;
 	flex-direction: row;
-	justify-content: end;
+	justify-content: flex-end;
 	align-items: center;
 	column-gap: 40px;
 }

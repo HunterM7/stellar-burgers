@@ -1,0 +1,37 @@
+//? === Order Info ===
+
+@import '../../scss/vars';
+
+.wrapper {
+	width: 100%;
+	max-width: 540px;
+
+	margin: 0 auto;
+	padding: 120px 10px;
+
+	text-align: center;
+}
+
+.orderId {
+	@include font-digits-large;
+
+	@include glow;
+
+	margin-bottom: 32px;
+}
+
+.title {
+	margin-bottom: 60px;
+}
+
+.img {
+	margin-bottom: 60px;
+}
+
+.subtitle {
+	margin-bottom: 8px;
+}
+
+.desc {
+	color: $text-secondary;
+}

@@ -20,15 +20,9 @@ const IngredientsGroup: React.FC<IngredientsGroupType> = ({
 	title,
 	data,
 }) => {
-
 	// Items
-	const items = data.map((item) => (
-		<BurgerItem
-			key={item._id}
-			img={item.image}
-			price={item.price}
-			title={item.name}
-		/>
+	const items = data.map((item, i) => (
+		<BurgerItem key={i} {...item} />
 	))
 
 	return (

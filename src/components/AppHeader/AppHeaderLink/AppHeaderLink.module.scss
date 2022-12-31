@@ -7,16 +7,17 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	column-gap: 8px;
+	gap: 8px;
 
 	padding: 16px 20px;
 
 	border-radius: 100px;
+
+	@include noselect;
 }
 
 .text {
 	color: $text-secondary;
-	white-space: nowrap;
 
 	&.active {
 		color: $text-primary;

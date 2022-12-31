@@ -1,3 +1,5 @@
+import React from 'react'
+
 // Files
 import styles from './BurgerConstructor.module.scss'
 import { data } from '../../utils/data'
@@ -9,6 +11,9 @@ import {
 	CurrencyIcon,
 	DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+
+// Components
+import OrderInfo from '../OrderInfo/OrderInfo'
 
 const BurgerConstructor: React.FC = () => {
 	// Burger contents
@@ -30,6 +35,13 @@ const BurgerConstructor: React.FC = () => {
 				/>
 			</div>
 		))
+
+	// Order Popup
+	const [isPopupActive, setIsPopupActive] =
+		React.useState<boolean>(false)
+
+	const handlePopup = () =>
+		setIsPopupActive((prev) => !prev)
 
 	return (
 		<section className={styles.wrapper}>
@@ -69,10 +81,15 @@ const BurgerConstructor: React.FC = () => {
 					htmlType='button'
 					type='primary'
 					size='large'
+					onClick={handlePopup}
 				>
 					Оформить заказ
 				</Button>
 			</div>
+
+			{isPopupActive && (
+				<OrderInfo handlePopup={handlePopup} />
+			)}
 		</section>
 	)
 }

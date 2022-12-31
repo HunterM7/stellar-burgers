@@ -12,6 +12,12 @@
 	row-gap: 4px;
 
 	position: relative;
+
+	&:hover {
+		.img {
+			transform: scale(1.1);
+		}
+	}
 }
 
 .img {
@@ -19,6 +25,10 @@
 	aspect-ratio: 2/1;
 
 	margin: 0 auto;
+
+	transition: transform $trans-fast;
+
+	cursor: pointer;
 }
 
 .price {

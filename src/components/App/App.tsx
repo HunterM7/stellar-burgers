@@ -1,3 +1,5 @@
+import React from 'react'
+
 // Files
 import styles from './App.module.scss'
 
@@ -6,7 +8,7 @@ import AppHeader from '../AppHeader/AppHeader'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 
-function App() {
+const App: React.FC = () => {
 	return (
 		<>
 			<AppHeader />
