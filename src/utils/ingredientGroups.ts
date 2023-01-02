@@ -1,10 +1,10 @@
-interface ingredientGroupType {
+interface IngredientGroupType {
 	id: number
 	title: string
 	type: string
 }
 
-export const ingredientGroups: ingredientGroupType[] = [
+export const ingredientGroups: IngredientGroupType[] = [
 	{
 		id: 1,
 		title: 'Булки',

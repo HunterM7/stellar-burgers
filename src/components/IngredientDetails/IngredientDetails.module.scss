@@ -2,47 +2,6 @@
 
 @import '../../scss/vars';
 
-.wrapper {
-	display: grid;
-	grid-template-rows: auto 1fr;
-	grid-template-columns: 1fr auto;
-	grid-template-areas:
-		'heading btn'
-		'content content';
-	align-items: center;
-
-	padding: 40px 40px 60px;
-
-	& > svg {
-		cursor: pointer;
-		width: 36px;
-		height: 36px;
-
-		padding: 6px;
-
-		position: relative;
-		right: -6px;
-	}
-}
-
-.heading {
-	padding: 12px 0;
-
-	@include noselect;
-}
-
-.content {
-	width: 100%;
-	max-width: 520px;
-
-	margin: 0 auto;
-
-	display: flex;
-	flex-direction: column;
-
-	grid-area: content;
-}
-
 .img {
 	width: 100%;
 	max-width: 480px;

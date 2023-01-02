@@ -1,7 +1,8 @@
 import React from 'react'
 
-// Files
+// Files & Data
 import styles from './AppHeader.module.scss'
+import { linksList } from '../../utils/linksList'
 
 // Yandex Components
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -10,23 +11,9 @@ import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 import AppHeaderLink from './AppHeaderLink/AppHeaderLink'
 
 const AppHeader: React.FC = () => {
-	const linksList = [
-		{
-			title: 'Конструктор',
-			link: '#',
-		},
-		{
-			title: 'Лента заказов',
-			link: '#',
-		},
-		{
-			title: 'Личный кабинет',
-			link: '#',
-		},
-	]
-
-	const [activeLink, setActiveLink] =
-		React.useState('Конструктор')
+	const [activeLink, setActiveLink] = React.useState(
+		linksList[0].title,
+	)
 
 	const headerLinks = linksList.map((link, i) => {
 		return (

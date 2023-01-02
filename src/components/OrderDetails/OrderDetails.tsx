@@ -1,22 +1,22 @@
 import React from 'react'
 
 // Files
-import styles from './OrderInfo.module.scss'
+import styles from './OrderDetails.module.scss'
 import orderSVG from '../../assets/images/orderDoneSVG.svg'
 
 // Components
-import ModalWindow from '../ModalWindow/ModalWindow'
+import Modal from '../Modal/Modal'
 
 interface OrderInfoType {
-	handlePopup: () => void
+	toggleModal: () => void
 }
 
 const OrderInfo: React.FC<OrderInfoType> = ({
-	handlePopup,
+	toggleModal,
 }) => {
 	return (
-		<ModalWindow handlePopup={handlePopup}>
-			<div className={styles.wrapper}>
+		<Modal toggleModal={toggleModal}>
+			<>
 				<p className={styles.orderId}>034536</p>
 				<h3 className={styles.title}>
 					идентификатор заказа
@@ -32,8 +32,8 @@ const OrderInfo: React.FC<OrderInfoType> = ({
 				<p className={styles.desc}>
 					Дождитесь готовности на орбитальной станции
 				</p>
-			</div>
-		</ModalWindow>
+			</>
+		</Modal>
 	)
 }
 

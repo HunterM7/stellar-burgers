@@ -1,5 +1,8 @@
 import React from 'react'
 
+// Hooks
+import useModal from '../../hooks/useModal'
+
 // Files
 import styles from './BurgerConstructor.module.scss'
 import { data } from '../../utils/data'
@@ -13,7 +16,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Components
-import OrderInfo from '../OrderInfo/OrderInfo'
+import OrderDetails from '../OrderDetails/OrderDetails'
 
 const BurgerConstructor: React.FC = () => {
 	// Burger contents
@@ -36,12 +39,8 @@ const BurgerConstructor: React.FC = () => {
 			</div>
 		))
 
-	// Order Popup
-	const [isPopupActive, setIsPopupActive] =
-		React.useState<boolean>(false)
-
-	const handlePopup = () =>
-		setIsPopupActive((prev) => !prev)
+	// Modal Window
+	const { isModalActive, toggleModal } = useModal(false)
 
 	return (
 		<section className={styles.wrapper}>
@@ -81,14 +80,14 @@ const BurgerConstructor: React.FC = () => {
 					htmlType='button'
 					type='primary'
 					size='large'
-					onClick={handlePopup}
+					onClick={toggleModal}
 				>
 					Оформить заказ
 				</Button>
 			</div>
 
-			{isPopupActive && (
-				<OrderInfo handlePopup={handlePopup} />
+			{isModalActive && (
+				<OrderDetails toggleModal={toggleModal} />
 			)}
 		</section>
 	)

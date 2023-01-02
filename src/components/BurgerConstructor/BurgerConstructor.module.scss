@@ -3,14 +3,13 @@
 @import '../../scss/vars';
 
 .wrapper {
-	max-height: 100%;
-	overflow: auto;
-
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-end;
 	row-gap: 40px;
+
+	overflow-y: auto;
 }
 
 .burgerConstructor {
@@ -21,7 +20,7 @@
 
 	max-height: 100%;
 
-	overflow: auto;
+	overflow-y: auto;
 
 	&__items {
 		display: flex;

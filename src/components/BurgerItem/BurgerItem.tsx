@@ -1,5 +1,8 @@
 import React from 'react'
 
+// Hooks
+import useModal from '../../hooks/useModal'
+
 // Files
 import styles from './BurgerItem.module.scss'
 import { dataType } from '../../utils/data'
@@ -11,47 +14,43 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Components
-import IngredientCard from '../IngredientCard/IngredientCard'
+import IngredientDetails from '../IngredientDetails/IngredientDetails'
 
 const BurgerItem: React.FC<dataType> = (data) => {
 	// Count of BurgerItem
 	const [count, setCount] = React.useState<number>(0)
 
-	// Modal PopUp
-	const [isPopupActive, setIsPopupActive] =
-		React.useState<boolean>(false)
-
-	const handlePopup = () => {
-		setIsPopupActive((prev) => !prev)
-	}
+	// Modal Window
+	const { isModalActive, toggleModal } = useModal(false)
 
 	return (
-		<li className={styles.wrapper}>
-			<img
-				src={data.image}
-				alt='Ingredient'
-				className={styles.img}
-				onClick={handlePopup}
-			/>
+		<>
+			<li className={styles.wrapper} onClick={toggleModal}>
+				<img
+					src={data.image}
+					alt='Ingredient'
+					className={styles.img}
+				/>
 
-			<div className={styles.price}>
-				{data.price}
-				<CurrencyIcon type='primary' />
-			</div>
+				<div className={styles.price}>
+					{data.price}
+					<CurrencyIcon type='primary' />
+				</div>
 
-			<p className={styles.title}>{data.name}</p>
+				<p className={styles.title}>{data.name}</p>
 
-			{count ? (
-				<Counter count={count} size='default' />
-			) : null}
+				{count ? (
+					<Counter count={count} size='default' />
+				) : null}
+			</li>
 
-			{isPopupActive && (
-				<IngredientCard
+			{isModalActive && (
+				<IngredientDetails
 					data={data}
-					handlePopup={handlePopup}
+					toggleModal={toggleModal}
 				/>
 			)}
-		</li>
+		</>
 	)
 }
 

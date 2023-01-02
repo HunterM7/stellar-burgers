@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-scroll'
 
-// Files
+// Files & Data
 import styles from './BurgerIngredients.module.scss'
 import { data } from '../../utils/data'
 import { ingredientGroups } from '../../utils/ingredientGroups'
