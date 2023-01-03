@@ -1,7 +1,7 @@
 interface IngredientGroupType {
-  id: number;
-  title: string;
-  type: string;
+  id: number
+  title: string
+  type: string
 }
 
 export const ingredientGroups: IngredientGroupType[] = [

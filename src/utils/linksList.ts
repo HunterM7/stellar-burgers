@@ -1,6 +1,6 @@
 export interface LinkListType {
-  title: string;
-  link: string;
+  title: string
+  link: string
 }
 
 export const linksList: LinkListType[] = [

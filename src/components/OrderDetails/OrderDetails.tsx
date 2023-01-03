@@ -9,7 +9,7 @@ import Modal from '../Modal/Modal'
 import styles from './OrderDetails.module.scss'
 
 interface OrderInfoType {
-  toggleModal: () => void;
+  toggleModal: () => void
 }
 
 const OrderInfo: React.FC<OrderInfoType> = ({ toggleModal }) => {

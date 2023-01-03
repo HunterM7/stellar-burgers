@@ -9,8 +9,8 @@ import Modal from '../Modal/Modal'
 import styles from './IngredientDetails.module.scss'
 
 interface IngredientDetailsType {
-  data: dataType;
-  toggleModal: () => void;
+  data: dataType
+  toggleModal: () => void
 }
 
 const IngredientDetails: React.FC<IngredientDetailsType> = ({ data, toggleModal }) => {

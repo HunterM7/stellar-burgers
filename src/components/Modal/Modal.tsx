@@ -14,9 +14,9 @@ import styles from './Modal.module.scss'
 import ModalOverlay from './ModalOverlay/ModalOverlay'
 
 interface ModalType {
-  title?: string;
-  toggleModal: () => void;
-  children?: React.ReactElement;
+  title?: string
+  toggleModal: () => void
+  children?: React.ReactElement
 }
 
 const Modal: React.FC<PropsWithChildren<ModalType>> = ({ title, toggleModal, children }) => {

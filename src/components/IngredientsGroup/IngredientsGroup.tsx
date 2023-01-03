@@ -11,9 +11,9 @@ import styles from './IngredientsGroup.module.scss'
 // Components
 
 type IngredientsGroupType = {
-  id: number,
-  title: string,
-  data: dataType[],
+  id: number
+  title: string
+  data: dataType[]
 }
 
 const IngredientsGroup: React.FC<IngredientsGroupType> = ({ id, title, data }) => {

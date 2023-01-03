@@ -33,8 +33,7 @@ const AppHeaderLink: React.FC<AppHeaderLinkType> = ({ link, title, isActive, set
         className={`
 				${styles.text}
 				${isActive ? styles.active : ''}
-			`}
-      >
+			`}>
         {title}
       </span>
     </a>
