@@ -19,7 +19,11 @@ interface ModalType {
   children?: React.ReactElement
 }
 
-const Modal: React.FC<PropsWithChildren<ModalType>> = ({ title, toggleModal, children }) => {
+const Modal: React.FC<PropsWithChildren<ModalType>> = ({
+  title,
+  toggleModal,
+  children,
+}) => {
   useKeyPress('Escape', toggleModal)
 
   const heading = <h2 className={styles.title}>{title}</h2>

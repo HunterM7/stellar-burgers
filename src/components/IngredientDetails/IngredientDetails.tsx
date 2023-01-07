@@ -13,7 +13,10 @@ interface IngredientDetailsType {
   toggleModal: () => void
 }
 
-const IngredientDetails: React.FC<IngredientDetailsType> = ({ data, toggleModal }) => {
+const IngredientDetails: React.FC<IngredientDetailsType> = ({
+  data,
+  toggleModal,
+}) => {
   // Nutrients
   const nutrientsInfo = [
     { title: 'Калории,ккал', data: data.calories },

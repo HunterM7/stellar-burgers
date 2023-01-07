@@ -1,7 +1,10 @@
 import React from 'react'
 
 // Yandex Components
-import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import {
+  Counter,
+  CurrencyIcon,
+} from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Hooks
 import useModal from '../../hooks/useModal'
@@ -36,7 +39,9 @@ const BurgerItem: React.FC<dataType> = (data) => {
         {count ? <Counter count={count} size="default" /> : null}
       </li>
 
-      {isModalActive && <IngredientDetails data={data} toggleModal={toggleModal} />}
+      {isModalActive && (
+        <IngredientDetails data={data} toggleModal={toggleModal} />
+      )}
     </>
   )
 }
