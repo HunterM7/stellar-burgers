@@ -53,7 +53,15 @@
     ],
     "comma-dangle": ["warn", "always-multiline"],
     "semi": ["warn", "never"],
-    "prettier/prettier": ["warn", {}],
+    "prettier/prettier": [
+      "warn",
+      {
+        "indent": 2,
+        "singleQuote": true,
+        "jsxSingleQuote": false,
+        "prettier.semi": false,
+      }
+    ],
     "import/order": [
       "warn",
       {

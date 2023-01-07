@@ -13,14 +13,18 @@ interface OrderInfoType {
 }
 
 const OrderInfo: React.FC<OrderInfoType> = ({ toggleModal }) => {
+  const [orderId, setOrderId] = React.useState<string>('034536')
+
   return (
     <Modal toggleModal={toggleModal}>
       <>
-        <p className={styles.orderId}>034536</p>
+        <p className={styles.orderId}>{orderId}</p>
         <h3 className={styles.title}>идентификатор заказа</h3>
         <img className={styles.img} src={orderSVG} alt="Order" />
         <p className={styles.subtitle}>Ваш заказ начали готовить</p>
-        <p className={styles.desc}>Дождитесь готовности на орбитальной станции</p>
+        <p className={styles.desc}>
+          Дождитесь готовности на орбитальной станции
+        </p>
       </>
     </Modal>
   )

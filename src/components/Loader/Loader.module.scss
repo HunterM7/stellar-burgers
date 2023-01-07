@@ -1,0 +1,85 @@
+//? === Loader ===
+
+@import '../../scss/vars';
+
+.wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.ring {
+	width: 180px;
+	aspect-ratio: 1/1;
+
+	border-radius: 50%;
+
+	position: relative;
+
+	animation: ring 2s linear infinite;
+
+	&::before {
+		content: '';
+		width: 100%;
+		height: 100%;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		border-radius: 50%;
+		box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+	}
+}
+
+.text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	animation: text 3s linear infinite;
+}
+
+@keyframes ring {
+	0% {
+		transform: rotate(0deg);
+		box-shadow: 1px 5px 2px #801ab3;
+	}
+	33% {
+		transform: rotate(120deg);
+		box-shadow: 1px 5px 2px $success;
+	}
+	66% {
+		transform: rotate(240deg);
+		box-shadow: 1px 5px 2px $accent;
+	}
+	100% {
+		transform: rotate(360deg);
+		box-shadow: 1px 5px 2px #801ab3;
+	}
+}
+
+@keyframes text {
+	0% {
+		color: $text-primary;
+	}
+	30% {
+		color: $text-primary;
+	}
+	50% {
+		color: $bg;
+	}
+	70% {
+		color: $text-primary;
+	}
+	100% {
+		color: $text-primary;
+	}
+}

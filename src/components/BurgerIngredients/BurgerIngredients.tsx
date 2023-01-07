@@ -1,20 +1,26 @@
 import React from 'react'
 import { Link } from 'react-scroll'
 
-// Files & Data
+// Yandex Components
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { data } from '../../utils/data'
+// Data
 import { ingredientGroups } from '../../utils/ingredientGroups'
-
-// Yandex Components
 
 // Components
 import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
 
+// Types
+import { dataType } from '../../utils/data'
+
+// Files
 import styles from './BurgerIngredients.module.scss'
 
-const Ingredients = () => {
+interface BurgerIngredientsType {
+  data: dataType[]
+}
+
+const BurgerIngredients: React.FC<BurgerIngredientsType> = ({ data }) => {
   // Tabs
   const [currentTab, setCurrentTab] = React.useState<string>('')
 
@@ -55,4 +61,4 @@ const Ingredients = () => {
   )
 }
 
-export default Ingredients
+export default BurgerIngredients

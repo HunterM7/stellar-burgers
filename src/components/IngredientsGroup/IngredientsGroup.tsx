@@ -18,7 +18,7 @@ type IngredientsGroupType = {
 
 const IngredientsGroup: React.FC<IngredientsGroupType> = ({ id, title, data }) => {
   // Items
-  const items = data.map((item, i) => <BurgerItem key={i} {...item} />)
+  const items = data ? data.map((item, i) => <BurgerItem key={i} {...item} />) : data
 
   return (
     <li id={`ingredients-block-${id}`} className={styles.wrapper}>

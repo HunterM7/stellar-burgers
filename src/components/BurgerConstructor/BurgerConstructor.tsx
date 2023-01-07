@@ -1,6 +1,6 @@
 import React from 'react'
 
-// Hooks
+// Yandex Components
 import {
   Button,
   ConstructorElement,
@@ -8,26 +8,34 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Hooks
 import useModal from '../../hooks/useModal'
 
 // Files
-import { data } from '../../utils/data'
-
-// Yandex Components
+import { dataType } from '../../utils/data'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'
 
+// Styles
 import styles from './BurgerConstructor.module.scss'
 
-const BurgerConstructor: React.FC = () => {
+interface BurgerConstructorType {
+  data: dataType[]
+}
+
+const BurgerConstructor: React.FC<BurgerConstructorType> = ({ data }) => {
   // Burger contents
   const burgerContents = data
     .filter((item) => item.type === 'sause' || item.type === 'main')
     .map((item) => (
       <div key={item._id} className={styles.draggableElement}>
         <DragIcon type="primary" />
-        <ConstructorElement text={item.name} price={item.price} thumbnail={item.image} />
+        <ConstructorElement
+          text={item.name}
+          price={item.price}
+          thumbnail={item.image}
+        />
       </div>
     ))
 
@@ -66,7 +74,11 @@ const BurgerConstructor: React.FC = () => {
           <CurrencyIcon type="primary" />
         </div>
 
-        <Button htmlType="button" type="primary" size="large" onClick={toggleModal}>
+        <Button
+          htmlType="button"
+          type="primary"
+          size="large"
+          onClick={toggleModal}>
           Оформить заказ
         </Button>
       </div>
