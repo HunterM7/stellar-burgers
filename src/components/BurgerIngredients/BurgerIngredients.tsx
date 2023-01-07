@@ -34,7 +34,10 @@ const BurgerIngredients: React.FC<BurgerIngredientsType> = ({ data }) => {
       offset={-20}
       containerId="ingredients"
       onSetActive={() => setCurrentTab(tab.title)}>
-      <Tab value={tab.title} active={currentTab === tab.title} onClick={setCurrentTab}>
+      <Tab
+        value={tab.title}
+        active={currentTab === tab.title}
+        onClick={setCurrentTab}>
         {tab.title}
       </Tab>
     </Link>

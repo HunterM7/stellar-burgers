@@ -59,7 +59,7 @@
         "indent": 2,
         "singleQuote": true,
         "jsxSingleQuote": false,
-        "prettier.semi": false,
+        "prettier.semi": false
       }
     ],
     "import/order": [
@@ -82,7 +82,7 @@
       "warn",
       {
         "multiline": {
-          "delimiter": "none", // comma | semi | none
+          "delimiter": "none",
           "requireLast": true
         },
         "singleline": {

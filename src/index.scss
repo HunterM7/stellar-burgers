@@ -20,11 +20,13 @@ body {
 }
 
 #root {
-	width: 100vw;
+	width: 100%;
 	height: 100vh;
 
 	display: flex;
 	flex-direction: column;
+	// display: grid;
+	// grid-template-rows: 88px 1fr;
 }
 
 .container {

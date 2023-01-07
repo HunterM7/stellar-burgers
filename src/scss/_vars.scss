@@ -44,15 +44,18 @@ $trans-medium: 0.8s $cubic;
 	overflow-y: overlay;
 
 	&::-webkit-scrollbar {
-		width: 8px;
+		width: 12px;
 	}
 
 	&::-webkit-scrollbar-track {
+		border-radius: 6px;
 		background-color: $input;
 		// margin-block-end: 3em;
 	}
 
 	&::-webkit-scrollbar-thumb {
+		border-radius: 6px;
+		border: 3px solid $input;
 		background-color: $text-secondary;
 
 		&:hover {

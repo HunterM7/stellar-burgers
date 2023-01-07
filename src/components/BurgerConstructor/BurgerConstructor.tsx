@@ -29,14 +29,14 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({ data }) => {
   const burgerContents = data
     .filter((item) => item.type === 'sause' || item.type === 'main')
     .map((item) => (
-      <div key={item._id} className={styles.draggableElement}>
+      <li key={item._id} className={styles.draggableElement}>
         <DragIcon type="primary" />
         <ConstructorElement
           text={item.name}
           price={item.price}
           thumbnail={item.image}
         />
-      </div>
+      </li>
     ))
 
   // Modal Window
@@ -55,7 +55,9 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({ data }) => {
           />
         </div>
 
-        <div className={styles.burgerConstructor__items}>{burgerContents}</div>
+        <div className={styles.ingredients}>
+          <ul className={styles.ingredients__container}>{burgerContents}</ul>
+        </div>
 
         <div className={styles.blockedElement}>
           <ConstructorElement
