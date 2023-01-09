@@ -6,19 +6,11 @@ import AppHeader from '../AppHeader/AppHeader'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 
-// Types
-import { dataType } from '../../utils/data'
-
 // Hooks
 import useFetchIngredients from '../../hooks/useFetchIngredients'
 
-// Files
+// Styles
 import styles from './App.module.scss'
-
-export interface stateType {
-  isLoading: boolean
-  data: dataType[]
-}
 
 const App: React.FC = () => {
   const url = 'https://norma.nomoreparties.space/api/ingredients'

@@ -1,6 +1,6 @@
 import React from 'react'
 
-// Files
+// Styles
 import styles from './ModalOverlay.module.scss'
 
 type ModalOverlayType = {

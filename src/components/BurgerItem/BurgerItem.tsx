@@ -1,6 +1,4 @@
 import React from 'react'
-
-// Yandex Components
 import {
   Counter,
   CurrencyIcon,
@@ -10,11 +8,12 @@ import {
 import useModal from '../../hooks/useModal'
 
 // Files
-import { dataType } from '../../utils/data'
+import { dataType } from '../../utils/types'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 
+// Styles
 import styles from './BurgerItem.module.scss'
 
 const BurgerItem: React.FC<dataType> = (data) => {

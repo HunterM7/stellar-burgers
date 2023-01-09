@@ -1,14 +1,13 @@
 import React from 'react'
 
-// Types
-import { dataType } from '../../utils/data'
-
 // Files
-import BurgerItem from '../BurgerItem/BurgerItem'
-
-import styles from './IngredientsGroup.module.scss'
+import { dataType } from '../../utils/types'
 
 // Components
+import BurgerItem from '../BurgerItem/BurgerItem'
+
+// Styles
+import styles from './IngredientsGroup.module.scss'
 
 type IngredientsGroupType = {
   id: number

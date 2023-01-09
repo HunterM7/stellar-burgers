@@ -1,6 +1,4 @@
 import React from 'react'
-
-// Yandex Components
 import {
   Button,
   ConstructorElement,
@@ -12,7 +10,7 @@ import {
 import useModal from '../../hooks/useModal'
 
 // Files
-import { dataType } from '../../utils/data'
+import { dataType } from '../../utils/types'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'

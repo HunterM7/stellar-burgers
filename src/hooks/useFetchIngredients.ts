@@ -1,18 +1,17 @@
 import React from 'react'
 
-import { dataType } from '../utils/data'
-
-type data = dataType[]
-type isLoading = boolean
-type hasError = boolean
+// Types
+import { dataType, hasError, isLoading } from '../utils/types'
 
 interface stateType {
-  data: data
+  data: dataType[]
   isLoading: isLoading
   hasError: hasError
 }
 
-const useFetchIngredients = (url: string): [data, isLoading, hasError] => {
+const useFetchIngredients = (
+  url: string,
+): [dataType[], isLoading, hasError] => {
   const [state, setState] = React.useState<stateType>({
     data: [],
     isLoading: true,
@@ -23,7 +22,7 @@ const useFetchIngredients = (url: string): [data, isLoading, hasError] => {
     fetch(url)
       .then((res) => res.json() as Promise<{ data: dataType[] }>)
       .then((json) => {
-        //! Remove setTimeout
+        //! Remove setTimeout. Only for Loading example
         setTimeout(() => {
           setState((prevState) => {
             return { ...prevState, isLoading: false, data: json.data }
@@ -31,7 +30,7 @@ const useFetchIngredients = (url: string): [data, isLoading, hasError] => {
         }, 1000)
       })
       .catch((error) => {
-        //! Remove setTimeout
+        //! Remove setTimeout. Only for Loading example
         setTimeout(() => {
           setState((prevState) => {
             return { ...prevState, isLoading: false, hasError: true }

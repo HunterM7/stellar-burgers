@@ -1,17 +1,15 @@
 import React, { PropsWithChildren } from 'react'
 import { createPortal } from 'react-dom'
-
-// Yandex Components
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Hooks
 import useKeyPress from '../../hooks/useKeyPress'
 
-// Files
-import styles from './Modal.module.scss'
-
 // Components
 import ModalOverlay from './ModalOverlay/ModalOverlay'
+
+// Styles
+import styles from './Modal.module.scss'
 
 interface ModalType {
   title?: string

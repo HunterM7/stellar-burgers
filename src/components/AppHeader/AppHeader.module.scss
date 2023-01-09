@@ -28,6 +28,8 @@
 }
 
 .logo {
+	height: 50px;
+
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -37,4 +39,8 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+
+	svg {
+		height: 100%;
+	}
 }

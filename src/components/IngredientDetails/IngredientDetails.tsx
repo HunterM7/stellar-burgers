@@ -1,11 +1,12 @@
 import React from 'react'
 
 // Files
-import { dataType } from '../../utils/data'
+import { dataType } from '../../utils/types'
 
 // Components
 import Modal from '../Modal/Modal'
 
+// Styles
 import styles from './IngredientDetails.module.scss'
 
 interface IngredientDetailsType {

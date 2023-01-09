@@ -1,19 +1,17 @@
 import React from 'react'
 import { Link } from 'react-scroll'
-
-// Yandex Components
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Data
+// Files
 import { ingredientGroups } from '../../utils/ingredientGroups'
 
 // Components
 import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
 
 // Types
-import { dataType } from '../../utils/data'
+import { dataType } from '../../utils/types'
 
-// Files
+// Styles
 import styles from './BurgerIngredients.module.scss'
 
 interface BurgerIngredientsType {
@@ -44,10 +42,10 @@ const BurgerIngredients: React.FC<BurgerIngredientsType> = ({ data }) => {
   ))
 
   // IngredientsGroups
-  const IngredientsGroups = ingredientGroups.map((item) => (
+  const IngredientsGroups = ingredientGroups.map((item, i) => (
     <IngredientsGroup
-      key={item.id}
-      id={item.id}
+      key={++i}
+      id={++i}
       title={item.title}
       data={data.filter((el) => el.type === item.type)}
     />
@@ -57,9 +55,11 @@ const BurgerIngredients: React.FC<BurgerIngredientsType> = ({ data }) => {
     <section className={styles.wrapper}>
       <div className={styles.tabs}>{tabList}</div>
 
-      <ul id="ingredients" className={styles.ingredients}>
-        {IngredientsGroups}
-      </ul>
+      <div className={styles.ingredients}>
+        <ul id="ingredients" className={styles.ingredients__list}>
+          {IngredientsGroups}
+        </ul>
+      </div>
     </section>
   )
 }

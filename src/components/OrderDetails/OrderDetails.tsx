@@ -1,11 +1,12 @@
 import React from 'react'
 
-// Files
-import orderSVG from '../../assets/images/orderDoneSVG.svg'
-
 // Components
 import Modal from '../Modal/Modal'
 
+// Files
+import orderSVG from '../../assets/images/orderDoneSVG.svg'
+
+// Styles
 import styles from './OrderDetails.module.scss'
 
 interface OrderInfoType {
@@ -13,6 +14,7 @@ interface OrderInfoType {
 }
 
 const OrderInfo: React.FC<OrderInfoType> = ({ toggleModal }) => {
+  // eslint-disable-next-line
   const [orderId, setOrderId] = React.useState<string>('034536')
 
   return (

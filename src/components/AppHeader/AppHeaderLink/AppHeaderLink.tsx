@@ -1,31 +1,29 @@
-import React, { SetStateAction } from 'react'
-
-// Yandex Components
+import React from 'react'
 import {
   BurgerIcon,
   ListIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Files
+// Styles
 import styles from './AppHeaderLink.module.scss'
 
 type AppHeaderLinkType = {
   link: string
   title: string
   isActive: boolean
-  setActiveLink: React.Dispatch<SetStateAction<string>>
+  onClick: () => void
 }
 
 const AppHeaderLink: React.FC<AppHeaderLinkType> = ({
   link,
   title,
   isActive,
-  setActiveLink,
+  onClick,
 }) => {
   // Handle click on link
   const handleClick = () => {
-    setActiveLink(title)
+    onClick()
   }
 
   return (
