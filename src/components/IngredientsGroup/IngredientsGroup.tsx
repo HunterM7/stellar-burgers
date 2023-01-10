@@ -27,7 +27,7 @@ const IngredientsGroup: React.FC<IngredientsGroupType> = ({
 
   return (
     <li id={`ingredients-block-${id}`} className={styles.wrapper}>
-      <h3 className={styles.subtitle}>{title}</h3>
+      <h3 className={styles.title}>{title}</h3>
       <ul className={styles.list}>{items}</ul>
     </li>
   )
