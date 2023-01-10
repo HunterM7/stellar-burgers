@@ -1,0 +1,26 @@
+//? === Order Info ===
+
+@import '../../scss/vars';
+
+.orderId {
+	@include font-digits-large;
+	@include glow;
+
+	margin-bottom: 32px;
+}
+
+.title {
+	margin-bottom: 60px;
+}
+
+.img {
+	margin-bottom: 60px;
+}
+
+.subtitle {
+	margin-bottom: 8px;
+}
+
+.desc {
+	color: $text-secondary;
+}

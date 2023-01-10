@@ -1,0 +1,41 @@
+//? === Burger Ingredients ===
+
+@import '../../scss/vars';
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	height: 100%;
+}
+
+.tabs {
+	display: flex;
+
+	margin-bottom: 40px;
+}
+
+.subtitle {
+	margin-bottom: 24px;
+}
+
+.ingredients {
+	width: 100%;
+
+	flex-grow: 1;
+
+	position: relative;
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		row-gap: 40px;
+
+		position: absolute;
+		inset: 0;
+
+		@include scrollbar;
+	}
+}

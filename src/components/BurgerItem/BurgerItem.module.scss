@@ -1,0 +1,52 @@
+//? === Burger Item ===
+
+@import '../../scss/vars';
+
+.wrapper {
+	width: 100%;
+	max-width: 280px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 4px;
+
+	position: relative;
+
+	&:hover {
+		.img {
+			transform: scale(1.1);
+		}
+	}
+}
+
+.img {
+	width: calc(100% - 16px * 2);
+	aspect-ratio: 2/1;
+
+	margin: 0 auto;
+
+	transition: transform $trans-fast;
+
+	cursor: pointer;
+}
+
+.price {
+	@include font-digits-small;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 8px;
+
+	svg {
+		width: 22px;
+		height: 22px;
+	}
+}
+
+.title {
+	height: 48px;
+	align-self: stretch;
+	text-align: center;
+}

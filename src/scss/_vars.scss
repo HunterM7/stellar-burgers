@@ -1,0 +1,130 @@
+//? === Vars ===
+
+// Colors
+$text-primary: #f2f2f3;
+$text-secondary: #8585ad;
+$text-disabled: #3a3a55;
+
+$black: #000000;
+$white: #ffffff;
+$bg: #131316;
+$bg-modal: #1c1c21;
+$accent: #4c4cff;
+$input: #2f2f37;
+$success: #00cccc;
+$error: #e52b1a;
+
+// Gradients
+$gradient-button: linear-gradient(64deg, #801ab3 0%, #4c4cff 100%);
+$gradient-button-active: linear-gradient(
+		0deg,
+		rgba(0, 0, 0, 0.4),
+		rgba(0, 0, 0, 0.4)
+	),
+	$gradient-button;
+
+$safetyFonts: Arial, Helvetica, sans-serif;
+
+// Transitions
+$cubic: cubic-bezier(0.4, 0.23, 0, 1);
+$trans-fast: 0.4s $cubic;
+$trans-medium: 0.8s $cubic;
+
+// Mixins
+@mixin noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* IE / Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+@mixin scrollbar {
+	overflow-y: overlay;
+
+	&::-webkit-scrollbar {
+		width: 12px;
+	}
+
+	&::-webkit-scrollbar-track {
+		border-radius: 6px;
+		background-color: $input;
+		// margin-block-end: 3em;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 6px;
+		border: 3px solid $input;
+		background-color: $text-secondary;
+
+		&:hover {
+			background-color: lighten($text-secondary, 10);
+		}
+	}
+}
+
+@mixin glow {
+	text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25),
+		0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+}
+
+@mixin font-Iceland {
+	font-family: 'Iceland', $safetyFonts;
+}
+
+@mixin font-IBM-Plex-Sans {
+	font-family: 'IBM Plex Sans', $safetyFonts;
+}
+
+@mixin font-JetBrains-Mono {
+	font-family: 'JetBrains Mono', $safetyFonts;
+}
+
+@mixin font-plain-text {
+	@include font-JetBrains-Mono();
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: $text-primary;
+}
+
+@mixin font-display-small {
+	@include font-JetBrains-Mono();
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1.25;
+	color: $text-primary;
+}
+
+@mixin font-display-large {
+	@include font-JetBrains-Mono();
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 1.1;
+	color: $text-primary;
+}
+
+@mixin font-digits-small {
+	@include font-Iceland();
+	font-size: 28px;
+	font-weight: 400;
+	line-height: 0.85;
+	color: $text-primary;
+}
+
+@mixin font-digits-medium {
+	@include font-Iceland();
+	font-size: 48px;
+	font-weight: 400;
+	line-height: 0.75;
+	color: $text-primary;
+}
+
+@mixin font-digits-large {
+	@include font-Iceland();
+	font-size: 144px;
+	font-weight: 400;
+	line-height: 0.83;
+	color: $text-primary;
+}

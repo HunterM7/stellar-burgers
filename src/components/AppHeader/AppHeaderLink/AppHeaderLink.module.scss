@@ -1,0 +1,25 @@
+//? === App Header Link ===
+
+// Imports
+@import '../../../scss/vars';
+
+.wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+
+	padding: 16px 20px;
+
+	border-radius: 100px;
+
+	@include noselect;
+}
+
+.text {
+	color: $text-secondary;
+
+	&.active {
+		color: $text-primary;
+	}
+}
