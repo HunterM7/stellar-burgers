@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 // Files
-import './index.scss'
+import './scss/index.scss'
 
 // Components
 import App from './components/App/App'

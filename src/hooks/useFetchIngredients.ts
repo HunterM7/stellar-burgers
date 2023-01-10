@@ -2,6 +2,7 @@ import React from 'react'
 
 // Types
 import { dataType, hasError, isLoading } from '../utils/types'
+import checkReponse from '../utils/checkReponse'
 
 interface stateType {
   data: dataType[]
@@ -20,9 +21,9 @@ const useFetchIngredients = (
 
   React.useEffect(() => {
     fetch(url)
-      .then((res) => res.json() as Promise<{ data: dataType[] }>)
+      .then((res) => checkReponse<{ data: dataType[] }>(res))
       .then((json) => {
-        //! Remove setTimeout. Only for Loading example
+        //! Remove setTimeout. Only for the Loading example
         setTimeout(() => {
           setState((prevState) => {
             return { ...prevState, isLoading: false, data: json.data }
@@ -30,7 +31,7 @@ const useFetchIngredients = (
         }, 1000)
       })
       .catch((error) => {
-        //! Remove setTimeout. Only for Loading example
+        //! Remove setTimeout. Only for the Loading example
         setTimeout(() => {
           setState((prevState) => {
             return { ...prevState, isLoading: false, hasError: true }

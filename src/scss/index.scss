@@ -1,9 +1,9 @@
 //? === Index ===
 
 // Imports
-@import 'scss/normalize';
-@import 'scss/_fonts';
-@import 'scss/vars';
+@import 'normalize';
+@import '_fonts';
+@import 'vars';
 
 h2 {
 	@include font-display-large;
