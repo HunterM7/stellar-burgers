@@ -20,7 +20,9 @@ interface BurgerIngredientsType {
 
 const BurgerIngredients: React.FC<BurgerIngredientsType> = ({ data }) => {
   // Tabs
-  const [currentTab, setCurrentTab] = React.useState<string>('')
+  const [currentTab, setCurrentTab] = React.useState<string>(
+    ingredientGroups[0].title,
+  )
 
   const tabList = ingredientGroups.map((tab, i) => (
     <Link
