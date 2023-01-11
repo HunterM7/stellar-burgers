@@ -36,11 +36,11 @@ const BurgerItem: React.FC<dataType> = (data) => {
         <p className={styles.title}>{data.name}</p>
 
         {count ? <Counter count={count} size="default" /> : null}
-      </li>
 
-      {isModalActive && (
-        <IngredientDetails data={data} toggleModal={toggleModal} />
-      )}
+        {isModalActive && (
+          <IngredientDetails data={data} toggleModal={toggleModal} />
+        )}
+      </li>
     </>
   )
 }

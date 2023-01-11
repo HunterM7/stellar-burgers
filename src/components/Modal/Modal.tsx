@@ -11,6 +11,8 @@ import ModalOverlay from './ModalOverlay/ModalOverlay'
 // Styles
 import styles from './Modal.module.scss'
 
+const modalRoot = document.getElementById('modal') as HTMLElement
+
 interface ModalType {
   title?: string
   toggleModal: () => void
@@ -22,12 +24,15 @@ const Modal: React.FC<PropsWithChildren<ModalType>> = ({
   toggleModal,
   children,
 }) => {
+  // Handling Escape press
   useKeyPress('Escape', toggleModal)
 
   const heading = <h2 className={styles.title}>{title}</h2>
 
+  if (!modalRoot) return null
+
   return createPortal(
-    <div className={styles.wrapper}>
+    <div onClick={(e) => e.stopPropagation()} className={styles.wrapper}>
       <div
         className={`
 				${styles.modal}
@@ -46,7 +51,7 @@ const Modal: React.FC<PropsWithChildren<ModalType>> = ({
 
       <ModalOverlay toggleModal={toggleModal} />
     </div>,
-    document.body,
+    modalRoot,
   )
 }
 
