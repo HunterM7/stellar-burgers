@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   Counter,
   CurrencyIcon,
@@ -9,6 +9,7 @@ import useModal from '../../hooks/useModal'
 
 // Files
 import { dataType } from '../../utils/types'
+import { BurgerContext } from '../../context/burgerContext'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -18,21 +19,17 @@ import styles from './BurgerItem.module.scss'
 
 interface BurgerItemType {
   data: dataType
-  dispatchBurgerState: React.Dispatch<{
-    type: string
-    payload: dataType
-  }>
 }
 
-const BurgerItem: React.FC<BurgerItemType> = ({
-  data,
-  dispatchBurgerState,
-}) => {
+const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
   // Count of BurgerItem
   const [count] = React.useState<number>(0)
 
   // Modal Window
   const { isModalActive, toggleModal } = useModal(false)
+
+  // Context
+  const { dispatch } = useContext(BurgerContext)
 
   return (
     <>
@@ -42,8 +39,8 @@ const BurgerItem: React.FC<BurgerItemType> = ({
           toggleModal()
 
           data.type === 'bun'
-            ? dispatchBurgerState({ type: 'setBun', payload: data })
-            : dispatchBurgerState({ type: 'setIngredient', payload: data })
+            ? dispatch({ type: 'setBun', payload: data })
+            : dispatch({ type: 'setIngredient', payload: data })
         }}>
         <img src={data.image} alt="Ingredient" className={styles.img} />
 

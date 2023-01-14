@@ -11,6 +11,11 @@ import useFetchIngredients from '../../hooks/useFetchIngredients'
 
 // Context
 import { DataContext } from '../../context/dataContext'
+import {
+  BurgerActions,
+  BurgerContext,
+  initialBurgerState,
+} from '../../context/burgerContext'
 
 // Types
 import { dataType } from '../../utils/types'
@@ -32,21 +37,9 @@ const App: React.FC = () => {
 
   // Adding ingredients and buns
 
-  const initialBurgerState: BurgerStateType = {
-    bun: {} as dataType,
-    ingredients: [],
-    totalPrice: 0,
-  }
-
-  // --- --- --- ---
-
-  const BurgerContext = React.createContext(initialBurgerState)
-
-  // --- --- --- ---
-
   function burgerReducer(
     state: BurgerStateType,
-    action: { type: string; payload: dataType },
+    action: { type: BurgerActions; payload: dataType },
   ) {
     switch (action.type) {
       case 'setBun':
@@ -79,10 +72,7 @@ const App: React.FC = () => {
     }
   }
 
-  const [burgerState, dispatchBurgerState] = React.useReducer(
-    burgerReducer,
-    initialBurgerState,
-  )
+  const [state, dispatch] = React.useReducer(burgerReducer, initialBurgerState)
 
   return (
     <>
@@ -94,14 +84,11 @@ const App: React.FC = () => {
           <h2>Что-то пошло не так</h2>
         ) : (
           <DataContext.Provider value={{ data }}>
-            {/* <BurgerContext.Provider value={{burgerState, dispatchBurgerState}}> */}
-            <h2 className={styles.title}>Соберите бургер</h2>
-            <BurgerIngredients dispatchBurgerState={dispatchBurgerState} />
-            <BurgerConstructor
-              burgerState={burgerState}
-              dispatchBurgerState={dispatchBurgerState}
-            />
-            {/* </BurgerContext.Provider> */}
+            <BurgerContext.Provider value={{ state, dispatch }}>
+              <h2 className={styles.title}>Соберите бургер</h2>
+              <BurgerIngredients />
+              <BurgerConstructor burgerState={state} />
+            </BurgerContext.Provider>
           </DataContext.Provider>
         )}
       </main>

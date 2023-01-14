@@ -5,7 +5,6 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 // Files
 import { ingredientGroups } from '../../utils/ingredientGroups'
 import { DataContext } from '../../context/dataContext'
-import { dataType } from '../../utils/types'
 
 // Components
 import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
@@ -13,20 +12,9 @@ import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
 // Styles
 import styles from './BurgerIngredients.module.scss'
 
-interface BurgerIngredientsType {
-  dispatchBurgerState: React.Dispatch<{
-    type: string
-    payload: dataType
-  }>
-}
-
-const BurgerIngredients: React.FC<BurgerIngredientsType> = ({
-  dispatchBurgerState,
-}) => {
+const BurgerIngredients: React.FC = () => {
   // Context
   const { data } = React.useContext(DataContext)
-
-  // const { dispatchBurgerState } = React.useContext(BurgerContext)
 
   // Tabs
   const [currentTab, setCurrentTab] = React.useState<string>(
@@ -59,7 +47,6 @@ const BurgerIngredients: React.FC<BurgerIngredientsType> = ({
       id={++i}
       title={item.title}
       data={data.filter((el) => el.type === item.type)}
-      dispatchBurgerState={dispatchBurgerState}
     />
   ))
 

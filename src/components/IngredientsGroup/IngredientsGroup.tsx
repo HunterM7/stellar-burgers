@@ -13,22 +13,15 @@ type IngredientsGroupType = {
   id: number
   title: string
   data: dataType[]
-  dispatchBurgerState: React.Dispatch<{
-    type: string
-    payload: dataType
-  }>
 }
 
 const IngredientsGroup: React.FC<IngredientsGroupType> = ({
   id,
   title,
   data,
-  dispatchBurgerState,
 }) => {
   // Items
-  const items = data.map((item, i) => (
-    <BurgerItem key={i} data={item} dispatchBurgerState={dispatchBurgerState} />
-  ))
+  const items = data.map((item, i) => <BurgerItem key={i} data={item} />)
 
   return (
     <li id={`ingredients-block-${id}`} className={styles.wrapper}>

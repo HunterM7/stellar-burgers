@@ -22,5 +22,5 @@ export const initialBurgerState: BurgerStateType = {
 
 export const BurgerContext = React.createContext<{
   state: BurgerStateType
-  dispatch: React.Dispatch<BurgerActions>
+  dispatch: React.Dispatch<{ type: BurgerActions; payload: dataType }>
 }>({ state: initialBurgerState, dispatch: () => undefined })
