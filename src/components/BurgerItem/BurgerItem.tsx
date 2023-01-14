@@ -16,7 +16,18 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails'
 // Styles
 import styles from './BurgerItem.module.scss'
 
-const BurgerItem: React.FC<dataType> = (data) => {
+interface BurgerItemType {
+  data: dataType
+  dispatchBurgerState: React.Dispatch<{
+    type: string
+    payload: dataType
+  }>
+}
+
+const BurgerItem: React.FC<BurgerItemType> = ({
+  data,
+  dispatchBurgerState,
+}) => {
   // Count of BurgerItem
   const [count] = React.useState<number>(0)
 
@@ -25,7 +36,15 @@ const BurgerItem: React.FC<dataType> = (data) => {
 
   return (
     <>
-      <li className={styles.wrapper} onClick={toggleModal}>
+      <li
+        className={styles.wrapper}
+        onClick={() => {
+          toggleModal()
+
+          data.type === 'bun'
+            ? dispatchBurgerState({ type: 'setBun', payload: data })
+            : dispatchBurgerState({ type: 'setIngredient', payload: data })
+        }}>
         <img src={data.image} alt="Ingredient" className={styles.img} />
 
         <div className={styles.price}>

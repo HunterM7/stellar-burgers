@@ -10,6 +10,7 @@ import {
 import useModal from '../../hooks/useModal'
 
 // Files
+import { BurgerStateType } from '../App/App'
 import { dataType } from '../../utils/types'
 
 // Components
@@ -19,23 +20,35 @@ import OrderDetails from '../OrderDetails/OrderDetails'
 import styles from './BurgerConstructor.module.scss'
 
 interface BurgerConstructorType {
-  data: dataType[]
+  burgerState: BurgerStateType
+  dispatchBurgerState: React.Dispatch<{
+    type: string
+    payload: dataType
+  }>
 }
 
-const BurgerConstructor: React.FC<BurgerConstructorType> = ({ data }) => {
+const BurgerConstructor: React.FC<BurgerConstructorType> = ({
+  burgerState,
+  dispatchBurgerState,
+}) => {
+  // Context
+  const { bun, ingredients, totalPrice } = burgerState
+
+  React.useEffect(() => {
+    dispatchBurgerState({ type: 'setTotalPrice', payload: {} as dataType })
+  }, [bun, ingredients, totalPrice, dispatchBurgerState])
+
   // Burger contents
-  const burgerContents = data
-    .filter((item) => item.type === 'sause' || item.type === 'main')
-    .map((item) => (
-      <li key={item._id} className={styles.draggableElement}>
-        <DragIcon type="primary" />
-        <ConstructorElement
-          text={item.name}
-          price={item.price}
-          thumbnail={item.image}
-        />
-      </li>
-    ))
+  const burgerIngredients = ingredients.map((item) => (
+    <li key={item._id} className={styles.draggableElement}>
+      <DragIcon type="primary" />
+      <ConstructorElement
+        text={item.name}
+        price={item.price}
+        thumbnail={item.image}
+      />
+    </li>
+  ))
 
   // Modal Window
   const { isModalActive, toggleModal } = useModal(false)
@@ -43,34 +56,42 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({ data }) => {
   return (
     <section className={styles.wrapper}>
       <div className={styles.burgerConstructor}>
-        <div className={styles.blockedElement}>
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={200}
-            thumbnail={data[0].image}
-          />
-        </div>
+        {bun._id ? (
+          <>
+            <div className={styles.blockedElement}>
+              <ConstructorElement
+                type="top"
+                isLocked={true}
+                text={`${bun.name} (верх)`}
+                price={bun.price}
+                thumbnail={bun.image}
+              />
+            </div>
 
-        <div className={styles.ingredients}>
-          <ul className={styles.ingredients__container}>{burgerContents}</ul>
-        </div>
+            <div className={styles.ingredients}>
+              <ul className={styles.ingredients__container}>
+                {burgerIngredients}
+              </ul>
+            </div>
 
-        <div className={styles.blockedElement}>
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={200}
-            thumbnail={data[0].image}
-          />
-        </div>
+            <div className={styles.blockedElement}>
+              <ConstructorElement
+                type="bottom"
+                isLocked={true}
+                text={`${bun.name} (низ)`}
+                price={bun.price}
+                thumbnail={bun.image}
+              />
+            </div>
+          </>
+        ) : (
+          <h2 className={styles.choiceOffer}>Выберите булку!</h2>
+        )}
       </div>
 
       <div className={styles.orderBox}>
         <div className={styles.price}>
-          <span>610</span>
+          <span>{totalPrice || 0}</span>
           <CurrencyIcon type="primary" />
         </div>
 
