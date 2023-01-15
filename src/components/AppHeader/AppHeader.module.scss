@@ -4,12 +4,11 @@
 @import '../../scss/vars';
 
 .header {
-	grid-row: 1 / span 1;
+	display: flex;
+	align-items: center;
 
-	padding: 16px 0;
-
-	z-index: 1000;
 	position: relative;
+	z-index: 1000;
 
 	background-color: $bg-modal;
 }

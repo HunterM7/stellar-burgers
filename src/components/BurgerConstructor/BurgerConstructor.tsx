@@ -10,7 +10,8 @@ import {
 import useModal from '../../hooks/useModal'
 
 // Files
-import { dataType } from '../../utils/types'
+import { BurgerStateType } from '../App/App'
+import { BurgerContext } from '../../context/burgerContext'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'
@@ -19,23 +20,32 @@ import OrderDetails from '../OrderDetails/OrderDetails'
 import styles from './BurgerConstructor.module.scss'
 
 interface BurgerConstructorType {
-  data: dataType[]
+  burgerState: BurgerStateType
 }
 
-const BurgerConstructor: React.FC<BurgerConstructorType> = ({ data }) => {
+const BurgerConstructor: React.FC<BurgerConstructorType> = ({
+  burgerState,
+}) => {
+  // Context
+  const { bun, ingredients, totalPrice } = burgerState
+
+  const { dispatchBurger } = React.useContext(BurgerContext)
+
+  React.useEffect(() => {
+    dispatchBurger({ type: 'setTotalPrice' })
+  }, [bun, ingredients, totalPrice, dispatchBurger])
+
   // Burger contents
-  const burgerContents = data
-    .filter((item) => item.type === 'sause' || item.type === 'main')
-    .map((item) => (
-      <li key={item._id} className={styles.draggableElement}>
-        <DragIcon type="primary" />
-        <ConstructorElement
-          text={item.name}
-          price={item.price}
-          thumbnail={item.image}
-        />
-      </li>
-    ))
+  const burgerIngredients = ingredients.map((item, i) => (
+    <li key={`${i}-${item._id}`} className={styles.draggableElement}>
+      <DragIcon type="primary" />
+      <ConstructorElement
+        text={item.name}
+        price={item.price}
+        thumbnail={item.image}
+      />
+    </li>
+  ))
 
   // Modal Window
   const { isModalActive, toggleModal } = useModal(false)
@@ -43,34 +53,46 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({ data }) => {
   return (
     <section className={styles.wrapper}>
       <div className={styles.burgerConstructor}>
-        <div className={styles.blockedElement}>
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={200}
-            thumbnail={data[0].image}
-          />
-        </div>
+        {bun._id ? (
+          <>
+            <div className={styles.blockedElement}>
+              <ConstructorElement
+                type="top"
+                isLocked={true}
+                text={`${bun.name} (верх)`}
+                price={bun.price}
+                thumbnail={bun.image}
+              />
+            </div>
 
-        <div className={styles.ingredients}>
-          <ul className={styles.ingredients__container}>{burgerContents}</ul>
-        </div>
+            <div className={styles.ingredients}>
+              {burgerIngredients.length ? (
+                <ul className={styles.ingredients__container}>
+                  {burgerIngredients}
+                </ul>
+              ) : (
+                <h2 className={styles.choiceOffer}>Добавьте ингридиенты!</h2>
+              )}
+            </div>
 
-        <div className={styles.blockedElement}>
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={200}
-            thumbnail={data[0].image}
-          />
-        </div>
+            <div className={styles.blockedElement}>
+              <ConstructorElement
+                type="bottom"
+                isLocked={true}
+                text={`${bun.name} (низ)`}
+                price={bun.price}
+                thumbnail={bun.image}
+              />
+            </div>
+          </>
+        ) : (
+          <h2 className={styles.choiceOffer}>Выберите булку!</h2>
+        )}
       </div>
 
       <div className={styles.orderBox}>
         <div className={styles.price}>
-          <span>610</span>
+          <span>{totalPrice || 0}</span>
           <CurrencyIcon type="primary" />
         </div>
 
@@ -83,7 +105,12 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({ data }) => {
         </Button>
       </div>
 
-      {isModalActive && <OrderDetails toggleModal={toggleModal} />}
+      {isModalActive && (
+        <OrderDetails
+          ingredients={[bun._id, ...ingredients.map((el) => el._id)]}
+          toggleModal={toggleModal}
+        />
+      )}
     </section>
   )
 }

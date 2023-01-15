@@ -4,23 +4,22 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Files
 import { ingredientGroups } from '../../utils/ingredientGroups'
+import { DataContext } from '../../context/dataContext'
 
 // Components
 import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
 
-// Types
-import { dataType } from '../../utils/types'
-
 // Styles
 import styles from './BurgerIngredients.module.scss'
 
-interface BurgerIngredientsType {
-  data: dataType[]
-}
+const BurgerIngredients: React.FC = () => {
+  // Context
+  const { data } = React.useContext(DataContext)
 
-const BurgerIngredients: React.FC<BurgerIngredientsType> = ({ data }) => {
   // Tabs
-  const [currentTab, setCurrentTab] = React.useState<string>('')
+  const [currentTab, setCurrentTab] = React.useState<string>(
+    ingredientGroups[0].title,
+  )
 
   const tabList = ingredientGroups.map((tab, i) => (
     <Link

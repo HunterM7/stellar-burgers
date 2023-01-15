@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   Counter,
   CurrencyIcon,
@@ -9,6 +9,7 @@ import useModal from '../../hooks/useModal'
 
 // Files
 import { dataType } from '../../utils/types'
+import { BurgerContext } from '../../context/burgerContext'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -16,16 +17,31 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails'
 // Styles
 import styles from './BurgerItem.module.scss'
 
-const BurgerItem: React.FC<dataType> = (data) => {
+interface BurgerItemType {
+  data: dataType
+}
+
+const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
   // Count of BurgerItem
   const [count] = React.useState<number>(0)
 
   // Modal Window
   const { isModalActive, toggleModal } = useModal(false)
 
+  // Context
+  const { dispatchBurger } = useContext(BurgerContext)
+
   return (
     <>
-      <li className={styles.wrapper} onClick={toggleModal}>
+      <li
+        className={styles.wrapper}
+        onClick={() => {
+          toggleModal()
+
+          data.type === 'bun'
+            ? dispatchBurger({ type: 'setBun', bun: data })
+            : dispatchBurger({ type: 'setIngredient', ingredient: data })
+        }}>
         <img src={data.image} alt="Ingredient" className={styles.img} />
 
         <div className={styles.price}>
@@ -36,11 +52,11 @@ const BurgerItem: React.FC<dataType> = (data) => {
         <p className={styles.title}>{data.name}</p>
 
         {count ? <Counter count={count} size="default" /> : null}
-      </li>
 
-      {isModalActive && (
-        <IngredientDetails data={data} toggleModal={toggleModal} />
-      )}
+        {isModalActive && (
+          <IngredientDetails data={data} toggleModal={toggleModal} />
+        )}
+      </li>
     </>
   )
 }

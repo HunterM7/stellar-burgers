@@ -9,6 +9,8 @@
 	align-items: flex-end;
 	row-gap: 40px;
 
+	grid-area: constructor;
+
 	height: 100%;
 }
 
@@ -53,6 +55,15 @@
 	flex-direction: row;
 	align-items: center;
 	gap: 8px;
+}
+
+.choiceOffer {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }
 
 .orderBox {

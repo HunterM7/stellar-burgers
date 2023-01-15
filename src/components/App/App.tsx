@@ -9,13 +9,39 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 // Hooks
 import useFetchIngredients from '../../hooks/useFetchIngredients'
 
+// Context
+import { DataContext } from '../../context/dataContext'
+import {
+  BurgerContext,
+  burgerReducer,
+  initialBurgerState,
+} from '../../context/burgerContext'
+
+// Types
+import { dataType } from '../../utils/types'
+
 // Styles
 import styles from './App.module.scss'
 
-const App: React.FC = () => {
-  const url = 'https://norma.nomoreparties.space/api/ingredients'
+export interface BurgerStateType {
+  bun: dataType
+  ingredients: dataType[]
+  totalPrice: number
+}
 
-  const [data, isLoading, hasError] = useFetchIngredients(url)
+export const API_URL = 'https://norma.nomoreparties.space/api/'
+
+const App: React.FC = () => {
+  // Fetching data
+  const [data, isLoading, hasError] = useFetchIngredients(
+    `${API_URL}ingredients`,
+  )
+
+  // Adding ingredients and buns
+  const [stateBurger, dispatchBurger] = React.useReducer(
+    burgerReducer,
+    initialBurgerState,
+  )
 
   return (
     <>
@@ -26,11 +52,13 @@ const App: React.FC = () => {
         ) : hasError ? (
           <h2>Что-то пошло не так</h2>
         ) : (
-          <>
-            <h2 className={styles.title}>Соберите бургер</h2>
-            <BurgerIngredients data={data} />
-            <BurgerConstructor data={data} />
-          </>
+          <DataContext.Provider value={{ data }}>
+            <BurgerContext.Provider value={{ stateBurger, dispatchBurger }}>
+              <h2 className={styles.title}>Соберите бургер</h2>
+              <BurgerIngredients />
+              <BurgerConstructor burgerState={stateBurger} />
+            </BurgerContext.Provider>
+          </DataContext.Provider>
         )}
       </main>
     </>
