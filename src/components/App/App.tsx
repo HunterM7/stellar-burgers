@@ -29,11 +29,13 @@ export interface BurgerStateType {
   totalPrice: number
 }
 
-const App: React.FC = () => {
-  const url = 'https://norma.nomoreparties.space/api/ingredients'
+export const API_URL = 'https://norma.nomoreparties.space/api/'
 
+const App: React.FC = () => {
   // Fetching data
-  const [data, isLoading, hasError] = useFetchIngredients(url)
+  const [data, isLoading, hasError] = useFetchIngredients(
+    `${API_URL}ingredients`,
+  )
 
   // Adding ingredients and buns
   const [stateBurger, dispatchBurger] = React.useReducer(

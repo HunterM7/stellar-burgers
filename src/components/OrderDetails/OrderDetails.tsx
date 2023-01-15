@@ -6,7 +6,8 @@ import Modal from '../Modal/Modal'
 // Hooks
 import useFetchOrder from '../../hooks/useFetchOrder'
 
-// Files
+// Files and Links
+import { API_URL } from '../App/App'
 import orderSVG from '../../assets/images/orderDoneSVG.svg'
 
 // Styles
@@ -18,7 +19,7 @@ interface OrderInfoType {
 }
 
 const OrderInfo: React.FC<OrderInfoType> = ({ ingredients, toggleModal }) => {
-  const url = 'https://norma.nomoreparties.space/api/orders'
+  const url = `${API_URL}orders`
 
   const [data, isLoading, hasError] = useFetchOrder(url, ingredients)
 
