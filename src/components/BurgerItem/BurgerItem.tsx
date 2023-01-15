@@ -39,8 +39,8 @@ const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
           toggleModal()
 
           data.type === 'bun'
-            ? dispatchBurger({ type: 'setBun', payload: data })
-            : dispatchBurger({ type: 'setIngredient', payload: data })
+            ? dispatchBurger({ type: 'setBun', bun: data })
+            : dispatchBurger({ type: 'setIngredient', ingredient: data })
         }}>
         <img src={data.image} alt="Ingredient" className={styles.img} />
 

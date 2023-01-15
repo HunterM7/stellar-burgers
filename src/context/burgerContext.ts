@@ -2,21 +2,33 @@ import React from 'react'
 
 import { dataType } from '../utils/types'
 
+interface setBunAction {
+  type: 'setBun'
+  bun: dataType
+}
+interface setIngredientAction {
+  type: 'setIngredient'
+  ingredient: dataType
+}
+interface removeIngredientAction {
+  type: 'removeIngredient'
+  ingredient: dataType
+}
+interface setTotalPricenAction {
+  type: 'setTotalPrice'
+}
+
+type BurgerActions =
+  | setBunAction
+  | setIngredientAction
+  | removeIngredientAction
+  | setTotalPricenAction
+
+// Creating context
 export interface BurgerStateType {
   bun: dataType
   ingredients: dataType[]
   totalPrice: number
-}
-
-export type BurgerActions =
-  | 'setBun'
-  | 'setIngredient'
-  | 'removeIngredient'
-  | 'setTotalPrice'
-
-interface ActionTypes {
-  type: BurgerActions
-  payload: dataType
 }
 
 export const initialBurgerState: BurgerStateType = {
@@ -27,26 +39,27 @@ export const initialBurgerState: BurgerStateType = {
 
 export const BurgerContext = React.createContext<{
   stateBurger: BurgerStateType
-  dispatchBurger: React.Dispatch<ActionTypes>
+  dispatchBurger: React.Dispatch<BurgerActions>
 }>({ stateBurger: initialBurgerState, dispatchBurger: () => undefined })
 
-export function burgerReducer(state: BurgerStateType, action: ActionTypes) {
+// Burger Reducer
+export function burgerReducer(state: BurgerStateType, action: BurgerActions) {
   switch (action.type) {
     case 'setBun':
       return {
         ...state,
-        bun: action.payload,
+        bun: action.bun,
       }
     case 'setIngredient':
       return {
         ...state,
-        ingredients: [...state.ingredients, action.payload],
+        ingredients: [...state.ingredients, action.ingredient],
       }
     case 'removeIngredient':
       return {
         ...state,
         ingredients: [...state.ingredients].filter(
-          (el) => el._id !== action.payload._id,
+          (el) => el._id !== action.ingredient._id,
         ),
       }
     case 'setTotalPrice':

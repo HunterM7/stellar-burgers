@@ -11,7 +11,6 @@ import useModal from '../../hooks/useModal'
 
 // Files
 import { BurgerStateType } from '../App/App'
-import { dataType } from '../../utils/types'
 import { BurgerContext } from '../../context/burgerContext'
 
 // Components
@@ -33,7 +32,7 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({
   const { dispatchBurger } = React.useContext(BurgerContext)
 
   React.useEffect(() => {
-    dispatchBurger({ type: 'setTotalPrice', payload: {} as dataType })
+    dispatchBurger({ type: 'setTotalPrice' })
   }, [bun, ingredients, totalPrice, dispatchBurger])
 
   // Burger contents
