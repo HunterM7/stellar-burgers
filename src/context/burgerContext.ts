@@ -1,24 +1,33 @@
 import React from 'react'
 
+// Constants
+import {
+  REMOVE_INGREDIENT,
+  SET_BUN,
+  SET_INGREDIENT,
+  SET_ORDER_ID,
+  SET_TOTAL_PRICE,
+} from '../utils/constants'
+
 import { dataType } from '../utils/types'
 
 interface setBunAction {
-  type: 'setBun'
+  type: typeof SET_BUN
   bun: dataType
 }
 interface setIngredientAction {
-  type: 'setIngredient'
+  type: typeof SET_INGREDIENT
   ingredient: dataType
 }
 interface removeIngredientAction {
-  type: 'removeIngredient'
+  type: typeof REMOVE_INGREDIENT
   ingredient: dataType
 }
 interface setTotalPricenAction {
-  type: 'setTotalPrice'
+  type: typeof SET_TOTAL_PRICE
 }
 interface setOrderIdAction {
-  type: 'setOrderId'
+  type: typeof SET_ORDER_ID
   orderId: number
 }
 
@@ -52,31 +61,31 @@ export const BurgerContext = React.createContext<{
 // Burger Reducer
 export function burgerReducer(state: BurgerStateType, action: BurgerActions) {
   switch (action.type) {
-    case 'setBun':
+    case SET_BUN:
       return {
         ...state,
         bun: action.bun,
       }
-    case 'setIngredient':
+    case SET_INGREDIENT:
       return {
         ...state,
         ingredients: [...state.ingredients, action.ingredient],
       }
-    case 'removeIngredient':
+    case REMOVE_INGREDIENT:
       return {
         ...state,
         ingredients: [...state.ingredients].filter(
           (el) => el._id !== action.ingredient._id,
         ),
       }
-    case 'setTotalPrice':
+    case SET_TOTAL_PRICE:
       return {
         ...state,
         totalPrice:
           state.bun.price * 2 +
           state.ingredients.reduce((sum, data) => sum + data.price, 0),
       }
-    case 'setOrderId':
+    case SET_ORDER_ID:
       return {
         ...state,
         orderId: action.orderId,

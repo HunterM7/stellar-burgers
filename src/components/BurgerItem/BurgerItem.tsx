@@ -7,9 +7,12 @@ import {
 // Hooks
 import useModal from '../../hooks/useModal'
 
-// Files
-import { dataType } from '../../utils/types'
+// Context
 import { BurgerContext } from '../../context/burgerContext'
+
+// Files and other
+import { dataType } from '../../utils/types'
+import { SET_BUN, SET_INGREDIENT } from '../../utils/constants'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -39,8 +42,8 @@ const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
           toggleModal()
 
           data.type === 'bun'
-            ? dispatchBurger({ type: 'setBun', bun: data })
-            : dispatchBurger({ type: 'setIngredient', ingredient: data })
+            ? dispatchBurger({ type: SET_BUN, bun: data })
+            : dispatchBurger({ type: SET_INGREDIENT, ingredient: data })
         }}>
         <img src={data.image} alt="Ingredient" className={styles.img} />
 

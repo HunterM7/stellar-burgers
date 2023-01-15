@@ -6,8 +6,8 @@ import Modal from '../Modal/Modal'
 // Hooks
 import useFetchOrder from '../../hooks/useFetchOrder'
 
-// Files and Links
-import { API_URL } from '../App/App'
+// Files and other
+import { API_URL_ORDER } from '../../utils/constants'
 import orderSVG from '../../assets/images/orderDoneSVG.svg'
 
 // Styles
@@ -19,9 +19,7 @@ interface OrderInfoType {
 }
 
 const OrderInfo: React.FC<OrderInfoType> = ({ ingredients, toggleModal }) => {
-  const url = `${API_URL}orders`
-
-  const [data, isLoading, hasError] = useFetchOrder(url, ingredients)
+  const [data, isLoading, hasError] = useFetchOrder(API_URL_ORDER, ingredients)
 
   return (
     <Modal toggleModal={toggleModal}>

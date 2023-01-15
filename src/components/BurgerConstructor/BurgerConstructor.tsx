@@ -9,9 +9,12 @@ import {
 // Hooks
 import useModal from '../../hooks/useModal'
 
-// Files
-import { BurgerStateType } from '../App/App'
+// Context
 import { BurgerContext } from '../../context/burgerContext'
+
+// Files and other
+import { BurgerStateType } from '../App/App'
+import { SET_TOTAL_PRICE } from '../../utils/constants'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'
@@ -32,8 +35,8 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({
   const { dispatchBurger } = React.useContext(BurgerContext)
 
   React.useEffect(() => {
-    dispatchBurger({ type: 'setTotalPrice' })
-  }, [bun, ingredients, totalPrice, dispatchBurger])
+    dispatchBurger({ type: SET_TOTAL_PRICE })
+  }, [bun, ingredients, dispatchBurger])
 
   // Burger contents
   const burgerIngredients = ingredients.map((item, i) => (

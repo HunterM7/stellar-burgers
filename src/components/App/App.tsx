@@ -17,6 +17,9 @@ import {
   initialBurgerState,
 } from '../../context/burgerContext'
 
+// Files and other
+import { API_URL_INGREDIENTS } from '../../utils/constants'
+
 // Types
 import { dataType } from '../../utils/types'
 
@@ -29,13 +32,9 @@ export interface BurgerStateType {
   totalPrice: number
 }
 
-export const API_URL = 'https://norma.nomoreparties.space/api/'
-
 const App: React.FC = () => {
   // Fetching data
-  const [data, isLoading, hasError] = useFetchIngredients(
-    `${API_URL}ingredients`,
-  )
+  const [data, isLoading, hasError] = useFetchIngredients(API_URL_INGREDIENTS)
 
   // Adding ingredients and buns
   const [stateBurger, dispatchBurger] = React.useReducer(
