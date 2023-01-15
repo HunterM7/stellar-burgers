@@ -12,8 +12,8 @@ import useFetchIngredients from '../../hooks/useFetchIngredients'
 // Context
 import { DataContext } from '../../context/dataContext'
 import {
-  BurgerActions,
   BurgerContext,
+  burgerReducer,
   initialBurgerState,
 } from '../../context/burgerContext'
 
@@ -36,43 +36,10 @@ const App: React.FC = () => {
   const [data, isLoading, hasError] = useFetchIngredients(url)
 
   // Adding ingredients and buns
-
-  function burgerReducer(
-    state: BurgerStateType,
-    action: { type: BurgerActions; payload: dataType },
-  ) {
-    switch (action.type) {
-      case 'setBun':
-        return {
-          ...state,
-          bun: action.payload,
-        }
-      case 'setIngredient':
-        return {
-          ...state,
-          ingredients: [...state.ingredients, action.payload],
-        }
-      case 'removeIngredient':
-        return {
-          ...state,
-          ingredients: [...state.ingredients].filter(
-            (el) => el._id !== action.payload._id,
-          ),
-        }
-      case 'setTotalPrice':
-        return {
-          ...state,
-          totalPrice:
-            state.bun.price * 2 +
-            state.ingredients.reduce((sum, data) => sum + data.price, 0),
-        }
-
-      default:
-        return state
-    }
-  }
-
-  const [state, dispatch] = React.useReducer(burgerReducer, initialBurgerState)
+  const [stateBurger, dispatchBurger] = React.useReducer(
+    burgerReducer,
+    initialBurgerState,
+  )
 
   return (
     <>
@@ -84,10 +51,10 @@ const App: React.FC = () => {
           <h2>Что-то пошло не так</h2>
         ) : (
           <DataContext.Provider value={{ data }}>
-            <BurgerContext.Provider value={{ state, dispatch }}>
+            <BurgerContext.Provider value={{ stateBurger, dispatchBurger }}>
               <h2 className={styles.title}>Соберите бургер</h2>
               <BurgerIngredients />
-              <BurgerConstructor burgerState={state} />
+              <BurgerConstructor burgerState={stateBurger} />
             </BurgerContext.Provider>
           </DataContext.Provider>
         )}

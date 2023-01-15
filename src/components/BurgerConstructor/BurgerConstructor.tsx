@@ -30,15 +30,15 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({
   // Context
   const { bun, ingredients, totalPrice } = burgerState
 
-  const { dispatch } = React.useContext(BurgerContext)
+  const { dispatchBurger } = React.useContext(BurgerContext)
 
   React.useEffect(() => {
-    dispatch({ type: 'setTotalPrice', payload: {} as dataType })
-  }, [bun, ingredients, totalPrice, dispatch])
+    dispatchBurger({ type: 'setTotalPrice', payload: {} as dataType })
+  }, [bun, ingredients, totalPrice, dispatchBurger])
 
   // Burger contents
-  const burgerIngredients = ingredients.map((item) => (
-    <li key={item._id} className={styles.draggableElement}>
+  const burgerIngredients = ingredients.map((item, i) => (
+    <li key={`${i}-${item._id}`} className={styles.draggableElement}>
       <DragIcon type="primary" />
       <ConstructorElement
         text={item.name}
@@ -67,9 +67,13 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({
             </div>
 
             <div className={styles.ingredients}>
-              <ul className={styles.ingredients__container}>
-                {burgerIngredients}
-              </ul>
+              {burgerIngredients.length ? (
+                <ul className={styles.ingredients__container}>
+                  {burgerIngredients}
+                </ul>
+              ) : (
+                <h2 className={styles.choiceOffer}>Добавьте ингридиенты!</h2>
+              )}
             </div>
 
             <div className={styles.blockedElement}>
@@ -102,7 +106,12 @@ const BurgerConstructor: React.FC<BurgerConstructorType> = ({
         </Button>
       </div>
 
-      {isModalActive && <OrderDetails toggleModal={toggleModal} />}
+      {isModalActive && (
+        <OrderDetails
+          ingredients={[bun._id, ...ingredients.map((el) => el._id)]}
+          toggleModal={toggleModal}
+        />
+      )}
     </section>
   )
 }

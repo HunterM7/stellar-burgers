@@ -29,7 +29,7 @@ const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
   const { isModalActive, toggleModal } = useModal(false)
 
   // Context
-  const { dispatch } = useContext(BurgerContext)
+  const { dispatchBurger } = useContext(BurgerContext)
 
   return (
     <>
@@ -39,8 +39,8 @@ const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
           toggleModal()
 
           data.type === 'bun'
-            ? dispatch({ type: 'setBun', payload: data })
-            : dispatch({ type: 'setIngredient', payload: data })
+            ? dispatchBurger({ type: 'setBun', payload: data })
+            : dispatchBurger({ type: 'setIngredient', payload: data })
         }}>
         <img src={data.image} alt="Ingredient" className={styles.img} />
 
