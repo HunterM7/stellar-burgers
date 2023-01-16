@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
 // Components
 import Loader from '../Loader/Loader'
@@ -12,18 +11,12 @@ import useFetchIngredients from '../../hooks/useFetchIngredients'
 
 // Context
 import { DataContext } from '../../context/dataContext'
-import {
-  BurgerContext,
-  burgerReducer,
-  initialBurgerState,
-} from '../../context/burgerContext'
 
 // Files and other
 import { API_URL_INGREDIENTS } from '../../utils/constants'
 
 // Types
 import { dataType } from '../../utils/types'
-import { RootState } from '../../redux/store'
 
 // Styles
 import styles from './App.module.scss'
@@ -38,13 +31,6 @@ const App: React.FC = () => {
   // Fetching data
   const [data, isLoading, hasError] = useFetchIngredients(API_URL_INGREDIENTS)
 
-  // const stateBurger = useSelector((store: RootState) => store.burger)
-  // Adding ingredients and buns
-  const [stateBurger, dispatchBurger] = React.useReducer(
-    burgerReducer,
-    initialBurgerState,
-  )
-
   return (
     <>
       <AppHeader />
@@ -55,11 +41,9 @@ const App: React.FC = () => {
           <h2>Что-то пошло не так</h2>
         ) : (
           <DataContext.Provider value={{ data }}>
-            <BurgerContext.Provider value={{ stateBurger, dispatchBurger }}>
-              <h2 className={styles.title}>Соберите бургер</h2>
-              <BurgerIngredients />
-              <BurgerConstructor burgerState={stateBurger} />
-            </BurgerContext.Provider>
+            <h2 className={styles.title}>Соберите бургер</h2>
+            <BurgerIngredients />
+            <BurgerConstructor />
           </DataContext.Provider>
         )}
       </main>

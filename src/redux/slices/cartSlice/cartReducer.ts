@@ -6,7 +6,7 @@ import {
   SET_INGREDIENT,
   REMOVE_INGREDIENT,
   SET_TOTAL_PRICE,
-} from './burgerActions'
+} from './cartActions'
 
 export interface StateType {
   bun: dataType
@@ -20,7 +20,7 @@ const initialState: StateType = {
   totalPrice: 0,
 }
 
-export const burgerReducer = (
+export const cartReducer = (
   state: StateType = initialState,
   action: Actions,
 ) => {

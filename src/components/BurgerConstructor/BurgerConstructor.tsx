@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   Button,
   ConstructorElement,
@@ -9,12 +11,11 @@ import {
 // Hooks
 import useModal from '../../hooks/useModal'
 
-// Context
-import { BurgerContext } from '../../context/burgerContext'
+// Types
+import { RootState } from '../../redux/store'
 
 // Files and other
-import { BurgerStateType } from '../App/App'
-import { SET_TOTAL_PRICE } from '../../utils/constants'
+import { SET_TOTAL_PRICE } from '../../redux/slices/cartSlice/cartActions'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'
@@ -22,21 +23,17 @@ import OrderDetails from '../OrderDetails/OrderDetails'
 // Styles
 import styles from './BurgerConstructor.module.scss'
 
-interface BurgerConstructorType {
-  burgerState: BurgerStateType
-}
+const BurgerConstructor: React.FC = () => {
+  // Redux
+  const { bun, ingredients, totalPrice } = useSelector(
+    (store: RootState) => store.cart,
+  )
 
-const BurgerConstructor: React.FC<BurgerConstructorType> = ({
-  burgerState,
-}) => {
-  // Context
-  const { bun, ingredients, totalPrice } = burgerState
-
-  const { dispatchBurger } = React.useContext(BurgerContext)
+  const despatch = useDispatch()
 
   React.useEffect(() => {
-    dispatchBurger({ type: SET_TOTAL_PRICE })
-  }, [bun, ingredients, dispatchBurger])
+    despatch({ type: SET_TOTAL_PRICE })
+  }, [bun, ingredients, despatch])
 
   // Burger contents
   const burgerIngredients = ingredients.map((item, i) => (

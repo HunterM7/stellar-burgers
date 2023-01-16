@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from 'redux'
 
-import { burgerReducer } from './slices/burgerSlice/burgerReducer'
+import { cartReducer } from './slices/cartSlice/cartReducer'
 
 const rootReducer = combineReducers({
-  burger: burgerReducer,
+  cart: cartReducer,
 })
 
 export const store = createStore(rootReducer)

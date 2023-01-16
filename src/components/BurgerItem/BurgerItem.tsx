@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import {
   Counter,
   CurrencyIcon,
@@ -7,12 +8,12 @@ import {
 // Hooks
 import useModal from '../../hooks/useModal'
 
-// Context
-import { BurgerContext } from '../../context/burgerContext'
-
 // Files and other
 import { dataType } from '../../utils/types'
-import { SET_BUN, SET_INGREDIENT } from '../../utils/constants'
+import {
+  SET_BUN,
+  SET_INGREDIENT,
+} from '../../redux/slices/cartSlice/cartActions'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -31,36 +32,33 @@ const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
   // Modal Window
   const { isModalActive, toggleModal } = useModal(false)
 
-  // Context
-  const { dispatchBurger } = useContext(BurgerContext)
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    toggleModal()
+
+    data.type === 'bun'
+      ? dispatch({ type: SET_BUN, bun: data })
+      : dispatch({ type: SET_INGREDIENT, ingredient: data })
+  }
 
   return (
-    <>
-      <li
-        className={styles.wrapper}
-        onClick={() => {
-          toggleModal()
+    <li className={styles.wrapper} onClick={handleClick}>
+      <img src={data.image} alt="Ingredient" className={styles.img} />
 
-          data.type === 'bun'
-            ? dispatchBurger({ type: SET_BUN, bun: data })
-            : dispatchBurger({ type: SET_INGREDIENT, ingredient: data })
-        }}>
-        <img src={data.image} alt="Ingredient" className={styles.img} />
+      <div className={styles.price}>
+        {data.price}
+        <CurrencyIcon type="primary" />
+      </div>
 
-        <div className={styles.price}>
-          {data.price}
-          <CurrencyIcon type="primary" />
-        </div>
+      <p className={styles.title}>{data.name}</p>
 
-        <p className={styles.title}>{data.name}</p>
+      {count ? <Counter count={count} size="default" /> : null}
 
-        {count ? <Counter count={count} size="default" /> : null}
-
-        {isModalActive && (
-          <IngredientDetails data={data} toggleModal={toggleModal} />
-        )}
-      </li>
-    </>
+      {isModalActive && (
+        <IngredientDetails data={data} toggleModal={toggleModal} />
+      )}
+    </li>
   )
 }
 
