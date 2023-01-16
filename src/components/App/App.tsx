@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 // Components
 import Loader from '../Loader/Loader'
@@ -22,6 +23,7 @@ import { API_URL_INGREDIENTS } from '../../utils/constants'
 
 // Types
 import { dataType } from '../../utils/types'
+import { RootState } from '../../redux/store'
 
 // Styles
 import styles from './App.module.scss'
@@ -36,6 +38,7 @@ const App: React.FC = () => {
   // Fetching data
   const [data, isLoading, hasError] = useFetchIngredients(API_URL_INGREDIENTS)
 
+  // const stateBurger = useSelector((store: RootState) => store.burger)
   // Adding ingredients and buns
   const [stateBurger, dispatchBurger] = React.useReducer(
     burgerReducer,

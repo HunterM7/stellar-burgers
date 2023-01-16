@@ -45,25 +45,21 @@ const useFetchOrder = (
     fetch(url, requestOptions)
       .then((res) => checkReponse<orderResponseType>(res))
       .then((json) => {
-        setState((prev) => {
-          return {
-            ...prev,
-            data: {
-              name: json.name,
-              order: json.order.number,
-            },
-            isLoading: false,
-          }
-        })
+        setState((prev) => ({
+          ...prev,
+          data: {
+            name: json.name,
+            order: json.order.number,
+          },
+          isLoading: false,
+        }))
       })
       .catch((error) =>
-        setState((prev) => {
-          return {
-            ...prev,
-            isLoading: false,
-            hasError: true,
-          }
-        }),
+        setState((prev) => ({
+          ...prev,
+          isLoading: false,
+          hasError: true,
+        })),
       )
   }, [url, ingredients])
 

@@ -1,5 +1,11 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
-import { rootReducer } from './rootReducer'
+import { burgerReducer } from './slices/burgerSlice/burgerReducer'
+
+const rootReducer = combineReducers({
+  burger: burgerReducer,
+})
 
 export const store = createStore(rootReducer)
+
+export type RootState = ReturnType<typeof store.getState>

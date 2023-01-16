@@ -25,17 +25,21 @@ const useFetchIngredients = (
       .then((json) => {
         //! Remove setTimeout. Only for the Loading example
         setTimeout(() => {
-          setState((prevState) => {
-            return { ...prevState, isLoading: false, data: json.data }
-          })
+          setState((prevState) => ({
+            ...prevState,
+            isLoading: false,
+            data: json.data,
+          }))
         }, 1000)
       })
       .catch((error) => {
         //! Remove setTimeout. Only for the Loading example
         setTimeout(() => {
-          setState((prevState) => {
-            return { ...prevState, isLoading: false, hasError: true }
-          })
+          setState((prevState) => ({
+            ...prevState,
+            isLoading: false,
+            hasError: true,
+          }))
         }, 1000)
       })
   }, [url])
