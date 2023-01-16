@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
 import {
   Button,
   ConstructorElement,
@@ -12,7 +11,7 @@ import {
 import useModal from '../../hooks/useModal'
 
 // Types
-import { RootState } from '../../redux/store'
+import { RootState, useAppDispatch } from '../../redux/store'
 
 // Files and other
 import { SET_TOTAL_PRICE } from '../../redux/slices/cartSlice/cartActions'
@@ -29,11 +28,11 @@ const BurgerConstructor: React.FC = () => {
     (store: RootState) => store.cart,
   )
 
-  const despatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   React.useEffect(() => {
-    despatch({ type: SET_TOTAL_PRICE })
-  }, [bun, ingredients, despatch])
+    dispatch({ type: SET_TOTAL_PRICE })
+  }, [bun, ingredients, dispatch])
 
   // Burger contents
   const burgerIngredients = ingredients.map((item, i) => (

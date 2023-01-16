@@ -1,5 +1,4 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import {
   Counter,
   CurrencyIcon,
@@ -7,6 +6,7 @@ import {
 
 // Hooks
 import useModal from '../../hooks/useModal'
+import { useAppDispatch } from '../../redux/store'
 
 // Files and other
 import { dataType } from '../../utils/types'
@@ -32,7 +32,7 @@ const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
   // Modal Window
   const { isModalActive, toggleModal } = useModal(false)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const handleClick = () => {
     toggleModal()
