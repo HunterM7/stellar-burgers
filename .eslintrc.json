@@ -33,7 +33,7 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "prefer-const": [
       "warn",
       {
@@ -96,6 +96,7 @@
     ],
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-unsafe-assignment": "warn",
-    "@typescript-eslint/no-floating-promises": ["off"]
+    "@typescript-eslint/no-floating-promises": ["off"],
+    "@typescript-eslint/no-unused-vars": "warn"
   }
 }
