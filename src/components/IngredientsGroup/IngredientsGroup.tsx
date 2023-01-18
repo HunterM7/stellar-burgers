@@ -31,4 +31,4 @@ const IngredientsGroup: React.FC<IngredientsGroupType> = ({
   )
 }
 
-export default IngredientsGroup
+export default React.memo(IngredientsGroup)

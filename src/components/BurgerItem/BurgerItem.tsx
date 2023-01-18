@@ -10,10 +10,7 @@ import { useAppDispatch } from '../../redux/store'
 
 // Files and other
 import { dataType } from '../../utils/types'
-import {
-  SET_BUN,
-  SET_INGREDIENT,
-} from '../../redux/slices/cartSlice/cartActions'
+import { SET_BUN, SET_INGREDIENT } from '../../redux/actions/cartActions'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -62,4 +59,4 @@ const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
   )
 }
 
-export default BurgerItem
+export default React.memo(BurgerItem)

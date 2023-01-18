@@ -20,6 +20,9 @@ import { dataType } from '../../utils/types'
 
 // Styles
 import styles from './App.module.scss'
+import { useSelector } from 'react-redux'
+import { getData } from '../../redux/actions/dataAction'
+import { useDispatch } from 'react-redux'
 
 export interface BurgerStateType {
   bun: dataType
@@ -29,7 +32,15 @@ export interface BurgerStateType {
 
 const App: React.FC = () => {
   // Fetching data
-  const [data, isLoading, hasError] = useFetchIngredients(API_URL_INGREDIENTS)
+  // const [data, isLoading, hasError] = useFetchIngredients(API_URL_INGREDIENTS)
+
+  const { data, isLoading, hasError } = useSelector((store) => store.data)
+
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(getData())
+  }, [])
 
   return (
     <>

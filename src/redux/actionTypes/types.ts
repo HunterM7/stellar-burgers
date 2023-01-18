@@ -18,3 +18,9 @@ export enum Status {
   _SUCCESS = '_SUCCESS',
   _ERROR = '_ERROR',
 }
+
+export interface stateType {
+  data: dataType[]
+  isLoading: boolean
+  hasError: boolean
+}

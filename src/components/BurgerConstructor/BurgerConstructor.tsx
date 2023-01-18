@@ -14,7 +14,7 @@ import useModal from '../../hooks/useModal'
 import { RootState, useAppDispatch } from '../../redux/store'
 
 // Files and other
-import { SET_TOTAL_PRICE } from '../../redux/slices/cartSlice/cartActions'
+import { SET_TOTAL_PRICE } from '../../redux/actions/cartActions'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'

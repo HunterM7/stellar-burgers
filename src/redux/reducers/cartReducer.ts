@@ -1,4 +1,4 @@
-import { dataType } from '../../../utils/types'
+import { dataType } from '../../utils/types'
 
 import {
   Actions,
@@ -6,7 +6,7 @@ import {
   SET_INGREDIENT,
   REMOVE_INGREDIENT,
   SET_TOTAL_PRICE,
-} from './cartActions'
+} from '../actions/cartActions'
 
 export interface StateType {
   bun: dataType
