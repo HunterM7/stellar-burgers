@@ -3,11 +3,26 @@ import { Status } from '../actionTypes/types'
 import { dataType } from '../../utils/types'
 import checkReponse from '../../utils/checkReponse'
 
+interface setRequestStatus {
+  type: typeof Status._REQUEST
+}
+interface setErrorStatus {
+  type: typeof Status._ERROR
+}
+interface setSuccessStatus {
+  type: typeof Status._SUCCESS
+  data: dataType[]
+}
+
+type Actions = setRequestStatus | setErrorStatus | setSuccessStatus
+
 /* eslint-disable */
+
+type DispatchType = (action: Actions) => void
 
 // Наш первый thunk
 export function getData() {
-  return function (dispatch) {
+  return function (dispatch: DispatchType) {
     dispatch({
       type: Status._REQUEST,
     })
@@ -21,7 +36,6 @@ export function getData() {
         })
       })
       .catch((err) => {
-        // Если сервер не вернул данных, также отправляем экшен об ошибке
         dispatch({
           type: Status._ERROR,
         })

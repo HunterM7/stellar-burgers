@@ -8,7 +8,7 @@ const initialState: stateType = {
 }
 
 export const dataReducer = (
-  state = initialState,
+  state: stateType = initialState,
   action: { type: Status; data: dataType[] },
 ) => {
   switch (action.type) {
