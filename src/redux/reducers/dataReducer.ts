@@ -1,5 +1,5 @@
 import { stateType, Status } from '../actionTypes/types'
-import { dataType } from '../../utils/types'
+import { dataActions } from '../actions/dataAction'
 
 const initialState: stateType = {
   data: [],
@@ -9,7 +9,7 @@ const initialState: stateType = {
 
 export const dataReducer = (
   state: stateType = initialState,
-  action: { type: Status; data: dataType[] },
+  action: dataActions,
 ) => {
   switch (action.type) {
     case Status._REQUEST: {

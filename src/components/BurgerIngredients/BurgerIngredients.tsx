@@ -1,10 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-scroll'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Types
+import { RootState } from '../../redux/store'
+
 // Files
 import { ingredientGroups } from '../../utils/ingredientGroups'
-import { DataContext } from '../../context/dataContext'
 
 // Components
 import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
@@ -14,7 +17,7 @@ import styles from './BurgerIngredients.module.scss'
 
 const BurgerIngredients: React.FC = () => {
   // Context
-  const { data } = React.useContext(DataContext)
+  const { data } = useSelector((store: RootState) => store.data)
 
   // Tabs
   const [currentTab, setCurrentTab] = React.useState<string>(

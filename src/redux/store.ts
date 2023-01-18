@@ -1,4 +1,4 @@
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { useDispatch } from 'react-redux'
 import thunk from 'redux-thunk'
 

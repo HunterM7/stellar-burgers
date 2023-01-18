@@ -14,14 +14,14 @@ interface setSuccessStatus {
   data: dataType[]
 }
 
-type Actions = setRequestStatus | setErrorStatus | setSuccessStatus
+export type dataActions = setRequestStatus | setErrorStatus | setSuccessStatus
 
 /* eslint-disable */
 
-type DispatchType = (action: Actions) => void
+type DispatchType = (action: dataActions) => void
 
 // Наш первый thunk
-export function getData() {
+export function getData(): any {
   return function (dispatch: DispatchType) {
     dispatch({
       type: Status._REQUEST,
