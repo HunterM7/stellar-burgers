@@ -1,16 +1,16 @@
 import { API_URL_ORDER } from '../../utils/constants'
-import { OrderStatus } from '../actionTypes/types'
+import { OrderFetchStatus } from '../actionTypes/types'
 import checkReponse from '../../utils/checkReponse'
 import { DispatchType } from '../store'
 
 interface setRequestStatus {
-  type: typeof OrderStatus._REQUEST
+  type: typeof OrderFetchStatus.ORDER_REQUEST
 }
 interface setErrorStatus {
-  type: typeof OrderStatus._ERROR
+  type: typeof OrderFetchStatus.ORDER_ERROR
 }
 interface setSuccessStatus {
-  type: typeof OrderStatus._SUCCESS
+  type: typeof OrderFetchStatus.ORDER_SUCCESS
   name: string
   orderId: number
 }
@@ -26,7 +26,7 @@ interface OrderResponseType {
 export function setOrder(ingredients: string[]): any {
   return function (dispatch: DispatchType) {
     dispatch({
-      type: OrderStatus._REQUEST,
+      type: OrderFetchStatus.ORDER_REQUEST,
     })
 
     const requestOptions = {
@@ -41,14 +41,14 @@ export function setOrder(ingredients: string[]): any {
       .then((res) => checkReponse<OrderResponseType>(res))
       .then((res) => {
         dispatch({
-          type: OrderStatus._SUCCESS,
+          type: OrderFetchStatus.ORDER_SUCCESS,
           name: res.name,
           orderId: res.order.number,
         })
       })
       .catch((err) => {
         dispatch({
-          type: OrderStatus._ERROR,
+          type: OrderFetchStatus.ORDER_ERROR,
         })
       })
   }

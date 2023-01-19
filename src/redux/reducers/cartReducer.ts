@@ -1,4 +1,3 @@
-import { DataType } from '../../utils/types'
 import { CartStateType } from '../actionTypes/types'
 
 import {
@@ -10,7 +9,7 @@ import {
 } from '../actions/cartActions'
 
 const initialState: CartStateType = {
-  bun: {} as DataType,
+  bun: null,
   ingredients: [],
   totalPrice: 0,
 }
@@ -43,9 +42,9 @@ export const cartReducer = (
     case SET_TOTAL_PRICE:
       return {
         ...state,
-        totalPrice:
-          state.bun.price * 2 +
-          state.ingredients.reduce((sum, item) => sum + item.price, 0),
+        totalPrice: state.bun
+          ? state.bun.price * 2
+          : 0 + state.ingredients.reduce((sum, item) => sum + item.price, 0),
       }
 
     default:

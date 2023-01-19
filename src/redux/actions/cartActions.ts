@@ -1,4 +1,4 @@
-import { DataType } from '../../utils/types'
+import { IngredientType } from '../actionTypes/types'
 
 export const SET_BUN = 'SET_BUN'
 export const SET_INGREDIENT = 'SET_INGREDIENT'
@@ -8,11 +8,11 @@ export const SET_TOTAL_PRICE = 'SET_TOTAL_PRICE'
 // Actions
 interface setBunAction {
   type: typeof SET_BUN
-  bun: DataType
+  bun: IngredientType
 }
 interface setIngredientAction {
   type: typeof SET_INGREDIENT
-  ingredient: DataType
+  ingredient: IngredientType
 }
 interface removeIngredientAction {
   type: typeof REMOVE_INGREDIENT

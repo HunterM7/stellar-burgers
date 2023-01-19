@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Files
-import { DataType } from '../../utils/types'
+import { IngredientType } from '../../redux/actionTypes/types'
 
 // Components
 import Modal from '../Modal/Modal'
@@ -10,7 +10,7 @@ import Modal from '../Modal/Modal'
 import styles from './IngredientDetails.module.scss'
 
 interface IngredientDetailsType {
-  data: DataType
+  data: IngredientType
   toggleModal: () => void
 }
 

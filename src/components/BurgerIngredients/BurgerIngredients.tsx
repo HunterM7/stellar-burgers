@@ -17,7 +17,7 @@ import styles from './BurgerIngredients.module.scss'
 
 const BurgerIngredients: React.FC = () => {
   // Context
-  const { data } = useSelector((store: RootStateType) => store.data)
+  const { ingredients } = useSelector((store: RootStateType) => store.data)
 
   // Tabs
   const [currentTab, setCurrentTab] = React.useState<string>(
@@ -49,7 +49,7 @@ const BurgerIngredients: React.FC = () => {
       key={++i}
       id={++i}
       title={item.title}
-      data={data.filter((el) => el.type === item.type)}
+      data={ingredients.filter((el) => el.type === item.type)}
     />
   ))
 

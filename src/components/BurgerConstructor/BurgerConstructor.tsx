@@ -21,6 +21,7 @@ import OrderDetails from '../OrderDetails/OrderDetails'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
+import IngredientPlug from './IngredientPlug/IngredientPlug'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
@@ -52,41 +53,45 @@ const BurgerConstructor: React.FC = () => {
   return (
     <section className={styles.wrapper}>
       <div className={styles.burgerConstructor}>
-        {bun._id ? (
-          <>
-            <div className={styles.blockedElement}>
-              <ConstructorElement
-                type="top"
-                isLocked={true}
-                text={`${bun.name} (верх)`}
-                price={bun.price}
-                thumbnail={bun.image}
-              />
-            </div>
+        <div className={styles.blockedElement}>
+          {bun ? (
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={`${bun.name} (верх)`}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          ) : (
+            <IngredientPlug position="top" title="Выберите булку" />
+          )}
+        </div>
 
-            <div className={styles.ingredients}>
-              {burgerIngredients.length ? (
-                <ul className={styles.ingredients__container}>
-                  {burgerIngredients}
-                </ul>
-              ) : (
-                <h2 className={styles.choiceOffer}>Добавьте ингридиенты!</h2>
-              )}
+        <div className={styles.ingredients}>
+          {burgerIngredients.length ? (
+            <ul className={styles.ingredients__container}>
+              {burgerIngredients}
+            </ul>
+          ) : (
+            <div className={styles.ingredients__plug}>
+              <IngredientPlug title="Добавьте ингридиенты" />
             </div>
+          )}
+        </div>
 
-            <div className={styles.blockedElement}>
-              <ConstructorElement
-                type="bottom"
-                isLocked={true}
-                text={`${bun.name} (низ)`}
-                price={bun.price}
-                thumbnail={bun.image}
-              />
-            </div>
-          </>
-        ) : (
-          <h2 className={styles.choiceOffer}>Выберите булку!</h2>
-        )}
+        <div className={styles.blockedElement}>
+          {bun ? (
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={`${bun.name} (низ)`}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          ) : (
+            <IngredientPlug position="bottom" title="Выберите булку" />
+          )}
+        </div>
       </div>
 
       <div className={styles.orderBox}>
@@ -104,7 +109,7 @@ const BurgerConstructor: React.FC = () => {
         </Button>
       </div>
 
-      {isModalActive && (
+      {isModalActive && bun && (
         <OrderDetails
           ingredients={[bun._id, ...ingredients.map((el) => el._id)]}
           toggleModal={toggleModal}

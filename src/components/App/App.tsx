@@ -12,14 +12,14 @@ import { getData } from '../../redux/actions/dataAction'
 import { RootStateType } from '../../redux/store'
 
 // Types
-import { DataType } from '../../utils/types'
+import { IngredientType } from '../../redux/actionTypes/types'
 
 // Styles
 import styles from './App.module.scss'
 
 export interface BurgerStateType {
-  bun: DataType
-  ingredients: DataType[]
+  bun: IngredientType
+  ingredients: IngredientType[]
   totalPrice: number
 }
 

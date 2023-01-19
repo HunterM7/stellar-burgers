@@ -1,4 +1,4 @@
-export interface DataType {
+export interface IngredientType {
   _id: string
   name: string
   type: string
@@ -10,30 +10,29 @@ export interface DataType {
   image: string
   image_mobile: string
   image_large: string
-  __v: number
 }
 
-export enum Status {
-  _REQUEST = '_REQUEST',
-  _SUCCESS = '_SUCCESS',
-  _ERROR = '_ERROR',
+export enum IngredientFetchStatus {
+  INGREDIENT_REQUEST = 'INGREDIENT_REQUEST',
+  INGREDIENT_SUCCESS = 'INGREDIENT_SUCCESS',
+  INGREDIENT_ERROR = 'INGREDIENT_ERROR',
 }
 
-export enum OrderStatus {
-  _REQUEST = 'ORDER_REQUEST',
-  _SUCCESS = 'ORDER_SUCCESS',
-  _ERROR = 'ORDER_ERROR',
+export enum OrderFetchStatus {
+  ORDER_REQUEST = 'ORDER_REQUEST',
+  ORDER_SUCCESS = 'ORDER_SUCCESS',
+  ORDER_ERROR = 'ORDER_ERROR',
 }
 
-export interface dataStateType {
-  data: DataType[]
+export interface DataStateType {
+  ingredients: IngredientType[]
   isLoading: boolean
   hasError: boolean
 }
 
 export interface CartStateType {
-  bun: DataType
-  ingredients: DataType[]
+  bun: IngredientType | null
+  ingredients: IngredientType[]
   totalPrice: number
 }
 

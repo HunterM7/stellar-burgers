@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Files
-import { DataType } from '../../utils/types'
+import { IngredientType } from '../../redux/actionTypes/types'
 
 // Components
 import BurgerItem from '../BurgerItem/BurgerItem'
@@ -12,7 +12,7 @@ import styles from './IngredientsGroup.module.scss'
 type IngredientsGroupType = {
   id: number
   title: string
-  data: DataType[]
+  data: IngredientType[]
 }
 
 const IngredientsGroup: React.FC<IngredientsGroupType> = ({

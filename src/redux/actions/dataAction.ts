@@ -1,18 +1,18 @@
 import { API_URL_INGREDIENTS } from '../../utils/constants'
-import { Status } from '../actionTypes/types'
-import { DataType } from '../../utils/types'
+import { IngredientFetchStatus } from '../actionTypes/types'
+import { IngredientType } from '../actionTypes/types'
 import checkReponse from '../../utils/checkReponse'
 import { DispatchType } from '../store'
 
 interface setRequestStatus {
-  type: typeof Status._REQUEST
+  type: typeof IngredientFetchStatus.INGREDIENT_REQUEST
 }
 interface setErrorStatus {
-  type: typeof Status._ERROR
+  type: typeof IngredientFetchStatus.INGREDIENT_ERROR
 }
 interface setSuccessStatus {
-  type: typeof Status._SUCCESS
-  data: DataType[]
+  type: typeof IngredientFetchStatus.INGREDIENT_SUCCESS
+  ingredients: IngredientType[]
 }
 
 export type dataActions = setRequestStatus | setErrorStatus | setSuccessStatus
@@ -21,20 +21,20 @@ export type dataActions = setRequestStatus | setErrorStatus | setSuccessStatus
 export function getData(): any {
   return function (dispatch: DispatchType) {
     dispatch({
-      type: Status._REQUEST,
+      type: IngredientFetchStatus.INGREDIENT_REQUEST,
     })
 
     fetch(API_URL_INGREDIENTS)
-      .then((res) => checkReponse<{ data: DataType[] }>(res))
+      .then((res) => checkReponse<{ data: IngredientType[] }>(res))
       .then((res) => {
         dispatch({
-          type: Status._SUCCESS,
-          data: res.data,
+          type: IngredientFetchStatus.INGREDIENT_SUCCESS,
+          ingredients: res.data,
         })
       })
       .catch((err) => {
         dispatch({
-          type: Status._ERROR,
+          type: IngredientFetchStatus.INGREDIENT_ERROR,
         })
       })
   }

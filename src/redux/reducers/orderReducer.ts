@@ -1,4 +1,4 @@
-import { OrderStateType, OrderStatus } from '../actionTypes/types'
+import { OrderStateType, OrderFetchStatus } from '../actionTypes/types'
 import { orderActions } from '../actions/orderAction'
 
 const initialState: OrderStateType = {
@@ -15,14 +15,14 @@ export const orderReducer = (
   action: orderActions,
 ) => {
   switch (action.type) {
-    case OrderStatus._REQUEST: {
+    case OrderFetchStatus.ORDER_REQUEST: {
       return {
         ...state,
         isLoading: true,
         hasError: false,
       }
     }
-    case OrderStatus._SUCCESS: {
+    case OrderFetchStatus.ORDER_SUCCESS: {
       return {
         ...state,
         orderInfo: {
@@ -32,7 +32,7 @@ export const orderReducer = (
         isLoading: false,
       }
     }
-    case OrderStatus._ERROR: {
+    case OrderFetchStatus.ORDER_ERROR: {
       return {
         ...state,
         isLoading: true,

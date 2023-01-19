@@ -1,32 +1,32 @@
-import { dataStateType, Status } from '../actionTypes/types'
+import { DataStateType, IngredientFetchStatus } from '../actionTypes/types'
 import { dataActions } from '../actions/dataAction'
 
-const initialState: dataStateType = {
-  data: [],
+const initialState: DataStateType = {
+  ingredients: [],
   isLoading: true,
   hasError: false,
 }
 
 export const dataReducer = (
-  state: dataStateType = initialState,
+  state: DataStateType = initialState,
   action: dataActions,
 ) => {
   switch (action.type) {
-    case Status._REQUEST: {
+    case IngredientFetchStatus.INGREDIENT_REQUEST: {
       return {
         ...state,
         isLoading: true,
         hasError: false,
       }
     }
-    case Status._SUCCESS: {
+    case IngredientFetchStatus.INGREDIENT_SUCCESS: {
       return {
         ...state,
-        data: action.data,
+        ingredients: action.ingredients,
         isLoading: false,
       }
     }
-    case Status._ERROR: {
+    case IngredientFetchStatus.INGREDIENT_ERROR: {
       return {
         ...state,
         isLoading: true,
