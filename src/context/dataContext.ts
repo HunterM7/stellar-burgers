@@ -1,9 +1,9 @@
 import { createContext } from 'react'
 
-import { dataType } from '../utils/types'
+import { DataType } from '../utils/types'
 
 interface DataContextType {
-  data: dataType[]
+  data: DataType[]
 }
 
 export const DataContext = createContext<DataContextType>({

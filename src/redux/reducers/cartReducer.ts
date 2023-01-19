@@ -1,4 +1,5 @@
-import { dataType } from '../../utils/types'
+import { DataType } from '../../utils/types'
+import { CartStateType } from '../actionTypes/types'
 
 import {
   Actions,
@@ -8,20 +9,14 @@ import {
   SET_TOTAL_PRICE,
 } from '../actions/cartActions'
 
-export interface StateType {
-  bun: dataType
-  ingredients: dataType[]
-  totalPrice: number
-}
-
-const initialState: StateType = {
-  bun: {} as dataType,
+const initialState: CartStateType = {
+  bun: {} as DataType,
   ingredients: [],
   totalPrice: 0,
 }
 
 export const cartReducer = (
-  state: StateType = initialState,
+  state: CartStateType = initialState,
   action: Actions,
 ) => {
   switch (action.type) {

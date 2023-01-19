@@ -11,7 +11,7 @@ import {
 import useModal from '../../hooks/useModal'
 
 // Types
-import { RootState, useAppDispatch } from '../../redux/store'
+import { RootStateType, useAppDispatch } from '../../redux/store'
 
 // Files and other
 import { SET_TOTAL_PRICE } from '../../redux/actions/cartActions'
@@ -25,7 +25,7 @@ import styles from './BurgerConstructor.module.scss'
 const BurgerConstructor: React.FC = () => {
   // Redux
   const { bun, ingredients, totalPrice } = useSelector(
-    (store: RootState) => store.cart,
+    (store: RootStateType) => store.cart,
   )
 
   const dispatch = useAppDispatch()

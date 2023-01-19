@@ -4,7 +4,7 @@ import { Link } from 'react-scroll'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Types
-import { RootState } from '../../redux/store'
+import { RootStateType } from '../../redux/store'
 
 // Files
 import { ingredientGroups } from '../../utils/ingredientGroups'
@@ -17,7 +17,7 @@ import styles from './BurgerIngredients.module.scss'
 
 const BurgerIngredients: React.FC = () => {
   // Context
-  const { data } = useSelector((store: RootState) => store.data)
+  const { data } = useSelector((store: RootStateType) => store.data)
 
   // Tabs
   const [currentTab, setCurrentTab] = React.useState<string>(

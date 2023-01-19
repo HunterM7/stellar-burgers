@@ -1,7 +1,8 @@
 import { API_URL_INGREDIENTS } from '../../utils/constants'
 import { Status } from '../actionTypes/types'
-import { dataType } from '../../utils/types'
+import { DataType } from '../../utils/types'
 import checkReponse from '../../utils/checkReponse'
+import { DispatchType } from '../store'
 
 interface setRequestStatus {
   type: typeof Status._REQUEST
@@ -11,16 +12,12 @@ interface setErrorStatus {
 }
 interface setSuccessStatus {
   type: typeof Status._SUCCESS
-  data: dataType[]
+  data: DataType[]
 }
 
 export type dataActions = setRequestStatus | setErrorStatus | setSuccessStatus
 
 /* eslint-disable */
-
-type DispatchType = (action: dataActions) => void
-
-// Наш первый thunk
 export function getData(): any {
   return function (dispatch: DispatchType) {
     dispatch({
@@ -28,7 +25,7 @@ export function getData(): any {
     })
 
     fetch(API_URL_INGREDIENTS)
-      .then((res) => checkReponse<{ data: dataType[] }>(res))
+      .then((res) => checkReponse<{ data: DataType[] }>(res))
       .then((res) => {
         dispatch({
           type: Status._SUCCESS,

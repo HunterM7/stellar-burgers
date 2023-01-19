@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Files
-import { dataType } from '../../utils/types'
+import { DataType } from '../../utils/types'
 
 // Components
 import Modal from '../Modal/Modal'
@@ -10,7 +10,7 @@ import Modal from '../Modal/Modal'
 import styles from './IngredientDetails.module.scss'
 
 interface IngredientDetailsType {
-  data: dataType
+  data: DataType
   toggleModal: () => void
 }
 

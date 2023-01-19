@@ -1,7 +1,4 @@
-export type isLoading = boolean
-export type hasError = boolean
-
-export interface dataType {
+export interface DataType {
   _id: string
   name: string
   type: string

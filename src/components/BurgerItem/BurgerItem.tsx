@@ -9,7 +9,7 @@ import useModal from '../../hooks/useModal'
 import { useAppDispatch } from '../../redux/store'
 
 // Files and other
-import { dataType } from '../../utils/types'
+import { DataType } from '../../utils/types'
 import { SET_BUN, SET_INGREDIENT } from '../../redux/actions/cartActions'
 
 // Components
@@ -19,7 +19,7 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import styles from './BurgerItem.module.scss'
 
 interface BurgerItemType {
-  data: dataType
+  data: DataType
 }
 
 const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {

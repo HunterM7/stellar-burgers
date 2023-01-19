@@ -1,4 +1,4 @@
-export interface dataType {
+export interface DataType {
   _id: string
   name: string
   type: string
@@ -19,8 +19,29 @@ export enum Status {
   _ERROR = '_ERROR',
 }
 
-export interface stateType {
-  data: dataType[]
+export enum OrderStatus {
+  _REQUEST = 'ORDER_REQUEST',
+  _SUCCESS = 'ORDER_SUCCESS',
+  _ERROR = 'ORDER_ERROR',
+}
+
+export interface dataStateType {
+  data: DataType[]
+  isLoading: boolean
+  hasError: boolean
+}
+
+export interface CartStateType {
+  bun: DataType
+  ingredients: DataType[]
+  totalPrice: number
+}
+
+export interface OrderStateType {
+  orderInfo: {
+    name: string
+    order: number
+  }
   isLoading: boolean
   hasError: boolean
 }

@@ -1,14 +1,14 @@
-import { stateType, Status } from '../actionTypes/types'
+import { dataStateType, Status } from '../actionTypes/types'
 import { dataActions } from '../actions/dataAction'
 
-const initialState: stateType = {
+const initialState: dataStateType = {
   data: [],
   isLoading: true,
   hasError: false,
 }
 
 export const dataReducer = (
-  state: stateType = initialState,
+  state: dataStateType = initialState,
   action: dataActions,
 ) => {
   switch (action.type) {
