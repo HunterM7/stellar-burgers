@@ -18,7 +18,7 @@ interface setSuccessStatus {
 export type dataActions = setRequestStatus | setErrorStatus | setSuccessStatus
 
 /* eslint-disable */
-export function getData(): any {
+export function getIngredients(): any {
   return function (dispatch: DispatchType) {
     dispatch({
       type: IngredientFetchStatus.INGREDIENT_REQUEST,

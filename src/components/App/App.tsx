@@ -8,7 +8,7 @@ import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 
 // Redux
-import { getData } from '../../redux/actions/dataAction'
+import { getIngredients } from '../../redux/actions/dataAction'
 import { RootStateType } from '../../redux/store'
 
 // Types
@@ -31,7 +31,7 @@ const App: React.FC = () => {
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    dispatch(getData())
+    dispatch(getIngredients())
   }, [dispatch])
 
   return (

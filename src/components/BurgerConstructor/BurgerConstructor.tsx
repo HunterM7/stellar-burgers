@@ -47,7 +47,7 @@ const BurgerConstructor: React.FC = () => {
         text={item.name}
         price={item.price}
         thumbnail={item.image}
-        handleClose={() => dispatch(removeIngredient(item._id))}
+        handleClose={() => dispatch(removeIngredient(item.uuid))}
       />
     </li>
   ))

@@ -12,6 +12,10 @@ export interface IngredientType {
   image_large: string
 }
 
+export interface IngredientCartType extends IngredientType {
+  uuid: string
+}
+
 export enum IngredientFetchStatus {
   INGREDIENT_REQUEST = 'INGREDIENT_REQUEST',
   INGREDIENT_SUCCESS = 'INGREDIENT_SUCCESS',
@@ -32,7 +36,7 @@ export interface DataStateType {
 
 export interface CartStateType {
   bun: IngredientType | null
-  ingredients: IngredientType[]
+  ingredients: IngredientCartType[]
   totalPrice: number
 }
 

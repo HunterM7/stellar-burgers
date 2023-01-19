@@ -47,7 +47,7 @@ const BurgerItem: React.FC<BurgerItemType> = ({ ingredient }) => {
 
     ingredient.type === 'bun'
       ? dispatch(setBun(ingredient))
-      : dispatch(setIngredient(ingredient))
+      : dispatch(setIngredient({ ...ingredient, uuid: crypto.randomUUID() }))
   }
 
   return (

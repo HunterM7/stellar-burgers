@@ -8,14 +8,16 @@ import {
   removeIngredientA,
   setTotalPricenA,
 } from '../actions/cartActions'
-import { IngredientType } from '../actionTypes/types'
+import { IngredientCartType, IngredientType } from '../actionTypes/types'
 
 export const setBun = (bun: IngredientType): setBunA => ({
   type: SET_BUN,
   bun,
 })
 
-export const setIngredient = (ingredient: IngredientType): setIngredientA => ({
+export const setIngredient = (
+  ingredient: IngredientCartType,
+): setIngredientA => ({
   type: SET_INGREDIENT,
   ingredient,
 })

@@ -1,4 +1,4 @@
-import { IngredientType } from '../actionTypes/types'
+import { IngredientCartType, IngredientType } from '../actionTypes/types'
 
 export const SET_BUN = 'SET_BUN'
 export const SET_INGREDIENT = 'SET_INGREDIENT'
@@ -12,7 +12,7 @@ export interface setBunA {
 }
 export interface setIngredientA {
   type: typeof SET_INGREDIENT
-  ingredient: IngredientType
+  ingredient: IngredientCartType
 }
 export interface removeIngredientA {
   type: typeof REMOVE_INGREDIENT
