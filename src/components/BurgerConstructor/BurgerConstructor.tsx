@@ -22,7 +22,7 @@ import {
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'
 
-import IngredientPlug from './IngredientPlug/IngredientPlug'
+import ConstructorPlug from './ConstructorPlug/ConstructorPlug'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
@@ -68,7 +68,7 @@ const BurgerConstructor: React.FC = () => {
               thumbnail={bun.image}
             />
           ) : (
-            <IngredientPlug position="top" title="Выберите булку" />
+            <ConstructorPlug position="top" title="Выберите булку" />
           )}
         </div>
 
@@ -79,7 +79,7 @@ const BurgerConstructor: React.FC = () => {
             </ul>
           ) : (
             <div className={styles.ingredients__plug}>
-              <IngredientPlug title="Добавьте ингридиенты" />
+              <ConstructorPlug title="Добавьте ингридиенты" />
             </div>
           )}
         </div>
@@ -94,7 +94,7 @@ const BurgerConstructor: React.FC = () => {
               thumbnail={bun.image}
             />
           ) : (
-            <IngredientPlug position="bottom" title="Выберите булку" />
+            <ConstructorPlug position="bottom" title="Выберите булку" />
           )}
         </div>
       </div>

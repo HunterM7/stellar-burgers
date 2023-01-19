@@ -1,7 +1,7 @@
 import { CartStateType } from '../actionTypes/types'
 
 import {
-  Actions,
+  CartActions,
   SET_BUN,
   SET_INGREDIENT,
   REMOVE_INGREDIENT,
@@ -16,7 +16,7 @@ const initialState: CartStateType = {
 
 export const cartReducer = (
   state: CartStateType = initialState,
-  action: Actions,
+  action: CartActions,
 ) => {
   switch (action.type) {
     case SET_BUN:
@@ -39,13 +39,17 @@ export const cartReducer = (
         ),
       }
 
-    case SET_TOTAL_PRICE:
+    case SET_TOTAL_PRICE: {
+      const bunPrice = state.bun ? state.bun.price * 2 : 0
+      const ingredientsPrice = state.ingredients.reduce(
+        (sum, item) => sum + item.price,
+        0,
+      )
       return {
         ...state,
-        totalPrice: state.bun
-          ? state.bun.price * 2
-          : 0 + state.ingredients.reduce((sum, item) => sum + item.price, 0),
+        totalPrice: bunPrice + ingredientsPrice,
       }
+    }
 
     default:
       return state

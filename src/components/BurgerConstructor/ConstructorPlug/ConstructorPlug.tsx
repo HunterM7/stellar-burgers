@@ -1,13 +1,16 @@
 import React from 'react'
 
-import styles from './IngredientPlug.module.scss'
+import styles from './ConstructorPlug.module.scss'
 
-type IngredientPlugType = {
+type ConstructorPlugType = {
   position?: 'top' | 'bottom'
   title: string
 }
 
-const IngredientPlug: React.FC<IngredientPlugType> = ({ position, title }) => {
+const ConstructorPlug: React.FC<ConstructorPlugType> = ({
+  position,
+  title,
+}) => {
   return (
     <div
       className={`
@@ -19,4 +22,4 @@ const IngredientPlug: React.FC<IngredientPlugType> = ({ position, title }) => {
   )
 }
 
-export default IngredientPlug
+export default ConstructorPlug
