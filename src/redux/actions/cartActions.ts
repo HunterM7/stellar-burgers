@@ -6,19 +6,19 @@ export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
 export const SET_TOTAL_PRICE = 'SET_TOTAL_PRICE'
 
 // Actions
-interface setBunAction {
+export interface setBunAction {
   type: typeof SET_BUN
   bun: IngredientType
 }
-interface setIngredientAction {
+export interface setIngredientAction {
   type: typeof SET_INGREDIENT
   ingredient: IngredientType
 }
-interface removeIngredientAction {
+export interface removeIngredientAction {
   type: typeof REMOVE_INGREDIENT
   id: string
 }
-interface setTotalPricenAction {
+export interface setTotalPricenAction {
   type: typeof SET_TOTAL_PRICE
 }
 

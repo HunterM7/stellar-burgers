@@ -10,35 +10,39 @@ import Modal from '../Modal/Modal'
 import styles from './IngredientDetails.module.scss'
 
 interface IngredientDetailsType {
-  data: IngredientType
+  ingredient: IngredientType
   toggleModal: () => void
 }
 
 const IngredientDetails: React.FC<IngredientDetailsType> = ({
-  data,
+  ingredient,
   toggleModal,
 }) => {
   // Nutrients
   const nutrientsInfo = [
-    { title: 'Калории,ккал', data: data.calories },
-    { title: 'Белки, г', data: data.proteins },
-    { title: 'Жиры, г', data: data.fat },
-    { title: 'Углеводы, г', data: data.carbohydrates },
+    { title: 'Калории,ккал', value: ingredient.calories },
+    { title: 'Белки, г', value: ingredient.proteins },
+    { title: 'Жиры, г', value: ingredient.fat },
+    { title: 'Углеводы, г', value: ingredient.carbohydrates },
   ]
 
   const nutrients = nutrientsInfo.map((item, i) => (
     <li key={i} className={styles.nutrients__item}>
       <p className={styles.nutrients__title}>{item.title}</p>
-      <p className={styles.nutrients__quantity}>{item.data}</p>
+      <p className={styles.nutrients__quantity}>{item.value}</p>
     </li>
   ))
 
   return (
     <Modal title="Детали ингредиента" toggleModal={toggleModal}>
       <>
-        <img className={styles.img} src={data.image_large} alt={data.name} />
+        <img
+          className={styles.img}
+          src={ingredient.image_large}
+          alt={ingredient.name}
+        />
 
-        <h3 className={styles.title}>{data.name}</h3>
+        <h3 className={styles.title}>{ingredient.name}</h3>
 
         <ul className={styles.nutrients}>{nutrients}</ul>
       </>

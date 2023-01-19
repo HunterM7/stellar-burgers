@@ -10,7 +10,10 @@ import { useAppDispatch } from '../../redux/store'
 
 // Files and other
 import { IngredientType } from '../../redux/actionTypes/types'
-import { SET_BUN, SET_INGREDIENT } from '../../redux/actions/cartActions'
+import {
+  setBun,
+  setIngredient,
+} from '../../redux/actionCreators/cartActionCreators'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -19,10 +22,10 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import styles from './BurgerItem.module.scss'
 
 interface BurgerItemType {
-  data: IngredientType
+  ingredient: IngredientType
 }
 
-const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
+const BurgerItem: React.FC<BurgerItemType> = ({ ingredient }) => {
   // Count of BurgerItem
   const [count] = React.useState<number>(0)
 
@@ -34,26 +37,26 @@ const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
   const handleClick = () => {
     toggleModal()
 
-    data.type === 'bun'
-      ? dispatch({ type: SET_BUN, bun: data })
-      : dispatch({ type: SET_INGREDIENT, ingredient: data })
+    ingredient.type === 'bun'
+      ? dispatch(setBun(ingredient))
+      : dispatch(setIngredient(ingredient))
   }
 
   return (
     <li className={styles.wrapper} onClick={handleClick}>
-      <img src={data.image} alt="Ingredient" className={styles.img} />
+      <img src={ingredient.image} alt="Ingredient" className={styles.img} />
 
       <div className={styles.price}>
-        {data.price}
+        {ingredient.price}
         <CurrencyIcon type="primary" />
       </div>
 
-      <p className={styles.title}>{data.name}</p>
+      <p className={styles.title}>{ingredient.name}</p>
 
       {count ? <Counter count={count} size="default" /> : null}
 
       {isModalActive && (
-        <IngredientDetails data={data} toggleModal={toggleModal} />
+        <IngredientDetails ingredient={ingredient} toggleModal={toggleModal} />
       )}
     </li>
   )

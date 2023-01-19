@@ -14,14 +14,18 @@ import useModal from '../../hooks/useModal'
 import { RootStateType, useAppDispatch } from '../../redux/store'
 
 // Files and other
-import { SET_TOTAL_PRICE } from '../../redux/actions/cartActions'
+import {
+  removeIngredient,
+  setTotalPrice,
+} from '../../redux/actionCreators/cartActionCreators'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'
 
+import IngredientPlug from './IngredientPlug/IngredientPlug'
+
 // Styles
 import styles from './BurgerConstructor.module.scss'
-import IngredientPlug from './IngredientPlug/IngredientPlug'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
@@ -32,7 +36,7 @@ const BurgerConstructor: React.FC = () => {
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
-    dispatch({ type: SET_TOTAL_PRICE })
+    dispatch(setTotalPrice())
   }, [bun, ingredients, dispatch])
 
   // Burger contents
@@ -43,6 +47,7 @@ const BurgerConstructor: React.FC = () => {
         text={item.name}
         price={item.price}
         thumbnail={item.image}
+        handleClose={() => dispatch(removeIngredient(item._id))}
       />
     </li>
   ))
