@@ -24,19 +24,19 @@ export const orderReducer = (
     }
     case OrderFetchStatus.ORDER_SUCCESS: {
       return {
-        ...state,
         orderInfo: {
           name: action.name,
           order: action.orderId,
         },
         isLoading: false,
+        hasError: false,
       }
     }
     case OrderFetchStatus.ORDER_ERROR: {
       return {
         ...state,
-        isLoading: true,
-        hasError: false,
+        isLoading: false,
+        hasError: true,
       }
     }
 

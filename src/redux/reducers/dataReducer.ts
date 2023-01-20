@@ -21,16 +21,16 @@ export const dataReducer = (
     }
     case IngredientFetchStatus.INGREDIENT_SUCCESS: {
       return {
-        ...state,
         ingredients: action.ingredients,
         isLoading: false,
+        hasError: false,
       }
     }
     case IngredientFetchStatus.INGREDIENT_ERROR: {
       return {
         ...state,
-        isLoading: true,
-        hasError: false,
+        isLoading: false,
+        hasError: true,
       }
     }
 
