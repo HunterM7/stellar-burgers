@@ -1,13 +1,12 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
 // Components
 import Modal from '../Modal/Modal'
 
 // Hooks
+import { useDispatch, useSelector } from '../../redux/store'
 
 // Types
-import { RootStateType, useAppDispatch } from '../../redux/store'
 import { setOrder } from '../../redux/actions/orderActions'
 
 // Files and other
@@ -24,11 +23,9 @@ interface OrderInfoType {
 const OrderInfo: React.FC<OrderInfoType> = ({ ingredients, toggleModal }) => {
   // const [data, isLoading, hasError] = useFetchOrder(API_URL_ORDER, ingredients)
 
-  const { orderInfo, isLoading, hasError } = useSelector(
-    (store: RootStateType) => store.order,
-  )
+  const { orderInfo, isLoading, hasError } = useSelector((store) => store.order)
 
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(setOrder(ingredients))

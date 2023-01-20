@@ -8,7 +8,7 @@ const initialState: TDataState = {
 }
 
 export const dataReducer = (
-  state: TDataState = initialState,
+  state = initialState,
   action: DataActions,
 ): TDataState => {
   switch (action.type) {

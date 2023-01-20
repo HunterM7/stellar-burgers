@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import {
   Counter,
   CurrencyIcon,
@@ -7,7 +6,7 @@ import {
 
 // Hooks
 import useModal from '../../hooks/useModal'
-import { RootStateType, useAppDispatch } from '../../redux/store'
+import { useDispatch, useSelector } from '../../redux/store'
 
 // Files and other
 import { TIngredient } from '../../redux/actionTypes/types'
@@ -29,7 +28,7 @@ interface BurgerItemType {
 
 const BurgerItem: React.FC<BurgerItemType> = ({ ingredient }) => {
   // Count of BurgerItem
-  const { bun, ingredients } = useSelector((store: RootStateType) => store.cart)
+  const { bun, ingredients } = useSelector((store) => store.cart)
 
   const count =
     ingredient.type === 'bun'
@@ -41,7 +40,7 @@ const BurgerItem: React.FC<BurgerItemType> = ({ ingredient }) => {
   // Modal Window
   const { isModalActive, toggleModal } = useModal(false)
 
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
 
   const handleClick = () => {
     toggleModal()

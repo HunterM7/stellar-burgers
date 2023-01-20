@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 
 // Components
 import Loader from '../Loader/Loader'
@@ -9,7 +8,7 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 
 // Redux
 import { getIngredients } from '../../redux/actions/dataActions'
-import { RootStateType } from '../../redux/store'
+import { useDispatch, useSelector } from '../../redux/store'
 
 // Types
 import { TIngredient } from '../../redux/actionTypes/types'
@@ -24,9 +23,7 @@ export interface BurgerStateType {
 }
 
 const App: React.FC = () => {
-  const { isLoading, hasError } = useSelector(
-    (store: RootStateType) => store.data,
-  )
+  const { isLoading, hasError } = useSelector((store) => store.data)
 
   const dispatch = useDispatch()
 

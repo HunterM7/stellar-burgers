@@ -1,11 +1,16 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
-import { useDispatch } from 'react-redux'
-import thunk from 'redux-thunk'
+import {
+  TypedUseSelectorHook,
+  useDispatch as dispatchHook,
+  useSelector as selectorHook,
+} from 'react-redux'
+import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
 import { cartReducer } from './reducers/cartReducer'
 import { dataReducer } from './reducers/dataReducer'
 import { orderReducer } from './reducers/orderReducer'
 import { IngredientDetailsReducer } from './reducers/ingredientDetailsReducer'
+import { TAppActions } from './actions'
 
 const rootReducer = combineReducers({
   data: dataReducer,
@@ -29,7 +34,16 @@ export const store = createStore(
   composeWithDevTools(applyMiddleware(thunk)),
 )
 
-export type DispatchType = typeof store.dispatch
-export type RootStateType = ReturnType<typeof store.getState>
+export type RootStateType = ReturnType<typeof rootReducer>
 
-export const useAppDispatch = () => useDispatch<DispatchType>()
+export type AppDispatch = ThunkDispatch<RootStateType, never, TAppActions>
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType, // return value type
+  RootStateType, // app state type
+  never, // extra argument type
+  TAppActions // action type
+>
+
+export const useDispatch = () => dispatchHook<AppDispatch>()
+export const useSelector: TypedUseSelectorHook<RootStateType> = selectorHook

@@ -1,7 +1,7 @@
 import { API_URL_ORDER } from '../../utils/constants'
 import { OrderFetchStatus } from '../actionTypes/types'
 import { checkReponse } from '../../utils/checkReponse'
-import { DispatchType } from '../store'
+import { AppDispatch, AppThunk } from '../store'
 import {
   setErrorOrderStatus,
   setRequestOrderStatus,
@@ -30,28 +30,23 @@ export interface TOrderResponse {
   order: { number: number }
 }
 
-/* eslint-disable */
-export function setOrder(ingredients: string[]): any {
-  return function (dispatch: DispatchType) {
+export const setOrder =
+  (ingredients: string[]): AppThunk =>
+  (dispatch: AppDispatch) => {
     dispatch(setRequestOrderStatus())
 
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        ingredients: ingredients,
+        ingredients,
       }),
     }
 
     fetch(API_URL_ORDER, requestOptions)
       .then((res) => checkReponse<TOrderResponse>(res))
-      .then((res) => {
-        console.log(res)
-
-        dispatch(setSuccessOrderStatus(res))
-      })
+      .then((res) => dispatch(setSuccessOrderStatus(res)))
       .catch((err) => {
         dispatch(setErrorOrderStatus())
       })
   }
-}

@@ -1,8 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
-// Files
-import { RootStateType } from '../../redux/store'
+// Hooks
+import { useSelector } from '../../redux/store'
 
 // Components
 import Modal from '../Modal/Modal'
@@ -19,7 +18,7 @@ const IngredientDetails: React.FC<IngredientDetailsType> = ({
 }) => {
   // Nutrients
   const { title, image, calories, proteins, fat, carbohydrates } = useSelector(
-    (store: RootStateType) => store.ingredientDetails,
+    (store) => store.ingredientDetails,
   )
 
   const nutrientsInfo = [

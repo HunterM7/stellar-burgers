@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import {
   Button,
   ConstructorElement,
@@ -11,7 +10,7 @@ import {
 import useModal from '../../hooks/useModal'
 
 // Types
-import { RootStateType, useAppDispatch } from '../../redux/store'
+import { useDispatch, useSelector } from '../../redux/store'
 
 // Files and other
 import {
@@ -29,11 +28,9 @@ import styles from './BurgerConstructor.module.scss'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
-  const { bun, ingredients, totalPrice } = useSelector(
-    (store: RootStateType) => store.cart,
-  )
+  const { bun, ingredients, totalPrice } = useSelector((store) => store.cart)
 
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(setTotalPrice())
