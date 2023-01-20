@@ -1,7 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 // Files
-import { IngredientType } from '../../redux/actionTypes/types'
+import { RootStateType } from '../../redux/store'
 
 // Components
 import Modal from '../Modal/Modal'
@@ -10,20 +11,22 @@ import Modal from '../Modal/Modal'
 import styles from './IngredientDetails.module.scss'
 
 interface IngredientDetailsType {
-  ingredient: IngredientType
   toggleModal: () => void
 }
 
 const IngredientDetails: React.FC<IngredientDetailsType> = ({
-  ingredient,
   toggleModal,
 }) => {
   // Nutrients
+  const { title, image, calories, proteins, fat, carbohydrates } = useSelector(
+    (store: RootStateType) => store.ingredientDetails,
+  )
+
   const nutrientsInfo = [
-    { title: 'Калории,ккал', value: ingredient.calories },
-    { title: 'Белки, г', value: ingredient.proteins },
-    { title: 'Жиры, г', value: ingredient.fat },
-    { title: 'Углеводы, г', value: ingredient.carbohydrates },
+    { title: 'Калории,ккал', value: calories },
+    { title: 'Белки, г', value: proteins },
+    { title: 'Жиры, г', value: fat },
+    { title: 'Углеводы, г', value: carbohydrates },
   ]
 
   const nutrients = nutrientsInfo.map((item, i) => (
@@ -36,13 +39,9 @@ const IngredientDetails: React.FC<IngredientDetailsType> = ({
   return (
     <Modal title="Детали ингредиента" toggleModal={toggleModal}>
       <>
-        <img
-          className={styles.img}
-          src={ingredient.image_large}
-          alt={ingredient.name}
-        />
+        <img className={styles.img} src={image} alt={title} />
 
-        <h3 className={styles.title}>{ingredient.name}</h3>
+        <h3 className={styles.title}>{title}</h3>
 
         <ul className={styles.nutrients}>{nutrients}</ul>
       </>

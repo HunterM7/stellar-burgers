@@ -3,7 +3,7 @@ import {
   setRequestStatusA,
   setSuccessStatusA,
 } from '../actions/dataActions'
-import { IngredientType, IngredientFetchStatus } from '../actionTypes/types'
+import { TIngredient, IngredientFetchStatus } from '../actionTypes/types'
 
 export const setRequestStatus = (): setRequestStatusA => ({
   type: IngredientFetchStatus.INGREDIENT_REQUEST,
@@ -14,7 +14,7 @@ export const setErrorStatus = (): setErrorStatusA => ({
 })
 
 export const setSuccessStatus = (
-  ingredients: IngredientType[],
+  ingredients: TIngredient[],
 ): setSuccessStatusA => ({
   type: IngredientFetchStatus.INGREDIENT_SUCCESS,
   ingredients,

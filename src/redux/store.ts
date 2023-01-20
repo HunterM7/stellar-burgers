@@ -5,11 +5,13 @@ import thunk from 'redux-thunk'
 import { cartReducer } from './reducers/cartReducer'
 import { dataReducer } from './reducers/dataReducer'
 import { orderReducer } from './reducers/orderReducer'
+import { IngredientDetailsReducer } from './reducers/ingredientDetailsReducer'
 
 const rootReducer = combineReducers({
   data: dataReducer,
   cart: cartReducer,
   order: orderReducer,
+  ingredientDetails: IngredientDetailsReducer,
 })
 
 // Redux DevTools

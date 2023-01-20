@@ -1,4 +1,4 @@
-import { CartStateType } from '../actionTypes/types'
+import { TCartState } from '../actionTypes/types'
 
 import {
   CartActions,
@@ -8,16 +8,16 @@ import {
   SET_TOTAL_PRICE,
 } from '../actions/cartActions'
 
-const initialState: CartStateType = {
+const initialState: TCartState = {
   bun: null,
   ingredients: [],
   totalPrice: 0,
 }
 
 export const cartReducer = (
-  state: CartStateType = initialState,
+  state: TCartState = initialState,
   action: CartActions,
-) => {
+): TCartState => {
   switch (action.type) {
     case SET_BUN:
       return {

@@ -1,8 +1,7 @@
-import { API_URL_INGREDIENTS } from '../../utils/constants'
-import { IngredientFetchStatus } from '../actionTypes/types'
-import { IngredientType } from '../actionTypes/types'
-import checkReponse from '../../utils/checkReponse'
 import { DispatchType } from '../store'
+import { checkReponse } from '../../utils/checkReponse'
+import { API_URL_INGREDIENTS } from '../../utils/constants'
+import { TIngredient, IngredientFetchStatus } from '../actionTypes/types'
 import {
   setErrorStatus,
   setRequestStatus,
@@ -17,10 +16,10 @@ export interface setErrorStatusA {
 }
 export interface setSuccessStatusA {
   type: typeof IngredientFetchStatus.INGREDIENT_SUCCESS
-  ingredients: IngredientType[]
+  ingredients: TIngredient[]
 }
 
-export type dataActions =
+export type DataActions =
   | setRequestStatusA
   | setErrorStatusA
   | setSuccessStatusA
@@ -31,7 +30,7 @@ export function getIngredients(): any {
     dispatch(setRequestStatus())
 
     fetch(API_URL_INGREDIENTS)
-      .then((res) => checkReponse<{ data: IngredientType[] }>(res))
+      .then((res) => checkReponse<{ data: TIngredient[] }>(res))
       .then((res) => {
         dispatch(setSuccessStatus(res.data))
       })

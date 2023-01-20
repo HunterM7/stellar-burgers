@@ -12,14 +12,14 @@ import { getIngredients } from '../../redux/actions/dataActions'
 import { RootStateType } from '../../redux/store'
 
 // Types
-import { IngredientType } from '../../redux/actionTypes/types'
+import { TIngredient } from '../../redux/actionTypes/types'
 
 // Styles
 import styles from './App.module.scss'
 
 export interface BurgerStateType {
-  bun: IngredientType
-  ingredients: IngredientType[]
+  bun: TIngredient
+  ingredients: TIngredient[]
   totalPrice: number
 }
 

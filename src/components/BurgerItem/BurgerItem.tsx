@@ -10,11 +10,12 @@ import useModal from '../../hooks/useModal'
 import { RootStateType, useAppDispatch } from '../../redux/store'
 
 // Files and other
-import { IngredientType } from '../../redux/actionTypes/types'
+import { TIngredient } from '../../redux/actionTypes/types'
 import {
   setBun,
   setIngredient,
 } from '../../redux/actionCreators/cartActionCreators'
+import { setIngredientDetails } from '../../redux/actionCreators/IngredientDetailsCreators'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -23,7 +24,7 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import styles from './BurgerItem.module.scss'
 
 interface BurgerItemType {
-  ingredient: IngredientType
+  ingredient: TIngredient
 }
 
 const BurgerItem: React.FC<BurgerItemType> = ({ ingredient }) => {
@@ -45,6 +46,17 @@ const BurgerItem: React.FC<BurgerItemType> = ({ ingredient }) => {
   const handleClick = () => {
     toggleModal()
 
+    dispatch(
+      setIngredientDetails({
+        title: ingredient.name,
+        image: ingredient.image_large,
+        calories: ingredient.calories,
+        proteins: ingredient.proteins,
+        fat: ingredient.fat,
+        carbohydrates: ingredient.carbohydrates,
+      }),
+    )
+
     ingredient.type === 'bun'
       ? dispatch(setBun(ingredient))
       : dispatch(setIngredient({ ...ingredient, uuid: crypto.randomUUID() }))
@@ -63,9 +75,7 @@ const BurgerItem: React.FC<BurgerItemType> = ({ ingredient }) => {
 
       {count ? <Counter count={count} size="default" /> : null}
 
-      {isModalActive && (
-        <IngredientDetails ingredient={ingredient} toggleModal={toggleModal} />
-      )}
+      {isModalActive && <IngredientDetails toggleModal={toggleModal} />}
     </li>
   )
 }

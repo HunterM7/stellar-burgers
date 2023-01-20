@@ -1,16 +1,16 @@
-import { DataStateType, IngredientFetchStatus } from '../actionTypes/types'
-import { dataActions } from '../actions/dataActions'
+import { TDataState, IngredientFetchStatus } from '../actionTypes/types'
+import { DataActions } from '../actions/dataActions'
 
-const initialState: DataStateType = {
+const initialState: TDataState = {
   ingredients: [],
   isLoading: true,
   hasError: false,
 }
 
 export const dataReducer = (
-  state: DataStateType = initialState,
-  action: dataActions,
-) => {
+  state: TDataState = initialState,
+  action: DataActions,
+): TDataState => {
   switch (action.type) {
     case IngredientFetchStatus.INGREDIENT_REQUEST: {
       return {

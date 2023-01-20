@@ -1,4 +1,4 @@
-export interface IngredientType {
+export interface TIngredient {
   _id: string
   name: string
   type: string
@@ -12,7 +12,7 @@ export interface IngredientType {
   image_large: string
 }
 
-export interface IngredientCartType extends IngredientType {
+export interface TIngredientCart extends TIngredient {
   uuid: string
 }
 
@@ -28,23 +28,32 @@ export enum OrderFetchStatus {
   ORDER_ERROR = 'ORDER_ERROR',
 }
 
-export interface DataStateType {
-  ingredients: IngredientType[]
+export interface TDataState {
+  ingredients: TIngredient[]
   isLoading: boolean
   hasError: boolean
 }
 
-export interface CartStateType {
-  bun: IngredientType | null
-  ingredients: IngredientCartType[]
+export interface TCartState {
+  bun: TIngredient | null
+  ingredients: TIngredientCart[]
   totalPrice: number
 }
 
-export interface OrderStateType {
+export interface TOrderState {
   orderInfo: {
     name: string
     order: number
   }
   isLoading: boolean
   hasError: boolean
+}
+
+export interface TIngredientDetails {
+  title: string
+  image: string
+  calories: number
+  proteins: number
+  fat: number
+  carbohydrates: number
 }

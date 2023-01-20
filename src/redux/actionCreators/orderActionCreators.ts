@@ -1,5 +1,5 @@
 import {
-  OrderResponseType,
+  TOrderResponse,
   setErrorOrderStatusA,
   setRequestOrderStatusA,
   setSuccessOrderStatusA,
@@ -15,7 +15,7 @@ export const setErrorOrderStatus = (): setErrorOrderStatusA => ({
 })
 
 export const setSuccessOrderStatus = (
-  res: OrderResponseType,
+  res: TOrderResponse,
 ): setSuccessOrderStatusA => ({
   type: OrderFetchStatus.ORDER_SUCCESS,
   name: res.name,

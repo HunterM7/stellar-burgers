@@ -6,18 +6,16 @@ import {
   setBunA,
   setIngredientA,
   removeIngredientA,
-  setTotalPricenA,
+  setTotalPriceA,
 } from '../actions/cartActions'
-import { IngredientCartType, IngredientType } from '../actionTypes/types'
+import { TIngredient, TIngredientCart } from '../actionTypes/types'
 
-export const setBun = (bun: IngredientType): setBunA => ({
+export const setBun = (bun: TIngredient): setBunA => ({
   type: SET_BUN,
   bun,
 })
 
-export const setIngredient = (
-  ingredient: IngredientCartType,
-): setIngredientA => ({
+export const setIngredient = (ingredient: TIngredientCart): setIngredientA => ({
   type: SET_INGREDIENT,
   ingredient,
 })
@@ -27,6 +25,6 @@ export const removeIngredient = (id: string): removeIngredientA => ({
   id,
 })
 
-export const setTotalPrice = (): setTotalPricenA => ({
+export const setTotalPrice = (): setTotalPriceA => ({
   type: SET_TOTAL_PRICE,
 })

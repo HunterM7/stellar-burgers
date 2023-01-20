@@ -40,8 +40,8 @@ const BurgerConstructor: React.FC = () => {
   }, [bun, ingredients, dispatch])
 
   // Burger contents
-  const burgerIngredients = ingredients.map((item, i) => (
-    <li key={`${i}-${item._id}`} className={styles.draggableElement}>
+  const burgerIngredients = ingredients.map((item) => (
+    <li key={item.uuid} className={styles.draggableElement}>
       <DragIcon type="primary" />
       <ConstructorElement
         text={item.name}

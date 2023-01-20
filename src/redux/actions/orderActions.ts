@@ -1,6 +1,6 @@
 import { API_URL_ORDER } from '../../utils/constants'
 import { OrderFetchStatus } from '../actionTypes/types'
-import checkReponse from '../../utils/checkReponse'
+import { checkReponse } from '../../utils/checkReponse'
 import { DispatchType } from '../store'
 import {
   setErrorOrderStatus,
@@ -20,12 +20,12 @@ export interface setSuccessOrderStatusA {
   orderId: number
 }
 
-export type orderActions =
+export type OrderActions =
   | setRequestOrderStatusA
   | setErrorOrderStatusA
   | setSuccessOrderStatusA
 
-export interface OrderResponseType {
+export interface TOrderResponse {
   name: string
   order: { number: number }
 }
@@ -44,8 +44,12 @@ export function setOrder(ingredients: string[]): any {
     }
 
     fetch(API_URL_ORDER, requestOptions)
-      .then((res) => checkReponse<OrderResponseType>(res))
-      .then((res) => dispatch(setSuccessOrderStatus(res)))
+      .then((res) => checkReponse<TOrderResponse>(res))
+      .then((res) => {
+        console.log(res)
+
+        dispatch(setSuccessOrderStatus(res))
+      })
       .catch((err) => {
         dispatch(setErrorOrderStatus())
       })
