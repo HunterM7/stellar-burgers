@@ -13,19 +13,19 @@ import styles from './Modal.module.scss'
 
 const modalRoot = document.getElementById('modal') as HTMLElement
 
-interface ModalT {
+interface TModal {
   title?: string
-  toggleModal: () => void
+  closeFunc: () => void
   children?: React.ReactElement
 }
 
-const Modal: React.FC<PropsWithChildren<ModalT>> = ({
+const Modal: React.FC<PropsWithChildren<TModal>> = ({
   title,
-  toggleModal,
+  closeFunc,
   children,
 }) => {
   // Handling Escape press
-  useKeyPress('Escape', toggleModal)
+  useKeyPress('Escape', closeFunc)
 
   const heading = <h2 className={styles.title}>{title}</h2>
 
@@ -42,14 +42,14 @@ const Modal: React.FC<PropsWithChildren<ModalT>> = ({
           {title && heading}
 
           <button className={styles.closeBtn}>
-            <CloseIcon type="primary" onClick={toggleModal} />
+            <CloseIcon type="primary" onClick={closeFunc} />
           </button>
         </div>
 
         <div className={styles.content}>{children}</div>
       </div>
 
-      <ModalOverlay toggleModal={toggleModal} />
+      <ModalOverlay closeFunc={closeFunc} />
     </div>,
     modalRoot,
   )

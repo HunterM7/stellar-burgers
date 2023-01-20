@@ -25,6 +25,7 @@ import ConstructorPlug from './ConstructorPlug/ConstructorPlug'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
+import { setOrder } from '../../redux/actions/orderActions'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
@@ -50,7 +51,24 @@ const BurgerConstructor: React.FC = () => {
   ))
 
   // Modal Window
-  const { isModalActive, toggleModal } = useModal(false)
+  const { isModalOpen, openModal, closeModal } = useModal(false)
+
+  // Handle order click
+  //! Добавить всплывающую подсказку вместо console.log()
+  const handleOrderClick = () => {
+    if (!bun && !ingredients.length) {
+      console.log('Выберите булку и хотя бы 1 ингридиент!')
+    } else if (!bun) {
+      console.log('Выберите булку!')
+    } else if (!ingredients.length) {
+      console.log('Выберите хотя бы 1 ингридиент!')
+    } else {
+      const orderIngridietns = [bun._id, ...ingredients.map((el) => el._id)]
+
+      dispatch(setOrder(orderIngridietns))
+      openModal()
+    }
+  }
 
   return (
     <section className={styles.wrapper}>
@@ -106,17 +124,12 @@ const BurgerConstructor: React.FC = () => {
           htmlType="button"
           type="primary"
           size="large"
-          onClick={toggleModal}>
+          onClick={handleOrderClick}>
           Оформить заказ
         </Button>
       </div>
 
-      {isModalActive && bun && (
-        <OrderDetails
-          ingredients={[bun._id, ...ingredients.map((el) => el._id)]}
-          toggleModal={toggleModal}
-        />
-      )}
+      {isModalOpen && bun && <OrderDetails closeModal={closeModal} />}
     </section>
   )
 }

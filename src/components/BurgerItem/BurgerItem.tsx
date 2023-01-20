@@ -38,12 +38,12 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
       : ingredients.filter((item) => item._id === ingredient._id).length
 
   // Modal Window
-  const { isModalActive, toggleModal } = useModal(false)
+  const { isModalOpen, openModal, closeModal } = useModal(false)
 
   const dispatch = useDispatch()
 
-  const handleClick = () => {
-    toggleModal()
+  const handleItemClick = () => {
+    openModal()
 
     dispatch(
       setIngredientDetails({
@@ -62,7 +62,7 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
   }
 
   return (
-    <li className={styles.wrapper} onClick={handleClick}>
+    <li className={styles.wrapper} onClick={handleItemClick}>
       <img src={ingredient.image} alt="Ingredient" className={styles.img} />
 
       <div className={styles.price}>
@@ -74,7 +74,7 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
 
       {count ? <Counter count={count} size="default" /> : null}
 
-      {isModalActive && <IngredientDetails toggleModal={toggleModal} />}
+      {isModalOpen && <IngredientDetails closeModal={closeModal} />}
     </li>
   )
 }

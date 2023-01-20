@@ -16,23 +16,14 @@ import orderSVG from '../../assets/images/orderDoneSVG.svg'
 import styles from './OrderDetails.module.scss'
 
 interface OrderInfoT {
-  ingredients: string[]
-  toggleModal: () => void
+  closeModal: () => void
 }
 
-const OrderInfo: React.FC<OrderInfoT> = ({ ingredients, toggleModal }) => {
-  // const [data, isLoading, hasError] = useFetchOrder(API_URL_ORDER, ingredients)
-
+const OrderInfo: React.FC<OrderInfoT> = ({ closeModal }) => {
   const { orderInfo, isLoading, hasError } = useSelector((store) => store.order)
 
-  const dispatch = useDispatch()
-
-  React.useEffect(() => {
-    dispatch(setOrder(ingredients))
-  }, [dispatch, ingredients])
-
   return (
-    <Modal toggleModal={toggleModal}>
+    <Modal closeFunc={closeModal}>
       {hasError ? (
         <h2>Что-то пошло не так</h2>
       ) : (
