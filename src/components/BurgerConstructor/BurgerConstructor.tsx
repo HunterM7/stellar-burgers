@@ -17,6 +17,7 @@ import {
   removeIngredient,
   setTotalPrice,
 } from '../../redux/actionCreators/cartActionCreators'
+import { setOrder } from '../../redux/actions/orderActions'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'
@@ -25,7 +26,6 @@ import ConstructorPlug from './ConstructorPlug/ConstructorPlug'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
-import { setOrder } from '../../redux/actions/orderActions'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
