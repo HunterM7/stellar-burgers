@@ -8,7 +8,7 @@ import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 
 // Redux
-import { getIngredients } from '../../redux/actions/dataAction'
+import { getIngredients } from '../../redux/actions/dataActions'
 import { RootStateType } from '../../redux/store'
 
 // Types

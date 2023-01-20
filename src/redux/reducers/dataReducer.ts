@@ -1,5 +1,5 @@
 import { DataStateType, IngredientFetchStatus } from '../actionTypes/types'
-import { dataActions } from '../actions/dataAction'
+import { dataActions } from '../actions/dataActions'
 
 const initialState: DataStateType = {
   ingredients: [],

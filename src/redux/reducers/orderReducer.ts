@@ -1,5 +1,5 @@
 import { OrderStateType, OrderFetchStatus } from '../actionTypes/types'
-import { orderActions } from '../actions/orderAction'
+import { orderActions } from '../actions/orderActions'
 
 const initialState: OrderStateType = {
   orderInfo: {

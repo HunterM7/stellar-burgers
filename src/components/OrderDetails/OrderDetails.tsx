@@ -8,7 +8,7 @@ import Modal from '../Modal/Modal'
 
 // Types
 import { RootStateType, useAppDispatch } from '../../redux/store'
-import { setOrder } from '../../redux/actions/orderAction'
+import { setOrder } from '../../redux/actions/orderActions'
 
 // Files and other
 import orderSVG from '../../assets/images/orderDoneSVG.svg'
