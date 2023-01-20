@@ -10,17 +10,8 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import { getIngredients } from '../../redux/actions/dataActions'
 import { useDispatch, useSelector } from '../../redux/store'
 
-// Types
-import { TIngredient } from '../../redux/actionTypes/types'
-
 // Styles
 import styles from './App.module.scss'
-
-export interface BurgerStateType {
-  bun: TIngredient
-  ingredients: TIngredient[]
-  totalPrice: number
-}
 
 const App: React.FC = () => {
   const { isLoading, hasError } = useSelector((store) => store.data)

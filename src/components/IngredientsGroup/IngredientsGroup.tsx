@@ -9,17 +9,13 @@ import BurgerItem from '../BurgerItem/BurgerItem'
 // Styles
 import styles from './IngredientsGroup.module.scss'
 
-type IngredientsGroupType = {
+type IngredientsGroupT = {
   id: number
   title: string
   data: TIngredient[]
 }
 
-const IngredientsGroup: React.FC<IngredientsGroupType> = ({
-  id,
-  title,
-  data,
-}) => {
+const IngredientsGroup: React.FC<IngredientsGroupT> = ({ id, title, data }) => {
   // Items
   const items = data.map((item, i) => <BurgerItem key={i} ingredient={item} />)
 

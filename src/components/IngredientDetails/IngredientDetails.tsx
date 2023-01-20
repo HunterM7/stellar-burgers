@@ -9,13 +9,11 @@ import Modal from '../Modal/Modal'
 // Styles
 import styles from './IngredientDetails.module.scss'
 
-interface IngredientDetailsType {
+interface IngredientDetailsT {
   toggleModal: () => void
 }
 
-const IngredientDetails: React.FC<IngredientDetailsType> = ({
-  toggleModal,
-}) => {
+const IngredientDetails: React.FC<IngredientDetailsT> = ({ toggleModal }) => {
   // Nutrients
   const { title, image, calories, proteins, fat, carbohydrates } = useSelector(
     (store) => store.ingredientDetails,

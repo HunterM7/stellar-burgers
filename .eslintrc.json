@@ -57,7 +57,6 @@
       "warn",
       {
         "indent": 2,
-        // "indent": ["warn", 2, { "SwitchCase": 2 }],
         "singleQuote": true,
         "jsxSingleQuote": false,
         "prettier.semi": false,

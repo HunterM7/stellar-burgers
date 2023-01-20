@@ -13,13 +13,13 @@ import styles from './Modal.module.scss'
 
 const modalRoot = document.getElementById('modal') as HTMLElement
 
-interface ModalType {
+interface ModalT {
   title?: string
   toggleModal: () => void
   children?: React.ReactElement
 }
 
-const Modal: React.FC<PropsWithChildren<ModalType>> = ({
+const Modal: React.FC<PropsWithChildren<ModalT>> = ({
   title,
   toggleModal,
   children,

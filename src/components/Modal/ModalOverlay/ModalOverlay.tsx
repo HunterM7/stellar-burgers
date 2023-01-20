@@ -3,11 +3,11 @@ import React from 'react'
 // Styles
 import styles from './ModalOverlay.module.scss'
 
-type ModalOverlayType = {
+type ModalOverlayT = {
   toggleModal: () => void
 }
 
-const ModalOverlay: React.FC<ModalOverlayType> = ({ toggleModal }) => {
+const ModalOverlay: React.FC<ModalOverlayT> = ({ toggleModal }) => {
   return <div className={styles.bg} onClick={toggleModal}></div>
 }
 

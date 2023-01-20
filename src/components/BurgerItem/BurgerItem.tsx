@@ -22,11 +22,11 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails'
 // Styles
 import styles from './BurgerItem.module.scss'
 
-interface BurgerItemType {
+interface BurgerItemT {
   ingredient: TIngredient
 }
 
-const BurgerItem: React.FC<BurgerItemType> = ({ ingredient }) => {
+const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
   // Count of BurgerItem
   const { bun, ingredients } = useSelector((store) => store.cart)
 

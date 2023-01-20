@@ -15,12 +15,12 @@ import orderSVG from '../../assets/images/orderDoneSVG.svg'
 // Styles
 import styles from './OrderDetails.module.scss'
 
-interface OrderInfoType {
+interface OrderInfoT {
   ingredients: string[]
   toggleModal: () => void
 }
 
-const OrderInfo: React.FC<OrderInfoType> = ({ ingredients, toggleModal }) => {
+const OrderInfo: React.FC<OrderInfoT> = ({ ingredients, toggleModal }) => {
   // const [data, isLoading, hasError] = useFetchOrder(API_URL_ORDER, ingredients)
 
   const { orderInfo, isLoading, hasError } = useSelector((store) => store.order)
