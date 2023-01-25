@@ -36,7 +36,7 @@ const BurgerIngredients: React.FC = () => {
       <Tab
         value={tab.title}
         active={currentTab === tab.title}
-        onClick={setCurrentTab}>
+        onClick={() => undefined}>
         {tab.title}
       </Tab>
     </Link>
