@@ -14,10 +14,9 @@ import { useDispatch, useSelector } from '../../redux/store'
 // Files and other
 import { TIngredient } from '../../redux/actionTypes/types'
 import {
-  setBun,
-  setIngredient,
-} from '../../redux/actionCreators/cartActionCreators'
-import { setIngredientDetails } from '../../redux/actionCreators/IngredientDetailsCreators'
+  resetIngredientDetails,
+  setIngredientDetails,
+} from '../../redux/actionCreators/IngredientDetailsCreators'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -43,10 +42,15 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
   // Modal Window
   const { isModalOpen, openModal, closeModal } = useModal(false)
 
+  const handleCloseModal = () => {
+    dispatch(resetIngredientDetails())
+    closeModal()
+  }
+
   // DnD
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [{ isDragging }, dragRef, dragPreviewRef] = useDrag(() => ({
     type: 'ingredient',
-    item: { ...ingredient },
+    item: { id: ingredient._id },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -77,9 +81,14 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
 			${styles.wrapper}
 			${isDragging ? styles['wrapper--onDrag'] : ''}
 		`}
-      ref={drag}
+      ref={dragRef}
       onClick={handleItemClick}>
-      <img src={ingredient.image} alt="Ingredient" className={styles.img} />
+      <img
+        ref={dragPreviewRef}
+        src={ingredient.image}
+        alt="Ingredient"
+        className={styles.img}
+      />
 
       <div className={styles.price}>
         {ingredient.price}
@@ -90,7 +99,7 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
 
       {count ? <Counter count={count} size="default" /> : null}
 
-      {isModalOpen && <IngredientDetails closeModal={closeModal} />}
+      {isModalOpen && <IngredientDetails closeModal={handleCloseModal} />}
     </li>
   )
 }

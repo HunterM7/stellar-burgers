@@ -12,7 +12,7 @@ import { useDrop } from 'react-dnd'
 // Hooks
 import useModal from '../../hooks/useModal'
 
-// Types
+// Types and Hooks
 import { useDispatch, useSelector } from '../../redux/store'
 
 // Files and other
@@ -31,10 +31,10 @@ import ConstructorPlug from './ConstructorPlug/ConstructorPlug'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
-import { TIngredient, TIngredientCart } from '../../redux/actionTypes/types'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
+  const allIngredients = useSelector((store) => store.data.ingredients)
   const { bun, ingredients, totalPrice } = useSelector((store) => store.cart)
 
   const dispatch = useDispatch()
@@ -57,18 +57,22 @@ const BurgerConstructor: React.FC = () => {
   ))
 
   // DnD
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [{ isHover }, dropRef] = useDrop(() => ({
     accept: 'ingredient',
-    drop: (ingredient: TIngredient) => dropIngredient(ingredient),
+    drop: ({ id }: { id: string }) => dropIngredient(id),
     collect: (monitor) => ({
-      isOver: monitor.isOver(),
+      isHover: monitor.isOver(),
     }),
   }))
 
-  const dropIngredient = (ingredient: TIngredient) => {
-    ingredient.type === 'bun'
-      ? dispatch(setBun(ingredient))
-      : dispatch(setIngredient({ ...ingredient, uuid: crypto.randomUUID() }))
+  const dropIngredient = (id: string) => {
+    const ingredient = allIngredients.find((el) => el._id === id)
+
+    if (ingredient) {
+      ingredient.type === 'bun'
+        ? dispatch(setBun(ingredient))
+        : dispatch(setIngredient({ ...ingredient, uuid: crypto.randomUUID() }))
+    }
   }
 
   // Modal Window
@@ -93,7 +97,12 @@ const BurgerConstructor: React.FC = () => {
 
   return (
     <section className={styles.wrapper}>
-      <div ref={drop} className={styles.burgerConstructor}>
+      <div
+        ref={dropRef}
+        className={`
+				${styles.burgerConstructor}
+				${isHover ? styles['burgerConstructor--hover'] : ''}
+			`}>
         <div className={styles.blockedElement}>
           {bun ? (
             <ConstructorElement

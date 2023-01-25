@@ -15,7 +15,9 @@
 
 	border-radius: 50px;
 
-	transition: box-shadow $trans-fast;
+	cursor: pointer;
+
+	transition: box-shadow $trans-fast, opacity $trans-fast;
 
 	&:hover {
 		.img {
@@ -25,6 +27,7 @@
 
 	&--onDrag {
 		box-shadow: $glow-small;
+		opacity: 0.8;
 	}
 }
 
@@ -35,8 +38,6 @@
 	margin: 0 auto;
 
 	transition: transform $trans-fast;
-
-	cursor: pointer;
 }
 
 .price {

@@ -6,12 +6,12 @@ import {
 import { TIngredientDetails } from '../actionTypes/types'
 
 const initialState: TIngredientDetails = {
-  title: 'test',
+  title: '',
   image: '',
   calories: 0,
-  proteins: 1,
-  fat: 2,
-  carbohydrates: 3,
+  proteins: 0,
+  fat: 0,
+  carbohydrates: 0,
 }
 
 export const IngredientDetailsReducer = (

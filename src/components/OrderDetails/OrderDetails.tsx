@@ -4,10 +4,7 @@ import React from 'react'
 import Modal from '../Modal/Modal'
 
 // Hooks
-import { useDispatch, useSelector } from '../../redux/store'
-
-// Types
-import { setOrder } from '../../redux/actions/orderActions'
+import { useSelector } from '../../redux/store'
 
 // Files and other
 import orderSVG from '../../assets/images/orderDoneSVG.svg'
