@@ -6,6 +6,9 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// DnD
+import { useDrop } from 'react-dnd'
+
 // Hooks
 import useModal from '../../hooks/useModal'
 
@@ -15,6 +18,8 @@ import { useDispatch, useSelector } from '../../redux/store'
 // Files and other
 import {
   removeIngredient,
+  setBun,
+  setIngredient,
   setTotalPrice,
 } from '../../redux/actionCreators/cartActionCreators'
 import { setOrder } from '../../redux/actions/orderActions'
@@ -26,6 +31,7 @@ import ConstructorPlug from './ConstructorPlug/ConstructorPlug'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
+import { TIngredient, TIngredientCart } from '../../redux/actionTypes/types'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
@@ -37,7 +43,7 @@ const BurgerConstructor: React.FC = () => {
     dispatch(setTotalPrice())
   }, [bun, ingredients, dispatch])
 
-  // Burger contents
+  // Burger content
   const burgerIngredients = ingredients.map((item) => (
     <li key={item.uuid} className={styles.draggableElement}>
       <DragIcon type="primary" />
@@ -49,6 +55,21 @@ const BurgerConstructor: React.FC = () => {
       />
     </li>
   ))
+
+  // DnD
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: 'ingredient',
+    drop: (ingredient: TIngredient) => dropIngredient(ingredient),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
+  }))
+
+  const dropIngredient = (ingredient: TIngredient) => {
+    ingredient.type === 'bun'
+      ? dispatch(setBun(ingredient))
+      : dispatch(setIngredient({ ...ingredient, uuid: crypto.randomUUID() }))
+  }
 
   // Modal Window
   const { isModalOpen, openModal, closeModal } = useModal(false)
@@ -72,7 +93,7 @@ const BurgerConstructor: React.FC = () => {
 
   return (
     <section className={styles.wrapper}>
-      <div className={styles.burgerConstructor}>
+      <div ref={drop} className={styles.burgerConstructor}>
         <div className={styles.blockedElement}>
           {bun ? (
             <ConstructorElement

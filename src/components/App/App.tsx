@@ -1,5 +1,9 @@
 import React from 'react'
 
+// DnD
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 // Components
 import Loader from '../Loader/Loader'
 import AppHeader from '../AppHeader/AppHeader'
@@ -31,11 +35,11 @@ const App: React.FC = () => {
         ) : hasError ? (
           <h2>Что-то пошло не так</h2>
         ) : (
-          <>
+          <DndProvider backend={HTML5Backend}>
             <h2 className={styles.title}>Соберите бургер</h2>
             <BurgerIngredients />
             <BurgerConstructor />
-          </>
+          </DndProvider>
         )}
       </main>
     </>

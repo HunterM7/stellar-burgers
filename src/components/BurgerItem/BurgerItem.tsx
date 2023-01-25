@@ -4,6 +4,9 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// DnD
+import { useDrag } from 'react-dnd'
+
 // Hooks
 import useModal from '../../hooks/useModal'
 import { useDispatch, useSelector } from '../../redux/store'
@@ -40,6 +43,17 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
   // Modal Window
   const { isModalOpen, openModal, closeModal } = useModal(false)
 
+  // DnD
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'ingredient',
+    item: { ...ingredient },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }))
+
+  // Redux
+
   const dispatch = useDispatch()
 
   const handleItemClick = () => {
@@ -55,14 +69,16 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
         carbohydrates: ingredient.carbohydrates,
       }),
     )
-
-    ingredient.type === 'bun'
-      ? dispatch(setBun(ingredient))
-      : dispatch(setIngredient({ ...ingredient, uuid: crypto.randomUUID() }))
   }
 
   return (
-    <li className={styles.wrapper} onClick={handleItemClick}>
+    <li
+      className={`
+			${styles.wrapper}
+			${isDragging ? styles['wrapper--onDrag'] : ''}
+		`}
+      ref={drag}
+      onClick={handleItemClick}>
       <img src={ingredient.image} alt="Ingredient" className={styles.img} />
 
       <div className={styles.price}>

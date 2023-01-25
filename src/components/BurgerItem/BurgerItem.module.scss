@@ -13,10 +13,18 @@
 
 	position: relative;
 
+	border-radius: 50px;
+
+	transition: box-shadow $trans-fast;
+
 	&:hover {
 		.img {
 			transform: scale(1.1);
 		}
+	}
+
+	&--onDrag {
+		box-shadow: $glow-small;
 	}
 }
 
