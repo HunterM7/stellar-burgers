@@ -33,10 +33,12 @@ const BurgerIngredients: React.FC = () => {
       offset={-20}
       containerId="ingredients"
       onSetActive={() => setCurrentTab(tab.title)}>
-      <Tab
-        value={tab.title}
-        active={currentTab === tab.title}
-        onClick={() => undefined}>
+      {/* Компонент <Tab> требует передачи функции в onClick.
+			Клик у меня обрабатывается в обертке <Link>,
+			поэтому необходимости в обработке клика по <Tab> не требуется.
+			eslint-disable-next-line
+			@ts-ignore */}
+      <Tab value={tab.title} active={currentTab === tab.title}>
         {tab.title}
       </Tab>
     </Link>
