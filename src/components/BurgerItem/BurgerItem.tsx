@@ -49,7 +49,7 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
 
   // DnD
   const [{ isDragging }, dragRef, dragPreviewRef] = useDrag(() => ({
-    type: 'ingredient',
+    type: 'INGREDIENT',
     item: { id: ingredient._id },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),

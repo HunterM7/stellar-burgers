@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import update from 'immutability-helper'
 import {
   Button,
   ConstructorElement,
   CurrencyIcon,
-  DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // DnD
@@ -13,11 +13,12 @@ import { useDrop } from 'react-dnd'
 import useModal from '../../hooks/useModal'
 
 // Types and Hooks
+import { TIngredientCart } from '../../redux/actionTypes/types'
 import { useDispatch, useSelector } from '../../redux/store'
 
 // Files and other
 import {
-  removeIngredient,
+  reorderIngredients,
   setBun,
   setIngredient,
   setTotalPrice,
@@ -26,11 +27,14 @@ import { setOrder } from '../../redux/actions/orderActions'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'
+import ConstructorItem from '../ConstructorItem/ConstructorItem'
+import PopupHint from '../PopupHint/PopupHint'
 
 import ConstructorPlug from './ConstructorPlug/ConstructorPlug'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
+import { dndSortFunc } from '../../utils/dndSortFunc'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
@@ -44,21 +48,21 @@ const BurgerConstructor: React.FC = () => {
   }, [bun, ingredients, dispatch])
 
   // Burger content
-  const burgerIngredients = ingredients.map((item) => (
-    <li key={item.uuid} className={styles.draggableElement}>
-      <DragIcon type="primary" />
-      <ConstructorElement
-        text={item.name}
-        price={item.price}
-        thumbnail={item.image}
-        handleClose={() => dispatch(removeIngredient(item.uuid))}
-      />
-    </li>
-  ))
+
+  const renderIngredient = useCallback(
+    (item: TIngredientCart, i: number) => (
+      <ConstructorItem key={item.uuid} ingredient={item} orderId={i} />
+    ),
+    [],
+  )
+
+  const burgerIngredients = ingredients.map((item, i) =>
+    renderIngredient(item, i),
+  )
 
   // DnD
   const [{ isHover }, dropRef] = useDrop(() => ({
-    accept: 'ingredient',
+    accept: 'INGREDIENT',
     drop: ({ id }: { id: string }) => dropIngredient(id),
     collect: (monitor) => ({
       isHover: monitor.isOver(),
@@ -78,15 +82,37 @@ const BurgerConstructor: React.FC = () => {
   // Modal Window
   const { isModalOpen, openModal, closeModal } = useModal(false)
 
+  // Popup Hint Modal
+  const initialPopupState = {
+    isPopupActive: false,
+    title: '',
+  }
+
+  const [popupState, setPopupState] = React.useState(initialPopupState)
+
+  const closePopup = () =>
+    setInterval(() => setPopupState(initialPopupState), 4000)
+
   // Handle order click
-  //! Добавить всплывающую подсказку вместо console.log()
   const handleOrderClick = () => {
     if (!bun && !ingredients.length) {
-      console.log('Выберите булку и хотя бы 1 ингридиент!')
+      setPopupState({
+        isPopupActive: true,
+        title: 'Выберите булку и хотя бы 1 ингридиент!',
+      })
+      closePopup()
     } else if (!bun) {
-      console.log('Выберите булку!')
+      setPopupState({
+        isPopupActive: true,
+        title: 'Выберите булку!',
+      })
+      closePopup()
     } else if (!ingredients.length) {
-      console.log('Выберите хотя бы 1 ингридиент!')
+      setPopupState({
+        isPopupActive: true,
+        title: 'Выберите хотя бы 1 ингридиент!',
+      })
+      closePopup()
     } else {
       const orderIngridietns = [bun._id, ...ingredients.map((el) => el._id)]
 
@@ -160,6 +186,7 @@ const BurgerConstructor: React.FC = () => {
       </div>
 
       {isModalOpen && bun && <OrderDetails closeModal={closeModal} />}
+      {popupState.isPopupActive && <PopupHint title={popupState.title} />}
     </section>
   )
 }

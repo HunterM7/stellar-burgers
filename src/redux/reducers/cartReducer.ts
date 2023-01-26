@@ -6,6 +6,7 @@ import {
   SET_INGREDIENT,
   REMOVE_INGREDIENT,
   SET_TOTAL_PRICE,
+  REORDER_INGREDIENTS,
 } from '../actions/cartActions'
 
 const initialState: TCartState = {
@@ -37,6 +38,12 @@ export const cartReducer = (
         ingredients: [...state.ingredients].filter(
           (item) => item.uuid !== action.id,
         ),
+      }
+
+    case REORDER_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: action.ingredients,
       }
 
     case SET_TOTAL_PRICE: {

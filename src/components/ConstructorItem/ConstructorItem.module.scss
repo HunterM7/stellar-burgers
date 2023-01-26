@@ -1,0 +1,20 @@
+//? === Constructor Item ===
+
+.wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
+
+.dragIcon {
+	width: 24px;
+	height: 24px;
+
+	cursor: move;
+
+	svg {
+		width: 100%;
+		height: 100%;
+	}
+}

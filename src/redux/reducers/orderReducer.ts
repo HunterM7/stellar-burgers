@@ -34,7 +34,7 @@ export const orderReducer = (
     }
     case OrderFetchStatus.ORDER_ERROR: {
       return {
-        ...state,
+        ...initialState,
         isLoading: false,
         hasError: true,
       }

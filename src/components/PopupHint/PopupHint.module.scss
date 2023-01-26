@@ -1,0 +1,15 @@
+//? === Popup Hint ===
+
+@import '../../scss/vars';
+
+.wrapper {
+	position: fixed;
+	top: 100px;
+	right: 100px;
+	z-index: 10000;
+
+	padding: 16px;
+
+	border-radius: 40px;
+	background-color: $bg-modal;
+}

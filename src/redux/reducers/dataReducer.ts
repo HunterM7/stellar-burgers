@@ -28,7 +28,7 @@ export const dataReducer = (
     }
     case IngredientFetchStatus.INGREDIENT_ERROR: {
       return {
-        ...state,
+        ...initialState,
         isLoading: false,
         hasError: true,
       }
