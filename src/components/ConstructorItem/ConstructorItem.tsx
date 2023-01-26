@@ -9,15 +9,15 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Redux
-import { TIngredientCart } from '../../redux/actionTypes/types'
 import { useDispatch, useSelector } from '../../redux/store'
+import { TIngredientCart } from '../../redux/actionTypes/types'
 import {
   removeIngredient,
   reorderIngredients,
 } from '../../redux/actionCreators/cartActionCreators'
 
 // Functions
-import { dndSortFunc } from '../../utils/dndSortFunc'
+import { sortFunc } from '../../utils/sortFunc'
 
 // Styles
 import styles from './ConstructorItem.module.scss'
@@ -61,19 +61,15 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
       }
     },
     hover(item, monitor) {
-      if (!itemRef.current) {
-        return
-      }
       const dragIndex = item.orderId
       const hoverIndex = orderId
 
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
+      if (!itemRef.current || dragIndex === hoverIndex) {
         return
       }
 
       // Determine rectangle on screen
-      const hoverBoundingRect = itemRef.current?.getBoundingClientRect()
+      const hoverBoundingRect = itemRef.current.getBoundingClientRect()
 
       // Get vertical middle
       const hoverMiddleY =
@@ -101,7 +97,9 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
 
       // Time to actually perform the action
       dispatch(
-        reorderIngredients(dndSortFunc(ingredients, dragIndex, hoverIndex)),
+        reorderIngredients(
+          sortFunc<TIngredientCart>(ingredients, dragIndex, hoverIndex),
+        ),
       )
 
       // Note: we're mutating the monitor item here!
@@ -112,15 +110,16 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
     },
   })
 
-  const opacity = isDragging ? 0 : 1
   dragSortRef(dropSortRef(itemRef))
 
   return (
     <li
       ref={itemRef}
-      style={{ opacity }}
       data-handler-id={handlerId}
-      className={styles.wrapper}>
+      className={`
+				${styles.wrapper}
+				${isDragging ? styles['wrapper--draggable'] : ''}
+			`}>
       <div className={styles.dragIcon}>
         <DragIcon type="primary" />
       </div>

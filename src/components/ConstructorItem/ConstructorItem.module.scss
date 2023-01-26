@@ -5,6 +5,10 @@
 	flex-direction: row;
 	align-items: center;
 	gap: 8px;
+
+	&--draggable {
+		opacity: 0;
+	}
 }
 
 .dragIcon {

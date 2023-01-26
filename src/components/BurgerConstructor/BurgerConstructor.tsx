@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import update from 'immutability-helper'
 import {
   Button,
   ConstructorElement,
@@ -18,7 +17,6 @@ import { useDispatch, useSelector } from '../../redux/store'
 
 // Files and other
 import {
-  reorderIngredients,
   setBun,
   setIngredient,
   setTotalPrice,
@@ -34,7 +32,6 @@ import ConstructorPlug from './ConstructorPlug/ConstructorPlug'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
-import { dndSortFunc } from '../../utils/dndSortFunc'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
@@ -172,7 +169,7 @@ const BurgerConstructor: React.FC = () => {
 
       <div className={styles.orderBox}>
         <div className={styles.price}>
-          <span>{totalPrice || 0}</span>
+          <span>{totalPrice}</span>
           <CurrencyIcon type="primary" />
         </div>
 
