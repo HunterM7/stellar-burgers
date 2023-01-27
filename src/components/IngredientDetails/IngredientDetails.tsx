@@ -2,6 +2,7 @@ import React from 'react'
 
 // Hooks
 import { useSelector } from '../../redux/store'
+import { ingredientDetailsSelector } from '../../redux/selectors/ingredientDetailsSelector'
 
 // Components
 import Modal from '../Modal/Modal'
@@ -16,7 +17,7 @@ interface IngredientDetailsT {
 const IngredientDetails: React.FC<IngredientDetailsT> = ({ closeModal }) => {
   // Nutrients
   const { title, image, calories, proteins, fat, carbohydrates } = useSelector(
-    (store) => store.ingredientDetails,
+    ingredientDetailsSelector,
   )
 
   const nutrientsInfo = [

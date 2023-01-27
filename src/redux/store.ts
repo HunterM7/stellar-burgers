@@ -36,16 +36,16 @@ export const store = createStore(
   composeWithDevTools(applyMiddleware(thunk)),
 )
 
-export type RootStateT = ReturnType<typeof rootReducer>
+export type TRootState = ReturnType<typeof rootReducer>
 
-export type AppDispatch = ThunkDispatch<RootStateT, never, TAppActions>
+export type AppDispatch = ThunkDispatch<TRootState, never, TAppActions>
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
-  RootStateT,
+  TRootState,
   never,
   TAppActions
 >
 
 export const useDispatch = () => dispatchHook<AppDispatch>()
-export const useSelector: TypedUseSelectorHook<RootStateT> = selectorHook
+export const useSelector: TypedUseSelectorHook<TRootState> = selectorHook

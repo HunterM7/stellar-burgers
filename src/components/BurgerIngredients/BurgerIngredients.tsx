@@ -7,6 +7,7 @@ import { useSelector } from '../../redux/store'
 
 // Files
 import { ingredientGroups } from '../../utils/ingredientGroups'
+import { dataIngreientsSelector } from '../../redux/selectors/dataSelector'
 
 // Components
 import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
@@ -15,8 +16,7 @@ import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
 import styles from './BurgerIngredients.module.scss'
 
 const BurgerIngredients: React.FC = () => {
-  // Context
-  const { ingredients } = useSelector((store) => store.data)
+  const ingredients = useSelector(dataIngreientsSelector)
 
   // Tabs
   const [currentTab, setCurrentTab] = React.useState<string>(

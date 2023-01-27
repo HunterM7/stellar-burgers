@@ -22,6 +22,8 @@ import {
   setTotalPrice,
 } from '../../redux/actionCreators/cartActionCreators'
 import { setOrder } from '../../redux/actions/orderActions'
+import { cartSelector } from '../../redux/selectors/cartSelectors'
+import { dataIngreientsSelector } from '../../redux/selectors/dataSelector'
 
 // Components
 import OrderDetails from '../OrderDetails/OrderDetails'
@@ -35,8 +37,8 @@ import styles from './BurgerConstructor.module.scss'
 
 const BurgerConstructor: React.FC = () => {
   // Redux
-  const allIngredients = useSelector((store) => store.data.ingredients)
-  const { bun, ingredients, totalPrice } = useSelector((store) => store.cart)
+  const allIngredients = useSelector(dataIngreientsSelector)
+  const { bun, ingredients, totalPrice } = useSelector(cartSelector)
 
   const dispatch = useDispatch()
 
@@ -88,7 +90,7 @@ const BurgerConstructor: React.FC = () => {
   const [popupState, setPopupState] = React.useState(initialPopupState)
 
   const closePopup = () =>
-    setInterval(() => setPopupState(initialPopupState), 4000)
+    setTimeout(() => setPopupState(initialPopupState), 4000)
 
   // Handle order click
   const handleOrderClick = () => {

@@ -40,9 +40,10 @@ const AppHeaderLink: React.FC<AppHeaderLinkT> = ({
 
       <span
         className={`
-				${styles.text}
-				${isActive ? styles.active : ''}
-			`}>
+					${styles.text}
+					${isActive ? styles.active : ''}
+				`}
+      >
         {title}
       </span>
     </a>

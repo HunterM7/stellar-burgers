@@ -17,6 +17,7 @@ import {
   resetIngredientDetails,
   setIngredientDetails,
 } from '../../redux/actionCreators/IngredientDetailsCreators'
+import { cartSelector } from '../../redux/selectors/cartSelectors'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -30,14 +31,15 @@ interface BurgerItemT {
 
 const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
   // Count of BurgerItem
-  const { bun, ingredients } = useSelector((store) => store.cart)
+  const { bun, ingredients } = useSelector(cartSelector)
 
-  const count =
-    ingredient.type === 'bun'
+  const count = React.useMemo(() => {
+    return ingredient.type === 'bun'
       ? bun?._id === ingredient._id
         ? 2
         : 0
       : ingredients.filter((item) => item._id === ingredient._id).length
+  }, [ingredient, bun, ingredients])
 
   // Modal Window
   const { isModalOpen, openModal, closeModal } = useModal(false)
@@ -82,7 +84,8 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
 			${isDragging ? styles['wrapper--onDrag'] : ''}
 		`}
       ref={dragRef}
-      onClick={handleItemClick}>
+      onClick={handleItemClick}
+    >
       <img
         ref={dragPreviewRef}
         src={ingredient.image}

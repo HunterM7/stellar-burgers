@@ -13,12 +13,13 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 // Redux
 import { getIngredients } from '../../redux/actions/dataActions'
 import { useDispatch, useSelector } from '../../redux/store'
+import { dataSelector } from '../../redux/selectors/dataSelector'
 
 // Styles
 import styles from './App.module.scss'
 
 const App: React.FC = () => {
-  const { isLoading, hasError } = useSelector((store) => store.data)
+  const { isLoading, hasError } = useSelector(dataSelector)
 
   const dispatch = useDispatch()
 

@@ -8,6 +8,7 @@ import { useSelector } from '../../redux/store'
 
 // Files and other
 import orderSVG from '../../assets/images/orderDoneSVG.svg'
+import { orderSelector } from '../../redux/selectors/orderSelector'
 
 // Styles
 import styles from './OrderDetails.module.scss'
@@ -17,7 +18,7 @@ interface OrderInfoT {
 }
 
 const OrderInfo: React.FC<OrderInfoT> = ({ closeModal }) => {
-  const { orderInfo, isLoading, hasError } = useSelector((store) => store.order)
+  const { orderInfo, isLoading, hasError } = useSelector(orderSelector)
 
   return (
     <Modal closeFunc={closeModal}>

@@ -13,7 +13,8 @@ const ConstructorPlug: React.FC<ConstructorPlugT> = ({ position, title }) => {
       className={`
 				${styles.wrapper}
 				${position ? styles[position] : ''}
-		`}>
+			`}
+    >
       {title}
     </div>
   )

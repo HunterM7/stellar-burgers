@@ -15,6 +15,7 @@ import {
   removeIngredient,
   reorderIngredients,
 } from '../../redux/actionCreators/cartActionCreators'
+import { cartIngredientsSelector } from '../../redux/selectors/cartSelectors'
 
 // Functions
 import { sortFunc } from '../../utils/sortFunc'
@@ -33,7 +34,7 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
 }) => {
   const dispatch = useDispatch()
 
-  const { ingredients } = useSelector((store) => store.cart)
+  const ingredients = useSelector(cartIngredientsSelector)
 
   // DnD
   const itemRef = React.useRef<HTMLLIElement>(null)
