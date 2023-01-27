@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, useMatch } from 'react-router-dom'
 import {
   BurgerIcon,
   ListIcon,
@@ -11,32 +12,27 @@ import styles from './AppHeaderLink.module.scss'
 type AppHeaderLinkT = {
   link: string
   title: string
-  isActive: boolean
-  onClick: () => void
 }
 
-const AppHeaderLink: React.FC<AppHeaderLinkT> = ({
-  link,
-  title,
-  isActive,
-  onClick,
-}) => {
-  // Handle click on link
-  const handleClick = () => {
-    onClick()
-  }
+const AppHeaderLink: React.FC<AppHeaderLinkT> = ({ title, link }) => {
+  // Active Link
+  const isActive = useMatch(link)
+
+  // Icon
+  const linkIcon =
+    (title === 'Конструктор' && (
+      <BurgerIcon type={isActive ? 'primary' : 'secondary'} />
+    )) ||
+    (title === 'Лента заказов' && (
+      <ListIcon type={isActive ? 'primary' : 'secondary'} />
+    )) ||
+    (title === 'Личный кабинет' && (
+      <ProfileIcon type={isActive ? 'primary' : 'secondary'} />
+    ))
 
   return (
-    <a className={styles.wrapper} href={link} onClick={handleClick}>
-      {title === 'Конструктор' && (
-        <BurgerIcon type={isActive ? 'primary' : 'secondary'} />
-      )}
-      {title === 'Лента заказов' && (
-        <ListIcon type={isActive ? 'primary' : 'secondary'} />
-      )}
-      {title === 'Личный кабинет' && (
-        <ProfileIcon type={isActive ? 'primary' : 'secondary'} />
-      )}
+    <Link className={styles.wrapper} to={link}>
+      {linkIcon}
 
       <span
         className={`
@@ -46,7 +42,7 @@ const AppHeaderLink: React.FC<AppHeaderLinkT> = ({
       >
         {title}
       </span>
-    </a>
+    </Link>
   )
 }
 

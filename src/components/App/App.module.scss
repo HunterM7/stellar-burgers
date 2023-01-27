@@ -1,21 +1,2 @@
 //? === App ===
 
-.main {
-	display: grid;
-	grid-template-areas:
-		'title title'
-		'ingredients constructor';
-	grid-template-rows: auto 1fr;
-	grid-template-columns: repeat(2, 1fr);
-
-	gap: 20px 40px;
-
-	padding-top: 40px;
-	padding-bottom: 52px;
-
-	position: relative;
-}
-
-.title {
-	grid-area: title;
-}

@@ -12,13 +12,7 @@ import styles from './AppHeader.module.scss'
 
 const AppHeader: React.FC = () => {
   const headerLinks = linksList.map((link, i) => (
-    <AppHeaderLink
-      key={i}
-      title={link.title}
-      link={link.link}
-      isActive={link.title === linksList[0].title}
-      onClick={() => alert(`Click on: ${link.title}`)}
-    />
+    <AppHeaderLink key={i} title={link.title} link={link.path} />
   ))
 
   return (

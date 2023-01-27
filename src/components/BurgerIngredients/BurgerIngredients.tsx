@@ -32,7 +32,8 @@ const BurgerIngredients: React.FC = () => {
       duration={700}
       offset={-20}
       containerId="ingredients"
-      onSetActive={() => setCurrentTab(tab.title)}>
+      onSetActive={() => setCurrentTab(tab.title)}
+    >
       {/* Компонент <Tab> требует передачи функции в onClick.
 			Клик у меня обрабатывается в обертке <Link>,
 			поэтому необходимости в обработке клика по <Tab> не требуется.
@@ -67,4 +68,4 @@ const BurgerIngredients: React.FC = () => {
   )
 }
 
-export default BurgerIngredients
+export default React.memo(BurgerIngredients)

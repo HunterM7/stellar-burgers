@@ -1,48 +1,26 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 
-// DnD
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+// Router Links
+import { ACCOUNT_LINK, HOME_LINK, ORDER_FEED_LINK } from '../../utils/constants'
 
-// Components
-import Loader from '../Loader/Loader'
+// Components and Pages
 import AppHeader from '../AppHeader/AppHeader'
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
-
-// Redux
-import { getIngredients } from '../../redux/actions/dataActions'
-import { useDispatch, useSelector } from '../../redux/store'
-import { dataSelector } from '../../redux/selectors/dataSelector'
+import { AccountPage, HomePage } from '../../pages'
+import OrderFeedPage from '../../pages/OrderFeedPage/OrderFeedPage'
 
 // Styles
-import styles from './App.module.scss'
+// import styles from './App.module.scss'
 
 const App: React.FC = () => {
-  const { isLoading, hasError } = useSelector(dataSelector)
-
-  const dispatch = useDispatch()
-
-  React.useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch])
-
   return (
     <>
       <AppHeader />
-      <main className={`container ${styles.main}`}>
-        {isLoading ? (
-          <Loader />
-        ) : hasError ? (
-          <h2>Что-то пошло не так</h2>
-        ) : (
-          <DndProvider backend={HTML5Backend}>
-            <h2 className={styles.title}>Соберите бургер</h2>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
-        )}
-      </main>
+      <Routes>
+        <Route path={HOME_LINK} element={<HomePage />} />
+        <Route path={ORDER_FEED_LINK} element={<OrderFeedPage />} />
+        <Route path={ACCOUNT_LINK} element={<AccountPage />} />
+      </Routes>
     </>
   )
 }
