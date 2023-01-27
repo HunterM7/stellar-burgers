@@ -32,8 +32,9 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
+    // "array-bracket-newline": ["warn", "always"],
     "react/react-in-jsx-scope": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "prefer-const": [
       "warn",
       {
@@ -57,11 +58,11 @@
       "warn",
       {
         "indent": 2,
-        // "indent": ["warn", 2, { "SwitchCase": 2 }],
         "singleQuote": true,
         "jsxSingleQuote": false,
         "prettier.semi": false,
-        "trailingComma": "all"
+        "trailingComma": "all",
+        "jsxBracketSameLine": false
       }
     ],
     "import/order": [
@@ -96,6 +97,7 @@
     ],
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-unsafe-assignment": "warn",
-    "@typescript-eslint/no-floating-promises": ["off"]
+    "@typescript-eslint/no-floating-promises": ["off"],
+    "@typescript-eslint/no-unused-vars": "warn"
   }
 }

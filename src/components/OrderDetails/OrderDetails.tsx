@@ -4,33 +4,32 @@ import React from 'react'
 import Modal from '../Modal/Modal'
 
 // Hooks
-import useFetchOrder from '../../hooks/useFetchOrder'
+import { useSelector } from '../../redux/store'
 
-// Files and Links
-import { API_URL } from '../App/App'
+// Files and other
 import orderSVG from '../../assets/images/orderDoneSVG.svg'
+import { orderSelector } from '../../redux/selectors/orderSelector'
 
 // Styles
 import styles from './OrderDetails.module.scss'
 
-interface OrderInfoType {
-  ingredients: string[]
-  toggleModal: () => void
+interface OrderInfoT {
+  closeModal: () => void
 }
 
-const OrderInfo: React.FC<OrderInfoType> = ({ ingredients, toggleModal }) => {
-  const url = `${API_URL}orders`
-
-  const [data, isLoading, hasError] = useFetchOrder(url, ingredients)
+const OrderInfo: React.FC<OrderInfoT> = ({ closeModal }) => {
+  const { orderInfo, isLoading, hasError } = useSelector(orderSelector)
 
   return (
-    <Modal toggleModal={toggleModal}>
+    <Modal closeFunc={closeModal}>
       {hasError ? (
         <h2>Что-то пошло не так</h2>
       ) : (
         <>
-          <p className={styles.orderId}>{isLoading ? '######' : data.order}</p>
-          <h3 className={styles.title}>{data.name}</h3>
+          <p className={styles.orderId}>
+            {isLoading ? '######' : orderInfo.order}
+          </p>
+          <h3 className={styles.title}>{orderInfo.name}</h3>
           <img className={styles.img} src={orderSVG} alt="Order" />
           <p className={styles.subtitle}>Ваш заказ начали готовить</p>
           <p className={styles.desc}>

@@ -13,10 +13,21 @@
 
 	position: relative;
 
+	border-radius: 50px;
+
+	cursor: pointer;
+
+	transition: box-shadow $trans-fast, opacity $trans-fast;
+
 	&:hover {
 		.img {
 			transform: scale(1.1);
 		}
+	}
+
+	&--onDrag {
+		box-shadow: $glow-small;
+		opacity: 0.8;
 	}
 }
 
@@ -27,8 +38,6 @@
 	margin: 0 auto;
 
 	transition: transform $trans-fast;
-
-	cursor: pointer;
 }
 
 .price {

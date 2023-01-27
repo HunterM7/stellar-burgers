@@ -1,47 +1,31 @@
 import React from 'react'
 
+// DnD
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 // Components
 import Loader from '../Loader/Loader'
 import AppHeader from '../AppHeader/AppHeader'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 
-// Hooks
-import useFetchIngredients from '../../hooks/useFetchIngredients'
-
-// Context
-import { DataContext } from '../../context/dataContext'
-import {
-  BurgerContext,
-  burgerReducer,
-  initialBurgerState,
-} from '../../context/burgerContext'
-
-// Types
-import { dataType } from '../../utils/types'
+// Redux
+import { getIngredients } from '../../redux/actions/dataActions'
+import { useDispatch, useSelector } from '../../redux/store'
+import { dataSelector } from '../../redux/selectors/dataSelector'
 
 // Styles
 import styles from './App.module.scss'
 
-export interface BurgerStateType {
-  bun: dataType
-  ingredients: dataType[]
-  totalPrice: number
-}
-
-export const API_URL = 'https://norma.nomoreparties.space/api/'
-
 const App: React.FC = () => {
-  // Fetching data
-  const [data, isLoading, hasError] = useFetchIngredients(
-    `${API_URL}ingredients`,
-  )
+  const { isLoading, hasError } = useSelector(dataSelector)
 
-  // Adding ingredients and buns
-  const [stateBurger, dispatchBurger] = React.useReducer(
-    burgerReducer,
-    initialBurgerState,
-  )
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(getIngredients())
+  }, [dispatch])
 
   return (
     <>
@@ -52,13 +36,11 @@ const App: React.FC = () => {
         ) : hasError ? (
           <h2>Что-то пошло не так</h2>
         ) : (
-          <DataContext.Provider value={{ data }}>
-            <BurgerContext.Provider value={{ stateBurger, dispatchBurger }}>
-              <h2 className={styles.title}>Соберите бургер</h2>
-              <BurgerIngredients />
-              <BurgerConstructor burgerState={stateBurger} />
-            </BurgerContext.Provider>
-          </DataContext.Provider>
+          <DndProvider backend={HTML5Backend}>
+            <h2 className={styles.title}>Соберите бургер</h2>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         )}
       </main>
     </>

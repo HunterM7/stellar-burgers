@@ -1,15 +1,23 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// DnD
+import { useDrag } from 'react-dnd'
+
 // Hooks
 import useModal from '../../hooks/useModal'
+import { useDispatch, useSelector } from '../../redux/store'
 
-// Files
-import { dataType } from '../../utils/types'
-import { BurgerContext } from '../../context/burgerContext'
+// Files and other
+import { TIngredient } from '../../redux/actionTypes/types'
+import {
+  resetIngredientDetails,
+  setIngredientDetails,
+} from '../../redux/actionCreators/IngredientDetailsCreators'
+import { cartSelector } from '../../redux/selectors/cartSelectors'
 
 // Components
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -17,48 +25,86 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails'
 // Styles
 import styles from './BurgerItem.module.scss'
 
-interface BurgerItemType {
-  data: dataType
+interface BurgerItemT {
+  ingredient: TIngredient
 }
 
-const BurgerItem: React.FC<BurgerItemType> = ({ data }) => {
+const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
   // Count of BurgerItem
-  const [count] = React.useState<number>(0)
+  const { bun, ingredients } = useSelector(cartSelector)
+
+  const count = React.useMemo(() => {
+    return ingredient.type === 'bun'
+      ? bun?._id === ingredient._id
+        ? 2
+        : 0
+      : ingredients.filter((item) => item._id === ingredient._id).length
+  }, [ingredient, bun, ingredients])
 
   // Modal Window
-  const { isModalActive, toggleModal } = useModal(false)
+  const { isModalOpen, openModal, closeModal } = useModal(false)
 
-  // Context
-  const { dispatchBurger } = useContext(BurgerContext)
+  const handleCloseModal = () => {
+    dispatch(resetIngredientDetails())
+    closeModal()
+  }
+
+  // DnD
+  const [{ isDragging }, dragRef, dragPreviewRef] = useDrag(() => ({
+    type: 'INGREDIENT',
+    item: { id: ingredient._id },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }))
+
+  // Redux
+
+  const dispatch = useDispatch()
+
+  const handleItemClick = () => {
+    openModal()
+
+    dispatch(
+      setIngredientDetails({
+        title: ingredient.name,
+        image: ingredient.image_large,
+        calories: ingredient.calories,
+        proteins: ingredient.proteins,
+        fat: ingredient.fat,
+        carbohydrates: ingredient.carbohydrates,
+      }),
+    )
+  }
 
   return (
-    <>
-      <li
-        className={styles.wrapper}
-        onClick={() => {
-          toggleModal()
+    <li
+      className={`
+			${styles.wrapper}
+			${isDragging ? styles['wrapper--onDrag'] : ''}
+		`}
+      ref={dragRef}
+      onClick={handleItemClick}
+    >
+      <img
+        ref={dragPreviewRef}
+        src={ingredient.image}
+        alt="Ingredient"
+        className={styles.img}
+      />
 
-          data.type === 'bun'
-            ? dispatchBurger({ type: 'setBun', bun: data })
-            : dispatchBurger({ type: 'setIngredient', ingredient: data })
-        }}>
-        <img src={data.image} alt="Ingredient" className={styles.img} />
+      <div className={styles.price}>
+        {ingredient.price}
+        <CurrencyIcon type="primary" />
+      </div>
 
-        <div className={styles.price}>
-          {data.price}
-          <CurrencyIcon type="primary" />
-        </div>
+      <p className={styles.title}>{ingredient.name}</p>
 
-        <p className={styles.title}>{data.name}</p>
+      {count ? <Counter count={count} size="default" /> : null}
 
-        {count ? <Counter count={count} size="default" /> : null}
-
-        {isModalActive && (
-          <IngredientDetails data={data} toggleModal={toggleModal} />
-        )}
-      </li>
-    </>
+      {isModalOpen && <IngredientDetails closeModal={handleCloseModal} />}
+    </li>
   )
 }
 
-export default BurgerItem
+export default React.memo(BurgerItem)

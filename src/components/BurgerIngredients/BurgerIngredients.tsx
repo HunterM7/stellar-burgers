@@ -2,9 +2,12 @@ import React from 'react'
 import { Link } from 'react-scroll'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Types
+import { useSelector } from '../../redux/store'
+
 // Files
 import { ingredientGroups } from '../../utils/ingredientGroups'
-import { DataContext } from '../../context/dataContext'
+import { dataIngreientsSelector } from '../../redux/selectors/dataSelector'
 
 // Components
 import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
@@ -13,8 +16,7 @@ import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
 import styles from './BurgerIngredients.module.scss'
 
 const BurgerIngredients: React.FC = () => {
-  // Context
-  const { data } = React.useContext(DataContext)
+  const ingredients = useSelector(dataIngreientsSelector)
 
   // Tabs
   const [currentTab, setCurrentTab] = React.useState<string>(
@@ -31,10 +33,12 @@ const BurgerIngredients: React.FC = () => {
       offset={-20}
       containerId="ingredients"
       onSetActive={() => setCurrentTab(tab.title)}>
-      <Tab
-        value={tab.title}
-        active={currentTab === tab.title}
-        onClick={setCurrentTab}>
+      {/* Компонент <Tab> требует передачи функции в onClick.
+			Клик у меня обрабатывается в обертке <Link>,
+			поэтому необходимости в обработке клика по <Tab> не требуется.
+			eslint-disable-next-line
+			@ts-ignore */}
+      <Tab value={tab.title} active={currentTab === tab.title}>
         {tab.title}
       </Tab>
     </Link>
@@ -46,7 +50,7 @@ const BurgerIngredients: React.FC = () => {
       key={++i}
       id={++i}
       title={item.title}
-      data={data.filter((el) => el.type === item.type)}
+      data={ingredients.filter((el) => el.type === item.type)}
     />
   ))
 

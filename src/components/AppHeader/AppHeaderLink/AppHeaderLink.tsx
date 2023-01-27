@@ -8,14 +8,14 @@ import {
 // Styles
 import styles from './AppHeaderLink.module.scss'
 
-type AppHeaderLinkType = {
+type AppHeaderLinkT = {
   link: string
   title: string
   isActive: boolean
   onClick: () => void
 }
 
-const AppHeaderLink: React.FC<AppHeaderLinkType> = ({
+const AppHeaderLink: React.FC<AppHeaderLinkT> = ({
   link,
   title,
   isActive,
@@ -40,9 +40,10 @@ const AppHeaderLink: React.FC<AppHeaderLinkType> = ({
 
       <span
         className={`
-				${styles.text}
-				${isActive ? styles.active : ''}
-			`}>
+					${styles.text}
+					${isActive ? styles.active : ''}
+				`}
+      >
         {title}
       </span>
     </a>

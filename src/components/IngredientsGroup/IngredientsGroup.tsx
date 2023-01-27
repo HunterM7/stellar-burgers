@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Files
-import { dataType } from '../../utils/types'
+import { TIngredient } from '../../redux/actionTypes/types'
 
 // Components
 import BurgerItem from '../BurgerItem/BurgerItem'
@@ -9,19 +9,15 @@ import BurgerItem from '../BurgerItem/BurgerItem'
 // Styles
 import styles from './IngredientsGroup.module.scss'
 
-type IngredientsGroupType = {
+type IngredientsGroupT = {
   id: number
   title: string
-  data: dataType[]
+  data: TIngredient[]
 }
 
-const IngredientsGroup: React.FC<IngredientsGroupType> = ({
-  id,
-  title,
-  data,
-}) => {
+const IngredientsGroup: React.FC<IngredientsGroupT> = ({ id, title, data }) => {
   // Items
-  const items = data.map((item, i) => <BurgerItem key={i} data={item} />)
+  const items = data.map((item, i) => <BurgerItem key={i} ingredient={item} />)
 
   return (
     <li id={`ingredients-block-${id}`} className={styles.wrapper}>
@@ -31,4 +27,4 @@ const IngredientsGroup: React.FC<IngredientsGroupType> = ({
   )
 }
 
-export default IngredientsGroup
+export default React.memo(IngredientsGroup)

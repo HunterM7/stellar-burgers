@@ -1,14 +1,21 @@
 import React from 'react'
 
 const useModal = (initialState: boolean) => {
-  const [isModalActive, setIsModalActive] =
-    React.useState<boolean>(initialState)
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(initialState)
 
-  const toggleModal = () => {
-    setIsModalActive((prev) => !prev)
+  const openModal = () => {
+    setIsModalOpen(true)
   }
 
-  return { isModalActive, toggleModal }
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev)
+  }
+
+  return { isModalOpen, openModal, closeModal, toggleModal }
 }
 
 export default useModal

@@ -1,9 +1,7 @@
 // Check Response function
 
-const checkReponse = <Type>(res: Response) => {
+export const checkReponse = <T>(res: Response) => {
   return res.ok
-    ? (res.json() as Promise<Type>)
+    ? (res.json() as Promise<T>)
     : res.json().then((err) => Promise.reject(err))
 }
-
-export default checkReponse
