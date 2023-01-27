@@ -120,7 +120,8 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
       className={`
 				${styles.wrapper}
 				${isDragging ? styles['wrapper--draggable'] : ''}
-			`}>
+			`}
+    >
       <div className={styles.dragIcon}>
         <DragIcon type="primary" />
       </div>

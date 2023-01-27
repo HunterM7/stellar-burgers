@@ -37,7 +37,8 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({
         className={`
 				${styles.modal}
 				${title ? styles['modal--withHeading'] : ''}
-			`}>
+			`}
+      >
         <div className={styles.header}>
           {title && heading}
 

@@ -116,7 +116,7 @@ const BurgerConstructor: React.FC = () => {
       const orderIngridietns = [bun._id, ...ingredients.map((el) => el._id)]
 
       dispatch(setOrder(orderIngridietns))
-      openModal()
+      openModal && openModal()
     }
   }
 
@@ -127,7 +127,8 @@ const BurgerConstructor: React.FC = () => {
         className={`
 				${styles.burgerConstructor}
 				${isHover ? styles['burgerConstructor--hover'] : ''}
-			`}>
+			`}
+      >
         <div className={styles.blockedElement}>
           {bun ? (
             <ConstructorElement
@@ -179,7 +180,8 @@ const BurgerConstructor: React.FC = () => {
           htmlType="button"
           type="primary"
           size="large"
-          onClick={handleOrderClick}>
+          onClick={handleOrderClick}
+        >
           Оформить заказ
         </Button>
       </div>
