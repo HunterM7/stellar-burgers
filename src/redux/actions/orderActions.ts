@@ -30,8 +30,6 @@ export interface TOrderResponse {
   order: { number: number }
 }
 
-// Тут выключил ESLint, потому что не знаю как объяснить ему, как работать с каррированными функциями
-/* eslint-disable */
 export const setOrder =
   (ingredients: string[]): AppThunk =>
   (dispatch: AppDispatch) => {

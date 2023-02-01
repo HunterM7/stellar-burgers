@@ -45,7 +45,14 @@
     "no-console": "warn",
     "quotes": ["warn", "single"],
     "jsx-quotes": ["warn", "prefer-double"],
-    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1,
+        "ignoredNodes": ["ArrowFunctionExpression > ArrowFunctionExpression"]
+      }
+    ],
     "max-len": [
       "warn",
       {
