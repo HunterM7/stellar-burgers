@@ -1,4 +1,4 @@
-import { ACCOUNT_LINK, HOME_LINK, ORDER_FEED_LINK } from './constants'
+import { PROFILE_LINK, HOME_LINK, ORDER_FEED_LINK } from './constants'
 
 interface LinkListT {
   title: string
@@ -16,6 +16,6 @@ export const linksList: LinkListT[] = [
   },
   {
     title: 'Личный кабинет',
-    path: ACCOUNT_LINK,
+    path: PROFILE_LINK,
   },
 ]
