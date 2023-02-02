@@ -2,8 +2,8 @@ import {
   setErrorStatusA,
   setRequestStatusA,
   setSuccessStatusA,
-} from '../actions/dataActions'
-import { TIngredient, IngredientFetchStatus } from '../actionTypes/types'
+} from 'redux/actions/dataActions'
+import { TIngredient, IngredientFetchStatus } from 'redux/actionTypes/types'
 
 export const setRequestStatus = (): setRequestStatusA => ({
   type: IngredientFetchStatus.INGREDIENT_REQUEST,

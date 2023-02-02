@@ -1,5 +1,5 @@
-import { TOrderState, OrderFetchStatus } from '../actionTypes/types'
-import { OrderActions } from '../actions/orderActions'
+import { TOrderState, OrderFetchStatus } from 'redux/actionTypes/types'
+import { OrderActions } from 'redux/actions/orderActions'
 
 const initialState: TOrderState = {
   orderInfo: {

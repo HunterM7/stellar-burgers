@@ -1,4 +1,4 @@
-import { TRootState } from '../store'
+import { TRootState } from 'redux/store'
 
 // Selectors
 export const cartSelector = (store: TRootState) => store.cart

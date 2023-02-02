@@ -12,4 +12,4 @@ const Loader: React.FC = () => {
   )
 }
 
-export default Loader
+export default React.memo(Loader)

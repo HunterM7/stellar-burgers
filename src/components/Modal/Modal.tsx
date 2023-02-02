@@ -3,15 +3,13 @@ import { createPortal } from 'react-dom'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Hooks
-import useKeyPress from '../../hooks/useKeyPress'
+import useKeyPress from 'hooks/useKeyPress'
 
 // Components
-import ModalOverlay from './ModalOverlay/ModalOverlay'
+import { ModalOverlay } from 'components'
 
 // Styles
 import styles from './Modal.module.scss'
-
-const modalRoot = document.getElementById('modal') as HTMLElement
 
 interface TModal {
   title?: string
@@ -24,11 +22,22 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({
   closeFunc,
   children,
 }) => {
+  // Heading in modal window
+  const heading = React.useMemo(
+    () => <h2 className={styles.title}>{title}</h2>,
+    [title],
+  )
+
   // Handling Escape press
   useKeyPress('Escape', closeFunc)
 
-  const heading = <h2 className={styles.title}>{title}</h2>
+  // Root where we render modal window
+  const modalRoot = React.useMemo(
+    () => document.getElementById('modal') as HTMLElement,
+    [],
+  )
 
+  // If there is no root container we don't render modal window
   if (!modalRoot) return null
 
   return createPortal(
@@ -56,4 +65,4 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({
   )
 }
 
-export default Modal
+export default React.memo(Modal)

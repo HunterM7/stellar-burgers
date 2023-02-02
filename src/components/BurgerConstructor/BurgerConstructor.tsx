@@ -9,28 +9,24 @@ import {
 import { useDrop } from 'react-dnd'
 
 // Hooks
-import useModal from '../../hooks/useModal'
+import useModal from 'hooks/useModal'
 
 // Types and Hooks
-import { TIngredientCart } from '../../redux/actionTypes/types'
-import { useDispatch, useSelector } from '../../redux/store'
+import { TIngredientCart } from 'redux/actionTypes/types'
+import { useDispatch, useSelector } from 'redux/store'
 
 // Files and other
-import {
-  setBun,
-  setIngredient,
-  setTotalPrice,
-} from '../../redux/actionCreators/cartActionCreators'
-import { setOrder } from '../../redux/actions/orderActions'
-import { cartSelector } from '../../redux/selectors/cartSelectors'
-import { dataIngreientsSelector } from '../../redux/selectors/dataSelector'
+import { setBun, setIngredient, setTotalPrice } from 'redux/actionCreators'
+import { setOrder } from 'redux/actions'
+import { cartSelector, dataIngreientsSelector } from 'redux/selectors'
 
 // Components
-import OrderDetails from '../OrderDetails/OrderDetails'
-import ConstructorItem from '../ConstructorItem/ConstructorItem'
-import PopupHint from '../PopupHint/PopupHint'
-
-import ConstructorPlug from './ConstructorPlug/ConstructorPlug'
+import {
+  ConstructorItem,
+  ConstructorPlug,
+  OrderDetails,
+  PopupHint,
+} from 'components'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
@@ -192,4 +188,4 @@ const BurgerConstructor: React.FC = () => {
   )
 }
 
-export default BurgerConstructor
+export default React.memo(BurgerConstructor)

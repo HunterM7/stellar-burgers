@@ -1,4 +1,4 @@
-import { TIngredientDetails } from '../actionTypes/types'
+import { TIngredientDetails } from 'redux/actionTypes/types'
 
 export const SET_INGREDIENT_DETAILS = 'SET_INGREDIENT_DETAILS'
 export const RESET_INGREDIENT_DETAILS = 'RESET_INGREDIENT_DETAILS'

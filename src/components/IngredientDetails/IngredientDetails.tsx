@@ -1,11 +1,11 @@
 import React from 'react'
 
-// Hooks
-import { useSelector } from '../../redux/store'
-import { ingredientDetailsSelector } from '../../redux/selectors/ingredientDetailsSelector'
+// Redux
+import { useSelector } from 'redux/store'
+import { ingredientDetailsSelector } from 'redux/selectors'
 
 // Components
-import Modal from '../Modal/Modal'
+import { Modal } from 'components'
 
 // Styles
 import styles from './IngredientDetails.module.scss'
@@ -20,19 +20,26 @@ const IngredientDetails: React.FC<IngredientDetailsT> = ({ closeModal }) => {
     ingredientDetailsSelector,
   )
 
-  const nutrientsInfo = [
-    { title: 'Калории,ккал', value: calories },
-    { title: 'Белки, г', value: proteins },
-    { title: 'Жиры, г', value: fat },
-    { title: 'Углеводы, г', value: carbohydrates },
-  ]
+  const nutrientsInfo = React.useMemo(
+    () => [
+      { title: 'Калории,ккал', value: calories },
+      { title: 'Белки, г', value: proteins },
+      { title: 'Жиры, г', value: fat },
+      { title: 'Углеводы, г', value: carbohydrates },
+    ],
+    [calories, carbohydrates, fat, proteins],
+  )
 
-  const nutrients = nutrientsInfo.map((item, i) => (
-    <li key={i} className={styles.nutrients__item}>
-      <p className={styles.nutrients__title}>{item.title}</p>
-      <p className={styles.nutrients__quantity}>{item.value}</p>
-    </li>
-  ))
+  const nutrients = React.useMemo(
+    () =>
+      nutrientsInfo.map((item, i) => (
+        <li key={i} className={styles.nutrients__item}>
+          <p className={styles.nutrients__title}>{item.title}</p>
+          <p className={styles.nutrients__quantity}>{item.value}</p>
+        </li>
+      )),
+    [nutrientsInfo],
+  )
 
   return (
     <Modal title="Детали ингредиента" closeFunc={closeModal}>
@@ -47,4 +54,4 @@ const IngredientDetails: React.FC<IngredientDetailsT> = ({ closeModal }) => {
   )
 }
 
-export default IngredientDetails
+export default React.memo(IngredientDetails)

@@ -6,10 +6,10 @@ import {
 } from 'react-redux'
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
-import { cartReducer } from './reducers/cartReducer'
 import { dataReducer } from './reducers/dataReducer'
-import { orderReducer } from './reducers/orderReducer'
 import { IngredientDetailsReducer } from './reducers/ingredientDetailsReducer'
+import { cartReducer } from './reducers/cartReducer'
+import { orderReducer } from './reducers/orderReducer'
 import { TAppActions } from './actions'
 
 const rootReducer = combineReducers({

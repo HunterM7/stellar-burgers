@@ -1,4 +1,4 @@
-import { TCartState } from '../actionTypes/types'
+import { TCartState } from 'redux/actionTypes/types'
 import {
   CartActions,
   SET_BUN,
@@ -6,7 +6,7 @@ import {
   REMOVE_INGREDIENT,
   SET_TOTAL_PRICE,
   REORDER_INGREDIENTS,
-} from '../actions/cartActions'
+} from 'redux/actions/cartActions'
 
 const initialState: TCartState = {
   bun: null,

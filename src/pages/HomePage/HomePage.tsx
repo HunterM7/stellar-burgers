@@ -4,12 +4,13 @@ import React from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-import { useDispatch, useSelector } from '../../redux/store'
-import { dataSelector } from '../../redux/selectors/dataSelector'
-import { getIngredients } from '../../redux/actions/dataActions'
-import Loader from '../../components/Loader/Loader'
-import BurgerIngredients from '../../components/BurgerIngredients/BurgerIngredients'
-import BurgerConstructor from '../../components/BurgerConstructor/BurgerConstructor'
+// Redux
+import { useDispatch, useSelector } from 'redux/store'
+import { dataSelector } from 'redux/selectors'
+import { getIngredients } from 'redux/actions'
+
+// Components
+import { Loader, BurgerIngredients, BurgerConstructor } from 'components'
 
 // Styles
 import styles from './HomePage.module.scss'

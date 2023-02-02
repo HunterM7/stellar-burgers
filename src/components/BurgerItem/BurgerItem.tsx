@@ -8,19 +8,19 @@ import {
 import { useDrag } from 'react-dnd'
 
 // Hooks
-import useModal from '../../hooks/useModal'
-import { useDispatch, useSelector } from '../../redux/store'
+import useModal from 'hooks/useModal'
+import { useDispatch, useSelector } from 'redux/store'
 
 // Files and other
-import { TIngredient } from '../../redux/actionTypes/types'
+import { TIngredient } from 'redux/actionTypes/types'
 import {
   resetIngredientDetails,
   setIngredientDetails,
-} from '../../redux/actionCreators/IngredientDetailsCreators'
-import { cartSelector } from '../../redux/selectors/cartSelectors'
+} from 'redux/actionCreators'
+import { cartSelector } from 'redux/selectors'
 
 // Components
-import IngredientDetails from '../IngredientDetails/IngredientDetails'
+import { IngredientDetails } from 'components'
 
 // Styles
 import styles from './BurgerItem.module.scss'
@@ -30,6 +30,8 @@ interface BurgerItemT {
 }
 
 const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
+  const dispatch = useDispatch()
+
   // Count of BurgerItem
   const { bun, ingredients } = useSelector(cartSelector)
 
@@ -41,14 +43,6 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
       : ingredients.filter((item) => item._id === ingredient._id).length
   }, [ingredient, bun, ingredients])
 
-  // Modal Window
-  const { isModalOpen, openModal, closeModal } = useModal(false)
-
-  const handleCloseModal = () => {
-    dispatch(resetIngredientDetails())
-    closeModal()
-  }
-
   // DnD
   const [{ isDragging }, dragRef, dragPreviewRef] = useDrag(() => ({
     type: 'INGREDIENT',
@@ -58,11 +52,16 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
     }),
   }))
 
+  // Modal Window
+  const { isModalOpen, openModal, closeModal } = useModal(false)
+
+  const handleCloseModal = React.useCallback(() => {
+    dispatch(resetIngredientDetails())
+    closeModal()
+  }, [dispatch, closeModal])
+
   // Redux
-
-  const dispatch = useDispatch()
-
-  const handleItemClick = () => {
+  const handleItemClick = React.useCallback(() => {
     openModal()
 
     dispatch(
@@ -75,7 +74,7 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
         carbohydrates: ingredient.carbohydrates,
       }),
     )
-  }
+  }, [openModal, dispatch, ingredient])
 
   return (
     <li

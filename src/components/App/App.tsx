@@ -10,10 +10,10 @@ import {
   PROFILE_LINK,
   REGISTER_LINK,
   RESET_PASSWORD_LINK,
-} from '../../utils/constants'
+} from 'utils/constants'
 
 // Components and Pages
-import AppHeader from '../AppHeader/AppHeader'
+import { AppHeader } from 'components'
 import {
   AccountPage,
   ForgotPasswordPage,
@@ -22,7 +22,7 @@ import {
   OrderFeedPage,
   RegisterPage,
   ResetPasswordPage,
-} from '../../pages'
+} from 'pages'
 
 const App: React.FC = () => {
   return (
@@ -43,4 +43,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default React.memo(App)

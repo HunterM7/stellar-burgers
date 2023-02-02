@@ -1,5 +1,5 @@
-import { TDataState, IngredientFetchStatus } from '../actionTypes/types'
-import { DataActions } from '../actions/dataActions'
+import { TDataState, IngredientFetchStatus } from 'redux/actionTypes/types'
+import { DataActions } from 'redux/actions/dataActions'
 
 const initialState: TDataState = {
   ingredients: [],

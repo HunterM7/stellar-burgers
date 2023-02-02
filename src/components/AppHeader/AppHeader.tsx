@@ -2,18 +2,23 @@ import React from 'react'
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Data
-import { linksList } from '../../utils/linksList'
+import { linksList } from 'utils/linksList'
 
 // Components
-import AppHeaderLink from './AppHeaderLink/AppHeaderLink'
+import { AppHeaderLink } from 'components'
 
 // Styles
 import styles from './AppHeader.module.scss'
 
 const AppHeader: React.FC = () => {
-  const headerLinks = linksList.map((link, i) => (
-    <AppHeaderLink key={i} title={link.title} link={link.path} />
-  ))
+  // List of header links
+  const headerLinks = React.useMemo(
+    () =>
+      linksList.map((link, i) => (
+        <AppHeaderLink key={i} title={link.title} link={link.path} />
+      )),
+    [],
+  )
 
   return (
     <header className={styles.header}>
@@ -28,4 +33,4 @@ const AppHeader: React.FC = () => {
   )
 }
 
-export default AppHeader
+export default React.memo(AppHeader)

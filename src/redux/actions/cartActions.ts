@@ -1,4 +1,4 @@
-import { TIngredient, TIngredientCart } from '../actionTypes/types'
+import { TIngredient, TIngredientCart } from 'redux/actionTypes/types'
 
 export const SET_BUN = 'SET_BUN'
 export const SET_INGREDIENT = 'SET_INGREDIENT'

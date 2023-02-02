@@ -9,26 +9,29 @@ import {
 // Styles
 import styles from './AppHeaderLink.module.scss'
 
-type AppHeaderLinkT = {
+type TAppHeaderLink = {
   link: string
   title: string
 }
 
-const AppHeaderLink: React.FC<AppHeaderLinkT> = ({ title, link }) => {
+const AppHeaderLink: React.FC<TAppHeaderLink> = ({ title, link }) => {
   // Active Link
   const isActive = useMatch(link)
 
   // Icon
-  const linkIcon =
-    (title === 'Конструктор' && (
-      <BurgerIcon type={isActive ? 'primary' : 'secondary'} />
-    )) ||
-    (title === 'Лента заказов' && (
-      <ListIcon type={isActive ? 'primary' : 'secondary'} />
-    )) ||
-    (title === 'Личный кабинет' && (
-      <ProfileIcon type={isActive ? 'primary' : 'secondary'} />
-    ))
+  const linkIcon = React.useMemo(
+    () =>
+      (title === 'Конструктор' && (
+        <BurgerIcon type={isActive ? 'primary' : 'secondary'} />
+      )) ||
+      (title === 'Лента заказов' && (
+        <ListIcon type={isActive ? 'primary' : 'secondary'} />
+      )) ||
+      (title === 'Личный кабинет' && (
+        <ProfileIcon type={isActive ? 'primary' : 'secondary'} />
+      )),
+    [title, isActive],
+  )
 
   return (
     <Link className={styles.wrapper} to={link}>
@@ -46,4 +49,4 @@ const AppHeaderLink: React.FC<AppHeaderLinkT> = ({ title, link }) => {
   )
 }
 
-export default AppHeaderLink
+export default React.memo(AppHeaderLink)
