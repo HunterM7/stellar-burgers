@@ -7,10 +7,10 @@ export const API_URL_ORDER = `${API_URL}orders/`
 
 // Routes
 export const HOME_LINK = '/'
-export const LOGIN_LINK = 'login'
-export const REGISTER_LINK = 'register'
-export const FORGOT_PASSWORD_LINK = 'forgot-password'
-export const RESET_PASSWORD_LINK = 'reset-password'
-export const PROFILE_LINK = 'profile'
-export const INGREDIENT_LINK = 'ingredients/:id'
-export const ORDER_FEED_LINK = 'order-feed'
+export const LOGIN_LINK = '/login'
+export const REGISTER_LINK = '/register'
+export const FORGOT_PASSWORD_LINK = '/forgot-password'
+export const RESET_PASSWORD_LINK = '/reset-password'
+export const PROFILE_LINK = '/profile'
+export const INGREDIENT_LINK = '/ingredients/:id'
+export const ORDER_FEED_LINK = '/order-feed'
