@@ -12,7 +12,7 @@ import useModal from 'hooks/useModal'
 import { useDispatch, useSelector } from 'redux/store'
 
 // Files and other
-import { TIngredient } from 'redux/actionTypes/types'
+import { TIngredient } from 'redux/actionTypes'
 import {
   resetIngredientDetails,
   setIngredientDetails,

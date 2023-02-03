@@ -4,7 +4,7 @@ import {
   setRequestOrderStatusA,
   setSuccessOrderStatusA,
 } from 'redux/actions/orderActions'
-import { OrderFetchStatus } from 'redux/actionTypes/types'
+import { OrderFetchStatus } from 'redux/actionTypes'
 
 export const setRequestOrderStatus = (): setRequestOrderStatusA => ({
   type: OrderFetchStatus.ORDER_REQUEST,

@@ -3,7 +3,7 @@ import {
   RESET_INGREDIENT_DETAILS,
   SET_INGREDIENT_DETAILS,
 } from 'redux/actions/ingredientDetailsActions'
-import { TIngredientDetails } from 'redux/actionTypes/types'
+import { TIngredientDetails } from 'redux/actionTypes'
 
 const initialState: TIngredientDetails = {
   title: '',

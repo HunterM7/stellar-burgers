@@ -10,7 +10,7 @@ import {
   reorderIngredientsA,
   setTotalPriceA,
 } from 'redux/actions/cartActions'
-import { TIngredient, TIngredientCart } from 'redux/actionTypes/types'
+import { TIngredient, TIngredientCart } from 'redux/actionTypes'
 
 export const setBun = (bun: TIngredient): setBunA => ({
   type: SET_BUN,

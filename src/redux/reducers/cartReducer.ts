@@ -1,4 +1,4 @@
-import { TCartState } from 'redux/actionTypes/types'
+import { TCartState } from 'redux/actionTypes'
 import {
   CartActions,
   SET_BUN,

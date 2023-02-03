@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Files
-import { TIngredient } from 'redux/actionTypes/types'
+import { TIngredient } from 'redux/actionTypes'
 
 // Components
 import { BurgerItem } from 'components'

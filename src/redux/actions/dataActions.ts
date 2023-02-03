@@ -1,7 +1,7 @@
 import { AppDispatch, AppThunk } from 'redux/store'
 import { checkReponse } from 'utils/checkReponse'
 import { API_URL_INGREDIENTS } from 'utils/constants'
-import { TIngredient, IngredientFetchStatus } from 'redux/actionTypes/types'
+import { TIngredient, IngredientFetchStatus } from 'redux/actionTypes'
 import {
   setErrorStatus,
   setRequestStatus,

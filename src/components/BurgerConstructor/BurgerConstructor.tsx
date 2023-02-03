@@ -11,11 +11,9 @@ import { useDrop } from 'react-dnd'
 // Hooks
 import useModal from 'hooks/useModal'
 
-// Types and Hooks
-import { TIngredientCart } from 'redux/actionTypes/types'
+// Redux
+import { TIngredientCart } from 'redux/actionTypes'
 import { useDispatch, useSelector } from 'redux/store'
-
-// Files and other
 import { setBun, setIngredient, setTotalPrice } from 'redux/actionCreators'
 import { setOrder } from 'redux/actions'
 import { cartSelector, dataIngreientsSelector } from 'redux/selectors'
@@ -43,7 +41,6 @@ const BurgerConstructor: React.FC = () => {
   }, [bun, ingredients, dispatch])
 
   // Burger content
-
   const renderIngredient = useCallback(
     (item: TIngredientCart, i: number) => (
       <ConstructorItem key={item.uuid} ingredient={item} orderId={i} />

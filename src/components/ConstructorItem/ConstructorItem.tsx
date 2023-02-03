@@ -10,7 +10,7 @@ import {
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
-import { TIngredientCart } from 'redux/actionTypes/types'
+import { TIngredientCart } from 'redux/actionTypes'
 import { removeIngredient, reorderIngredients } from 'redux/actionCreators'
 import { cartIngredientsSelector } from 'redux/selectors'
 

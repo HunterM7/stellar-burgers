@@ -1,5 +1,5 @@
 import { API_URL_ORDER } from 'utils/constants'
-import { OrderFetchStatus } from 'redux/actionTypes/types'
+import { OrderFetchStatus } from 'redux/actionTypes'
 import { checkReponse } from 'utils/checkReponse'
 import { AppDispatch, AppThunk } from 'redux/store'
 import {

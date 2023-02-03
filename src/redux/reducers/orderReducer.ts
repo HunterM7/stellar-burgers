@@ -1,4 +1,4 @@
-import { TOrderState, OrderFetchStatus } from 'redux/actionTypes/types'
+import { TOrderState, OrderFetchStatus } from 'redux/actionTypes'
 import { OrderActions } from 'redux/actions/orderActions'
 
 const initialState: TOrderState = {
