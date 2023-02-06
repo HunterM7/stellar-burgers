@@ -41,15 +41,12 @@ const BurgerConstructor: React.FC = () => {
   }, [bun, ingredients, dispatch])
 
   // Burger content
-  const renderIngredient = useCallback(
-    (item: TIngredientCart, i: number) => (
-      <ConstructorItem key={item.uuid} ingredient={item} orderId={i} />
-    ),
-    [],
-  )
-
-  const burgerIngredients = ingredients.map((item, i) =>
-    renderIngredient(item, i),
+  const burgerIngredients = React.useMemo(
+    () =>
+      ingredients.map((item, i) => (
+        <ConstructorItem key={item.uuid} ingredient={item} orderId={i} />
+      )),
+    [ingredients],
   )
 
   // DnD

@@ -6,8 +6,11 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Functions
+import { checkReponse } from 'utils/checkReponse'
+
 // Routes
-import { LOGIN_LINK } from 'utils/constants'
+import { API_URL_PASSWORD_RESET_REQUEST, LOGIN_LINK } from 'utils/constants'
 
 // Styles
 import styles from './ResetPasswordPage.module.scss'
@@ -35,6 +38,30 @@ const ResetPasswordPage = () => {
       ...prev,
       code: e.target.value,
     }))
+  }
+
+  // Main button click
+  const handleMainButton = () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: form.password,
+        token: form.code,
+      }),
+    }
+
+    type TResetPasswordResponse = {
+      success: boolean
+      message: string
+    }
+
+    fetch(API_URL_PASSWORD_RESET_REQUEST, requestOptions)
+      .then((res) => checkReponse<TResetPasswordResponse>(res))
+      .then((res) => navigate(LOGIN_LINK))
+      .catch((err) => {
+        console.log('error')
+      })
   }
 
   // On click login button
@@ -65,7 +92,12 @@ const ResetPasswordPage = () => {
           size="default"
         />
 
-        <Button htmlType="button" type="primary" size="large">
+        <Button
+          htmlType="button"
+          type="primary"
+          size="large"
+          onClick={handleMainButton}
+        >
           Восстановить
         </Button>
       </form>

@@ -1,0 +1,48 @@
+//? === Auth pages ===
+
+@import 'scss/vars';
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.loginblock {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.title {
+	margin-bottom: 24px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+
+	margin-bottom: 80px;
+}
+
+.options {
+	&__container {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+
+		gap: 8px;
+	}
+
+	&__text {
+		color: $text-secondary;
+	}
+
+	&__btn {
+		padding: 0;
+	}
+}

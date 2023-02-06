@@ -5,6 +5,7 @@ export const API_URL = 'https://norma.nomoreparties.space/api/'
 export const API_URL_INGREDIENTS = `${API_URL}ingredients/`
 export const API_URL_ORDER = `${API_URL}orders/`
 export const API_URL_PASSWORD_RESET = `${API_URL}password-reset/`
+export const API_URL_PASSWORD_RESET_REQUEST = `${API_URL}password-reset/reset/`
 
 // Routes
 export const HOME_LINK = '/'

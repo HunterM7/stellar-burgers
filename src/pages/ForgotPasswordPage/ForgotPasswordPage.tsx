@@ -9,7 +9,11 @@ import {
 import { checkReponse } from 'utils/checkReponse'
 
 // Routes
-import { API_URL_PASSWORD_RESET, LOGIN_LINK } from 'utils/constants'
+import {
+  API_URL_PASSWORD_RESET,
+  LOGIN_LINK,
+  RESET_PASSWORD_LINK,
+} from 'utils/constants'
 
 // Styles
 import styles from './ForgotPasswordPage.module.scss'
@@ -47,7 +51,7 @@ const ForgotPasswordPage = () => {
 
     fetch(API_URL_PASSWORD_RESET, requestOptions)
       .then((res) => checkReponse<TResetPasswordResponse>(res))
-      .then((res) => console.log('success', res))
+      .then((res) => navigate(RESET_PASSWORD_LINK))
       .catch((err) => {
         console.log('error')
       })
