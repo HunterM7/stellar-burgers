@@ -25,11 +25,12 @@ body {
 
 	display: grid;
 	grid-template-rows: 88px 1fr;
+	gap: 40px;
 }
 
 .container {
 	width: 100%;
-	max-width: 1272px;
+	max-width: calc(1240px + 16px * 2);
 
 	margin: 0 auto;
 	padding: 0 16px;

@@ -10,22 +10,22 @@ import { BurgerItem } from 'components'
 import styles from './IngredientsGroup.module.scss'
 
 type IngredientsGroupT = {
-  id: number
+  id: string
   title: string
   data: TIngredient[]
 }
 
 const IngredientsGroup: React.FC<IngredientsGroupT> = ({ id, title, data }) => {
   // Ingredients
-  const items = React.useMemo(
+  const ingredients = React.useMemo(
     () => data.map((item, i) => <BurgerItem key={i} ingredient={item} />),
     [data],
   )
 
   return (
-    <li id={`ingredients-block-${id}`} className={styles.wrapper}>
+    <li id={id} className={styles.wrapper}>
       <h3 className={styles.title}>{title}</h3>
-      <ul className={styles.list}>{items}</ul>
+      <ul className={styles.list}>{ingredients}</ul>
     </li>
   )
 }

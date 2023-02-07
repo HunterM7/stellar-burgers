@@ -1,3 +1,28 @@
 //? === Account Page ===
 
 @import 'scss/vars';
+
+.wrapper {
+	display: grid;
+	grid-template-columns: 320px 1fr;
+	column-gap: 60px;
+}
+
+.aside {
+	padding-top: 80px;
+
+	& > a {
+		display: flex;
+		align-items: center;
+
+		height: 64px;
+
+		&:last-of-type {
+			margin-bottom: 80px;
+		}
+	}
+
+	& > p {
+		color: $text-secondary;
+	}
+}

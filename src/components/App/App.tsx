@@ -8,12 +8,13 @@ import {
   LOGIN_LINK,
   ORDER_FEED_LINK,
   PROFILE_LINK,
+  PROFILE_ORDERS_LINK,
   REGISTER_LINK,
   RESET_PASSWORD_LINK,
 } from 'utils/constants'
 
 // Components and Pages
-import { AppHeader } from 'components'
+import { AppHeader, OrderHistory, ProfileInfo } from 'components'
 import {
   AccountPage,
   ForgotPasswordPage,
@@ -31,7 +32,10 @@ const App: React.FC = () => {
       <Routes>
         <Route path={HOME_LINK} element={<HomePage />} />
         <Route path={ORDER_FEED_LINK} element={<OrderFeedPage />} />
-        <Route path={PROFILE_LINK} element={<AccountPage />} />
+        <Route path={PROFILE_LINK} element={<AccountPage />}>
+          <Route path={PROFILE_LINK} element={<ProfileInfo />} />
+          <Route path={PROFILE_ORDERS_LINK} element={<OrderHistory />} />
+        </Route>
 
         {/* Authentication routes */}
         <Route path={LOGIN_LINK} element={<LoginPage />} />

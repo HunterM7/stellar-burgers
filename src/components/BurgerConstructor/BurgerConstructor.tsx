@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import {
   Button,
   ConstructorElement,
@@ -12,7 +12,6 @@ import { useDrop } from 'react-dnd'
 import useModal from 'hooks/useModal'
 
 // Redux
-import { TIngredientCart } from 'redux/actionTypes'
 import { useDispatch, useSelector } from 'redux/store'
 import { setBun, setIngredient, setTotalPrice } from 'redux/actionCreators'
 import { setOrder } from 'redux/actions'
@@ -58,32 +57,40 @@ const BurgerConstructor: React.FC = () => {
     }),
   }))
 
-  const dropIngredient = (id: string) => {
-    const ingredient = allIngredients.find((el) => el._id === id)
+  const dropIngredient = React.useCallback(
+    (id: string) => {
+      const ingredient = allIngredients.find((el) => el._id === id)
 
-    if (ingredient) {
-      ingredient.type === 'bun'
-        ? dispatch(setBun(ingredient))
-        : dispatch(setIngredient({ ...ingredient, uuid: crypto.randomUUID() }))
-    }
-  }
+      if (ingredient) {
+        ingredient.type === 'bun'
+          ? dispatch(setBun(ingredient))
+          : dispatch(setIngredient(ingredient))
+      }
+    },
+    [allIngredients, dispatch],
+  )
 
   // Modal Window
   const { isModalOpen, openModal, closeModal } = useModal(false)
 
   // Popup Hint Modal
-  const initialPopupState = {
-    isPopupActive: false,
-    title: '',
-  }
+  const initialPopupState = React.useMemo(
+    () => ({
+      isPopupActive: false,
+      title: '',
+    }),
+    [],
+  )
 
   const [popupState, setPopupState] = React.useState(initialPopupState)
 
-  const closePopup = () =>
-    setTimeout(() => setPopupState(initialPopupState), 4000)
+  const closePopup = React.useCallback(
+    () => setTimeout(() => setPopupState(initialPopupState), 4000),
+    [initialPopupState],
+  )
 
   // Handle order click
-  const handleOrderClick = () => {
+  const handleOrderClick = React.useCallback(() => {
     if (!bun && !ingredients.length) {
       setPopupState({
         isPopupActive: true,
@@ -108,7 +115,7 @@ const BurgerConstructor: React.FC = () => {
       dispatch(setOrder(orderIngridietns))
       openModal && openModal()
     }
-  }
+  }, [bun, ingredients, dispatch, closePopup, openModal])
 
   return (
     <section className={styles.wrapper}>

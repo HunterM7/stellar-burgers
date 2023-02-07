@@ -9,7 +9,7 @@ export const SET_TOTAL_PRICE = 'SET_TOTAL_PRICE'
 // Actions
 export interface setBunA {
   type: typeof SET_BUN
-  bun: TIngredient
+  ingredient: TIngredient
 }
 export interface setIngredientA {
   type: typeof SET_INGREDIENT

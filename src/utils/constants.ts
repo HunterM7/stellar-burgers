@@ -13,6 +13,9 @@ export const LOGIN_LINK = '/login'
 export const REGISTER_LINK = '/register'
 export const FORGOT_PASSWORD_LINK = '/forgot-password'
 export const RESET_PASSWORD_LINK = '/reset-password'
+
 export const PROFILE_LINK = '/profile'
+export const PROFILE_ORDERS_LINK = `${PROFILE_LINK}/orders`
+
 export const INGREDIENT_LINK = '/ingredients/:id'
 export const ORDER_FEED_LINK = '/order-feed'

@@ -1,11 +1,11 @@
 import { TCartState } from 'redux/actionTypes'
 import {
   CartActions,
-  SET_BUN,
   SET_INGREDIENT,
   REMOVE_INGREDIENT,
   SET_TOTAL_PRICE,
   REORDER_INGREDIENTS,
+  SET_BUN,
 } from 'redux/actions/cartActions'
 
 const initialState: TCartState = {
@@ -22,7 +22,7 @@ export const cartReducer = (
     case SET_BUN:
       return {
         ...state,
-        bun: action.bun,
+        bun: action.ingredient,
       }
 
     case SET_INGREDIENT:

@@ -12,7 +12,9 @@ import Loader from './Loader/Loader'
 import Modal from './Modal/Modal'
 import ModalOverlay from './Modal/ModalOverlay/ModalOverlay'
 import OrderDetails from './OrderDetails/OrderDetails'
+import OrderHistory from './OrderHistory/OrderHistory'
 import PopupHint from './PopupHint/PopupHint'
+import ProfileInfo from './ProfileInfo/ProfileInfo'
 
 export {
   App,
@@ -30,4 +32,6 @@ export {
   ModalOverlay,
   OrderDetails,
   PopupHint,
+  ProfileInfo,
+  OrderHistory,
 }

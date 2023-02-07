@@ -54,8 +54,8 @@ const BurgerIngredients: React.FC = () => {
     () =>
       ingredientGroups.map((item, i) => (
         <IngredientsGroup
-          key={++i}
-          id={++i}
+          key={i}
+          id={`ingredients-block-${++i}`}
           title={item.title}
           data={ingredients.filter((el) => el.type === item.type)}
         />

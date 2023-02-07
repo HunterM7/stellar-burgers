@@ -60,7 +60,7 @@ const ResetPasswordPage = () => {
       .then((res) => checkReponse<TResetPasswordResponse>(res))
       .then((res) => navigate(LOGIN_LINK))
       .catch((err) => {
-        console.log('error')
+        alert('error')
       })
   }
 
