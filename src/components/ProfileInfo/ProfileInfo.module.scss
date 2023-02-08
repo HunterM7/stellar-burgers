@@ -1,0 +1,11 @@
+//? === Profile Info ===
+
+@import 'scss/vars';
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+
+	padding-top: 80px;
+}

@@ -11,20 +11,24 @@ const AccountPage = () => {
   return (
     <main className={`container ${styles.wrapper}`}>
       <aside className={styles.aside}>
-        <Link to={PROFILE_LINK}>
-          <h3>Профиль</h3>
-        </Link>
-        <Link to={PROFILE_ORDERS_LINK}>
-          <h3>История заказов</h3>
-        </Link>
-        <Link to={PROFILE_LINK}>
-          <h3>Выход</h3>
-        </Link>
-        <p>В этом разделе вы можете изменить свои персональные данные</p>
+        <div className={styles.aside__buttons}>
+          <Link to={PROFILE_LINK}>
+            <h3>Профиль</h3>
+          </Link>
+          <Link to={PROFILE_ORDERS_LINK}>
+            <h3>История заказов</h3>
+          </Link>
+          <button className={styles.logout}>
+            <h3>Выход</h3>
+          </button>
+        </div>
+
+        <p className={styles.aside__info}>
+          В этом разделе вы можете изменить свои персональные данные
+        </p>
       </aside>
-      <div>
-        <Outlet />
-      </div>
+
+      <Outlet />
     </main>
   )
 }

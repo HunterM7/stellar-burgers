@@ -11,18 +11,23 @@
 .aside {
 	padding-top: 80px;
 
-	& > a {
-		display: flex;
-		align-items: center;
+	&__buttons {
+		& > * {
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			align-items: center;
 
-		height: 64px;
-
-		&:last-of-type {
-			margin-bottom: 80px;
+			height: 64px;
 		}
+
+		margin-bottom: 80px;
 	}
 
-	& > p {
+	&__info {
 		color: $text-secondary;
 	}
+}
+
+.logout {
 }
