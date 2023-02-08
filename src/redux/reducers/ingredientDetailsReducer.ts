@@ -14,7 +14,7 @@ const initialState: TIngredientDetails = {
   carbohydrates: 0,
 }
 
-export const IngredientDetailsReducer = (
+export const ingredientDetailsReducer = (
   state = initialState,
   action: IngredientDetailsActions,
 ) => {

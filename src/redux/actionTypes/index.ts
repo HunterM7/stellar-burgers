@@ -22,6 +22,12 @@ export enum IngredientFetchStatus {
   INGREDIENT_ERROR = 'INGREDIENT_ERROR',
 }
 
+export enum RegisterFetchStatus {
+  REGISTER_REQUEST = 'REGISTER_REQUEST',
+  REGISTER_SUCCESS = 'REGISTER_SUCCESS',
+  REGISTER_ERROR = 'REGISTER_ERROR',
+}
+
 export enum OrderFetchStatus {
   ORDER_REQUEST = 'ORDER_REQUEST',
   ORDER_SUCCESS = 'ORDER_SUCCESS',

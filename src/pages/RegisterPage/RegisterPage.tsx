@@ -7,6 +7,16 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Redux
+import { useDispatch, useSelector } from 'redux/store'
+import { authUserSelector } from 'redux/selectors'
+import { handleRegister } from 'redux/actions'
+import {
+  authChangeName,
+  authChangePassword,
+  authChangeEmail,
+} from 'redux/actionCreators'
+
 // Routes
 import { LOGIN_LINK } from 'utils/constants'
 
@@ -15,36 +25,35 @@ import styles from './RegisterPage.module.scss'
 
 const RegisterPage = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   // Form state
-  const [form, setForm] = React.useState({
-    name: '',
-    email: '',
-    password: '',
-  })
+  const { name, email, password } = useSelector(authUserSelector)
 
   // Name input function
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      email: e.target.value,
-    }))
+    dispatch(authChangeName(e.target.value))
   }
 
   // Email input function
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      email: e.target.value,
-    }))
+    dispatch(authChangeEmail(e.target.value))
   }
 
   // Password input function
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      password: e.target.value,
-    }))
+    dispatch(authChangePassword(e.target.value))
+  }
+
+  // On click main button
+  const handleRegisterClick = () => {
+    dispatch(
+      handleRegister({
+        name,
+        email,
+        password,
+      }),
+    )
   }
 
   // On click login button
@@ -61,7 +70,7 @@ const RegisterPage = () => {
           type="text"
           placeholder="Имя"
           onChange={onChangeName}
-          value={form.name}
+          value={name}
           name="name"
           error={false}
           errorText="Ошибка"
@@ -71,17 +80,22 @@ const RegisterPage = () => {
         <EmailInput
           name="email"
           placeholder="E-mail"
-          value={form.email}
+          value={email}
           onChange={onChangeEmail}
         />
 
         <PasswordInput
           onChange={onChangePassword}
-          value={form.password}
+          value={password}
           name={'password'}
         />
 
-        <Button htmlType="button" type="primary" size="large">
+        <Button
+          onClick={handleRegisterClick}
+          htmlType="button"
+          type="primary"
+          size="large"
+        >
           Зарегистрироваться
         </Button>
       </form>

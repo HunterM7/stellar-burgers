@@ -19,6 +19,14 @@ import {
   setIngredientDetails,
   resetIngredientDetails,
 } from './IngredientDetailsCreators'
+import {
+  registerError,
+  registerRequest,
+  registerSuccess,
+  authChangeEmail,
+  authChangeName,
+  authChangePassword,
+} from './authActionCreators'
 
 export {
   // dataReducerActions
@@ -38,4 +46,11 @@ export {
   // ingredientDetailsReducer
   setIngredientDetails,
   resetIngredientDetails,
+  // authReducer
+  registerRequest,
+  registerError,
+  registerSuccess,
+  authChangeEmail,
+  authChangeName,
+  authChangePassword,
 }

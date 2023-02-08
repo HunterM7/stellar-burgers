@@ -17,23 +17,36 @@ import {
   orderInfoSelector,
 } from './orderSelector'
 import { ingredientDetailsSelector } from './ingredientDetailsSelector'
+import {
+  authSelector,
+  authUserSelector,
+  authNameSelector,
+  authEmailSelector,
+  authPasswordSelector,
+} from './authSelectors'
 
 export {
-  // dataReducer selectors
+  // data selectors
   dataSelector,
   dataIsLoadingSelector,
   dataHasErrorSelector,
   dataIngreientsSelector,
-  // cartReducer selectors
+  // cart selectors
   cartSelector,
   cartBunSelector,
   cartIngredientsSelector,
   cartTotalPriceSelector,
-  // orderReducer selectors
+  // order selectors
   orderSelector,
   orderIsLoadingSelector,
   orderHasErrorSelector,
   orderInfoSelector,
-  // ingredientDetailsReducer selectors
+  // ingredientDetails selectors
   ingredientDetailsSelector,
+  // auth selectors
+  authSelector,
+  authUserSelector,
+  authNameSelector,
+  authEmailSelector,
+  authPasswordSelector,
 }
