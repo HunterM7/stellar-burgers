@@ -7,16 +7,13 @@ import {
   registerRequest,
   registerSuccess,
 } from 'redux/actionCreators'
-import {
-  TAuthLogin,
-  TAuthRegister,
-  TAuthUser,
-} from 'redux/reducers/authReducer'
+import { TAuthLogin, TAuthRegister } from 'redux/reducers/authReducer'
 import {
   loginError,
   loginRequest,
   loginSuccess,
 } from 'redux/actionCreators/authActionCreators'
+import { setCookie } from 'utils/cookie'
 
 export type TRegisterResponse = {
   success: boolean
@@ -129,6 +126,10 @@ export const handleLogin =
     fetch(API_AUTH_LOGIN, requestOptions)
       .then((res) => checkReponse<TLoginResponse>(res))
       .then((res) => {
+        const authToken = res.accessToken.split('Bearer ')[1]
+
+        authToken && setCookie('token', authToken)
+
         dispatch(loginSuccess(res))
       })
       .catch((err) => dispatch(loginError()))

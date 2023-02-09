@@ -8,14 +8,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Redux
-import { useDispatch, useSelector } from 'redux/store'
-import { authUserSelector } from 'redux/selectors'
+import { useDispatch } from 'redux/store'
 import { handleRegister } from 'redux/actions'
-import {
-  authChangeName,
-  authChangePassword,
-  authChangeEmail,
-} from 'redux/actionCreators'
 
 // Routes
 import { LOGIN_LINK } from 'utils/constants'
@@ -28,32 +22,30 @@ const RegisterPage = () => {
   const dispatch = useDispatch()
 
   // Form state
-  const { name, email, password } = useSelector(authUserSelector)
+  const [registerForm, setRegisterForm] = React.useState({
+    name: '',
+    email: '',
+    password: '',
+  })
 
   // Name input function
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(authChangeName(e.target.value))
+    setRegisterForm((prev) => ({ ...prev, name: e.target.value }))
   }
 
   // Email input function
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(authChangeEmail(e.target.value))
+    setRegisterForm((prev) => ({ ...prev, email: e.target.value }))
   }
 
   // Password input function
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(authChangePassword(e.target.value))
+    setRegisterForm((prev) => ({ ...prev, password: e.target.value }))
   }
 
   // On click main button
   const handleRegisterClick = () => {
-    dispatch(
-      handleRegister({
-        name,
-        email,
-        password,
-      }),
-    )
+    dispatch(handleRegister(registerForm))
   }
 
   // On click login button
@@ -70,7 +62,7 @@ const RegisterPage = () => {
           type="text"
           placeholder="Имя"
           onChange={onChangeName}
-          value={name}
+          value={registerForm.name}
           name="name"
           error={false}
           errorText="Ошибка"
@@ -80,13 +72,13 @@ const RegisterPage = () => {
         <EmailInput
           name="email"
           placeholder="E-mail"
-          value={email}
+          value={registerForm.email}
           onChange={onChangeEmail}
         />
 
         <PasswordInput
           onChange={onChangePassword}
-          value={password}
+          value={registerForm.password}
           name={'password'}
         />
 

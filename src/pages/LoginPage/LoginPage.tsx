@@ -9,7 +9,6 @@ import {
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
 import { authUserSelector } from 'redux/selectors'
-import { authChangeEmail, authChangePassword } from 'redux/actionCreators'
 import { handleLogin } from 'redux/actions'
 
 // Routes
@@ -23,26 +22,29 @@ const LoginPage = () => {
   const dispatch = useDispatch()
 
   // Form state
-  const { email, password, isLoggedIn } = useSelector(authUserSelector)
+  const [loginForm, setLoginForm] = React.useState({
+    email: '',
+    password: '',
+  })
+
+  const { isLoggedIn } = useSelector(authUserSelector)
 
   // Redirect if logged in
-  React.useEffect(() => {
-    isLoggedIn && navigate(HOME_LINK)
-  }, [isLoggedIn, navigate])
+  isLoggedIn && navigate(HOME_LINK)
 
   // Email input function
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(authChangeEmail(e.target.value))
+    setLoginForm((prev) => ({ ...prev, email: e.target.value }))
   }
 
   // Password input function
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(authChangePassword(e.target.value))
+    setLoginForm((prev) => ({ ...prev, password: e.target.value }))
   }
 
   // Handle login button
   const handleLoginButton = () => {
-    dispatch(handleLogin({ email, password }))
+    dispatch(handleLogin(loginForm))
   }
 
   // On click register button
@@ -63,13 +65,13 @@ const LoginPage = () => {
         <EmailInput
           name="email"
           placeholder="E-mail"
-          value={email}
+          value={loginForm.email}
           onChange={onChangeEmail}
         />
 
         <PasswordInput
           onChange={onChangePassword}
-          value={password}
+          value={loginForm.password}
           name={'password'}
         />
 
