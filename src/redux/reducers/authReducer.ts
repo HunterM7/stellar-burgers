@@ -4,10 +4,22 @@ import {
   AUTH_CHANGE_NAME,
   AUTH_CHANGE_PASSWORD,
 } from 'redux/actions/authActions'
-import { RegisterFetchStatus } from 'redux/actionTypes'
+import { LoginFetchStatus, RegisterFetchStatus } from 'redux/actionTypes'
 
 export type TAuthUser = {
   name: string
+  email: string
+  password: string
+  isLoggedIn: boolean
+}
+
+export type TAuthRegister = {
+  name: string
+  email: string
+  password: string
+}
+
+export type TAuthLogin = {
   email: string
   password: string
 }
@@ -23,6 +35,7 @@ const initialState: TAuthState = {
     name: '',
     email: '',
     password: '',
+    isLoggedIn: false,
   },
   isLoading: false,
   hasError: false,
@@ -33,6 +46,7 @@ export const authReducer = (
   action: AuthActions,
 ): TAuthState => {
   switch (action.type) {
+    // Register logic
     case RegisterFetchStatus.REGISTER_REQUEST:
       return { ...state, isLoading: true, hasError: false }
 
@@ -50,6 +64,26 @@ export const authReducer = (
     case RegisterFetchStatus.REGISTER_ERROR:
       return { ...state, isLoading: false, hasError: true }
 
+    // Login logic
+    case LoginFetchStatus.LOGIN_REQUEST:
+      return { ...state, isLoading: true, hasError: false }
+
+    case LoginFetchStatus.LOGIN_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          name: action.response.user.name,
+          email: action.response.user.email,
+          isLoggedIn: true,
+        },
+        isLoading: false,
+      }
+
+    case LoginFetchStatus.LOGIN_ERROR:
+      return { ...state, isLoading: false, hasError: true }
+
+    // Change state logic
     case AUTH_CHANGE_NAME:
       return { ...state, user: { ...state.user, name: action.name } }
 

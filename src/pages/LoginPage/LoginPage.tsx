@@ -6,35 +6,43 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Redux
+import { useDispatch, useSelector } from 'redux/store'
+import { authUserSelector } from 'redux/selectors'
+import { authChangeEmail, authChangePassword } from 'redux/actionCreators'
+import { handleLogin } from 'redux/actions'
+
 // Routes
-import { FORGOT_PASSWORD_LINK, REGISTER_LINK } from 'utils/constants'
+import { FORGOT_PASSWORD_LINK, HOME_LINK, REGISTER_LINK } from 'utils/constants'
 
 // Styles
 import styles from './LoginPage.module.scss'
 
 const LoginPage = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   // Form state
-  const [form, setForm] = React.useState({
-    email: '',
-    password: '',
-  })
+  const { email, password, isLoggedIn } = useSelector(authUserSelector)
+
+  // Redirect if logged in
+  React.useEffect(() => {
+    isLoggedIn && navigate(HOME_LINK)
+  }, [isLoggedIn, navigate])
 
   // Email input function
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      email: e.target.value,
-    }))
+    dispatch(authChangeEmail(e.target.value))
   }
 
   // Password input function
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      password: e.target.value,
-    }))
+    dispatch(authChangePassword(e.target.value))
+  }
+
+  // Handle login button
+  const handleLoginButton = () => {
+    dispatch(handleLogin({ email, password }))
   }
 
   // On click register button
@@ -55,17 +63,22 @@ const LoginPage = () => {
         <EmailInput
           name="email"
           placeholder="E-mail"
-          value={form.email}
+          value={email}
           onChange={onChangeEmail}
         />
 
         <PasswordInput
           onChange={onChangePassword}
-          value={form.password}
+          value={password}
           name={'password'}
         />
 
-        <Button htmlType="button" type="primary" size="large">
+        <Button
+          htmlType="button"
+          type="primary"
+          size="large"
+          onClick={handleLoginButton}
+        >
           Войти
         </Button>
       </form>

@@ -9,6 +9,7 @@ import { AuthActions } from './authActions'
 import { getIngredients } from './dataActions'
 import { setOrder } from './orderActions'
 import { handleRegister } from './authActions'
+import { handleLogin } from './authActions'
 
 export type TAppActions =
   | DataActions
@@ -17,4 +18,4 @@ export type TAppActions =
   | IngredientDetailsActions
   | AuthActions
 
-export { getIngredients, setOrder, handleRegister }
+export { getIngredients, setOrder, handleRegister, handleLogin }

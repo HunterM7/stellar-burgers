@@ -1,15 +1,34 @@
 import { AppThunk, AppDispatch } from 'redux/store'
 import { checkReponse } from 'utils/checkReponse'
-import { API_AUTH_REGISTER } from 'utils/constants'
-import { RegisterFetchStatus } from 'redux/actionTypes'
+import { API_AUTH_LOGIN, API_AUTH_REGISTER } from 'utils/constants'
+import { LoginFetchStatus, RegisterFetchStatus } from 'redux/actionTypes'
 import {
   registerError,
   registerRequest,
   registerSuccess,
 } from 'redux/actionCreators'
-import { TAuthUser } from 'redux/reducers/authReducer'
+import {
+  TAuthLogin,
+  TAuthRegister,
+  TAuthUser,
+} from 'redux/reducers/authReducer'
+import {
+  loginError,
+  loginRequest,
+  loginSuccess,
+} from 'redux/actionCreators/authActionCreators'
 
 export type TRegisterResponse = {
+  success: boolean
+  user: {
+    email: string
+    name: string
+  }
+  accessToken: string
+  refreshToken: string
+}
+
+export type TLoginResponse = {
   success: boolean
   user: {
     email: string
@@ -33,6 +52,19 @@ export interface registerSuccessA {
   type: typeof RegisterFetchStatus.REGISTER_SUCCESS
   response: TRegisterResponse
 }
+// -----------
+export interface loginRequestA {
+  type: typeof LoginFetchStatus.LOGIN_REQUEST
+}
+export interface loginErrorA {
+  type: typeof LoginFetchStatus.LOGIN_ERROR
+}
+export interface loginSuccessA {
+  type: typeof LoginFetchStatus.LOGIN_SUCCESS
+  response: TLoginResponse
+}
+// -----------
+
 export interface authChangeNameA {
   type: typeof AUTH_CHANGE_NAME
   name: string
@@ -50,12 +82,15 @@ export type AuthActions =
   | registerRequestA
   | registerErrorA
   | registerSuccessA
+  | loginRequestA
+  | loginErrorA
+  | loginSuccessA
   | authChangeNameA
   | authChangeEmailA
   | authChangePasswordA
 
 export const handleRegister =
-  ({ name, email, password }: TAuthUser): AppThunk =>
+  ({ name, email, password }: TAuthRegister): AppThunk =>
   (dispatch: AppDispatch) => {
     dispatch(registerRequest())
 
@@ -75,4 +110,26 @@ export const handleRegister =
         dispatch(registerSuccess(res))
       })
       .catch((err) => dispatch(registerError()))
+  }
+
+export const handleLogin =
+  ({ email, password }: TAuthLogin): AppThunk =>
+  (dispatch: AppDispatch) => {
+    dispatch(loginRequest())
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    }
+
+    fetch(API_AUTH_LOGIN, requestOptions)
+      .then((res) => checkReponse<TLoginResponse>(res))
+      .then((res) => {
+        dispatch(loginSuccess(res))
+      })
+      .catch((err) => dispatch(loginError()))
   }

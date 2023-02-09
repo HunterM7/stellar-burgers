@@ -28,6 +28,12 @@ export enum RegisterFetchStatus {
   REGISTER_ERROR = 'REGISTER_ERROR',
 }
 
+export enum LoginFetchStatus {
+  LOGIN_REQUEST = 'LOGIN_REQUEST',
+  LOGIN_SUCCESS = 'LOGIN_SUCCESS',
+  LOGIN_ERROR = 'LOGIN_ERROR',
+}
+
 export enum OrderFetchStatus {
   ORDER_REQUEST = 'ORDER_REQUEST',
   ORDER_SUCCESS = 'ORDER_SUCCESS',

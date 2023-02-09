@@ -1,4 +1,4 @@
-import { RegisterFetchStatus } from 'redux/actionTypes'
+import { LoginFetchStatus, RegisterFetchStatus } from 'redux/actionTypes'
 import {
   TRegisterResponse,
   registerRequestA,
@@ -10,8 +10,13 @@ import {
   authChangeEmailA,
   authChangePasswordA,
   AUTH_CHANGE_PASSWORD,
+  loginRequestA,
+  loginErrorA,
+  loginSuccessA,
+  TLoginResponse,
 } from 'redux/actions/authActions'
 
+// Register action creators
 export const registerRequest = (): registerRequestA => ({
   type: RegisterFetchStatus.REGISTER_REQUEST,
 })
@@ -24,6 +29,20 @@ export const registerSuccess = (
   response: TRegisterResponse,
 ): registerSuccessA => ({
   type: RegisterFetchStatus.REGISTER_SUCCESS,
+  response,
+})
+
+// Login action creators
+export const loginRequest = (): loginRequestA => ({
+  type: LoginFetchStatus.LOGIN_REQUEST,
+})
+
+export const loginError = (): loginErrorA => ({
+  type: LoginFetchStatus.LOGIN_ERROR,
+})
+
+export const loginSuccess = (response: TLoginResponse): loginSuccessA => ({
+  type: LoginFetchStatus.LOGIN_SUCCESS,
   response,
 })
 
