@@ -160,7 +160,6 @@ export const handleLogin =
 
 export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(getUserRequest())
-  console.log('getUser')
 
   const requestOptions = {
     method: 'GET',
@@ -177,14 +176,6 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
 
   fetch(API_AUTH_USER, requestOptions)
     .then((res) => checkReponse<TLoginResponse>(res))
-    .then((res) => {
-      console.log('user success')
-
-      dispatch(getUserSuccess(res))
-    })
-    .catch((err) => {
-      console.log('user error', err)
-
-      dispatch(getUserError())
-    })
+    .then((res) => dispatch(getUserSuccess(res)))
+    .catch((err) => dispatch(getUserError()))
 }
