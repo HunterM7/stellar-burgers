@@ -8,6 +8,7 @@ import LoginPage from './LoginPage/LoginPage'
 import RegisterPage from './RegisterPage/RegisterPage'
 import ForgotPasswordPage from './ForgotPasswordPage/ForgotPasswordPage'
 import ResetPasswordPage from './ResetPasswordPage/ResetPasswordPage'
+import NotFoundPage from './NotFoundPage/NotFoundPage'
 
 export {
   HomePage,
@@ -17,4 +18,5 @@ export {
   RegisterPage,
   ForgotPasswordPage,
   ResetPasswordPage,
+  NotFoundPage,
 }

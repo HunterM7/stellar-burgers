@@ -15,6 +15,7 @@ export const API_AUTH_REGISTER = `${API_URL}auth/register` // эндпоинт �
 export const API_AUTH_TOKEN = `${API_URL}auth/token` // эндпоинт обновления токена.
 
 // Routes
+export const NOT_FOUND_LINK = '*'
 export const HOME_LINK = '/'
 export const LOGIN_LINK = '/login'
 export const REGISTER_LINK = '/register'

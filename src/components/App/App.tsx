@@ -6,6 +6,7 @@ import {
   FORGOT_PASSWORD_LINK,
   HOME_LINK,
   LOGIN_LINK,
+  NOT_FOUND_LINK,
   ORDER_FEED_LINK,
   PROFILE_LINK,
   PROFILE_ORDERS_LINK,
@@ -25,6 +26,7 @@ import {
   ForgotPasswordPage,
   HomePage,
   LoginPage,
+  NotFoundPage,
   OrderFeedPage,
   RegisterPage,
   ResetPasswordPage,
@@ -51,6 +53,9 @@ const App: React.FC = () => {
         <Route path={REGISTER_LINK} element={<RegisterPage />} />
         <Route path={FORGOT_PASSWORD_LINK} element={<ForgotPasswordPage />} />
         <Route path={RESET_PASSWORD_LINK} element={<ResetPasswordPage />} />
+
+        {/* Not Found Page */}
+        <Route path={NOT_FOUND_LINK} element={<NotFoundPage />} />
       </Routes>
     </>
   )
