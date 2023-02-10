@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import {
   Button,
   EmailInput,
@@ -27,10 +27,10 @@ const LoginPage = () => {
     password: '',
   })
 
+  // Redirect if logged in
   const { isLoggedIn } = useSelector(authUserSelector)
 
-  // Redirect if logged in
-  isLoggedIn && navigate(HOME_LINK)
+  if (isLoggedIn) return <Navigate to={HOME_LINK} />
 
   // Email input function
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {

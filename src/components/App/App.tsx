@@ -14,7 +14,12 @@ import {
 } from 'utils/constants'
 
 // Components and Pages
-import { AppHeader, OrderHistory, ProfileInfo } from 'components'
+import {
+  AppHeader,
+  OrderHistory,
+  ProfileInfo,
+  ProtectedRouteElement,
+} from 'components'
 import {
   AccountPage,
   ForgotPasswordPage,
@@ -32,7 +37,11 @@ const App: React.FC = () => {
       <Routes>
         <Route path={HOME_LINK} element={<HomePage />} />
         <Route path={ORDER_FEED_LINK} element={<OrderFeedPage />} />
-        <Route path={PROFILE_LINK} element={<AccountPage />}>
+
+        <Route
+          path={PROFILE_LINK}
+          element={<ProtectedRouteElement element={<AccountPage />} />}
+        >
           <Route path={PROFILE_LINK} element={<ProfileInfo />} />
           <Route path={PROFILE_ORDERS_LINK} element={<OrderHistory />} />
         </Route>

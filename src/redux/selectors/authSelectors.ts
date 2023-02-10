@@ -7,3 +7,5 @@ export const authNameSelector = (store: TRootState) => store.auth.user.name
 export const authEmailSelector = (store: TRootState) => store.auth.user.email
 export const authPasswordSelector = (store: TRootState) =>
   store.auth.user.password
+export const authIsLoggedInSelector = (store: TRootState) =>
+  store.auth.user.isLoggedIn

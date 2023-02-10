@@ -34,6 +34,12 @@ export enum LoginFetchStatus {
   LOGIN_ERROR = 'LOGIN_ERROR',
 }
 
+export enum GetUserFetchStatus {
+  GET_USER_REQUEST = 'GET_USER_REQUEST',
+  GET_USER_SUCCESS = 'GET_USER_SUCCESS',
+  GET_USER_ERROR = 'GET_USER_ERROR',
+}
+
 export enum OrderFetchStatus {
   ORDER_REQUEST = 'ORDER_REQUEST',
   ORDER_SUCCESS = 'ORDER_SUCCESS',

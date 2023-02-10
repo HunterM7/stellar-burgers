@@ -1,10 +1,9 @@
+import { AuthActions } from 'redux/actions/authActions'
 import {
-  AuthActions,
-  AUTH_CHANGE_EMAIL,
-  AUTH_CHANGE_NAME,
-  AUTH_CHANGE_PASSWORD,
-} from 'redux/actions/authActions'
-import { LoginFetchStatus, RegisterFetchStatus } from 'redux/actionTypes'
+  GetUserFetchStatus,
+  LoginFetchStatus,
+  RegisterFetchStatus,
+} from 'redux/actionTypes'
 
 export type TAuthUser = {
   name: string
@@ -37,7 +36,7 @@ const initialState: TAuthState = {
     password: '',
     isLoggedIn: false,
   },
-  isLoading: false,
+  isLoading: true,
   hasError: false,
 }
 
@@ -83,15 +82,34 @@ export const authReducer = (
     case LoginFetchStatus.LOGIN_ERROR:
       return { ...state, isLoading: false, hasError: true }
 
-    // Change state logic
-    case AUTH_CHANGE_NAME:
-      return { ...state, user: { ...state.user, name: action.name } }
+    // Get user logic
+    case GetUserFetchStatus.GET_USER_REQUEST:
+      return { ...state, isLoading: true, hasError: false }
 
-    case AUTH_CHANGE_EMAIL:
-      return { ...state, user: { ...state.user, email: action.email } }
+    case GetUserFetchStatus.GET_USER_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          name: action.response.user.name,
+          email: action.response.user.email,
+          isLoggedIn: true,
+        },
+        isLoading: false,
+      }
 
-    case AUTH_CHANGE_PASSWORD:
-      return { ...state, user: { ...state.user, password: action.password } }
+    case GetUserFetchStatus.GET_USER_ERROR:
+      return {
+        ...state,
+        user: {
+          name: '',
+          email: '',
+          password: '',
+          isLoggedIn: false,
+        },
+        isLoading: false,
+        hasError: true,
+      }
 
     default:
       return { ...state }

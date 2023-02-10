@@ -1,19 +1,20 @@
-import { LoginFetchStatus, RegisterFetchStatus } from 'redux/actionTypes'
+import {
+  GetUserFetchStatus,
+  LoginFetchStatus,
+  RegisterFetchStatus,
+} from 'redux/actionTypes'
 import {
   TRegisterResponse,
   registerRequestA,
   registerErrorA,
   registerSuccessA,
-  authChangeNameA,
-  AUTH_CHANGE_NAME,
-  AUTH_CHANGE_EMAIL,
-  authChangeEmailA,
-  authChangePasswordA,
-  AUTH_CHANGE_PASSWORD,
   loginRequestA,
   loginErrorA,
   loginSuccessA,
   TLoginResponse,
+  getUserRequestA,
+  getUserErrorA,
+  getUserSuccessA,
 } from 'redux/actions/authActions'
 
 // Register action creators
@@ -46,17 +47,16 @@ export const loginSuccess = (response: TLoginResponse): loginSuccessA => ({
   response,
 })
 
-export const authChangeName = (name: string): authChangeNameA => ({
-  type: AUTH_CHANGE_NAME,
-  name,
+// Getting user action creators
+export const getUserRequest = (): getUserRequestA => ({
+  type: GetUserFetchStatus.GET_USER_REQUEST,
 })
 
-export const authChangeEmail = (email: string): authChangeEmailA => ({
-  type: AUTH_CHANGE_EMAIL,
-  email,
+export const getUserError = (): getUserErrorA => ({
+  type: GetUserFetchStatus.GET_USER_ERROR,
 })
 
-export const authChangePassword = (password: string): authChangePasswordA => ({
-  type: AUTH_CHANGE_PASSWORD,
-  password,
+export const getUserSuccess = (response: TLoginResponse): getUserSuccessA => ({
+  type: GetUserFetchStatus.GET_USER_SUCCESS,
+  response,
 })

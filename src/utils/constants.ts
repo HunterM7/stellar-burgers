@@ -8,6 +8,7 @@ export const API_URL_PASSWORD_RESET = `${API_URL}password-reset/`
 export const API_URL_PASSWORD_RESET_REQUEST = `${API_URL}password-reset/reset/`
 
 // API Auth Endpoints
+export const API_AUTH_USER = `${API_URL}auth/user` // эндпоинт получения и обновления данных пользователя.
 export const API_AUTH_LOGIN = `${API_URL}auth/login` // эндпоинт для авторизации.
 export const API_AUTH_LOGOUT = `${API_URL}auth/logout` // эндпоинт для выхода из системы.
 export const API_AUTH_REGISTER = `${API_URL}auth/register` // эндпоинт для регистрации пользователя.

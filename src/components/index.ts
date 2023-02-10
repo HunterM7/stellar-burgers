@@ -15,6 +15,7 @@ import OrderDetails from './OrderDetails/OrderDetails'
 import OrderHistory from './OrderHistory/OrderHistory'
 import PopupHint from './PopupHint/PopupHint'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
+import ProtectedRouteElement from './ProtectedRouteElement/ProtectedRouteElement'
 
 export {
   App,
@@ -34,4 +35,5 @@ export {
   PopupHint,
   ProfileInfo,
   OrderHistory,
+  ProtectedRouteElement,
 }

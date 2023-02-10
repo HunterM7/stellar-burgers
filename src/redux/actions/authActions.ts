@@ -1,7 +1,15 @@
 import { AppThunk, AppDispatch } from 'redux/store'
 import { checkReponse } from 'utils/checkReponse'
-import { API_AUTH_LOGIN, API_AUTH_REGISTER } from 'utils/constants'
-import { LoginFetchStatus, RegisterFetchStatus } from 'redux/actionTypes'
+import {
+  API_AUTH_LOGIN,
+  API_AUTH_REGISTER,
+  API_AUTH_USER,
+} from 'utils/constants'
+import {
+  GetUserFetchStatus,
+  LoginFetchStatus,
+  RegisterFetchStatus,
+} from 'redux/actionTypes'
 import {
   registerError,
   registerRequest,
@@ -9,11 +17,14 @@ import {
 } from 'redux/actionCreators'
 import { TAuthLogin, TAuthRegister } from 'redux/reducers/authReducer'
 import {
+  getUserError,
+  getUserRequest,
+  getUserSuccess,
   loginError,
   loginRequest,
   loginSuccess,
 } from 'redux/actionCreators/authActionCreators'
-import { setCookie } from 'utils/cookie'
+import { getCookie, setCookie } from 'utils/cookie'
 
 export type TRegisterResponse = {
   success: boolean
@@ -35,44 +46,46 @@ export type TLoginResponse = {
   refreshToken: string
 }
 
-export const AUTH_CHANGE_NAME = 'AUTH_CHANGE_NAME'
-export const AUTH_CHANGE_EMAIL = 'AUTH_CHANGE_EMAIL'
-export const AUTH_CHANGE_PASSWORD = 'AUTH_CHANGE_PASSWORD'
-
+// Register actions
 export interface registerRequestA {
   type: typeof RegisterFetchStatus.REGISTER_REQUEST
 }
+
 export interface registerErrorA {
   type: typeof RegisterFetchStatus.REGISTER_ERROR
 }
+
 export interface registerSuccessA {
   type: typeof RegisterFetchStatus.REGISTER_SUCCESS
   response: TRegisterResponse
 }
-// -----------
+
+// Login actions
 export interface loginRequestA {
   type: typeof LoginFetchStatus.LOGIN_REQUEST
 }
+
 export interface loginErrorA {
   type: typeof LoginFetchStatus.LOGIN_ERROR
 }
+
 export interface loginSuccessA {
   type: typeof LoginFetchStatus.LOGIN_SUCCESS
   response: TLoginResponse
 }
-// -----------
 
-export interface authChangeNameA {
-  type: typeof AUTH_CHANGE_NAME
-  name: string
+// Get user actions
+export interface getUserRequestA {
+  type: typeof GetUserFetchStatus.GET_USER_REQUEST
 }
-export interface authChangeEmailA {
-  type: typeof AUTH_CHANGE_EMAIL
-  email: string
+
+export interface getUserErrorA {
+  type: typeof GetUserFetchStatus.GET_USER_ERROR
 }
-export interface authChangePasswordA {
-  type: typeof AUTH_CHANGE_PASSWORD
-  password: string
+
+export interface getUserSuccessA {
+  type: typeof GetUserFetchStatus.GET_USER_SUCCESS
+  response: TLoginResponse
 }
 
 export type AuthActions =
@@ -82,9 +95,9 @@ export type AuthActions =
   | loginRequestA
   | loginErrorA
   | loginSuccessA
-  | authChangeNameA
-  | authChangeEmailA
-  | authChangePasswordA
+  | getUserRequestA
+  | getUserErrorA
+  | getUserSuccessA
 
 export const handleRegister =
   ({ name, email, password }: TAuthRegister): AppThunk =>
@@ -134,3 +147,34 @@ export const handleLogin =
       })
       .catch((err) => dispatch(loginError()))
   }
+
+export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
+  dispatch(getUserRequest())
+  console.log('getUser')
+
+  const requestOptions = {
+    method: 'GET',
+    // mode: 'cors',
+    // cache: 'no-cache',
+    // credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer '.concat(getCookie('token') || ''),
+    },
+    // redirect: 'follow',
+    // referrerPolicy: 'no-referrer',
+  }
+
+  fetch(API_AUTH_USER, requestOptions)
+    .then((res) => checkReponse<TLoginResponse>(res))
+    .then((res) => {
+      console.log('user success')
+
+      dispatch(getUserSuccess(res))
+    })
+    .catch((err) => {
+      console.log('user error', err)
+
+      dispatch(getUserError())
+    })
+}

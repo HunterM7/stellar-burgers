@@ -23,9 +23,6 @@ import {
   registerError,
   registerRequest,
   registerSuccess,
-  authChangeEmail,
-  authChangeName,
-  authChangePassword,
 } from './authActionCreators'
 
 export {
@@ -50,7 +47,4 @@ export {
   registerRequest,
   registerError,
   registerSuccess,
-  authChangeEmail,
-  authChangeName,
-  authChangePassword,
 }
