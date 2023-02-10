@@ -56,6 +56,7 @@ export const authReducer = (
           ...state.user,
           name: action.response.user.name,
           email: action.response.user.email,
+          isLoggedIn: true,
         },
         isLoading: false,
       }

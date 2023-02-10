@@ -12,7 +12,7 @@ import { useDispatch } from 'redux/store'
 import { handleRegister } from 'redux/actions'
 
 // Routes
-import { LOGIN_LINK } from 'utils/constants'
+import { HOME_LINK, LOGIN_LINK } from 'utils/constants'
 
 // Styles
 import styles from './RegisterPage.module.scss'
@@ -46,6 +46,7 @@ const RegisterPage = () => {
   // On click main button
   const handleRegisterClick = () => {
     dispatch(handleRegister(registerForm))
+    navigate(HOME_LINK)
   }
 
   // On click login button

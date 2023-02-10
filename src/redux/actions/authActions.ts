@@ -117,6 +117,13 @@ export const handleRegister =
     fetch(API_AUTH_REGISTER, requestOptions)
       .then((res) => checkReponse<TRegisterResponse>(res))
       .then((res) => {
+        const authToken = res.accessToken.split('Bearer ')[1]
+
+        if (authToken) {
+          setCookie('token', authToken)
+          localStorage.setItem('refreshToken', res.refreshToken)
+        }
+
         dispatch(registerSuccess(res))
       })
       .catch((err) => dispatch(registerError()))
@@ -141,7 +148,10 @@ export const handleLogin =
       .then((res) => {
         const authToken = res.accessToken.split('Bearer ')[1]
 
-        authToken && setCookie('token', authToken)
+        if (authToken) {
+          setCookie('token', authToken)
+          localStorage.setItem('refreshToken', res.refreshToken)
+        }
 
         dispatch(loginSuccess(res))
       })

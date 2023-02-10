@@ -10,20 +10,20 @@ import {
 } from 'redux/selectors/authSelectors'
 
 // Routes
-import { LOGIN_LINK } from 'utils/constants'
+import { HOME_LINK } from 'utils/constants'
 
 // Components
 import { Loader } from 'components'
 
-type TProtectedRouteElement = {
+type TUnprotectedRouteElement = {
   element: ReactElement
 }
 
-const ProtectedRouteElement: React.FC<TProtectedRouteElement> = ({
+const UnprotectedRouteElement: React.FC<TUnprotectedRouteElement> = ({
   element,
 }) => {
   const isLoggedIn = useSelector(authIsLoggedInSelector)
-  const { isLoading, hasError } = useSelector(authSelector)
+  const { isLoading } = useSelector(authSelector)
   const dispatch = useDispatch()
 
   const init = React.useCallback(() => {
@@ -35,10 +35,9 @@ const ProtectedRouteElement: React.FC<TProtectedRouteElement> = ({
   }, [init])
 
   if (isLoading) return <Loader />
-  if (hasError || (!isLoading && !isLoggedIn))
-    return <Navigate to={LOGIN_LINK} replace />
+  if (!isLoading && isLoggedIn) return <Navigate to={HOME_LINK} replace />
 
   return element
 }
 
-export default React.memo(ProtectedRouteElement)
+export default React.memo(UnprotectedRouteElement)

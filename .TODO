@@ -7,6 +7,8 @@
 * Все пустые строки в стейтах поменять на null
 * Типизировать setCookie.ts
 * Оформить NotFoundPage
+* Перенести fetch в redux из ForgotPasswordPage
+* Мемоизировать новые pages
 
 Какие компоненты нужно мемоизировать и переработать:
 * BurgerConstructor

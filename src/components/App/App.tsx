@@ -31,6 +31,7 @@ import {
   RegisterPage,
   ResetPasswordPage,
 } from 'pages'
+import UnprotectedRouteElement from 'components/UnprotectedRouteElement/UnprotectedRouteElement'
 
 const App: React.FC = () => {
   return (
@@ -49,10 +50,22 @@ const App: React.FC = () => {
         </Route>
 
         {/* Authentication routes */}
-        <Route path={LOGIN_LINK} element={<LoginPage />} />
-        <Route path={REGISTER_LINK} element={<RegisterPage />} />
-        <Route path={FORGOT_PASSWORD_LINK} element={<ForgotPasswordPage />} />
-        <Route path={RESET_PASSWORD_LINK} element={<ResetPasswordPage />} />
+        <Route
+          path={LOGIN_LINK}
+          element={<UnprotectedRouteElement element={<LoginPage />} />}
+        />
+        <Route
+          path={REGISTER_LINK}
+          element={<UnprotectedRouteElement element={<RegisterPage />} />}
+        />
+        <Route
+          path={FORGOT_PASSWORD_LINK}
+          element={<UnprotectedRouteElement element={<ForgotPasswordPage />} />}
+        />
+        <Route
+          path={RESET_PASSWORD_LINK}
+          element={<UnprotectedRouteElement element={<ResetPasswordPage />} />}
+        />
 
         {/* Not Found Page */}
         <Route path={NOT_FOUND_LINK} element={<NotFoundPage />} />

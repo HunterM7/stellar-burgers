@@ -5,14 +5,21 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react'
 
-import styles from './ProfileInfo.module.scss'
+// Redux
+import { useSelector } from 'redux/store'
+import { authUserSelector } from 'redux/selectors'
+
+// Styles
+import styles from './AccountInfo.module.scss'
 
 const ProfileInfo = () => {
+  const { name, email, password } = useSelector(authUserSelector)
+
   // Form state
   const [form, setForm] = React.useState({
-    name: 'username',
-    email: 'useremail',
-    password: 'userpassword',
+    name,
+    email,
+    password,
   })
 
   // Name input function
@@ -71,4 +78,4 @@ const ProfileInfo = () => {
   )
 }
 
-export default ProfileInfo
+export default React.memo(ProfileInfo)

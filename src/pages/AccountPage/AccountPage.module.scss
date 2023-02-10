@@ -12,15 +12,6 @@
 	padding-top: 80px;
 
 	&__buttons {
-		& > * {
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
-			align-items: center;
-
-			height: 64px;
-		}
-
 		margin-bottom: 80px;
 	}
 
@@ -29,5 +20,27 @@
 	}
 }
 
-.logout {
+.link {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+
+	height: 64px;
+
+	h3 {
+		color: $text-secondary;
+	}
+
+	&--active {
+		h3 {
+			color: $text-primary;
+		}
+	}
+
+	&:hover {
+		h3 {
+			color: $text-primary;
+		}
+	}
 }
