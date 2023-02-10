@@ -30,6 +30,8 @@
 
 	h3 {
 		color: $text-secondary;
+
+		transition: color $trans-fast;
 	}
 
 	&--active {

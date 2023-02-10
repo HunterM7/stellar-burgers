@@ -9,6 +9,7 @@
 * Оформить NotFoundPage
 * Перенести fetch в redux из ForgotPasswordPage
 * Мемоизировать новые pages
+* Сделать плавную анимацию вкладок в профиле
 
 Какие компоненты нужно мемоизировать и переработать:
 * BurgerConstructor
