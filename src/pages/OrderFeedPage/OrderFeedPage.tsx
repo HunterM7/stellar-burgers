@@ -1,7 +1,7 @@
 import React from 'react'
 
-const OrderFeedPage = () => {
+const OrderFeedPage: React.FC = () => {
   return <div>OrderFeedPage</div>
 }
 
-export default OrderFeedPage
+export default React.memo(OrderFeedPage)
