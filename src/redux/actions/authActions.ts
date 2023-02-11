@@ -25,6 +25,7 @@ import {
   loginSuccess,
 } from 'redux/actionCreators/authActionCreators'
 import { getCookie, setCookie } from 'utils/cookie'
+import { refreshToken } from 'utils/refreshToken'
 
 export type TRegisterResponse = {
   success: boolean
@@ -44,6 +45,11 @@ export type TLoginResponse = {
   }
   accessToken: string
   refreshToken: string
+}
+
+export type TErrorResponse = {
+  message: string
+  success: boolean
 }
 
 // Register actions
@@ -155,7 +161,11 @@ export const handleLogin =
 
         dispatch(loginSuccess(res))
       })
-      .catch((err) => dispatch(loginError()))
+      .catch((err) => {
+        console.log('Login Error', err)
+
+        dispatch(loginError())
+      })
   }
 
 export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
@@ -163,19 +173,22 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
 
   const requestOptions = {
     method: 'GET',
-    // mode: 'cors',
-    // cache: 'no-cache',
-    // credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(getCookie('token') || ''),
     },
-    // redirect: 'follow',
-    // referrerPolicy: 'no-referrer',
   }
 
   fetch(API_AUTH_USER, requestOptions)
     .then((res) => checkReponse<TLoginResponse>(res))
     .then((res) => dispatch(getUserSuccess(res)))
-    .catch((err) => dispatch(getUserError()))
+    .catch((err: TErrorResponse) => {
+      if (err.message === 'jwt expired') {
+        console.log('Error', err)
+
+        refreshToken().then(() => dispatch(getUser()))
+      } else {
+        dispatch(getUserError())
+      }
+    })
 }

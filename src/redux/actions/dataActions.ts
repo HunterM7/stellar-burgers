@@ -7,6 +7,7 @@ import {
   setRequestStatus,
   setSuccessStatus,
 } from 'redux/actionCreators'
+import { TErrorResponse } from './authActions'
 
 export interface setRequestStatusA {
   type: typeof IngredientFetchStatus.INGREDIENT_REQUEST

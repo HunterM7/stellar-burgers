@@ -7,6 +7,7 @@ import {
   setRequestOrderStatus,
   setSuccessOrderStatus,
 } from 'redux/actionCreators'
+import { TErrorResponse } from './authActions'
 
 export interface setRequestOrderStatusA {
   type: typeof OrderFetchStatus.ORDER_REQUEST

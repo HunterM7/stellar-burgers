@@ -17,6 +17,7 @@ import {
 
 // Styles
 import styles from './ForgotPasswordPage.module.scss'
+import { TErrorResponse } from 'redux/actions/authActions'
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate()

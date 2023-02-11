@@ -14,6 +14,7 @@ import { API_URL_PASSWORD_RESET_REQUEST, LOGIN_LINK } from 'utils/constants'
 
 // Styles
 import styles from './ResetPasswordPage.module.scss'
+import { TErrorResponse } from 'redux/actions/authActions'
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate()
