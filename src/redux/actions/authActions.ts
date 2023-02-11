@@ -4,12 +4,14 @@ import {
   API_AUTH_LOGIN,
   API_AUTH_REGISTER,
   API_AUTH_USER,
+  API_AUTH_LOGOUT,
 } from 'utils/constants'
 import {
   GetUserFetchStatus,
   LoginFetchStatus,
   LogoutFetchStatus,
   RegisterFetchStatus,
+  SetUserFetchStatus,
 } from 'redux/actionTypes'
 import {
   registerError,
@@ -27,10 +29,12 @@ import {
   logoutError,
   logoutRequest,
   logoutSuccess,
+  setUserError,
+  setUserRequest,
+  setUserSuccess,
 } from 'redux/actionCreators/authActionCreators'
 import { getCookie, setCookie } from 'utils/cookie'
 import { refreshToken } from 'utils/refreshToken'
-import { API_AUTH_LOGOUT } from '../../utils/constants'
 
 export type TRegisterResponse = {
   success: boolean
@@ -50,6 +54,20 @@ export type TLoginResponse = {
   }
   accessToken: string
   refreshToken: string
+}
+
+export type TUserResponse = {
+  success: boolean
+  user: {
+    email: string
+    name: string
+  }
+}
+
+export type TSetUser = {
+  name: string
+  email: string
+  password: string
 }
 
 export type TLogoutResponse = {
@@ -115,7 +133,21 @@ export interface getUserErrorA {
 
 export interface getUserSuccessA {
   type: typeof GetUserFetchStatus.GET_USER_SUCCESS
-  response: TLoginResponse
+  response: TUserResponse
+}
+
+// Set user actions
+export interface setUserRequestA {
+  type: typeof SetUserFetchStatus.SET_USER_REQUEST
+}
+
+export interface setUserErrorA {
+  type: typeof SetUserFetchStatus.SET_USER_ERROR
+}
+
+export interface setUserSuccessA {
+  type: typeof SetUserFetchStatus.SET_USER_SUCCESS
+  response: TUserResponse
 }
 
 export type AuthActions =
@@ -131,6 +163,9 @@ export type AuthActions =
   | getUserRequestA
   | getUserErrorA
   | getUserSuccessA
+  | setUserRequestA
+  | setUserErrorA
+  | setUserSuccessA
 
 export const handleRegister =
   ({ name, email, password }: TAuthRegister): AppThunk =>
@@ -233,7 +268,7 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
   }
 
   fetch(API_AUTH_USER, requestOptions)
-    .then((res) => checkReponse<TLoginResponse>(res))
+    .then((res) => checkReponse<TUserResponse>(res))
     .then((res) => dispatch(getUserSuccess(res)))
     .catch((err: TErrorResponse) => {
       if (err.message === 'jwt expired') {
@@ -245,3 +280,38 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
       }
     })
 }
+
+export const setUser =
+  ({ name, email, password }: TSetUser): AppThunk =>
+  (dispatch: AppDispatch) => {
+    dispatch(setUserRequest())
+    console.log('setUser request')
+
+    const requestOptions = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer '.concat(getCookie('token') || ''),
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+    }
+
+    fetch(API_AUTH_USER, requestOptions)
+      .then((res) => checkReponse<TUserResponse>(res))
+      .then((res) => dispatch(setUserSuccess(res)))
+      .catch((err: TErrorResponse) => {
+        if (err.message === 'jwt expired') {
+          console.log('Error', err)
+
+          refreshToken().then(() =>
+            dispatch(setUser({ name, email, password })),
+          )
+        } else {
+          dispatch(setUserError())
+        }
+      })
+  }

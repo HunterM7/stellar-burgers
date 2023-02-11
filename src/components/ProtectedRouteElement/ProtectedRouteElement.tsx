@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
@@ -25,6 +25,10 @@ const ProtectedRouteElement: React.FC<TProtectedRouteElement> = ({
   const isLoggedIn = useSelector(authIsLoggedInSelector)
   const { isLoading, hasError } = useSelector(authSelector)
   const dispatch = useDispatch()
+
+  const location = useLocation()
+
+  console.log(location)
 
   const init = React.useCallback(() => {
     dispatch(getUser())

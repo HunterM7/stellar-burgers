@@ -3,6 +3,7 @@ import {
   LoginFetchStatus,
   LogoutFetchStatus,
   RegisterFetchStatus,
+  SetUserFetchStatus,
 } from 'redux/actionTypes'
 import {
   TRegisterResponse,
@@ -20,6 +21,10 @@ import {
   logoutErrorA,
   logoutSuccessA,
   TLogoutResponse,
+  setUserRequestA,
+  setUserErrorA,
+  setUserSuccessA,
+  TUserResponse,
 } from 'redux/actions/authActions'
 
 // Register action creators
@@ -75,7 +80,21 @@ export const getUserError = (): getUserErrorA => ({
   type: GetUserFetchStatus.GET_USER_ERROR,
 })
 
-export const getUserSuccess = (response: TLoginResponse): getUserSuccessA => ({
+export const getUserSuccess = (response: TUserResponse): getUserSuccessA => ({
   type: GetUserFetchStatus.GET_USER_SUCCESS,
+  response,
+})
+
+// Setting user action creators
+export const setUserRequest = (): setUserRequestA => ({
+  type: SetUserFetchStatus.SET_USER_REQUEST,
+})
+
+export const setUserError = (): setUserErrorA => ({
+  type: SetUserFetchStatus.SET_USER_ERROR,
+})
+
+export const setUserSuccess = (response: TUserResponse): setUserSuccessA => ({
+  type: SetUserFetchStatus.SET_USER_SUCCESS,
   response,
 })

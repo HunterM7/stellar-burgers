@@ -7,13 +7,15 @@ import {
 import React from 'react'
 
 // Redux
-import { useSelector } from 'redux/store'
+import { useDispatch, useSelector } from 'redux/store'
 import { authUserSelector } from 'redux/selectors'
+import { setUser } from 'redux/actions/authActions'
 
 // Styles
 import styles from './AccountInfo.module.scss'
 
 const ProfileInfo = () => {
+  const dispatch = useDispatch()
   const { name, email, password } = useSelector(authUserSelector)
 
   // Form state
@@ -59,6 +61,11 @@ const ProfileInfo = () => {
     setForm({ name, email, password })
   }
 
+  // Submit function
+  const handleSubmitButton = () => {
+    dispatch(setUser(form))
+  }
+
   return (
     <div className={styles.wrapper}>
       <Input
@@ -99,7 +106,12 @@ const ProfileInfo = () => {
             Отмена
           </Button>
 
-          <Button htmlType="button" type="primary" size="medium">
+          <Button
+            htmlType="button"
+            type="primary"
+            size="medium"
+            onClick={handleSubmitButton}
+          >
             Сохранить
           </Button>
         </div>

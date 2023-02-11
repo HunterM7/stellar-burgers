@@ -4,6 +4,7 @@ import {
   LoginFetchStatus,
   LogoutFetchStatus,
   RegisterFetchStatus,
+  SetUserFetchStatus,
 } from 'redux/actionTypes'
 
 export type TAuthUser = {
@@ -114,6 +115,34 @@ export const authReducer = (
       }
 
     case GetUserFetchStatus.GET_USER_ERROR:
+      return {
+        ...state,
+        user: {
+          name: '',
+          email: '',
+          password: '',
+          isLoggedIn: false,
+        },
+        isLoading: false,
+        hasError: true,
+      }
+
+    // Set user logic
+    case SetUserFetchStatus.SET_USER_REQUEST:
+      return { ...state, isLoading: true, hasError: false }
+
+    case SetUserFetchStatus.SET_USER_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          name: action.response.user.name,
+          email: action.response.user.email,
+        },
+        isLoading: false,
+      }
+
+    case SetUserFetchStatus.SET_USER_ERROR:
       return {
         ...state,
         user: {

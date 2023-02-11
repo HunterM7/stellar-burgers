@@ -46,6 +46,12 @@ export enum GetUserFetchStatus {
   GET_USER_ERROR = 'GET_USER_ERROR',
 }
 
+export enum SetUserFetchStatus {
+  SET_USER_REQUEST = 'SET_USER_REQUEST',
+  SET_USER_SUCCESS = 'SET_USER_SUCCESS',
+  SET_USER_ERROR = 'SET_USER_ERROR',
+}
+
 export enum OrderFetchStatus {
   ORDER_REQUEST = 'ORDER_REQUEST',
   ORDER_SUCCESS = 'ORDER_SUCCESS',

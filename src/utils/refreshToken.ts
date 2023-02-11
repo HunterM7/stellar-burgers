@@ -40,6 +40,6 @@ export const refreshToken = async () => {
       return res
     })
     .catch((err: TErrorResponse) => {
-      console.log('refresh token error', err)
+      console.log('refresh token error')
     })
 }
