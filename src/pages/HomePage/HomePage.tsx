@@ -15,7 +15,7 @@ import { Loader, BurgerIngredients, BurgerConstructor } from 'components'
 // Styles
 import styles from './HomePage.module.scss'
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   const { isLoading, hasError } = useSelector(dataSelector)
 
   const dispatch = useDispatch()
@@ -41,4 +41,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default React.memo(HomePage)
