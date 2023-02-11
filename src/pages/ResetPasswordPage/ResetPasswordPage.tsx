@@ -7,68 +7,58 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Functions
-import { checkReponse } from 'utils/checkReponse'
+import { resetPassword } from 'utils/auth/resetPassword'
 
 // Routes
-import { API_URL_PASSWORD_RESET_REQUEST, LOGIN_LINK } from 'utils/constants'
+import { LOGIN_LINK } from 'utils/constants'
 
 // Styles
 import styles from './ResetPasswordPage.module.scss'
-import { TErrorResponse } from 'redux/actions/authActions'
 
-const ResetPasswordPage = () => {
+const ResetPasswordPage: React.FC = () => {
   const navigate = useNavigate()
 
   // Form state
   const [form, setForm] = React.useState({
     password: '',
-    code: '',
+    token: '',
   })
 
   // Password input function
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      password: e.target.value,
-    }))
-  }
+  const onChangePassword = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setForm((prev) => ({
+        ...prev,
+        password: e.target.value,
+      }))
+    },
+    [setForm],
+  )
 
   // Password input function
-  const onChangeCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      code: e.target.value,
-    }))
-  }
+  const onChangeCode = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setForm((prev) => ({
+        ...prev,
+        token: e.target.value,
+      }))
+    },
+    [setForm],
+  )
 
   // Main button click
-  const handleMainButton = () => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        password: form.password,
-        token: form.code,
-      }),
-    }
-
-    type TResetPasswordResponse = {
-      success: boolean
-      message: string
-    }
-
-    fetch(API_URL_PASSWORD_RESET_REQUEST, requestOptions)
-      .then((res) => checkReponse<TResetPasswordResponse>(res))
+  const handleMainButton = React.useCallback(() => {
+    resetPassword(form)
       .then((res) => navigate(LOGIN_LINK))
       .catch((err) => {
-        alert('error')
+        console.log('error')
       })
-  }
+  }, [form, navigate])
 
   // On click login button
-  const handleLoginButton = () => {
+  const handleLoginButton = React.useCallback(() => {
     navigate(LOGIN_LINK)
-  }
+  }, [navigate])
 
   return (
     <main className={`container ${styles.wrapper}`}>
@@ -86,7 +76,7 @@ const ResetPasswordPage = () => {
           type="text"
           placeholder="Введите код из письма"
           onChange={onChangeCode}
-          value={form.code}
+          value={form.token}
           name="name"
           error={false}
           errorText="Ошибка"
@@ -106,6 +96,7 @@ const ResetPasswordPage = () => {
       <div className={styles.options}>
         <div className={styles.options__container}>
           <p className={styles.options__text}>Вспомнили пароль?</p>
+
           <Button
             htmlType="button"
             type="secondary"
@@ -121,4 +112,4 @@ const ResetPasswordPage = () => {
   )
 }
 
-export default ResetPasswordPage
+export default React.memo(ResetPasswordPage)

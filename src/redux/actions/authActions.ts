@@ -34,7 +34,8 @@ import {
   setUserSuccess,
 } from 'redux/actionCreators/authActionCreators'
 import { getCookie, setCookie } from 'utils/cookie'
-import { refreshToken } from 'utils/refreshToken'
+import { refreshToken } from 'utils/auth/refreshToken'
+import { requestCreator } from 'utils/requestCreator'
 
 export type TRegisterResponse = {
   success: boolean
@@ -76,8 +77,8 @@ export type TLogoutResponse = {
 }
 
 export type TErrorResponse = {
-  message: string
   success: boolean
+  message: string
 }
 
 // Register actions
@@ -285,20 +286,20 @@ export const setUser =
   ({ name, email, password }: TSetUser): AppThunk =>
   (dispatch: AppDispatch) => {
     dispatch(setUserRequest())
+
     console.log('setUser request')
 
-    const requestOptions = {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
+    const requestOptions = requestCreator(
+      'PATCH',
+      {
         Authorization: 'Bearer '.concat(getCookie('token') || ''),
       },
-      body: JSON.stringify({
+      {
         name,
         email,
         password,
-      }),
-    }
+      },
+    )
 
     fetch(API_AUTH_USER, requestOptions)
       .then((res) => checkReponse<TUserResponse>(res))

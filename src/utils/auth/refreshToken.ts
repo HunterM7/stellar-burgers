@@ -2,11 +2,14 @@
 import { checkReponse } from 'utils/checkReponse'
 import { setCookie } from 'utils/cookie'
 
+// Functions
+import { requestCreator } from 'utils/requestCreator'
+
 // Redux
 import { TErrorResponse } from 'redux/actions/authActions'
 
 // API Routes
-import { API_AUTH_TOKEN } from './constants'
+import { API_AUTH_TOKEN } from '../constants'
 
 export type TRefreshTokenResponse = {
   success: boolean
@@ -15,21 +18,15 @@ export type TRefreshTokenResponse = {
 }
 
 export const refreshToken = async () => {
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      token: localStorage.getItem('refreshToken'),
-    }),
-  }
+  const requestOptions = requestCreator(
+    'POST',
+    {},
+    { token: localStorage.getItem('refreshToken') },
+  )
 
   await fetch(API_AUTH_TOKEN, requestOptions)
     .then((res) => checkReponse<TRefreshTokenResponse>(res))
     .then((res) => {
-      console.log('refresh token succes')
-
       const accessToken = res.accessToken.split('Bearer ')[1]
 
       if (accessToken) {

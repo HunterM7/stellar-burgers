@@ -6,15 +6,10 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Functions
-import { checkReponse } from 'utils/checkReponse'
-import { requestCreator } from 'utils/requestCreator'
+import { forgotPassword } from 'utils/auth/forgotPassword'
 
 // Routes
-import {
-  API_URL_PASSWORD_RESET,
-  LOGIN_LINK,
-  RESET_PASSWORD_LINK,
-} from 'utils/constants'
+import { LOGIN_LINK, RESET_PASSWORD_LINK } from 'utils/constants'
 
 // Styles
 import styles from './ForgotPasswordPage.module.scss'
@@ -34,21 +29,13 @@ const ForgotPasswordPage = () => {
   )
 
   // Main button click
-  const handleMainButton = () => {
-    const requestOptions = requestCreator('POST', {}, form)
-
-    type TResetPasswordResponse = {
-      success: boolean
-      message: string
-    }
-
-    fetch(API_URL_PASSWORD_RESET, requestOptions)
-      .then((res) => checkReponse<TResetPasswordResponse>(res))
+  const handleMainButton = React.useCallback(() => {
+    forgotPassword(form)
       .then((res) => navigate(RESET_PASSWORD_LINK))
       .catch((err) => {
         console.log('error')
       })
-  }
+  }, [form, navigate])
 
   // On click login button
   const handleLoginButton = React.useCallback(() => {
