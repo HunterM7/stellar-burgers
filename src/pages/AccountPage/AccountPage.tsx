@@ -1,7 +1,9 @@
 import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { handleLogout } from 'redux/actions/authActions'
+
+// Redux
 import { useDispatch } from 'redux/store'
+import { handleLogout } from 'redux/actions'
 
 // Routes
 import { PROFILE_LINK, PROFILE_ORDERS_LINK } from 'utils/constants'
@@ -9,7 +11,7 @@ import { PROFILE_LINK, PROFILE_ORDERS_LINK } from 'utils/constants'
 // Styles
 import styles from './AccountPage.module.scss'
 
-const AccountPage = () => {
+const AccountPage: React.FC = () => {
   const dispatch = useDispatch()
 
   const className = React.useCallback(
@@ -18,9 +20,9 @@ const AccountPage = () => {
     [],
   )
 
-  const handleLogoutButton = () => {
+  const handleLogoutButton = React.useCallback(() => {
     dispatch(handleLogout())
-  }
+  }, [dispatch])
 
   return (
     <main className={`container ${styles.wrapper}`}>
