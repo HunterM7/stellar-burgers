@@ -7,6 +7,7 @@ import {
 
 // Functions
 import { checkReponse } from 'utils/checkReponse'
+import { requestCreator } from 'utils/requestCreator'
 
 // Routes
 import {
@@ -17,33 +18,24 @@ import {
 
 // Styles
 import styles from './ForgotPasswordPage.module.scss'
-import { TErrorResponse } from 'redux/actions/authActions'
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate()
 
   // Form state
-  const [form, setForm] = React.useState({
-    email: '',
-  })
+  const [form, setForm] = React.useState({ email: '' })
 
   // Email input function
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      email: e.target.value,
-    }))
-  }
+  const onChangeEmail = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setForm({ email: e.target.value })
+    },
+    [],
+  )
 
   // Main button click
   const handleMainButton = () => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: form.email,
-      }),
-    }
+    const requestOptions = requestCreator('POST', {}, form)
 
     type TResetPasswordResponse = {
       success: boolean
@@ -59,9 +51,9 @@ const ForgotPasswordPage = () => {
   }
 
   // On click login button
-  const handleLoginButton = () => {
+  const handleLoginButton = React.useCallback(() => {
     navigate(LOGIN_LINK)
-  }
+  }, [navigate])
 
   return (
     <main className={`container ${styles.wrapper}`}>
@@ -88,6 +80,7 @@ const ForgotPasswordPage = () => {
       <div className={styles.options}>
         <div className={styles.options__container}>
           <p className={styles.options__text}>Вспомнили пароль?</p>
+
           <Button
             htmlType="button"
             type="secondary"
