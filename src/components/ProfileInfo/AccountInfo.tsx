@@ -1,4 +1,5 @@
 import {
+  Button,
   EmailInput,
   Input,
   PasswordInput,
@@ -22,6 +23,13 @@ const ProfileInfo = () => {
     password,
   })
 
+  // Display buttons
+  const isEdit = React.useMemo(
+    () =>
+      name !== form.name || email !== form.email || password !== form.password,
+    [name, email, password, form],
+  )
+
   // Name input function
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({
@@ -44,6 +52,11 @@ const ProfileInfo = () => {
       ...prev,
       password: e.target.value,
     }))
+  }
+
+  // Cancel function
+  const handleCancelButton = () => {
+    setForm({ name, email, password })
   }
 
   return (
@@ -74,6 +87,23 @@ const ProfileInfo = () => {
         name={'password'}
         icon="EditIcon"
       />
+
+      {isEdit && (
+        <div className={styles.buttons}>
+          <Button
+            htmlType="button"
+            type="secondary"
+            size="medium"
+            onClick={handleCancelButton}
+          >
+            Отмена
+          </Button>
+
+          <Button htmlType="button" type="primary" size="medium">
+            Сохранить
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

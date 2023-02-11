@@ -8,6 +8,7 @@ import {
 import {
   GetUserFetchStatus,
   LoginFetchStatus,
+  LogoutFetchStatus,
   RegisterFetchStatus,
 } from 'redux/actionTypes'
 import {
@@ -23,9 +24,13 @@ import {
   loginError,
   loginRequest,
   loginSuccess,
+  logoutError,
+  logoutRequest,
+  logoutSuccess,
 } from 'redux/actionCreators/authActionCreators'
 import { getCookie, setCookie } from 'utils/cookie'
 import { refreshToken } from 'utils/refreshToken'
+import { API_AUTH_LOGOUT } from '../../utils/constants'
 
 export type TRegisterResponse = {
   success: boolean
@@ -45,6 +50,11 @@ export type TLoginResponse = {
   }
   accessToken: string
   refreshToken: string
+}
+
+export type TLogoutResponse = {
+  success: boolean
+  message: string
 }
 
 export type TErrorResponse = {
@@ -80,6 +90,20 @@ export interface loginSuccessA {
   response: TLoginResponse
 }
 
+// Logout actions
+export interface logoutRequestA {
+  type: typeof LogoutFetchStatus.LOGOUT_REQUEST
+}
+
+export interface logoutErrorA {
+  type: typeof LogoutFetchStatus.LOGOUT_ERROR
+}
+
+export interface logoutSuccessA {
+  type: typeof LogoutFetchStatus.LOGOUT_SUCCESS
+  response: TLogoutResponse
+}
+
 // Get user actions
 export interface getUserRequestA {
   type: typeof GetUserFetchStatus.GET_USER_REQUEST
@@ -101,6 +125,9 @@ export type AuthActions =
   | loginRequestA
   | loginErrorA
   | loginSuccessA
+  | logoutRequestA
+  | logoutErrorA
+  | logoutSuccessA
   | getUserRequestA
   | getUserErrorA
   | getUserSuccessA
@@ -167,6 +194,32 @@ export const handleLogin =
         dispatch(loginError())
       })
   }
+
+export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
+  dispatch(logoutRequest())
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      token: localStorage.getItem('refreshToken'),
+    }),
+  }
+
+  fetch(API_AUTH_LOGOUT, requestOptions)
+    .then((res) => checkReponse<TLogoutResponse>(res))
+    .then((res) => {
+      setCookie('token', '')
+      localStorage.removeItem('refreshToken')
+
+      dispatch(logoutSuccess(res))
+    })
+    .catch((err) => {
+      console.log('Login Error', err)
+
+      dispatch(logoutError())
+    })
+}
 
 export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(getUserRequest())

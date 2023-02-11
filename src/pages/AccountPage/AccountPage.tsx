@@ -1,5 +1,7 @@
 import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { handleLogout } from 'redux/actions/authActions'
+import { useDispatch } from 'redux/store'
 
 // Routes
 import { PROFILE_LINK, PROFILE_ORDERS_LINK } from 'utils/constants'
@@ -8,11 +10,17 @@ import { PROFILE_LINK, PROFILE_ORDERS_LINK } from 'utils/constants'
 import styles from './AccountPage.module.scss'
 
 const AccountPage = () => {
+  const dispatch = useDispatch()
+
   const className = React.useCallback(
     ({ isActive }: { isActive: boolean }) =>
       `${styles.link} ${isActive ? styles['link--active'] : ''}`,
     [],
   )
+
+  const handleLogoutButton = () => {
+    dispatch(handleLogout())
+  }
 
   return (
     <main className={`container ${styles.wrapper}`}>
@@ -26,7 +34,7 @@ const AccountPage = () => {
             <h3>История заказов</h3>
           </NavLink>
 
-          <button className={styles.link}>
+          <button onClick={handleLogoutButton} className={styles.link}>
             <h3>Выход</h3>
           </button>
         </div>

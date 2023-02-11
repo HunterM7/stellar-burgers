@@ -1,6 +1,7 @@
 import {
   GetUserFetchStatus,
   LoginFetchStatus,
+  LogoutFetchStatus,
   RegisterFetchStatus,
 } from 'redux/actionTypes'
 import {
@@ -15,6 +16,10 @@ import {
   getUserRequestA,
   getUserErrorA,
   getUserSuccessA,
+  logoutRequestA,
+  logoutErrorA,
+  logoutSuccessA,
+  TLogoutResponse,
 } from 'redux/actions/authActions'
 
 // Register action creators
@@ -44,6 +49,20 @@ export const loginError = (): loginErrorA => ({
 
 export const loginSuccess = (response: TLoginResponse): loginSuccessA => ({
   type: LoginFetchStatus.LOGIN_SUCCESS,
+  response,
+})
+
+// Logout action creators
+export const logoutRequest = (): logoutRequestA => ({
+  type: LogoutFetchStatus.LOGOUT_REQUEST,
+})
+
+export const logoutError = (): logoutErrorA => ({
+  type: LogoutFetchStatus.LOGOUT_ERROR,
+})
+
+export const logoutSuccess = (response: TLogoutResponse): logoutSuccessA => ({
+  type: LogoutFetchStatus.LOGOUT_SUCCESS,
   response,
 })
 

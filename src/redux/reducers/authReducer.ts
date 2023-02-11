@@ -2,6 +2,7 @@ import { AuthActions } from 'redux/actions/authActions'
 import {
   GetUserFetchStatus,
   LoginFetchStatus,
+  LogoutFetchStatus,
   RegisterFetchStatus,
 } from 'redux/actionTypes'
 
@@ -36,7 +37,7 @@ const initialState: TAuthState = {
     password: '',
     isLoggedIn: false,
   },
-  isLoading: true,
+  isLoading: false,
   hasError: false,
 }
 
@@ -81,6 +82,19 @@ export const authReducer = (
       }
 
     case LoginFetchStatus.LOGIN_ERROR:
+      return { ...state, isLoading: false, hasError: true }
+
+    // Logout logic
+    case LogoutFetchStatus.LOGOUT_REQUEST:
+      return { ...state, isLoading: true, hasError: false }
+
+    case LogoutFetchStatus.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        ...initialState,
+      }
+
+    case LogoutFetchStatus.LOGOUT_ERROR:
       return { ...state, isLoading: false, hasError: true }
 
     // Get user logic

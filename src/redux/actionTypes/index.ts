@@ -34,6 +34,12 @@ export enum LoginFetchStatus {
   LOGIN_ERROR = 'LOGIN_ERROR',
 }
 
+export enum LogoutFetchStatus {
+  LOGOUT_REQUEST = 'LOGOUT_REQUEST',
+  LOGOUT_SUCCESS = 'LOGOUT_SUCCESS',
+  LOGOUT_ERROR = 'LOGOUT_ERROR',
+}
+
 export enum GetUserFetchStatus {
   GET_USER_REQUEST = 'GET_USER_REQUEST',
   GET_USER_SUCCESS = 'GET_USER_SUCCESS',
