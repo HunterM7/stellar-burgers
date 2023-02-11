@@ -17,7 +17,7 @@ import { HOME_LINK, LOGIN_LINK } from 'utils/constants'
 // Styles
 import styles from './RegisterPage.module.scss'
 
-const RegisterPage = () => {
+const RegisterPage: React.FC = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -29,30 +29,40 @@ const RegisterPage = () => {
   })
 
   // Name input function
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRegisterForm((prev) => ({ ...prev, name: e.target.value }))
-  }
+  const onChangeName = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setRegisterForm((prev) => ({ ...prev, name: e.target.value }))
+    },
+    [setRegisterForm],
+  )
 
   // Email input function
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRegisterForm((prev) => ({ ...prev, email: e.target.value }))
-  }
+  const onChangeEmail = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setRegisterForm((prev) => ({ ...prev, email: e.target.value }))
+    },
+    [setRegisterForm],
+  )
 
   // Password input function
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRegisterForm((prev) => ({ ...prev, password: e.target.value }))
-  }
+  const onChangePassword = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setRegisterForm((prev) => ({ ...prev, password: e.target.value }))
+    },
+    [setRegisterForm],
+  )
 
   // On click main button
-  const handleRegisterClick = () => {
+  //! Попробовать сделать после регистрации автоматический логин
+  const handleRegisterClick = React.useCallback(() => {
     dispatch(handleRegister(registerForm))
     navigate(HOME_LINK)
-  }
+  }, [dispatch, navigate, registerForm])
 
   // On click login button
-  const handleLoginButton = () => {
+  const handleLoginButton = React.useCallback(() => {
     navigate(LOGIN_LINK)
-  }
+  }, [navigate])
 
   return (
     <main className={`container ${styles.wrapper}`}>
@@ -111,4 +121,4 @@ const RegisterPage = () => {
   )
 }
 
-export default RegisterPage
+export default React.memo(RegisterPage)

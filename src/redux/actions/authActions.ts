@@ -36,6 +36,7 @@ import {
 import { getCookie, setCookie } from 'utils/cookie'
 import { refreshToken } from 'utils/auth/refreshToken'
 import { requestCreator } from 'utils/requestCreator'
+import { saveTokens } from 'utils/auth/saveTokens'
 
 export type TRegisterResponse = {
   success: boolean
@@ -186,11 +187,10 @@ export const handleRegister =
     fetch(API_AUTH_REGISTER, requestOptions)
       .then((res) => checkReponse<TRegisterResponse>(res))
       .then((res) => {
-        const authToken = res.accessToken.split('Bearer ')[1]
+        const accessToken = res.accessToken.split('Bearer ')[1]
 
-        if (authToken) {
-          setCookie('token', authToken)
-          localStorage.setItem('refreshToken', res.refreshToken)
+        if (accessToken) {
+          saveTokens(accessToken, res.refreshToken)
         }
 
         dispatch(registerSuccess(res))

@@ -4,6 +4,7 @@ import { setCookie } from 'utils/cookie'
 
 // Functions
 import { requestCreator } from 'utils/requestCreator'
+import { saveTokens } from 'utils/auth/saveTokens'
 
 // Redux
 import { TErrorResponse } from 'redux/actions/authActions'
@@ -30,8 +31,7 @@ export const refreshToken = async () => {
       const accessToken = res.accessToken.split('Bearer ')[1]
 
       if (accessToken) {
-        setCookie('token', accessToken)
-        localStorage.setItem('refreshToken', res.refreshToken)
+        saveTokens(accessToken, res.refreshToken)
       }
 
       return res
