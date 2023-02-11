@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Button,
   EmailInput,
@@ -7,17 +7,16 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Redux
-import { useDispatch, useSelector } from 'redux/store'
-import { authUserSelector } from 'redux/selectors'
+import { useDispatch } from 'redux/store'
 import { handleLogin } from 'redux/actions'
 
 // Routes
-import { FORGOT_PASSWORD_LINK, HOME_LINK, REGISTER_LINK } from 'utils/constants'
+import { FORGOT_PASSWORD_LINK, REGISTER_LINK } from 'utils/constants'
 
 // Styles
 import styles from './LoginPage.module.scss'
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -27,35 +26,36 @@ const LoginPage = () => {
     password: '',
   })
 
-  // Redirect if logged in
-  const { isLoggedIn } = useSelector(authUserSelector)
-
-  if (isLoggedIn) return <Navigate to={HOME_LINK} />
-
   // Email input function
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginForm((prev) => ({ ...prev, email: e.target.value }))
-  }
+  const onChangeEmail = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLoginForm((prev) => ({ ...prev, email: e.target.value }))
+    },
+    [setLoginForm],
+  )
 
   // Password input function
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginForm((prev) => ({ ...prev, password: e.target.value }))
-  }
+  const onChangePassword = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLoginForm((prev) => ({ ...prev, password: e.target.value }))
+    },
+    [setLoginForm],
+  )
 
   // Handle login button
-  const handleLoginButton = () => {
+  const handleLoginButton = React.useCallback(() => {
     dispatch(handleLogin(loginForm))
-  }
+  }, [dispatch, loginForm])
 
   // On click register button
-  const handleRegisterButton = () => {
+  const handleRegisterButton = React.useCallback(() => {
     navigate(REGISTER_LINK)
-  }
+  }, [navigate])
 
   // On click reset-password button
-  const handleForgotPasswordButton = () => {
+  const handleForgotPasswordButton = React.useCallback(() => {
     navigate(FORGOT_PASSWORD_LINK)
-  }
+  }, [navigate])
 
   return (
     <main className={`container ${styles.wrapper}`}>
@@ -88,6 +88,7 @@ const LoginPage = () => {
       <div className={styles.options}>
         <div className={styles.options__container}>
           <p className={styles.options__text}>{'Вы — новый пользователь?'}</p>
+
           <Button
             htmlType="button"
             type="secondary"
@@ -101,6 +102,7 @@ const LoginPage = () => {
 
         <div className={styles.options__container}>
           <p className={styles.options__text}>Забыли пароль?</p>
+
           <Button
             htmlType="button"
             type="secondary"
@@ -116,4 +118,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default React.memo(LoginPage)

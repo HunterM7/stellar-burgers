@@ -26,13 +26,9 @@ const UnprotectedRouteElement: React.FC<TUnprotectedRouteElement> = ({
   const { isLoading } = useSelector(authSelector)
   const dispatch = useDispatch()
 
-  const init = React.useCallback(() => {
+  React.useEffect(() => {
     dispatch(getUser())
   }, [dispatch])
-
-  React.useEffect(() => {
-    init()
-  }, [init])
 
   if (isLoading) return <Loader />
   if (!isLoading && isLoggedIn) return <Navigate to={HOME_LINK} replace />
