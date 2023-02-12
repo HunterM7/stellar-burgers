@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Button,
   EmailInput,
@@ -16,6 +16,7 @@ import styles from './ForgotPasswordPage.module.scss'
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate()
+  const location = useLocation()
 
   // Form state
   const [form, setForm] = React.useState({ email: '' })
@@ -31,7 +32,11 @@ const ForgotPasswordPage = () => {
   // Main button click
   const handleMainButton = React.useCallback(() => {
     forgotPassword(form)
-      .then((res) => navigate(RESET_PASSWORD_LINK))
+      .then(() =>
+        navigate(RESET_PASSWORD_LINK, {
+          state: { resetPassword: true },
+        }),
+      )
       .catch((err) => {
         console.log('error')
       })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Button,
   Input,
@@ -17,6 +17,13 @@ import styles from './ResetPasswordPage.module.scss'
 
 const ResetPasswordPage: React.FC = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+
+  React.useEffect(() => {
+    // Don't know how typify useLocation
+    // eslint-disable-next-line
+    if (!location.state?.resetPassword) navigate(LOGIN_LINK)
+  }, [location.state, navigate])
 
   // Form state
   const [form, setForm] = React.useState({
