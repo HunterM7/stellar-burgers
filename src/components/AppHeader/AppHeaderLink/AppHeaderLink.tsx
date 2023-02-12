@@ -1,41 +1,23 @@
 import React from 'react'
-import { Link, useMatch } from 'react-router-dom'
-import {
-  BurgerIcon,
-  ListIcon,
-  ProfileIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components'
+import { Link, useLocation, useMatch } from 'react-router-dom'
 
 // Styles
 import styles from './AppHeaderLink.module.scss'
 
 type TAppHeaderLink = {
-  link: string
   title: string
+  path: string
+  icon: React.ReactElement
 }
 
-const AppHeaderLink: React.FC<TAppHeaderLink> = ({ title, link }) => {
+const AppHeaderLink: React.FC<TAppHeaderLink> = ({ title, path, icon }) => {
   // Active Link
-  const isActive = useMatch(link)
-
-  // Icon
-  const linkIcon = React.useMemo(
-    () =>
-      (title === 'Конструктор' && (
-        <BurgerIcon type={isActive ? 'primary' : 'secondary'} />
-      )) ||
-      (title === 'Лента заказов' && (
-        <ListIcon type={isActive ? 'primary' : 'secondary'} />
-      )) ||
-      (title === 'Личный кабинет' && (
-        <ProfileIcon type={isActive ? 'primary' : 'secondary'} />
-      )),
-    [title, isActive],
-  )
+  const isActive = useMatch(path)
 
   return (
-    <Link className={styles.wrapper} to={link}>
-      {linkIcon}
+    <Link className={styles.wrapper} to={path}>
+      {React.cloneElement(icon, { type: isActive ? 'primary' : 'secondary' })}
+
       <span
         className={`
 					${styles.text}

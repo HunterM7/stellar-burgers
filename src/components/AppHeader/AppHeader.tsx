@@ -17,10 +17,7 @@ import styles from './AppHeader.module.scss'
 const AppHeader: React.FC = () => {
   // List of header links
   const headerLinks = React.useMemo(
-    () =>
-      linksList.map((link, i) => (
-        <AppHeaderLink key={i} title={link.title} link={link.path} />
-      )),
+    () => linksList.map((link, i) => <AppHeaderLink key={i} {...link} />),
     [],
   )
 
