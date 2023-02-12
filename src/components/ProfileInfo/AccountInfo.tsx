@@ -62,12 +62,14 @@ const ProfileInfo = () => {
   }
 
   // Submit function
-  const handleSubmitButton = () => {
+  const submitForm = (e: React.FormEvent) => {
+    e.preventDefault()
+
     dispatch(setUser(form))
   }
 
   return (
-    <div className={styles.wrapper}>
+    <form className={styles.wrapper} onSubmit={submitForm}>
       <Input
         type="text"
         placeholder="Имя"
@@ -106,17 +108,12 @@ const ProfileInfo = () => {
             Отмена
           </Button>
 
-          <Button
-            htmlType="button"
-            type="primary"
-            size="medium"
-            onClick={handleSubmitButton}
-          >
+          <Button htmlType="submit" type="primary" size="medium">
             Сохранить
           </Button>
         </div>
       )}
-    </div>
+    </form>
   )
 }
 
