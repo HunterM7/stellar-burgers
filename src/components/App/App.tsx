@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 // Routes
 import {
@@ -9,6 +9,7 @@ import {
   LOGIN_LINK,
   NOT_FOUND_LINK,
   ORDER_FEED_LINK,
+  ORDER_LINK,
   PROFILE_LINK,
   PROFILE_ORDERS_LINK,
   REGISTER_LINK,
@@ -18,6 +19,8 @@ import {
 // Components and Pages
 import {
   AppHeader,
+  IngredientDetails,
+  OrderDetails,
   OrderHistory,
   ProfileInfo,
   ProtectedRouteElement,
@@ -37,6 +40,7 @@ import {
 
 const App: React.FC = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   // eslint-disable-next-line
   const background = location.state && location.state.background
 
@@ -78,6 +82,12 @@ const App: React.FC = () => {
         {/* Not Found Page */}
         <Route path={NOT_FOUND_LINK} element={<NotFoundPage />} />
       </Routes>
+      {background && (
+        <Routes>
+          <Route path={INGREDIENT_PAGE_LINK} element={<IngredientDetails />} />
+          <Route path={ORDER_LINK} element={<OrderDetails />} />
+        </Routes>
+      )}
     </>
   )
 }

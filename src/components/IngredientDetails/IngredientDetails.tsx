@@ -3,13 +3,9 @@ import React from 'react'
 // Components
 import { Modal, IngredientInfo } from 'components'
 
-interface IngredientDetailsT {
-  closeModal: () => void
-}
-
-const IngredientDetails: React.FC<IngredientDetailsT> = ({ closeModal }) => {
+const IngredientDetails: React.FC = () => {
   return (
-    <Modal title="Детали ингредиента" closeFunc={closeModal}>
+    <Modal title="Детали ингредиента">
       <IngredientInfo />
     </Modal>
   )

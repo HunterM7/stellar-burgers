@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import {
   Counter,
   CurrencyIcon,
@@ -8,23 +8,14 @@ import {
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
 import { TIngredient } from 'redux/actionTypes'
-import {
-  resetIngredientDetails,
-  setIngredientDetails,
-} from 'redux/actionCreators'
+import { setIngredientDetails } from 'redux/actionCreators'
 import { cartSelector } from 'redux/selectors'
 
 // DnD
 import { useDrag } from 'react-dnd'
 
-// Hooks
-import useModal from 'hooks/useModal'
-
-// Files and other
-import { HOME_LINK, INGREDIENT_LINK } from 'utils/constants'
-
-// Components
-import { IngredientDetails } from 'components'
+// Routes
+import { INGREDIENT_LINK } from 'utils/constants'
 
 // Styles
 import styles from './BurgerItem.module.scss'
@@ -36,7 +27,6 @@ interface BurgerItemT {
 const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
   const dispatch = useDispatch()
   const location = useLocation()
-  const navigate = useNavigate()
 
   // Count of BurgerItem
   const { bun, ingredients } = useSelector(cartSelector)
@@ -58,19 +48,8 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
     }),
   }))
 
-  // Modal Window
-  const { isModalOpen, openModal, closeModal } = useModal(false)
-
-  const handleCloseModal = React.useCallback(() => {
-    dispatch(resetIngredientDetails())
-    closeModal()
-    navigate(HOME_LINK)
-  }, [dispatch, closeModal, navigate])
-
   // Redux
   const handleItemClick = React.useCallback(() => {
-    openModal()
-
     dispatch(
       setIngredientDetails({
         title: ingredient.name,
@@ -81,7 +60,7 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
         carbohydrates: ingredient.carbohydrates,
       }),
     )
-  }, [openModal, dispatch, ingredient])
+  }, [dispatch, ingredient])
 
   return (
     <li
@@ -113,8 +92,6 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
       </Link>
 
       {count ? <Counter count={count} size="default" /> : null}
-
-      {isModalOpen && <IngredientDetails closeModal={handleCloseModal} />}
     </li>
   )
 }

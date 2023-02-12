@@ -13,15 +13,11 @@ import orderSVG from 'assets/images/orderDoneSVG.svg'
 // Styles
 import styles from './OrderDetails.module.scss'
 
-interface TOrderDetails {
-  closeModal: () => void
-}
-
-const OrderDetails: React.FC<TOrderDetails> = ({ closeModal }) => {
+const OrderDetails: React.FC = () => {
   const { orderInfo, isLoading, hasError } = useSelector(orderSelector)
 
   return (
-    <Modal closeFunc={closeModal}>
+    <Modal>
       {hasError ? (
         <h2>Что-то пошло не так</h2>
       ) : (

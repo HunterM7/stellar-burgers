@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Button,
   ConstructorElement,
@@ -8,32 +9,29 @@ import {
 // DnD
 import { useDrop } from 'react-dnd'
 
-// Hooks
-import useModal from 'hooks/useModal'
-
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
 import { setBun, setIngredient, setTotalPrice } from 'redux/actionCreators'
 import { setOrder } from 'redux/actions'
 import { cartSelector, dataIngreientsSelector } from 'redux/selectors'
 
+// Routes
+import { ORDER_LINK } from 'utils/constants'
+
 // Components
-import {
-  ConstructorItem,
-  ConstructorPlug,
-  OrderDetails,
-  PopupHint,
-} from 'components'
+import { ConstructorItem, ConstructorPlug, PopupHint } from 'components'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
 
 const BurgerConstructor: React.FC = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   // Redux
   const allIngredients = useSelector(dataIngreientsSelector)
   const { bun, ingredients, totalPrice } = useSelector(cartSelector)
-
-  const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(setTotalPrice())
@@ -70,9 +68,6 @@ const BurgerConstructor: React.FC = () => {
     [allIngredients, dispatch],
   )
 
-  // Modal Window
-  const { isModalOpen, openModal, closeModal } = useModal(false)
-
   // Popup Hint Modal
   const initialPopupState = React.useMemo(
     () => ({
@@ -84,38 +79,30 @@ const BurgerConstructor: React.FC = () => {
 
   const [popupState, setPopupState] = React.useState(initialPopupState)
 
-  const closePopup = React.useCallback(
-    () => setTimeout(() => setPopupState(initialPopupState), 4000),
+  const handlePopup = React.useCallback(
+    (title: string) => {
+      setPopupState({
+        isPopupActive: true,
+        title,
+      })
+      setTimeout(() => setPopupState(initialPopupState), 4000)
+    },
     [initialPopupState],
   )
 
   // Handle order click
   const handleOrderClick = React.useCallback(() => {
-    if (!bun && !ingredients.length) {
-      setPopupState({
-        isPopupActive: true,
-        title: 'Выберите булку и хотя бы 1 ингридиент!',
-      })
-      closePopup()
-    } else if (!bun) {
-      setPopupState({
-        isPopupActive: true,
-        title: 'Выберите булку!',
-      })
-      closePopup()
-    } else if (!ingredients.length) {
-      setPopupState({
-        isPopupActive: true,
-        title: 'Выберите хотя бы 1 ингридиент!',
-      })
-      closePopup()
-    } else {
+    if (!bun && !ingredients.length)
+      handlePopup('Выберите булку и хотя бы 1 ингридиент!')
+    else if (!bun) handlePopup('Выберите булку!')
+    else if (!ingredients.length) handlePopup('Выберите хотя бы 1 ингридиент!')
+    else {
       const orderIngridietns = [bun._id, ...ingredients.map((el) => el._id)]
 
       dispatch(setOrder(orderIngridietns))
-      openModal && openModal()
+      navigate(ORDER_LINK, { state: { background: location } })
     }
-  }, [bun, ingredients, dispatch, closePopup, openModal])
+  }, [bun, ingredients, handlePopup, dispatch, navigate, location])
 
   return (
     <section className={styles.wrapper}>
@@ -183,7 +170,6 @@ const BurgerConstructor: React.FC = () => {
         </Button>
       </div>
 
-      {isModalOpen && bun && <OrderDetails closeModal={closeModal} />}
       {popupState.isPopupActive && <PopupHint title={popupState.title} />}
     </section>
   )

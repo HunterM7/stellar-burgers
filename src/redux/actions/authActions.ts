@@ -1,11 +1,6 @@
+// Redux
 import { AppThunk, AppDispatch } from 'redux/store'
-import { checkReponse } from 'utils/checkReponse'
-import {
-  API_AUTH_LOGIN,
-  API_AUTH_REGISTER,
-  API_AUTH_USER,
-  API_AUTH_LOGOUT,
-} from 'utils/constants'
+import { TAuthLogin, TAuthRegister } from 'redux/reducers/authReducer'
 import {
   GetUserFetchStatus,
   LoginFetchStatus,
@@ -18,7 +13,6 @@ import {
   registerRequest,
   registerSuccess,
 } from 'redux/actionCreators'
-import { TAuthLogin, TAuthRegister } from 'redux/reducers/authReducer'
 import {
   getUserError,
   getUserRequest,
@@ -33,6 +27,17 @@ import {
   setUserRequest,
   setUserSuccess,
 } from 'redux/actionCreators/authActionCreators'
+
+// API Endpoints
+import {
+  API_AUTH_LOGIN,
+  API_AUTH_REGISTER,
+  API_AUTH_USER,
+  API_AUTH_LOGOUT,
+} from 'utils/constants'
+
+// Functions
+import { checkReponse } from 'utils/checkReponse'
 import { getCookie, setCookie } from 'utils/cookie'
 import { refreshToken } from 'utils/auth/refreshToken'
 import { requestCreator } from 'utils/requestCreator'
@@ -174,15 +179,7 @@ export const handleRegister =
   (dispatch: AppDispatch) => {
     dispatch(registerRequest())
 
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    }
+    const requestOptions = requestCreator('POST', {}, { name, email, password })
 
     fetch(API_AUTH_REGISTER, requestOptions)
       .then((res) => checkReponse<TRegisterResponse>(res))
@@ -203,14 +200,7 @@ export const handleLogin =
   (dispatch: AppDispatch) => {
     dispatch(loginRequest())
 
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    }
+    const requestOptions = requestCreator('POST', {}, { email, password })
 
     fetch(API_AUTH_LOGIN, requestOptions)
       .then((res) => checkReponse<TLoginResponse>(res))
@@ -234,13 +224,11 @@ export const handleLogin =
 export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(logoutRequest())
 
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      token: localStorage.getItem('refreshToken'),
-    }),
-  }
+  const requestOptions = requestCreator(
+    'POST',
+    {},
+    { token: localStorage.getItem('refreshToken') },
+  )
 
   fetch(API_AUTH_LOGOUT, requestOptions)
     .then((res) => checkReponse<TLogoutResponse>(res))

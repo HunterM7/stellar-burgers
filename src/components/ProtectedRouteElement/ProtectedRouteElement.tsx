@@ -26,10 +26,6 @@ const ProtectedRouteElement: React.FC<TProtectedRouteElement> = ({
   const { isLoading, hasError } = useSelector(authSelector)
   const dispatch = useDispatch()
 
-  const location = useLocation()
-
-  console.log(location)
-
   const init = React.useCallback(() => {
     dispatch(getUser())
   }, [dispatch])

@@ -28,3 +28,4 @@ export const PROFILE_ORDERS_LINK = `${PROFILE_LINK}/orders`
 export const INGREDIENT_LINK = '/ingredients'
 export const INGREDIENT_PAGE_LINK = `${INGREDIENT_LINK}/:id`
 export const ORDER_FEED_LINK = '/order-feed'
+export const ORDER_LINK = '/order'
