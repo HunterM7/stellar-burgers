@@ -261,8 +261,6 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
     .then((res) => dispatch(getUserSuccess(res)))
     .catch((err: TErrorResponse) => {
       if (err.message === 'jwt expired') {
-        console.log('Error', err)
-
         refreshToken().then(() => dispatch(getUser()))
       } else {
         dispatch(getUserError())

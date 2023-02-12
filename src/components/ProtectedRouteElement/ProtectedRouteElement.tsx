@@ -22,6 +22,7 @@ type TProtectedRouteElement = {
 const ProtectedRouteElement: React.FC<TProtectedRouteElement> = ({
   element,
 }) => {
+  const location = useLocation()
   const isLoggedIn = useSelector(authIsLoggedInSelector)
   const { isLoading, hasError } = useSelector(authSelector)
   const dispatch = useDispatch()
@@ -36,7 +37,7 @@ const ProtectedRouteElement: React.FC<TProtectedRouteElement> = ({
 
   if (isLoading) return <Loader />
   if (hasError || (!isLoading && !isLoggedIn))
-    return <Navigate to={LOGIN_LINK} replace />
+    return <Navigate to={LOGIN_LINK} state={{ target: location }} replace />
 
   return element
 }

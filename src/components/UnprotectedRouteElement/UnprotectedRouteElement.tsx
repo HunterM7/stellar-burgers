@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
@@ -22,16 +22,20 @@ type TUnprotectedRouteElement = {
 const UnprotectedRouteElement: React.FC<TUnprotectedRouteElement> = ({
   element,
 }) => {
+  const dispatch = useDispatch()
+  const location = useLocation()
   const isLoggedIn = useSelector(authIsLoggedInSelector)
   const { isLoading } = useSelector(authSelector)
-  const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(getUser())
   }, [dispatch])
 
   if (isLoading) return <Loader />
-  if (!isLoading && isLoggedIn) return <Navigate to={HOME_LINK} replace />
+  if (!isLoading && isLoggedIn)
+    // Don't know how to typify useLocation
+    // eslint-disable-next-line
+    return <Navigate to={location.state.target || HOME_LINK} replace />
 
   return element
 }
