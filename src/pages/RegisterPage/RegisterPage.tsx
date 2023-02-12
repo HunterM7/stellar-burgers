@@ -52,12 +52,15 @@ const RegisterPage: React.FC = () => {
     [setRegisterForm],
   )
 
-  // On click main button
-  //! Попробовать сделать после регистрации автоматический логин
-  const handleRegisterClick = React.useCallback(() => {
-    dispatch(handleRegister(registerForm))
-    navigate(HOME_LINK)
-  }, [dispatch, navigate, registerForm])
+  // Submit form
+  const submitForm = React.useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault()
+
+      dispatch(handleRegister(registerForm))
+    },
+    [dispatch, registerForm],
+  )
 
   // On click login button
   const handleLoginButton = React.useCallback(() => {
@@ -68,7 +71,7 @@ const RegisterPage: React.FC = () => {
     <main className={`container ${styles.wrapper}`}>
       <h3 className={styles.title}>Регистрация</h3>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={submitForm}>
         <Input
           type="text"
           placeholder="Имя"
@@ -93,12 +96,7 @@ const RegisterPage: React.FC = () => {
           name={'password'}
         />
 
-        <Button
-          onClick={handleRegisterClick}
-          htmlType="button"
-          type="primary"
-          size="large"
-        >
+        <Button htmlType="submit" type="primary" size="large">
           Зарегистрироваться
         </Button>
       </form>

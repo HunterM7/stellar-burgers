@@ -16,7 +16,6 @@ import styles from './ForgotPasswordPage.module.scss'
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate()
-  const location = useLocation()
 
   // Form state
   const [form, setForm] = React.useState({ email: '' })
@@ -29,18 +28,23 @@ const ForgotPasswordPage = () => {
     [],
   )
 
-  // Main button click
-  const handleMainButton = React.useCallback(() => {
-    forgotPassword(form)
-      .then(() =>
-        navigate(RESET_PASSWORD_LINK, {
-          state: { resetPassword: true },
-        }),
-      )
-      .catch((err) => {
-        console.log('error')
-      })
-  }, [form, navigate])
+  // Submit form
+  const submitForm = React.useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault()
+
+      forgotPassword(form)
+        .then(() =>
+          navigate(RESET_PASSWORD_LINK, {
+            state: { resetPassword: true },
+          }),
+        )
+        .catch((err) => {
+          console.log('error')
+        })
+    },
+    [form, navigate],
+  )
 
   // On click login button
   const handleLoginButton = React.useCallback(() => {
@@ -51,7 +55,7 @@ const ForgotPasswordPage = () => {
     <main className={`container ${styles.wrapper}`}>
       <h3 className={styles.title}>Восстановление пароля</h3>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={submitForm}>
         <EmailInput
           name="email"
           placeholder="Укажите e-mail"
@@ -59,12 +63,7 @@ const ForgotPasswordPage = () => {
           onChange={onChangeEmail}
         />
 
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          onClick={handleMainButton}
-        >
+        <Button htmlType="submit" type="primary" size="large">
           Восстановить
         </Button>
       </form>

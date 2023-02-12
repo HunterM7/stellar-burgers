@@ -36,7 +36,6 @@ const AppHeaderLink: React.FC<TAppHeaderLink> = ({ title, link }) => {
   return (
     <Link className={styles.wrapper} to={link}>
       {linkIcon}
-
       <span
         className={`
 					${styles.text}

@@ -42,10 +42,15 @@ const LoginPage: React.FC = () => {
     [setLoginForm],
   )
 
-  // Handle login button
-  const handleLoginButton = React.useCallback(() => {
-    dispatch(handleLogin(loginForm))
-  }, [dispatch, loginForm])
+  // Submit form
+  const submitForm = React.useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault()
+
+      dispatch(handleLogin(loginForm))
+    },
+    [dispatch, loginForm],
+  )
 
   // On click register button
   const handleRegisterButton = React.useCallback(() => {
@@ -61,7 +66,7 @@ const LoginPage: React.FC = () => {
     <main className={`container ${styles.wrapper}`}>
       <h3 className={styles.title}>Вход</h3>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={submitForm}>
         <EmailInput
           name="email"
           placeholder="E-mail"
@@ -75,12 +80,7 @@ const LoginPage: React.FC = () => {
           name={'password'}
         />
 
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          onClick={handleLoginButton}
-        >
+        <Button htmlType="submit" type="primary" size="large">
           Войти
         </Button>
       </form>

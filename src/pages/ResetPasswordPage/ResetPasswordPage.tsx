@@ -53,14 +53,19 @@ const ResetPasswordPage: React.FC = () => {
     [setForm],
   )
 
-  // Main button click
-  const handleMainButton = React.useCallback(() => {
-    resetPassword(form)
-      .then((res) => navigate(LOGIN_LINK))
-      .catch((err) => {
-        console.log('error')
-      })
-  }, [form, navigate])
+  // Submit form
+  const submitForm = React.useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault()
+
+      resetPassword(form)
+        .then((res) => navigate(LOGIN_LINK))
+        .catch((err) => {
+          console.log('error')
+        })
+    },
+    [form, navigate],
+  )
 
   // On click login button
   const handleLoginButton = React.useCallback(() => {
@@ -71,7 +76,7 @@ const ResetPasswordPage: React.FC = () => {
     <main className={`container ${styles.wrapper}`}>
       <h3 className={styles.title}>Восстановление пароля</h3>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={submitForm}>
         <PasswordInput
           onChange={onChangePassword}
           value={form.password}
@@ -90,12 +95,7 @@ const ResetPasswordPage: React.FC = () => {
           size="default"
         />
 
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          onClick={handleMainButton}
-        >
+        <Button htmlType="submit" type="primary" size="large">
           Восстановить
         </Button>
       </form>
