@@ -1,10 +1,11 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 // Routes
 import {
   FORGOT_PASSWORD_LINK,
   HOME_LINK,
+  INGREDIENT_PAGE_LINK,
   LOGIN_LINK,
   NOT_FOUND_LINK,
   ORDER_FEED_LINK,
@@ -20,24 +21,29 @@ import {
   OrderHistory,
   ProfileInfo,
   ProtectedRouteElement,
+  UnprotectedRouteElement,
 } from 'components'
 import {
   AccountPage,
   ForgotPasswordPage,
   HomePage,
+  IngredientPage,
   LoginPage,
   NotFoundPage,
   OrderFeedPage,
   RegisterPage,
   ResetPasswordPage,
 } from 'pages'
-import UnprotectedRouteElement from 'components/UnprotectedRouteElement/UnprotectedRouteElement'
 
 const App: React.FC = () => {
+  const location = useLocation()
+  // eslint-disable-next-line
+  const background = location.state && location.state.background
+
   return (
     <>
       <AppHeader />
-      <Routes>
+      <Routes location={background || location}>
         <Route path={HOME_LINK} element={<HomePage />} />
         <Route path={ORDER_FEED_LINK} element={<OrderFeedPage />} />
 
@@ -48,6 +54,8 @@ const App: React.FC = () => {
           <Route path={PROFILE_LINK} element={<ProfileInfo />} />
           <Route path={PROFILE_ORDERS_LINK} element={<OrderHistory />} />
         </Route>
+
+        <Route path={INGREDIENT_PAGE_LINK} element={<IngredientPage />} />
 
         {/* Authentication routes */}
         <Route

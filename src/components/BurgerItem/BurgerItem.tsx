@@ -1,23 +1,27 @@
 import React from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// DnD
-import { useDrag } from 'react-dnd'
-
-// Hooks
-import useModal from 'hooks/useModal'
+// Redux
 import { useDispatch, useSelector } from 'redux/store'
-
-// Files and other
 import { TIngredient } from 'redux/actionTypes'
 import {
   resetIngredientDetails,
   setIngredientDetails,
 } from 'redux/actionCreators'
 import { cartSelector } from 'redux/selectors'
+
+// DnD
+import { useDrag } from 'react-dnd'
+
+// Hooks
+import useModal from 'hooks/useModal'
+
+// Files and other
+import { HOME_LINK, INGREDIENT_LINK } from 'utils/constants'
 
 // Components
 import { IngredientDetails } from 'components'
@@ -31,6 +35,8 @@ interface BurgerItemT {
 
 const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
   const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
 
   // Count of BurgerItem
   const { bun, ingredients } = useSelector(cartSelector)
@@ -58,7 +64,8 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
   const handleCloseModal = React.useCallback(() => {
     dispatch(resetIngredientDetails())
     closeModal()
-  }, [dispatch, closeModal])
+    navigate(HOME_LINK)
+  }, [dispatch, closeModal, navigate])
 
   // Redux
   const handleItemClick = React.useCallback(() => {
@@ -85,19 +92,25 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
       ref={dragRef}
       onClick={handleItemClick}
     >
-      <img
-        ref={dragPreviewRef}
-        src={ingredient.image}
-        alt="Ingredient"
-        className={styles.img}
-      />
+      <Link
+        to={`${INGREDIENT_LINK}/${ingredient._id}`}
+        state={{ background: location }}
+        className={styles.link}
+      >
+        <img
+          ref={dragPreviewRef}
+          src={ingredient.image}
+          alt="Ingredient"
+          className={styles.img}
+        />
 
-      <div className={styles.price}>
-        {ingredient.price}
-        <CurrencyIcon type="primary" />
-      </div>
+        <div className={styles.price}>
+          {ingredient.price}
+          <CurrencyIcon type="primary" />
+        </div>
 
-      <p className={styles.title}>{ingredient.name}</p>
+        <p className={styles.title}>{ingredient.name}</p>
+      </Link>
 
       {count ? <Counter count={count} size="default" /> : null}
 

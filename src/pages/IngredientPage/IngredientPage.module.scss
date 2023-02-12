@@ -1,0 +1,16 @@
+//? === Ingredient Page ===
+
+@import 'scss/vars';
+
+.wrapper {
+	width: 100%;
+	max-width: calc(520px + 32px);
+
+	padding-top: 80px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	text-align: center;
+}

@@ -6,8 +6,9 @@ import ConstructorPlug from './BurgerConstructor/ConstructorPlug/ConstructorPlug
 import BurgerIngredients from './BurgerIngredients/BurgerIngredients'
 import BurgerItem from './BurgerItem/BurgerItem'
 import ConstructorItem from './ConstructorItem/ConstructorItem'
-import IngredientDetails from './IngredientDetails/IngredientDetails'
 import IngredientsGroup from './IngredientsGroup/IngredientsGroup'
+import IngredientDetails from './IngredientDetails/IngredientDetails'
+import IngredientInfo from './IngredientInfo/IngredientInfo'
 import Loader from './Loader/Loader'
 import Modal from './Modal/Modal'
 import ModalOverlay from './Modal/ModalOverlay/ModalOverlay'
@@ -16,6 +17,7 @@ import OrderHistory from './OrderHistory/OrderHistory'
 import PopupHint from './PopupHint/PopupHint'
 import ProfileInfo from './ProfileInfo/AccountInfo'
 import ProtectedRouteElement from './ProtectedRouteElement/ProtectedRouteElement'
+import UnprotectedRouteElement from './UnprotectedRouteElement/UnprotectedRouteElement'
 
 export {
   App,
@@ -36,4 +38,6 @@ export {
   ProfileInfo,
   OrderHistory,
   ProtectedRouteElement,
+  UnprotectedRouteElement,
+  IngredientInfo,
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
-const OrderHistory = () => {
+const OrderHistory: React.FC = () => {
   return <div>OrderHistory</div>
 }
 
-export default OrderHistory
+export default React.memo(OrderHistory)

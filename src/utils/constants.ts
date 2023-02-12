@@ -25,5 +25,6 @@ export const RESET_PASSWORD_LINK = '/reset-password'
 export const PROFILE_LINK = '/profile'
 export const PROFILE_ORDERS_LINK = `${PROFILE_LINK}/orders`
 
-export const INGREDIENT_LINK = '/ingredients/:id'
+export const INGREDIENT_LINK = '/ingredients'
+export const INGREDIENT_PAGE_LINK = `${INGREDIENT_LINK}/:id`
 export const ORDER_FEED_LINK = '/order-feed'
