@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation, useMatch } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 // Styles
 import styles from './AppHeaderLink.module.scss'
@@ -11,22 +11,17 @@ type TAppHeaderLink = {
 }
 
 const AppHeaderLink: React.FC<TAppHeaderLink> = ({ title, path, icon }) => {
-  // Active Link
-  const isActive = useMatch(path)
-
   return (
-    <Link className={styles.wrapper} to={path}>
-      {React.cloneElement(icon, { type: isActive ? 'primary' : 'secondary' })}
+    <NavLink
+      className={({ isActive }) =>
+        `${styles.wrapper} ${isActive ? styles['wrapper--active'] : ''}`
+      }
+      to={path}
+    >
+      {icon}
 
-      <span
-        className={`
-					${styles.text}
-					${isActive ? styles.active : ''}
-				`}
-      >
-        {title}
-      </span>
-    </Link>
+      <span className={styles.text}>{title}</span>
+    </NavLink>
   )
 }
 
