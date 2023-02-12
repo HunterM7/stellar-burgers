@@ -13,10 +13,14 @@ import { useDrop } from 'react-dnd'
 import { useDispatch, useSelector } from 'redux/store'
 import { setBun, setIngredient, setTotalPrice } from 'redux/actionCreators'
 import { setOrder } from 'redux/actions'
-import { cartSelector, dataIngreientsSelector } from 'redux/selectors'
+import {
+  cartSelector,
+  dataIngreientsSelector,
+  authIsLoggedInSelector,
+} from 'redux/selectors'
 
 // Routes
-import { ORDER_LINK } from 'utils/constants'
+import { LOGIN_LINK, ORDER_LINK } from 'utils/constants'
 
 // Components
 import { ConstructorItem, ConstructorPlug, PopupHint } from 'components'
@@ -32,6 +36,7 @@ const BurgerConstructor: React.FC = () => {
   // Redux
   const allIngredients = useSelector(dataIngreientsSelector)
   const { bun, ingredients, totalPrice } = useSelector(cartSelector)
+  const isUserLoggedIn = useSelector(authIsLoggedInSelector)
 
   React.useEffect(() => {
     dispatch(setTotalPrice())
@@ -96,6 +101,7 @@ const BurgerConstructor: React.FC = () => {
       handlePopup('Выберите булку и хотя бы 1 ингридиент!')
     else if (!bun) handlePopup('Выберите булку!')
     else if (!ingredients.length) handlePopup('Выберите хотя бы 1 ингридиент!')
+    else if (!isUserLoggedIn) navigate(LOGIN_LINK)
     else {
       const orderIngridietns = [bun._id, ...ingredients.map((el) => el._id)]
 
