@@ -16,8 +16,8 @@ import OrderDetails from './OrderDetails/OrderDetails'
 import OrderHistory from './OrderHistory/OrderHistory'
 import PopupHint from './PopupHint/PopupHint'
 import ProfileInfo from './ProfileInfo/AccountInfo'
-import ProtectedRouteElement from './ProtectedRouteElement/ProtectedRouteElement'
-import UnprotectedRouteElement from './UnprotectedRouteElement/UnprotectedRouteElement'
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
+import UnprotectedRoute from './UnprotectedRoute/UnprotectedRoute'
 
 export {
   App,
@@ -37,7 +37,7 @@ export {
   PopupHint,
   ProfileInfo,
   OrderHistory,
-  ProtectedRouteElement,
-  UnprotectedRouteElement,
+  ProtectedRoute,
+  UnprotectedRoute,
   IngredientInfo,
 }

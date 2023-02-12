@@ -25,7 +25,6 @@ interface BurgerItemT {
 }
 
 const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
-  const dispatch = useDispatch()
   const location = useLocation()
 
   // Count of BurgerItem
@@ -48,20 +47,6 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
     }),
   }))
 
-  // Redux
-  const handleItemClick = React.useCallback(() => {
-    dispatch(
-      setIngredientDetails({
-        title: ingredient.name,
-        image: ingredient.image_large,
-        calories: ingredient.calories,
-        proteins: ingredient.proteins,
-        fat: ingredient.fat,
-        carbohydrates: ingredient.carbohydrates,
-      }),
-    )
-  }, [dispatch, ingredient])
-
   return (
     <li
       className={`
@@ -69,7 +54,6 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
 			${isDragging ? styles['wrapper--onDrag'] : ''}
 		`}
       ref={dragRef}
-      onClick={handleItemClick}
     >
       <Link
         to={`${INGREDIENT_LINK}/${ingredient._id}`}

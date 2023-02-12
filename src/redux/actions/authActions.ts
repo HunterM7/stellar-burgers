@@ -38,7 +38,7 @@ import {
 
 // Functions
 import { checkReponse } from 'utils/checkReponse'
-import { getCookie, setCookie } from 'utils/cookie'
+import { deleteCookie, getCookie, setCookie } from 'utils/cookie'
 import { refreshToken } from 'utils/auth/refreshToken'
 import { requestCreator } from 'utils/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
@@ -233,7 +233,7 @@ export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
   fetch(API_AUTH_LOGOUT, requestOptions)
     .then((res) => checkReponse<TLogoutResponse>(res))
     .then((res) => {
-      setCookie('token', '')
+      deleteCookie('token')
       localStorage.removeItem('refreshToken')
 
       dispatch(logoutSuccess(res))
