@@ -108,7 +108,15 @@ const BurgerConstructor: React.FC = () => {
       dispatch(setOrder(orderIngridietns))
       navigate(ORDER_LINK, { state: { background: location } })
     }
-  }, [bun, ingredients, handlePopup, dispatch, navigate, location])
+  }, [
+    bun,
+    ingredients,
+    isUserLoggedIn,
+    location,
+    handlePopup,
+    navigate,
+    dispatch,
+  ])
 
   return (
     <section className={styles.wrapper}>
