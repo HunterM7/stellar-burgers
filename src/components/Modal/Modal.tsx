@@ -31,7 +31,7 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({ title, children }) => {
   const navigate = useNavigate()
 
   const closeFunc = React.useCallback(() => {
-    location?.state?.backgroud && navigate(location.state.backgroud)
+    location?.state?.background && navigate(location.state.background)
   }, [location.state, navigate])
 
   // Handling Escape press

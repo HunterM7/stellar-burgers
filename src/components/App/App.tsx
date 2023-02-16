@@ -44,8 +44,7 @@ const App: React.FC = () => {
   // useLocation
   const location: TUseLocation = useLocation()
 
-
-  const background = location.state && location.state.backgroud
+  const background = location.state && location.state.background
 
   return (
     <>

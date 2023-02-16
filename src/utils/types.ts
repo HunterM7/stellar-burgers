@@ -4,7 +4,7 @@ export interface TUseLocation {
   pathname: string
   search: string
   state: {
-    backgroud?: Location
+    background?: Location
     target?: Location
     resetPassword?: boolean
   } | null
