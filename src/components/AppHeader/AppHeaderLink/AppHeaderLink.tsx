@@ -13,13 +13,12 @@ type TAppHeaderLink = {
 const AppHeaderLink: React.FC<TAppHeaderLink> = ({ title, path, icon }) => {
   return (
     <NavLink
-      className={({ isActive }) =>
-        `${styles.wrapper} ${isActive ? styles['wrapper--active'] : ''}`
-      }
       to={path}
+      className={({ isActive }) =>
+        `${styles.wrapper} ${isActive ? styles.active : ''}`
+      }
     >
       {icon}
-
       <span className={styles.text}>{title}</span>
     </NavLink>
   )

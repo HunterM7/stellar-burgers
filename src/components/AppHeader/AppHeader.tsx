@@ -2,10 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Data
+// Utils
 import { linksList } from 'utils/linksList'
-
-// Routes
 import { HOME_LINK } from 'utils/constants'
 
 // Components

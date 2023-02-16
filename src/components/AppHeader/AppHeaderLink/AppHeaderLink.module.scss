@@ -19,7 +19,7 @@
 		fill: $text-secondary;
 	}
 
-	&--active {
+	&.active {
 		svg {
 			fill: $text-primary;
 		}
