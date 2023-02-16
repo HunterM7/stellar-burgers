@@ -6,26 +6,30 @@ interface TProps {
   [propName: string]: any
 }
 
-export function setCookie(name: string, value: string, props?: any) {
-  props = props || {}
-  let exp = props.expires
-  if (typeof exp == 'number' && exp) {
-    const d = new Date()
-    d.setTime(d.getTime() + exp * 1000)
-    exp = props.expires = d
-  }
-  if (exp && exp.toUTCString) {
-    props.expires = exp.toUTCString()
-  }
-  value = encodeURIComponent(value)
+export function setCookie(name: string, value: string, options?: TProps) {
+  options = { path: '/', ...options }
 
-  let updatedCookie = name + '=' + value
+  let exp = options.expires
 
-  for (const propName in props) {
-    updatedCookie += '; ' + propName
-    const propValue = props[propName]
-    if (propValue !== true) {
-      updatedCookie += '=' + propValue
+  if (exp && typeof exp == 'number') {
+    const date = new Date()
+    date.setTime(date.getTime() + exp * 1000)
+    exp = options.expires = date
+  }
+
+  if (exp instanceof Date) {
+    options.expires = exp.toUTCString()
+  }
+
+  let updatedCookie = encodeURIComponent(name) + '=' + encodeURIComponent(value)
+
+  for (const optionKey in options) {
+    updatedCookie += '; ' + optionKey
+
+    const optionValue = options[optionKey]
+
+    if (optionValue !== true) {
+      updatedCookie += '=' + optionValue
     }
   }
 
@@ -43,13 +47,8 @@ export const getCookie = (name: string) => {
   return matches ? decodeURIComponent(matches[1]) : undefined
 }
 
-export const deleteCookie = (name: string, path?: string, domain?: string) => {
-  if (getCookie(name)) {
-    document.cookie =
-      name +
-      '=' +
-      (path ? ';path=' + path : '') +
-      (domain ? ';domain=' + domain : '') +
-      ';expires=Thu, 01 Jan 1970 00:00:01 GMT'
-  }
+export const deleteCookie = (name: string) => {
+  setCookie(name, '', {
+    'max-age': -1,
+  })
 }
