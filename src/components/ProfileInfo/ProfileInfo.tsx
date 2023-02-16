@@ -12,7 +12,7 @@ import { authUserSelector } from 'redux/selectors'
 import { setUser } from 'redux/actions/authActions'
 
 // Styles
-import styles from './AccountInfo.module.scss'
+import styles from './ProfileInfo.module.scss'
 
 const ProfileInfo = () => {
   const dispatch = useDispatch()

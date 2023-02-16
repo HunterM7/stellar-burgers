@@ -14,7 +14,7 @@ import { TIngredientCart } from 'redux/actionTypes'
 import { removeIngredient, reorderIngredients } from 'redux/actionCreators'
 import { cartIngredientsSelector } from 'redux/selectors'
 
-// Functions
+// Utils
 import { sortFunc } from 'utils/sortFunc'
 
 // Styles

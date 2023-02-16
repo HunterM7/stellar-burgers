@@ -15,7 +15,7 @@ import ModalOverlay from './Modal/ModalOverlay/ModalOverlay'
 import OrderDetails from './OrderDetails/OrderDetails'
 import OrderHistory from './OrderHistory/OrderHistory'
 import PopupHint from './PopupHint/PopupHint'
-import ProfileInfo from './ProfileInfo/AccountInfo'
+import ProfileInfo from './ProfileInfo/ProfileInfo'
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 import UnprotectedRoute from './UnprotectedRoute/UnprotectedRoute'
 

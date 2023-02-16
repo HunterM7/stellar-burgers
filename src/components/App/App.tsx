@@ -4,7 +4,6 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 // Routes
 import {
   FORGOT_PASSWORD_LINK,
-  HOME_LINK,
   INGREDIENT_PAGE_LINK,
   LOGIN_LINK,
   NOT_FOUND_LINK,
@@ -38,16 +37,21 @@ import {
   ResetPasswordPage,
 } from 'pages'
 
+// Utils
+import { TUseLocation } from 'utils/types'
+
 const App: React.FC = () => {
-  const location = useLocation()
-  // eslint-disable-next-line
-  const background = location.state && location.state.background
+  // useLocation
+  const location: TUseLocation = useLocation()
+
+
+  const background = location.state && location.state.backgroud
 
   return (
     <>
       <AppHeader />
       <Routes location={background || location}>
-        <Route path={HOME_LINK} element={<HomePage />} />
+        <Route index element={<HomePage />} />
         <Route path={ORDER_FEED_LINK} element={<OrderFeedPage />} />
 
         <Route

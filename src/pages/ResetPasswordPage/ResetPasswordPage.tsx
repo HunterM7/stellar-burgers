@@ -6,23 +6,22 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Functions
+// Utils
 import { resetPassword } from 'utils/auth/resetPassword'
+import { TUseLocation } from 'utils/types'
 
 // Routes
-import { LOGIN_LINK } from 'utils/constants'
+import { FORGOT_PASSWORD_LINK, LOGIN_LINK } from 'utils/constants'
 
 // Styles
 import styles from './ResetPasswordPage.module.scss'
 
 const ResetPasswordPage: React.FC = () => {
   const navigate = useNavigate()
-  const location = useLocation()
+  const location: TUseLocation = useLocation()
 
   React.useEffect(() => {
-    // Don't know how typify useLocation
-    // eslint-disable-next-line
-    if (!location.state?.resetPassword) navigate(LOGIN_LINK)
+    !location?.state?.resetPassword && navigate(FORGOT_PASSWORD_LINK)
   }, [location.state, navigate])
 
   // Form state

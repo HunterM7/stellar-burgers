@@ -1,8 +1,7 @@
 // Check response function
 import { checkReponse } from 'utils/checkReponse'
-import { setCookie } from 'utils/cookie'
 
-// Functions
+// Utils
 import { requestCreator } from 'utils/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
 
@@ -10,7 +9,7 @@ import { saveTokens } from 'utils/auth/saveTokens'
 import { TErrorResponse } from 'redux/actions/authActions'
 
 // API Routes
-import { API_AUTH_TOKEN } from '../constants'
+import { API_AUTH_TOKEN } from 'utils/constants'
 
 export type TRefreshTokenResponse = {
   success: boolean
@@ -28,11 +27,7 @@ export const refreshToken = async () => {
   await fetch(API_AUTH_TOKEN, requestOptions)
     .then((res) => checkReponse<TRefreshTokenResponse>(res))
     .then((res) => {
-      const accessToken = res.accessToken.split('Bearer ')[1]
-
-      if (accessToken) {
-        saveTokens(accessToken, res.refreshToken)
-      }
+      saveTokens(res.accessToken, res.refreshToken)
 
       return res
     })

@@ -1,11 +1,11 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Button,
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Functions
+// Utils
 import { forgotPassword } from 'utils/auth/forgotPassword'
 
 // Routes

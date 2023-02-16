@@ -38,7 +38,7 @@ import {
 
 // Functions
 import { checkReponse } from 'utils/checkReponse'
-import { deleteCookie, getCookie, setCookie } from 'utils/cookie'
+import { deleteCookie, getCookie } from 'utils/cookie'
 import { refreshToken } from 'utils/auth/refreshToken'
 import { requestCreator } from 'utils/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
@@ -184,11 +184,7 @@ export const handleRegister =
     fetch(API_AUTH_REGISTER, requestOptions)
       .then((res) => checkReponse<TRegisterResponse>(res))
       .then((res) => {
-        const accessToken = res.accessToken.split('Bearer ')[1]
-
-        if (accessToken) {
-          saveTokens(accessToken, res.refreshToken)
-        }
+        saveTokens(res.accessToken, res.refreshToken)
 
         dispatch(registerSuccess(res))
       })
@@ -205,12 +201,7 @@ export const handleLogin =
     fetch(API_AUTH_LOGIN, requestOptions)
       .then((res) => checkReponse<TLoginResponse>(res))
       .then((res) => {
-        const authToken = res.accessToken.split('Bearer ')[1]
-
-        if (authToken) {
-          setCookie('token', authToken)
-          localStorage.setItem('refreshToken', res.refreshToken)
-        }
+        saveTokens(res.accessToken, res.refreshToken)
 
         dispatch(loginSuccess(res))
       })
@@ -248,13 +239,9 @@ export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
 export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(getUserRequest())
 
-  const requestOptions = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer '.concat(getCookie('token') || ''),
-    },
-  }
+  const requestOptions = requestCreator('GET', {
+    Authorization: 'Bearer '.concat(getCookie('token') || ''),
+  })
 
   fetch(API_AUTH_USER, requestOptions)
     .then((res) => checkReponse<TUserResponse>(res))
@@ -273,18 +260,10 @@ export const setUser =
   (dispatch: AppDispatch) => {
     dispatch(setUserRequest())
 
-    console.log('setUser request')
-
     const requestOptions = requestCreator(
       'PATCH',
-      {
-        Authorization: 'Bearer '.concat(getCookie('token') || ''),
-      },
-      {
-        name,
-        email,
-        password,
-      },
+      { Authorization: 'Bearer '.concat(getCookie('token') || '') },
+      { name, email, password },
     )
 
     fetch(API_AUTH_USER, requestOptions)
@@ -292,8 +271,6 @@ export const setUser =
       .then((res) => dispatch(setUserSuccess(res)))
       .catch((err: TErrorResponse) => {
         if (err.message === 'jwt expired') {
-          console.log('Error', err)
-
           refreshToken().then(() =>
             dispatch(setUser({ name, email, password })),
           )

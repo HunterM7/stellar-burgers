@@ -14,6 +14,7 @@ import { HOME_LINK } from 'utils/constants'
 
 // Components
 import { Loader } from 'components'
+import { TUseLocation } from 'utils/types'
 
 type TUnprotectedRoute = {
   element: ReactElement
@@ -21,7 +22,7 @@ type TUnprotectedRoute = {
 
 const UnprotectedRoute: React.FC<TUnprotectedRoute> = ({ element }) => {
   const dispatch = useDispatch()
-  const location = useLocation()
+  const location: TUseLocation = useLocation()
   const isLoggedIn = useSelector(authIsLoggedInSelector)
   const { isLoading } = useSelector(authSelector)
 
@@ -31,8 +32,6 @@ const UnprotectedRoute: React.FC<TUnprotectedRoute> = ({ element }) => {
 
   if (isLoading) return <Loader />
   if (!isLoading && isLoggedIn)
-    // Don't know how to typify useLocation
-    // eslint-disable-next-line
     return <Navigate to={location.state?.target || HOME_LINK} replace />
 
   return element

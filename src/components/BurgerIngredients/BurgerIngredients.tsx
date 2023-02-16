@@ -6,7 +6,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'redux/store'
 import { dataIngreientsSelector } from 'redux/selectors'
 
-// Files
+// Utils
 import { ingredientGroups } from 'utils/ingredientGroups'
 
 // Components

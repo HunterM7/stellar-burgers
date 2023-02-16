@@ -3,11 +3,9 @@ import { createPortal } from 'react-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Hooks
+// Utils
 import useKeyPress from 'hooks/useKeyPress'
-
-// Routes
-import { HOME_LINK } from 'utils/constants'
+import { TUseLocation } from 'utils/types'
 
 // Components
 import { ModalOverlay } from 'components'
@@ -21,7 +19,7 @@ interface TModal {
 }
 
 const Modal: React.FC<PropsWithChildren<TModal>> = ({ title, children }) => {
-  const location = useLocation()
+  const location: TUseLocation = useLocation()
 
   // Heading in modal window
   const heading = React.useMemo(
@@ -33,9 +31,7 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({ title, children }) => {
   const navigate = useNavigate()
 
   const closeFunc = React.useCallback(() => {
-    // Don't know how to typify useLocation
-    // eslint-disable-next-line
-    navigate(location.state.background)
+    location?.state?.backgroud && navigate(location.state.backgroud)
   }, [location.state, navigate])
 
   // Handling Escape press

@@ -6,9 +6,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Redux
-import { useDispatch, useSelector } from 'redux/store'
+import { useSelector } from 'redux/store'
 import { TIngredient } from 'redux/actionTypes'
-import { setIngredientDetails } from 'redux/actionCreators'
 import { cartSelector } from 'redux/selectors'
 
 // DnD

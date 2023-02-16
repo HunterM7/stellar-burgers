@@ -1,7 +1,7 @@
 // API Endpoints
 import { API_URL_PASSWORD_RESET } from 'utils/constants'
 
-// Functions
+// Utils
 import { requestCreator } from 'utils/requestCreator'
 import { checkReponse } from 'utils/checkReponse'
 

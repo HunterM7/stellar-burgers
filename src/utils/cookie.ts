@@ -1,5 +1,12 @@
 /* eslint-disable */
-export function setCookie(name: any, value: any, props?: any) {
+
+interface TProps {
+  path?: string
+  expires?: Date | string | number
+  [propName: string]: any
+}
+
+export function setCookie(name: string, value: string, props?: any) {
   props = props || {}
   let exp = props.expires
   if (typeof exp == 'number' && exp) {
@@ -11,7 +18,9 @@ export function setCookie(name: any, value: any, props?: any) {
     props.expires = exp.toUTCString()
   }
   value = encodeURIComponent(value)
+
   let updatedCookie = name + '=' + value
+
   for (const propName in props) {
     updatedCookie += '; ' + propName
     const propValue = props[propName]
@@ -19,10 +28,11 @@ export function setCookie(name: any, value: any, props?: any) {
       updatedCookie += '=' + propValue
     }
   }
+
   document.cookie = updatedCookie
 }
 
-export function getCookie(name: any) {
+export const getCookie = (name: string) => {
   const matches = document.cookie.match(
     new RegExp(
       '(?:^|; )' +
