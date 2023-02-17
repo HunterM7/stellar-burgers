@@ -1,4 +1,4 @@
-//? === Account Page ===
+//? === Profile Page ===
 
 @import 'scss/vars';
 
@@ -34,7 +34,7 @@
 		transition: color $trans-fast;
 	}
 
-	&--active {
+	&.active {
 		h3 {
 			color: $text-primary;
 		}

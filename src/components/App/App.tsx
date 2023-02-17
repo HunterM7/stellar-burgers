@@ -26,7 +26,7 @@ import {
   UnprotectedRoute,
 } from 'components'
 import {
-  AccountPage,
+  ProfilePage,
   ForgotPasswordPage,
   HomePage,
   IngredientPage,
@@ -55,7 +55,7 @@ const App: React.FC = () => {
 
         <Route
           path={PROFILE_LINK}
-          element={<ProtectedRoute element={<AccountPage />} />}
+          element={<ProtectedRoute element={<ProfilePage />} />}
         >
           <Route path={PROFILE_LINK} element={<ProfileInfo />} />
           <Route path={PROFILE_ORDERS_LINK} element={<OrderHistory />} />

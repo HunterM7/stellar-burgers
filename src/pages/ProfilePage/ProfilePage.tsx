@@ -9,14 +9,14 @@ import { handleLogout } from 'redux/actions'
 import { PROFILE_LINK, PROFILE_ORDERS_LINK } from 'utils/constants'
 
 // Styles
-import styles from './AccountPage.module.scss'
+import styles from './ProfilePage.module.scss'
 
-const AccountPage: React.FC = () => {
+const ProfilePage: React.FC = () => {
   const dispatch = useDispatch()
 
   const className = React.useCallback(
     ({ isActive }: { isActive: boolean }) =>
-      `${styles.link} ${isActive ? styles['link--active'] : ''}`,
+      `${styles.link} ${isActive ? styles.active : ''}`,
     [],
   )
 
@@ -51,4 +51,4 @@ const AccountPage: React.FC = () => {
   )
 }
 
-export default React.memo(AccountPage)
+export default React.memo(ProfilePage)

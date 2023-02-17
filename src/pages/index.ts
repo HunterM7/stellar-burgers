@@ -1,7 +1,7 @@
 // Header link pages
 import HomePage from './HomePage/HomePage'
 import OrderFeedPage from './OrderFeedPage/OrderFeedPage'
-import AccountPage from './AccountPage/AccountPage'
+import ProfilePage from './ProfilePage/ProfilePage'
 
 // Authentication pages
 import LoginPage from './LoginPage/LoginPage'
@@ -14,7 +14,7 @@ import IngredientPage from './IngredientPage/IngredientPage'
 export {
   HomePage,
   OrderFeedPage,
-  AccountPage,
+  ProfilePage,
   LoginPage,
   RegisterPage,
   ForgotPasswordPage,
