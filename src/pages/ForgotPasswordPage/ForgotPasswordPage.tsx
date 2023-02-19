@@ -56,6 +56,7 @@ const ForgotPasswordPage = () => {
           placeholder="Укажите e-mail"
           value={form.email}
           onChange={onChangeEmail}
+          autoFocus
         />
 
         <Button htmlType="submit" type="primary" size="large">

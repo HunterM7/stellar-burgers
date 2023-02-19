@@ -74,6 +74,7 @@ const RegisterPage: React.FC = () => {
           error={false}
           errorText="Ошибка"
           size="default"
+          autoFocus
         />
 
         <EmailInput

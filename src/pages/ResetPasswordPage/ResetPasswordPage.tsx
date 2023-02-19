@@ -76,6 +76,7 @@ const ResetPasswordPage: React.FC = () => {
           value={form.password}
           name={'password'}
           placeholder="Введите новый пароль"
+          autoFocus
         />
 
         <Input

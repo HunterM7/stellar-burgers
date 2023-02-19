@@ -56,11 +56,11 @@ const LoginPage: React.FC = () => {
 
       <form className="auth__form" onSubmit={submitForm}>
         <EmailInput
-          autoFocus
           name="email"
           placeholder="E-mail"
           value={loginForm.email}
           onChange={onChangeEmail}
+          autoFocus
         />
 
         <PasswordInput
