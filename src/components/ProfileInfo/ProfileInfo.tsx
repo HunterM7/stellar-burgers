@@ -16,20 +16,21 @@ import styles from './ProfileInfo.module.scss'
 
 const ProfileInfo = () => {
   const dispatch = useDispatch()
-  const { name, email, password } = useSelector(authUserSelector)
+  const { name, email } = useSelector(authUserSelector)
 
   // Form state
-  const [form, setForm] = React.useState({
+  const formInitial = {
     name,
     email,
-    password,
-  })
+    password: '',
+  }
+
+  const [form, setForm] = React.useState(formInitial)
 
   // Display buttons
   const isEdit = React.useMemo(
-    () =>
-      name !== form.name || email !== form.email || password !== form.password,
-    [name, email, password, form],
+    () => form.name !== name || form.email !== email || !!form.password,
+    [name, email, form],
   )
 
   // Name input function
@@ -58,7 +59,7 @@ const ProfileInfo = () => {
 
   // Cancel function
   const handleCancelButton = () => {
-    setForm({ name, email, password })
+    setForm(formInitial)
   }
 
   // Submit function

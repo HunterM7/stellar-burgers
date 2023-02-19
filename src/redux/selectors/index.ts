@@ -22,7 +22,6 @@ import {
   authUserSelector,
   authNameSelector,
   authEmailSelector,
-  authPasswordSelector,
   authIsLoggedInSelector,
 } from './authSelectors'
 
@@ -49,6 +48,5 @@ export {
   authUserSelector,
   authNameSelector,
   authEmailSelector,
-  authPasswordSelector,
   authIsLoggedInSelector,
 }

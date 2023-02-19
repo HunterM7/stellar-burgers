@@ -10,7 +10,6 @@ import {
 export type TAuthUser = {
   name: string
   email: string
-  password: string
   isLoggedIn: boolean
 }
 
@@ -35,7 +34,6 @@ const initialState: TAuthState = {
   user: {
     name: '',
     email: '',
-    password: '',
     isLoggedIn: false,
   },
   isLoading: false,
@@ -116,13 +114,7 @@ export const authReducer = (
 
     case GetUserFetchStatus.GET_USER_ERROR:
       return {
-        ...state,
-        user: {
-          name: '',
-          email: '',
-          password: '',
-          isLoggedIn: false,
-        },
+        ...initialState,
         isLoading: false,
         hasError: true,
       }
@@ -144,13 +136,7 @@ export const authReducer = (
 
     case SetUserFetchStatus.SET_USER_ERROR:
       return {
-        ...state,
-        user: {
-          name: '',
-          email: '',
-          password: '',
-          isLoggedIn: false,
-        },
+        ...initialState,
         isLoading: false,
         hasError: true,
       }
