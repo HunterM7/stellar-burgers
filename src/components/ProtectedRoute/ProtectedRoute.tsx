@@ -26,7 +26,7 @@ const ProtectedRoute: React.FC<TProtectedRoute> = ({
 }) => {
   const location: TUseLocation = useLocation()
   const isLoggedIn = useSelector(authIsLoggedInSelector)
-  const { isLoading, hasError } = useSelector(authSelector)
+  const { isLoading } = useSelector(authSelector)
 
   if (isLoading) return <Loader />
 
@@ -34,7 +34,6 @@ const ProtectedRoute: React.FC<TProtectedRoute> = ({
     return <Navigate to={location.state?.target || HOME_LINK} replace />
 
   if (!onlyUnAuth && !isLoggedIn) {
-    // Сервер не ответил
     return <Navigate to={LOGIN_LINK} state={{ target: location }} replace />
   }
 

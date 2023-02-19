@@ -47,7 +47,7 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({ title, children }) => {
   if (!modalRoot) return null
 
   return createPortal(
-    <div onClick={(e) => e.stopPropagation()} className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <div
         className={`
 				${styles.modal}
