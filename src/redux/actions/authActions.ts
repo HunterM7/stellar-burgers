@@ -206,8 +206,6 @@ export const handleLogin =
         dispatch(loginSuccess(res))
       })
       .catch((err) => {
-        console.log('Login Error', err)
-
         dispatch(loginError())
       })
   }
@@ -230,8 +228,6 @@ export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
       dispatch(logoutSuccess(res))
     })
     .catch((err) => {
-      console.log('Login Error', err)
-
       dispatch(logoutError())
     })
 }

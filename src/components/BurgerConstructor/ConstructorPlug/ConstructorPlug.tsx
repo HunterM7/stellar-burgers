@@ -10,14 +10,14 @@ type ConstructorPlugT = {
 
 const ConstructorPlug: React.FC<ConstructorPlugT> = ({ title, position }) => {
   return (
-    <div
+    <p
       className={`
 				${styles.wrapper}
 				${position ? styles[position] : ''}
 			`}
     >
       {title}
-    </div>
+    </p>
   )
 }
 

@@ -17,10 +17,16 @@
 
 	&__info {
 		color: $text-secondary;
+		@include noselect;
 	}
 }
 
 .link {
+	@include font-display-small;
+	color: $text-secondary;
+	transition: color $trans-fast;
+	@include noselect;
+
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -28,21 +34,11 @@
 
 	height: 64px;
 
-	h3 {
-		color: $text-secondary;
-
-		transition: color $trans-fast;
-	}
-
 	&.active {
-		h3 {
-			color: $text-primary;
-		}
+		color: $text-primary;
 	}
 
 	&:hover {
-		h3 {
-			color: $text-primary;
-		}
+		color: $text-primary;
 	}
 }

@@ -29,15 +29,15 @@ const ProfilePage: React.FC = () => {
       <aside className={styles.aside}>
         <div className={styles.aside__buttons}>
           <NavLink className={className} to={PROFILE_LINK} end>
-            <h3>Профиль</h3>
+            Профиль
           </NavLink>
 
           <NavLink className={className} to={PROFILE_ORDERS_LINK} end>
-            <h3>История заказов</h3>
+            История заказов
           </NavLink>
 
-          <button onClick={handleLogoutButton} className={styles.link}>
-            <h3>Выход</h3>
+          <button className={styles.link} onClick={handleLogoutButton}>
+            Выход
           </button>
         </div>
 

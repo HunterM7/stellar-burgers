@@ -1,5 +1,4 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Button,
   EmailInput,
@@ -13,11 +12,10 @@ import { handleLogin } from 'redux/actions'
 // Routes
 import { FORGOT_PASSWORD_LINK, REGISTER_LINK } from 'utils/constants'
 
-// Styles
-import styles from './LoginPage.module.scss'
+// Components
+import { AuthLink } from 'components'
 
 const LoginPage: React.FC = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   // Form state
@@ -52,22 +50,13 @@ const LoginPage: React.FC = () => {
     [dispatch, loginForm],
   )
 
-  // On click register button
-  const handleRegisterButton = React.useCallback(() => {
-    navigate(REGISTER_LINK)
-  }, [navigate])
-
-  // On click reset-password button
-  const handleForgotPasswordButton = React.useCallback(() => {
-    navigate(FORGOT_PASSWORD_LINK)
-  }, [navigate])
-
   return (
-    <main className={`container ${styles.wrapper}`}>
-      <h3 className={styles.title}>Вход</h3>
+    <main className="container auth">
+      <h3 className="auth__title">Вход</h3>
 
-      <form className={styles.form} onSubmit={submitForm}>
+      <form className="auth__form" onSubmit={submitForm}>
         <EmailInput
+          autoFocus
           name="email"
           placeholder="E-mail"
           value={loginForm.email}
@@ -85,34 +74,17 @@ const LoginPage: React.FC = () => {
         </Button>
       </form>
 
-      <div className={styles.options}>
-        <div className={styles.options__container}>
-          <p className={styles.options__text}>{'Вы — новый пользователь?'}</p>
-
-          <Button
-            htmlType="button"
-            type="secondary"
-            size="large"
-            extraClass={styles.options__btn}
-            onClick={handleRegisterButton}
-          >
-            Зарегистрироваться
-          </Button>
-        </div>
-
-        <div className={styles.options__container}>
-          <p className={styles.options__text}>Забыли пароль?</p>
-
-          <Button
-            htmlType="button"
-            type="secondary"
-            size="large"
-            extraClass={styles.options__btn}
-            onClick={handleForgotPasswordButton}
-          >
-            Восстановить пароль
-          </Button>
-        </div>
+      <div className="auth__links">
+        <AuthLink
+          title="Вы — новый пользователь?"
+          buttonName="Зарегистрироваться"
+          path={REGISTER_LINK}
+        />
+        <AuthLink
+          title="Забыли пароль?"
+          buttonName="Восстановить пароль"
+          path={FORGOT_PASSWORD_LINK}
+        />
       </div>
     </main>
   )

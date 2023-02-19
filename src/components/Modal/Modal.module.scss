@@ -51,6 +51,8 @@
 
 .title {
 	flex: 1;
+
+	@include noselect;
 }
 
 .closeBtn {

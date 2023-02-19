@@ -20,10 +20,10 @@ type TProtectedRoute = {
 }
 
 const ProtectedRoute: React.FC<TProtectedRoute> = ({ element }) => {
+  const dispatch = useDispatch()
   const location = useLocation()
   const isLoggedIn = useSelector(authIsLoggedInSelector)
   const { isLoading, hasError } = useSelector(authSelector)
-  const dispatch = useDispatch()
 
   const init = React.useCallback(() => {
     dispatch(getUser())

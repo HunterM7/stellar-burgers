@@ -18,6 +18,7 @@ import PopupHint from './PopupHint/PopupHint'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 import UnprotectedRoute from './UnprotectedRoute/UnprotectedRoute'
+import AuthLink from './AuthLink/AuthLink'
 
 export {
   App,
@@ -40,4 +41,5 @@ export {
   ProtectedRoute,
   UnprotectedRoute,
   IngredientInfo,
+  AuthLink,
 }

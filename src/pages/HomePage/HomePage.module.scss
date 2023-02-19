@@ -1,5 +1,7 @@
 //? === Home Page ===
 
+@import 'scss/vars';
+
 .wrapper {
 	display: grid;
 	grid-template-areas:
@@ -19,4 +21,6 @@
 
 .title {
 	grid-area: title;
+
+	@include noselect;
 }

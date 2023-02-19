@@ -1,5 +1,4 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import {
   Button,
   Input,
@@ -12,13 +11,12 @@ import { useDispatch } from 'redux/store'
 import { handleRegister } from 'redux/actions'
 
 // Routes
-import { HOME_LINK, LOGIN_LINK } from 'utils/constants'
+import { LOGIN_LINK } from 'utils/constants'
 
-// Styles
-import styles from './RegisterPage.module.scss'
+// Components
+import { AuthLink } from 'components'
 
 const RegisterPage: React.FC = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   // Form state
@@ -62,16 +60,11 @@ const RegisterPage: React.FC = () => {
     [dispatch, registerForm],
   )
 
-  // On click login button
-  const handleLoginButton = React.useCallback(() => {
-    navigate(LOGIN_LINK)
-  }, [navigate])
-
   return (
-    <main className={`container ${styles.wrapper}`}>
-      <h3 className={styles.title}>Регистрация</h3>
+    <main className="container auth">
+      <h3 className="auth__title">Регистрация</h3>
 
-      <form className={styles.form} onSubmit={submitForm}>
+      <form className="auth__form" onSubmit={submitForm}>
         <Input
           type="text"
           placeholder="Имя"
@@ -101,19 +94,12 @@ const RegisterPage: React.FC = () => {
         </Button>
       </form>
 
-      <div className={styles.options}>
-        <div className={styles.options__container}>
-          <p className={styles.options__text}>Уже зарегистрированы?</p>
-          <Button
-            htmlType="button"
-            type="secondary"
-            size="large"
-            extraClass={styles.options__btn}
-            onClick={handleLoginButton}
-          >
-            Войти
-          </Button>
-        </div>
+      <div className="auth__links">
+        <AuthLink
+          title="Уже зарегистрированы?"
+          buttonName="Войти"
+          path={LOGIN_LINK}
+        />
       </div>
     </main>
   )

@@ -7,14 +7,14 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Utils
-import { resetPassword } from 'utils/auth/resetPassword'
 import { TUseLocation } from 'utils/types'
+import { resetPassword } from 'utils/auth/resetPassword'
 
 // Routes
 import { FORGOT_PASSWORD_LINK, LOGIN_LINK } from 'utils/constants'
 
-// Styles
-import styles from './ResetPasswordPage.module.scss'
+// Components
+import { AuthLink } from 'components'
 
 const ResetPasswordPage: React.FC = () => {
   const navigate = useNavigate()
@@ -66,16 +66,11 @@ const ResetPasswordPage: React.FC = () => {
     [form, navigate],
   )
 
-  // On click login button
-  const handleLoginButton = React.useCallback(() => {
-    navigate(LOGIN_LINK)
-  }, [navigate])
-
   return (
-    <main className={`container ${styles.wrapper}`}>
-      <h3 className={styles.title}>Восстановление пароля</h3>
+    <main className="container auth">
+      <h3 className="auth__title">Восстановление пароля</h3>
 
-      <form className={styles.form} onSubmit={submitForm}>
+      <form className="auth__form" onSubmit={submitForm}>
         <PasswordInput
           onChange={onChangePassword}
           value={form.password}
@@ -99,20 +94,12 @@ const ResetPasswordPage: React.FC = () => {
         </Button>
       </form>
 
-      <div className={styles.options}>
-        <div className={styles.options__container}>
-          <p className={styles.options__text}>Вспомнили пароль?</p>
-
-          <Button
-            htmlType="button"
-            type="secondary"
-            size="large"
-            extraClass={styles.options__btn}
-            onClick={handleLoginButton}
-          >
-            Войти
-          </Button>
-        </div>
+      <div className="auth__links">
+        <AuthLink
+          title="Вспомнили пароль?"
+          buttonName="Войти"
+          path={LOGIN_LINK}
+        />
       </div>
     </main>
   )
