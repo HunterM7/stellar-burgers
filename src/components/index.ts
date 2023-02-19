@@ -17,7 +17,6 @@ import OrderHistory from './OrderHistory/OrderHistory'
 import PopupHint from './PopupHint/PopupHint'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
-import UnprotectedRoute from './UnprotectedRoute/UnprotectedRoute'
 import AuthLink from './AuthLink/AuthLink'
 import ConstructorBody from './BurgerConstructor/ConstructorBody/ConstructorBody'
 
@@ -40,7 +39,6 @@ export {
   ProfileInfo,
   OrderHistory,
   ProtectedRoute,
-  UnprotectedRoute,
   IngredientInfo,
   AuthLink,
   ConstructorBody,

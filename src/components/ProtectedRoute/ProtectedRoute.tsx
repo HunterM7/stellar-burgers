@@ -10,18 +10,23 @@ import {
 } from 'redux/selectors/authSelectors'
 
 // Routes
-import { LOGIN_LINK } from 'utils/constants'
+import { HOME_LINK, LOGIN_LINK } from 'utils/constants'
+import { TUseLocation } from 'utils/types'
 
 // Components
 import { Loader } from 'components'
 
 type TProtectedRoute = {
   element: ReactElement
+  onlyUnAuth?: boolean
 }
 
-const ProtectedRoute: React.FC<TProtectedRoute> = ({ element }) => {
+const ProtectedRoute: React.FC<TProtectedRoute> = ({
+  element,
+  onlyUnAuth = false,
+}) => {
   const dispatch = useDispatch()
-  const location = useLocation()
+  const location: TUseLocation = useLocation()
   const isLoggedIn = useSelector(authIsLoggedInSelector)
   const { isLoading, hasError } = useSelector(authSelector)
 
@@ -34,8 +39,14 @@ const ProtectedRoute: React.FC<TProtectedRoute> = ({ element }) => {
   }, [init])
 
   if (isLoading) return <Loader />
-  if (hasError || (!isLoading && !isLoggedIn))
+
+  if (onlyUnAuth && isLoggedIn)
+    return <Navigate to={location.state?.target || HOME_LINK} replace />
+
+  if (!onlyUnAuth && !isLoggedIn) {
+    // Сервер не ответил
     return <Navigate to={LOGIN_LINK} state={{ target: location }} replace />
+  }
 
   return element
 }

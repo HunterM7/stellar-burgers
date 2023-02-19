@@ -23,7 +23,6 @@ import {
   OrderHistory,
   ProfileInfo,
   ProtectedRoute,
-  UnprotectedRoute,
 } from 'components'
 import {
   ProfilePage,
@@ -66,19 +65,23 @@ const App: React.FC = () => {
         {/* Authentication routes */}
         <Route
           path={LOGIN_LINK}
-          element={<UnprotectedRoute element={<LoginPage />} />}
+          element={<ProtectedRoute onlyUnAuth element={<LoginPage />} />}
         />
         <Route
           path={REGISTER_LINK}
-          element={<UnprotectedRoute element={<RegisterPage />} />}
+          element={<ProtectedRoute onlyUnAuth element={<RegisterPage />} />}
         />
         <Route
           path={FORGOT_PASSWORD_LINK}
-          element={<UnprotectedRoute element={<ForgotPasswordPage />} />}
+          element={
+            <ProtectedRoute onlyUnAuth element={<ForgotPasswordPage />} />
+          }
         />
         <Route
           path={RESET_PASSWORD_LINK}
-          element={<UnprotectedRoute element={<ResetPasswordPage />} />}
+          element={
+            <ProtectedRoute onlyUnAuth element={<ResetPasswordPage />} />
+          }
         />
 
         {/* Not Found Page */}
