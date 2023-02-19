@@ -14,7 +14,7 @@
 
 	transition: box-shadow $trans-fast, opacity $trans-fast;
 
-	&--onDrag {
+	&_onDrag {
 		box-shadow: $glow-small;
 		opacity: 0.8;
 	}

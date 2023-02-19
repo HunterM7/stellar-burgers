@@ -19,6 +19,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo'
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 import UnprotectedRoute from './UnprotectedRoute/UnprotectedRoute'
 import AuthLink from './AuthLink/AuthLink'
+import ConstructorBody from './BurgerConstructor/ConstructorBody/ConstructorBody'
 
 export {
   App,
@@ -42,4 +43,5 @@ export {
   UnprotectedRoute,
   IngredientInfo,
   AuthLink,
+  ConstructorBody,
 }

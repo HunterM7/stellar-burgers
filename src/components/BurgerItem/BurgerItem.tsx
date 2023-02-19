@@ -50,7 +50,7 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
     <li
       className={`
 			${styles.wrapper}
-			${isDragging ? styles['wrapper--onDrag'] : ''}
+			${isDragging ? styles.wrapper_onDrag : ''}
 		`}
       ref={dragRef}
     >

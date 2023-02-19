@@ -116,7 +116,7 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
       data-handler-id={handlerId}
       className={`
 				${styles.wrapper}
-				${isDragging ? styles['wrapper--draggable'] : ''}
+				${isDragging ? styles.wrapper_draggable : ''}
 			`}
     >
       <div className={styles.dragIcon}>

@@ -2,16 +2,12 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Button,
-  ConstructorElement,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// DnD
-import { useDrop } from 'react-dnd'
-
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
-import { setBun, setIngredient, setTotalPrice } from 'redux/actionCreators'
+import { setTotalPrice } from 'redux/actionCreators'
 import { setOrder } from 'redux/actions'
 import {
   cartSelector,
@@ -23,7 +19,7 @@ import {
 import { LOGIN_LINK, ORDER_LINK } from 'utils/constants'
 
 // Components
-import { ConstructorItem, ConstructorPlug, PopupHint } from 'components'
+import { ConstructorBody, PopupHint } from 'components'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
@@ -34,44 +30,12 @@ const BurgerConstructor: React.FC = () => {
   const dispatch = useDispatch()
 
   // Redux
-  const allIngredients = useSelector(dataIngreientsSelector)
   const { bun, ingredients, totalPrice } = useSelector(cartSelector)
   const isUserLoggedIn = useSelector(authIsLoggedInSelector)
 
   React.useEffect(() => {
     dispatch(setTotalPrice())
   }, [bun, ingredients, dispatch])
-
-  // Burger content
-  const burgerIngredients = React.useMemo(
-    () =>
-      ingredients.map((item, i) => (
-        <ConstructorItem key={item.uuid} ingredient={item} orderId={i} />
-      )),
-    [ingredients],
-  )
-
-  // DnD
-  const [{ isHover }, dropRef] = useDrop(() => ({
-    accept: 'INGREDIENT',
-    drop: ({ id }: { id: string }) => dropIngredient(id),
-    collect: (monitor) => ({
-      isHover: monitor.isOver(),
-    }),
-  }))
-
-  const dropIngredient = React.useCallback(
-    (id: string) => {
-      const ingredient = allIngredients.find((el) => el._id === id)
-
-      if (ingredient) {
-        ingredient.type === 'bun'
-          ? dispatch(setBun(ingredient))
-          : dispatch(setIngredient(ingredient))
-      }
-    },
-    [allIngredients, dispatch],
-  )
 
   // Popup Hint Modal
   const initialPopupState = React.useMemo(
@@ -120,53 +84,7 @@ const BurgerConstructor: React.FC = () => {
 
   return (
     <section className={styles.wrapper}>
-      <div
-        ref={dropRef}
-        className={`
-				${styles.burgerConstructor}
-				${isHover ? styles['burgerConstructor--hover'] : ''}
-			`}
-      >
-        <div className={styles.blockedElement}>
-          {bun ? (
-            <ConstructorElement
-              type="top"
-              isLocked={true}
-              text={`${bun.name} (верх)`}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          ) : (
-            <ConstructorPlug position="top" title="Выберите булку" />
-          )}
-        </div>
-
-        <div className={styles.ingredients}>
-          {burgerIngredients.length ? (
-            <ul className={styles.ingredients__container}>
-              {burgerIngredients}
-            </ul>
-          ) : (
-            <div className={styles.ingredients__plug}>
-              <ConstructorPlug title="Добавьте ингридиенты" />
-            </div>
-          )}
-        </div>
-
-        <div className={styles.blockedElement}>
-          {bun ? (
-            <ConstructorElement
-              type="bottom"
-              isLocked={true}
-              text={`${bun.name} (низ)`}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          ) : (
-            <ConstructorPlug position="bottom" title="Выберите булку" />
-          )}
-        </div>
-      </div>
+      <ConstructorBody />
 
       <div className={styles.orderBox}>
         <div className={styles.price}>
