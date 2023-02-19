@@ -1,37 +1,35 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Data
-import { linksList } from '../../utils/linksList'
+// Utils
+import { linksList } from 'utils/linksList'
+import { HOME_LINK } from 'utils/constants'
 
 // Components
-import AppHeaderLink from './AppHeaderLink/AppHeaderLink'
+import { AppHeaderLink } from 'components'
 
 // Styles
 import styles from './AppHeader.module.scss'
 
 const AppHeader: React.FC = () => {
-  const headerLinks = linksList.map((link, i) => (
-    <AppHeaderLink
-      key={i}
-      title={link.title}
-      link={link.link}
-      isActive={link.title === linksList[0].title}
-      onClick={() => alert(`Click on: ${link.title}`)}
-    />
-  ))
+  // List of header links
+  const headerLinks = React.useMemo(
+    () => linksList.map((link, i) => <AppHeaderLink key={i} {...link} />),
+    [],
+  )
 
   return (
     <header className={styles.header}>
       <div className="container">
         <nav className={styles.nav}>{headerLinks}</nav>
 
-        <div className={styles.logo}>
+        <Link to={HOME_LINK} className={styles.logo}>
           <Logo />
-        </div>
+        </Link>
       </div>
     </header>
   )
 }
 
-export default AppHeader
+export default React.memo(AppHeader)

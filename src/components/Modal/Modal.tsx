@@ -1,34 +1,49 @@
 import React, { PropsWithChildren } from 'react'
 import { createPortal } from 'react-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Hooks
-import useKeyPress from '../../hooks/useKeyPress'
+// Utils
+import useKeyPress from 'hooks/useKeyPress'
+import { TUseLocation } from 'utils/types'
 
 // Components
-import ModalOverlay from './ModalOverlay/ModalOverlay'
+import { ModalOverlay } from 'components'
 
 // Styles
 import styles from './Modal.module.scss'
 
-const modalRoot = document.getElementById('modal') as HTMLElement
-
 interface TModal {
   title?: string
-  closeFunc: () => void
   children?: React.ReactElement
 }
 
-const Modal: React.FC<PropsWithChildren<TModal>> = ({
-  title,
-  closeFunc,
-  children,
-}) => {
+const Modal: React.FC<PropsWithChildren<TModal>> = ({ title, children }) => {
+  const location: TUseLocation = useLocation()
+
+  // Heading in modal window
+  const heading = React.useMemo(
+    () => <h2 className={styles.title}>{title}</h2>,
+    [title],
+  )
+
+  // Close function
+  const navigate = useNavigate()
+
+  const closeFunc = React.useCallback(() => {
+    location?.state?.background && navigate(location.state.background)
+  }, [location.state, navigate])
+
   // Handling Escape press
   useKeyPress('Escape', closeFunc)
 
-  const heading = <h2 className={styles.title}>{title}</h2>
+  // Root where we render modal window
+  const modalRoot = React.useMemo(
+    () => document.getElementById('modal') as HTMLElement,
+    [],
+  )
 
+  // If there is no root container we don't render modal window
   if (!modalRoot) return null
 
   return createPortal(
@@ -36,8 +51,9 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({
       <div
         className={`
 				${styles.modal}
-				${title ? styles['modal--withHeading'] : ''}
-			`}>
+				${title ? styles.modal_withHeading : ''}
+			`}
+      >
         <div className={styles.header}>
           {title && heading}
 
@@ -55,4 +71,4 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({
   )
 }
 
-export default Modal
+export default React.memo(Modal)

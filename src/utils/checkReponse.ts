@@ -1,5 +1,4 @@
 // Check Response function
-
 export const checkReponse = <T>(res: Response) => {
   return res.ok
     ? (res.json() as Promise<T>)

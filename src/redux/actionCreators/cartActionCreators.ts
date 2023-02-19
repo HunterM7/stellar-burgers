@@ -9,17 +9,17 @@ import {
   removeIngredientA,
   reorderIngredientsA,
   setTotalPriceA,
-} from '../actions/cartActions'
-import { TIngredient, TIngredientCart } from '../actionTypes/types'
+} from 'redux/actions/cartActions'
+import { TIngredient, TIngredientCart } from 'redux/actionTypes'
 
-export const setBun = (bun: TIngredient): setBunA => ({
+export const setBun = (ingredient: TIngredient): setBunA => ({
   type: SET_BUN,
-  bun,
+  ingredient,
 })
 
-export const setIngredient = (ingredient: TIngredientCart): setIngredientA => ({
+export const setIngredient = (ingredient: TIngredient): setIngredientA => ({
   type: SET_INGREDIENT,
-  ingredient,
+  ingredient: { ...ingredient, uuid: crypto.randomUUID() },
 })
 
 export const removeIngredient = (id: string): removeIngredientA => ({

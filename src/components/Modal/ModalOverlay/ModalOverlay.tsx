@@ -11,4 +11,4 @@ const ModalOverlay: React.FC<ModalOverlayT> = ({ closeFunc }) => {
   return <div className={styles.bg} onClick={closeFunc}></div>
 }
 
-export default ModalOverlay
+export default React.memo(ModalOverlay)

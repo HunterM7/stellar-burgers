@@ -2,15 +2,15 @@ import React from 'react'
 import { Link } from 'react-scroll'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Types
-import { useSelector } from '../../redux/store'
+// Redux
+import { useSelector } from 'redux/store'
+import { dataIngreientsSelector } from 'redux/selectors'
 
-// Files
-import { ingredientGroups } from '../../utils/ingredientGroups'
-import { dataIngreientsSelector } from '../../redux/selectors/dataSelector'
+// Utils
+import { ingredientGroups } from 'utils/ingredientGroups'
 
 // Components
-import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
+import { IngredientsGroup } from 'components'
 
 // Styles
 import styles from './BurgerIngredients.module.scss'
@@ -23,36 +23,45 @@ const BurgerIngredients: React.FC = () => {
     ingredientGroups[0].title,
   )
 
-  const tabList = ingredientGroups.map((tab, i) => (
-    <Link
-      key={i}
-      to={`ingredients-block-${++i}`}
-      spy={true}
-      smooth={true}
-      duration={700}
-      offset={-20}
-      containerId="ingredients"
-      onSetActive={() => setCurrentTab(tab.title)}>
-      {/* Компонент <Tab> требует передачи функции в onClick.
-			Клик у меня обрабатывается в обертке <Link>,
-			поэтому необходимости в обработке клика по <Tab> не требуется.
-			eslint-disable-next-line
-			@ts-ignore */}
-      <Tab value={tab.title} active={currentTab === tab.title}>
-        {tab.title}
-      </Tab>
-    </Link>
-  ))
+  const tabList = React.useMemo(
+    () =>
+      ingredientGroups.map((tab, i) => (
+        <Link
+          key={i}
+          to={`ingredients-block-${++i}`}
+          spy={true}
+          smooth={true}
+          duration={700}
+          offset={-20}
+          containerId="ingredients"
+          onSetActive={() => setCurrentTab(tab.title)}
+        >
+          {/* Компонент <Tab> требует передачи функции в onClick.
+						Клик у меня обрабатывается в обертке <Link>,
+						поэтому необходимости в обработке клика по <Tab> не требуется.
+						eslint-disable-next-line
+						@ts-ignore */}
+          <Tab value={tab.title} active={currentTab === tab.title}>
+            {tab.title}
+          </Tab>
+        </Link>
+      )),
+    [currentTab],
+  )
 
   // IngredientsGroups
-  const IngredientsGroups = ingredientGroups.map((item, i) => (
-    <IngredientsGroup
-      key={++i}
-      id={++i}
-      title={item.title}
-      data={ingredients.filter((el) => el.type === item.type)}
-    />
-  ))
+  const IngredientsGroups = React.useMemo(
+    () =>
+      ingredientGroups.map((item, i) => (
+        <IngredientsGroup
+          key={i}
+          id={`ingredients-block-${++i}`}
+          title={item.title}
+          data={ingredients.filter((el) => el.type === item.type)}
+        />
+      )),
+    [ingredients],
+  )
 
   return (
     <section className={styles.wrapper}>
@@ -67,4 +76,4 @@ const BurgerIngredients: React.FC = () => {
   )
 }
 
-export default BurgerIngredients
+export default React.memo(BurgerIngredients)

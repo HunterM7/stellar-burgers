@@ -1,4 +1,4 @@
-import { TIngredient, TIngredientCart } from '../actionTypes/types'
+import { TIngredient, TIngredientCart } from 'redux/actionTypes'
 
 export const SET_BUN = 'SET_BUN'
 export const SET_INGREDIENT = 'SET_INGREDIENT'
@@ -9,7 +9,7 @@ export const SET_TOTAL_PRICE = 'SET_TOTAL_PRICE'
 // Actions
 export interface setBunA {
   type: typeof SET_BUN
-  bun: TIngredient
+  ingredient: TIngredient
 }
 export interface setIngredientA {
   type: typeof SET_INGREDIENT

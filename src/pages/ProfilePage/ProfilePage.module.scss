@@ -1,0 +1,44 @@
+//? === Profile Page ===
+
+@import 'scss/vars';
+
+.wrapper {
+	display: grid;
+	grid-template-columns: 320px 1fr;
+	column-gap: 60px;
+}
+
+.aside {
+	padding-top: 80px;
+
+	&__buttons {
+		margin-bottom: 80px;
+	}
+
+	&__info {
+		color: $text-secondary;
+		@include noselect;
+	}
+}
+
+.link {
+	@include font-display-small;
+	color: $text-secondary;
+	transition: color $trans-fast;
+	@include noselect;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+
+	height: 64px;
+
+	&.active {
+		color: $text-primary;
+	}
+
+	&:hover {
+		color: $text-primary;
+	}
+}

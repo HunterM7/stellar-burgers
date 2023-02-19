@@ -5,8 +5,7 @@
 	font-family: 'Iceland';
 	font-style: normal;
 	font-weight: 400;
-	src: url('../assets/fonts/iceland/Iceland-Regular.ttf')
-		format('truetype');
+	src: url('/assets/fonts/iceland/Iceland-Regular.ttf') format('truetype');
 }
 
 // IBM Plex Sans
@@ -14,14 +13,14 @@
 	font-family: 'IBM Plex Sans';
 	font-style: normal;
 	font-weight: 400;
-	src: url('../assets/fonts/ibm-plex-sans/IBMPlexSans-Regular.ttf')
+	src: url('/assets/fonts/ibm-plex-sans/IBMPlexSans-Regular.ttf')
 		format('truetype');
 }
 @font-face {
 	font-family: 'IBM Plex Sans';
 	font-style: normal;
 	font-weight: 700;
-	src: url('../assets/fonts/ibm-plex-sans/IBMPlexSans-Bold.ttf')
+	src: url('/assets/fonts/ibm-plex-sans/IBMPlexSans-Bold.ttf')
 		format('truetype');
 }
 
@@ -30,13 +29,13 @@
 	font-family: 'JetBrains Mono';
 	font-style: normal;
 	font-weight: 400;
-	src: url('../assets/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf')
+	src: url('/assets/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf')
 		format('truetype');
 }
 @font-face {
 	font-family: 'JetBrains Mono';
 	font-style: normal;
 	font-weight: 700;
-	src: url('../assets/fonts/jetbrains-mono/JetBrainsMono-Bold.ttf')
+	src: url('/assets/fonts/jetbrains-mono/JetBrainsMono-Bold.ttf')
 		format('truetype');
 }

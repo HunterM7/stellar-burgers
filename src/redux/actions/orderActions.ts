@@ -1,12 +1,14 @@
-import { API_URL_ORDER } from '../../utils/constants'
-import { OrderFetchStatus } from '../actionTypes/types'
-import { checkReponse } from '../../utils/checkReponse'
-import { AppDispatch, AppThunk } from '../store'
+import { API_URL_ORDER } from 'utils/constants'
+import { OrderFetchStatus } from 'redux/actionTypes'
+import { checkReponse } from 'utils/checkReponse'
+import { AppDispatch, AppThunk } from 'redux/store'
 import {
   setErrorOrderStatus,
   setRequestOrderStatus,
   setSuccessOrderStatus,
-} from '../actionCreators/orderActionCreators'
+} from 'redux/actionCreators'
+import { TErrorResponse } from './authActions'
+import { requestCreator } from 'utils/requestCreator'
 
 export interface setRequestOrderStatusA {
   type: typeof OrderFetchStatus.ORDER_REQUEST
@@ -30,20 +32,12 @@ export interface TOrderResponse {
   order: { number: number }
 }
 
-// Тут выключил ESLint, потому что не знаю как объяснить ему, как работать с каррированными функциями
-/* eslint-disable */
 export const setOrder =
   (ingredients: string[]): AppThunk =>
   (dispatch: AppDispatch) => {
     dispatch(setRequestOrderStatus())
 
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ingredients,
-      }),
-    }
+    const requestOptions = requestCreator('POST', {}, { ingredients })
 
     fetch(API_URL_ORDER, requestOptions)
       .then((res) => checkReponse<TOrderResponse>(res))

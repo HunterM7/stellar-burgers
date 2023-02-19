@@ -1,27 +1,23 @@
 import React from 'react'
 
 // Components
-import Modal from '../Modal/Modal'
+import { Modal } from 'components'
 
-// Hooks
-import { useSelector } from '../../redux/store'
+// Redux
+import { useSelector } from 'redux/store'
+import { orderSelector } from 'redux/selectors'
 
 // Files and other
-import orderSVG from '../../assets/images/orderDoneSVG.svg'
-import { orderSelector } from '../../redux/selectors/orderSelector'
+import orderSVG from 'assets/images/orderDoneSVG.svg'
 
 // Styles
 import styles from './OrderDetails.module.scss'
 
-interface OrderInfoT {
-  closeModal: () => void
-}
-
-const OrderInfo: React.FC<OrderInfoT> = ({ closeModal }) => {
+const OrderDetails: React.FC = () => {
   const { orderInfo, isLoading, hasError } = useSelector(orderSelector)
 
   return (
-    <Modal closeFunc={closeModal}>
+    <Modal>
       {hasError ? (
         <h2>Что-то пошло не так</h2>
       ) : (
@@ -41,4 +37,4 @@ const OrderInfo: React.FC<OrderInfoT> = ({ closeModal }) => {
   )
 }
 
-export default OrderInfo
+export default React.memo(OrderDetails)

@@ -1,173 +1,90 @@
-import React, { useCallback } from 'react'
+import React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Button,
-  ConstructorElement,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// DnD
-import { useDrop } from 'react-dnd'
-
-// Hooks
-import useModal from '../../hooks/useModal'
-
-// Types and Hooks
-import { TIngredientCart } from '../../redux/actionTypes/types'
-import { useDispatch, useSelector } from '../../redux/store'
-
-// Files and other
+// Redux
+import { useDispatch, useSelector } from 'redux/store'
+import { setTotalPrice } from 'redux/actionCreators'
+import { setOrder } from 'redux/actions'
 import {
-  setBun,
-  setIngredient,
-  setTotalPrice,
-} from '../../redux/actionCreators/cartActionCreators'
-import { setOrder } from '../../redux/actions/orderActions'
-import { cartSelector } from '../../redux/selectors/cartSelectors'
-import { dataIngreientsSelector } from '../../redux/selectors/dataSelector'
+  cartSelector,
+  dataIngreientsSelector,
+  authIsLoggedInSelector,
+} from 'redux/selectors'
+
+// Routes
+import { LOGIN_LINK, ORDER_LINK } from 'utils/constants'
 
 // Components
-import OrderDetails from '../OrderDetails/OrderDetails'
-import ConstructorItem from '../ConstructorItem/ConstructorItem'
-import PopupHint from '../PopupHint/PopupHint'
-
-import ConstructorPlug from './ConstructorPlug/ConstructorPlug'
+import { ConstructorBody, PopupHint } from 'components'
 
 // Styles
 import styles from './BurgerConstructor.module.scss'
 
 const BurgerConstructor: React.FC = () => {
-  // Redux
-  const allIngredients = useSelector(dataIngreientsSelector)
-  const { bun, ingredients, totalPrice } = useSelector(cartSelector)
-
+  const location = useLocation()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  // Redux
+  const { bun, ingredients, totalPrice } = useSelector(cartSelector)
+  const isUserLoggedIn = useSelector(authIsLoggedInSelector)
 
   React.useEffect(() => {
     dispatch(setTotalPrice())
   }, [bun, ingredients, dispatch])
 
-  // Burger content
-
-  const renderIngredient = useCallback(
-    (item: TIngredientCart, i: number) => (
-      <ConstructorItem key={item.uuid} ingredient={item} orderId={i} />
-    ),
+  // Popup Hint Modal
+  const initialPopupState = React.useMemo(
+    () => ({
+      isPopupActive: false,
+      title: '',
+    }),
     [],
   )
 
-  const burgerIngredients = ingredients.map((item, i) =>
-    renderIngredient(item, i),
-  )
-
-  // DnD
-  const [{ isHover }, dropRef] = useDrop(() => ({
-    accept: 'INGREDIENT',
-    drop: ({ id }: { id: string }) => dropIngredient(id),
-    collect: (monitor) => ({
-      isHover: monitor.isOver(),
-    }),
-  }))
-
-  const dropIngredient = (id: string) => {
-    const ingredient = allIngredients.find((el) => el._id === id)
-
-    if (ingredient) {
-      ingredient.type === 'bun'
-        ? dispatch(setBun(ingredient))
-        : dispatch(setIngredient({ ...ingredient, uuid: crypto.randomUUID() }))
-    }
-  }
-
-  // Modal Window
-  const { isModalOpen, openModal, closeModal } = useModal(false)
-
-  // Popup Hint Modal
-  const initialPopupState = {
-    isPopupActive: false,
-    title: '',
-  }
-
   const [popupState, setPopupState] = React.useState(initialPopupState)
 
-  const closePopup = () =>
-    setTimeout(() => setPopupState(initialPopupState), 4000)
+  const handlePopup = React.useCallback(
+    (title: string) => {
+      setPopupState({
+        isPopupActive: true,
+        title,
+      })
+      setTimeout(() => setPopupState(initialPopupState), 4000)
+    },
+    [initialPopupState],
+  )
 
   // Handle order click
-  const handleOrderClick = () => {
-    if (!bun && !ingredients.length) {
-      setPopupState({
-        isPopupActive: true,
-        title: 'Выберите булку и хотя бы 1 ингридиент!',
-      })
-      closePopup()
-    } else if (!bun) {
-      setPopupState({
-        isPopupActive: true,
-        title: 'Выберите булку!',
-      })
-      closePopup()
-    } else if (!ingredients.length) {
-      setPopupState({
-        isPopupActive: true,
-        title: 'Выберите хотя бы 1 ингридиент!',
-      })
-      closePopup()
-    } else {
+  const handleOrderClick = React.useCallback(() => {
+    if (!bun && !ingredients.length)
+      handlePopup('Выберите булку и хотя бы 1 ингридиент!')
+    else if (!bun) handlePopup('Выберите булку!')
+    else if (!ingredients.length) handlePopup('Выберите хотя бы 1 ингридиент!')
+    else if (!isUserLoggedIn) navigate(LOGIN_LINK)
+    else {
       const orderIngridietns = [bun._id, ...ingredients.map((el) => el._id)]
 
       dispatch(setOrder(orderIngridietns))
-      openModal()
+      navigate(ORDER_LINK, { state: { background: location } })
     }
-  }
+  }, [
+    bun,
+    ingredients,
+    isUserLoggedIn,
+    location,
+    handlePopup,
+    navigate,
+    dispatch,
+  ])
 
   return (
     <section className={styles.wrapper}>
-      <div
-        ref={dropRef}
-        className={`
-				${styles.burgerConstructor}
-				${isHover ? styles['burgerConstructor--hover'] : ''}
-			`}>
-        <div className={styles.blockedElement}>
-          {bun ? (
-            <ConstructorElement
-              type="top"
-              isLocked={true}
-              text={`${bun.name} (верх)`}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          ) : (
-            <ConstructorPlug position="top" title="Выберите булку" />
-          )}
-        </div>
-
-        <div className={styles.ingredients}>
-          {burgerIngredients.length ? (
-            <ul className={styles.ingredients__container}>
-              {burgerIngredients}
-            </ul>
-          ) : (
-            <div className={styles.ingredients__plug}>
-              <ConstructorPlug title="Добавьте ингридиенты" />
-            </div>
-          )}
-        </div>
-
-        <div className={styles.blockedElement}>
-          {bun ? (
-            <ConstructorElement
-              type="bottom"
-              isLocked={true}
-              text={`${bun.name} (низ)`}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          ) : (
-            <ConstructorPlug position="bottom" title="Выберите булку" />
-          )}
-        </div>
-      </div>
+      <ConstructorBody />
 
       <div className={styles.orderBox}>
         <div className={styles.price}>
@@ -179,15 +96,15 @@ const BurgerConstructor: React.FC = () => {
           htmlType="button"
           type="primary"
           size="large"
-          onClick={handleOrderClick}>
+          onClick={handleOrderClick}
+        >
           Оформить заказ
         </Button>
       </div>
 
-      {isModalOpen && bun && <OrderDetails closeModal={closeModal} />}
       {popupState.isPopupActive && <PopupHint title={popupState.title} />}
     </section>
   )
 }
 
-export default BurgerConstructor
+export default React.memo(BurgerConstructor)

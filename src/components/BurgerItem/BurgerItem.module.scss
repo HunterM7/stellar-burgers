@@ -1,15 +1,10 @@
 //? === Burger Item ===
 
-@import '../../scss/vars';
+@import 'scss/vars';
 
 .wrapper {
 	width: 100%;
 	max-width: 280px;
-
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	row-gap: 4px;
 
 	position: relative;
 
@@ -19,15 +14,22 @@
 
 	transition: box-shadow $trans-fast, opacity $trans-fast;
 
+	&_onDrag {
+		box-shadow: $glow-small;
+		opacity: 0.8;
+	}
+}
+
+.link {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 4px;
+
 	&:hover {
 		.img {
 			transform: scale(1.1);
 		}
-	}
-
-	&--onDrag {
-		box-shadow: $glow-small;
-		opacity: 0.8;
 	}
 }
 

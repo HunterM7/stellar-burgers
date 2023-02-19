@@ -1,7 +1,7 @@
 //? === App Header Link ===
 
 // Imports
-@import '../../../scss/vars';
+@import 'scss/vars';
 
 .wrapper {
 	display: flex;
@@ -14,12 +14,21 @@
 	border-radius: 100px;
 
 	@include noselect;
+
+	svg {
+		fill: $text-secondary;
+	}
+
+	&.active {
+		svg {
+			fill: $text-primary;
+		}
+		span {
+			color: $text-primary;
+		}
+	}
 }
 
 .text {
 	color: $text-secondary;
-
-	&.active {
-		color: $text-primary;
-	}
 }

@@ -1,12 +1,13 @@
-import { AppDispatch, AppThunk } from '../store'
-import { checkReponse } from '../../utils/checkReponse'
-import { API_URL_INGREDIENTS } from '../../utils/constants'
-import { TIngredient, IngredientFetchStatus } from '../actionTypes/types'
+import { AppDispatch, AppThunk } from 'redux/store'
+import { checkReponse } from 'utils/checkReponse'
+import { API_URL_INGREDIENTS } from 'utils/constants'
+import { TIngredient, IngredientFetchStatus } from 'redux/actionTypes'
 import {
   setErrorStatus,
   setRequestStatus,
   setSuccessStatus,
-} from '../actionCreators/dataActionCreators'
+} from 'redux/actionCreators'
+import { TErrorResponse } from './authActions'
 
 export interface setRequestStatusA {
   type: typeof IngredientFetchStatus.INGREDIENT_REQUEST

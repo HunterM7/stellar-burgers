@@ -14,7 +14,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      // "angular2/*": ["../path/to/angular2/*"],
+      // "local/*": ["../path/to/local/modules/*"]
+      // Instruction: https://stackoverflow.com/questions/38601592/typescript-import-path-alias
+      // https://plusreturn.com/blog/how-to-configure-a-path-alias-in-a-react-typescript-app-for-cleaner-imports/
+    }
   },
   "include": ["src"]
 }

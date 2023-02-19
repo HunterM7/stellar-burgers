@@ -1,6 +1,6 @@
 //? === Modal Window
 
-@import '../../scss/vars';
+@import 'scss/vars';
 
 .wrapper {
 	width: 100vw;
@@ -29,7 +29,7 @@
 	border-radius: 40px;
 	background-color: $bg-modal;
 
-	&--withHeading {
+	&_withHeading {
 		padding-bottom: 60px;
 
 		.header {
@@ -51,6 +51,8 @@
 
 .title {
 	flex: 1;
+
+	@include noselect;
 }
 
 .closeBtn {

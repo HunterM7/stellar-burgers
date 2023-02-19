@@ -9,16 +9,13 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Redux
-import { useDispatch, useSelector } from '../../redux/store'
-import { TIngredientCart } from '../../redux/actionTypes/types'
-import {
-  removeIngredient,
-  reorderIngredients,
-} from '../../redux/actionCreators/cartActionCreators'
-import { cartIngredientsSelector } from '../../redux/selectors/cartSelectors'
+import { useDispatch, useSelector } from 'redux/store'
+import { TIngredientCart } from 'redux/actionTypes'
+import { removeIngredient, reorderIngredients } from 'redux/actionCreators'
+import { cartIngredientsSelector } from 'redux/selectors'
 
-// Functions
-import { sortFunc } from '../../utils/sortFunc'
+// Utils
+import { sortFunc } from 'utils/sortFunc'
 
 // Styles
 import styles from './ConstructorItem.module.scss'
@@ -119,8 +116,9 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
       data-handler-id={handlerId}
       className={`
 				${styles.wrapper}
-				${isDragging ? styles['wrapper--draggable'] : ''}
-			`}>
+				${isDragging ? styles.wrapper_draggable : ''}
+			`}
+    >
       <div className={styles.dragIcon}>
         <DragIcon type="primary" />
       </div>
@@ -135,4 +133,4 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
   )
 }
 
-export default ConstructorItem
+export default React.memo(ConstructorItem)

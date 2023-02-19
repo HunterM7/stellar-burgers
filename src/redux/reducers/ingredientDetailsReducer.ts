@@ -2,8 +2,8 @@ import {
   IngredientDetailsActions,
   RESET_INGREDIENT_DETAILS,
   SET_INGREDIENT_DETAILS,
-} from '../actions/ingredientDetailsActions'
-import { TIngredientDetails } from '../actionTypes/types'
+} from 'redux/actions/ingredientDetailsActions'
+import { TIngredientDetails } from 'redux/actionTypes'
 
 const initialState: TIngredientDetails = {
   title: '',
@@ -14,7 +14,7 @@ const initialState: TIngredientDetails = {
   carbohydrates: 0,
 }
 
-export const IngredientDetailsReducer = (
+export const ingredientDetailsReducer = (
   state = initialState,
   action: IngredientDetailsActions,
 ) => {

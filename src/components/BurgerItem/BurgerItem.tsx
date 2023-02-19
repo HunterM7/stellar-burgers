@@ -1,26 +1,20 @@
 import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Redux
+import { useSelector } from 'redux/store'
+import { TIngredient } from 'redux/actionTypes'
+import { cartSelector } from 'redux/selectors'
+
 // DnD
 import { useDrag } from 'react-dnd'
 
-// Hooks
-import useModal from '../../hooks/useModal'
-import { useDispatch, useSelector } from '../../redux/store'
-
-// Files and other
-import { TIngredient } from '../../redux/actionTypes/types'
-import {
-  resetIngredientDetails,
-  setIngredientDetails,
-} from '../../redux/actionCreators/IngredientDetailsCreators'
-import { cartSelector } from '../../redux/selectors/cartSelectors'
-
-// Components
-import IngredientDetails from '../IngredientDetails/IngredientDetails'
+// Routes
+import { INGREDIENT_LINK } from 'utils/constants'
 
 // Styles
 import styles from './BurgerItem.module.scss'
@@ -30,6 +24,8 @@ interface BurgerItemT {
 }
 
 const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
+  const location = useLocation()
+
   // Count of BurgerItem
   const { bun, ingredients } = useSelector(cartSelector)
 
@@ -41,14 +37,6 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
       : ingredients.filter((item) => item._id === ingredient._id).length
   }, [ingredient, bun, ingredients])
 
-  // Modal Window
-  const { isModalOpen, openModal, closeModal } = useModal(false)
-
-  const handleCloseModal = () => {
-    dispatch(resetIngredientDetails())
-    closeModal()
-  }
-
   // DnD
   const [{ isDragging }, dragRef, dragPreviewRef] = useDrag(() => ({
     type: 'INGREDIENT',
@@ -58,51 +46,35 @@ const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
     }),
   }))
 
-  // Redux
-
-  const dispatch = useDispatch()
-
-  const handleItemClick = () => {
-    openModal()
-
-    dispatch(
-      setIngredientDetails({
-        title: ingredient.name,
-        image: ingredient.image_large,
-        calories: ingredient.calories,
-        proteins: ingredient.proteins,
-        fat: ingredient.fat,
-        carbohydrates: ingredient.carbohydrates,
-      }),
-    )
-  }
-
   return (
     <li
       className={`
 			${styles.wrapper}
-			${isDragging ? styles['wrapper--onDrag'] : ''}
+			${isDragging ? styles.wrapper_onDrag : ''}
 		`}
       ref={dragRef}
-      onClick={handleItemClick}
     >
-      <img
-        ref={dragPreviewRef}
-        src={ingredient.image}
-        alt="Ingredient"
-        className={styles.img}
-      />
+      <Link
+        to={`${INGREDIENT_LINK}/${ingredient._id}`}
+        state={{ background: location }}
+        className={styles.link}
+      >
+        <img
+          ref={dragPreviewRef}
+          src={ingredient.image}
+          alt="Ingredient"
+          className={styles.img}
+        />
 
-      <div className={styles.price}>
-        {ingredient.price}
-        <CurrencyIcon type="primary" />
-      </div>
+        <div className={styles.price}>
+          {ingredient.price}
+          <CurrencyIcon type="primary" />
+        </div>
 
-      <p className={styles.title}>{ingredient.name}</p>
+        <p className={styles.title}>{ingredient.name}</p>
+      </Link>
 
       {count ? <Counter count={count} size="default" /> : null}
-
-      {isModalOpen && <IngredientDetails closeModal={handleCloseModal} />}
     </li>
   )
 }

@@ -1,50 +1,110 @@
 import React from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
-// DnD
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-
-// Components
-import Loader from '../Loader/Loader'
-import AppHeader from '../AppHeader/AppHeader'
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
+// Routes
+import {
+  FORGOT_PASSWORD_LINK,
+  INGREDIENT_PAGE_LINK,
+  LOGIN_LINK,
+  NOT_FOUND_LINK,
+  ORDER_FEED_LINK,
+  ORDER_LINK,
+  PROFILE_LINK,
+  PROFILE_ORDERS_LINK,
+  REGISTER_LINK,
+  RESET_PASSWORD_LINK,
+} from 'utils/constants'
 
 // Redux
-import { getIngredients } from '../../redux/actions/dataActions'
-import { useDispatch, useSelector } from '../../redux/store'
-import { dataSelector } from '../../redux/selectors/dataSelector'
+import { useDispatch } from 'redux/store'
 
-// Styles
-import styles from './App.module.scss'
+// Components and Pages
+import {
+  AppHeader,
+  IngredientDetails,
+  OrderDetails,
+  OrderHistory,
+  ProfileInfo,
+  ProtectedRoute,
+} from 'components'
+import {
+  ProfilePage,
+  ForgotPasswordPage,
+  HomePage,
+  IngredientPage,
+  LoginPage,
+  NotFoundPage,
+  OrderFeedPage,
+  RegisterPage,
+  ResetPasswordPage,
+} from 'pages'
+
+// Utils
+import { TUseLocation } from 'utils/types'
+import { getUser } from 'redux/actions'
 
 const App: React.FC = () => {
-  const { isLoading, hasError } = useSelector(dataSelector)
-
+  const location: TUseLocation = useLocation()
   const dispatch = useDispatch()
 
+  // useLocation
+  const background = location.state && location.state.background
+
+  // Checking the freshness of tokens
   React.useEffect(() => {
-    dispatch(getIngredients())
+    dispatch(getUser())
   }, [dispatch])
 
   return (
     <>
       <AppHeader />
-      <main className={`container ${styles.main}`}>
-        {isLoading ? (
-          <Loader />
-        ) : hasError ? (
-          <h2>Что-то пошло не так</h2>
-        ) : (
-          <DndProvider backend={HTML5Backend}>
-            <h2 className={styles.title}>Соберите бургер</h2>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
-        )}
-      </main>
+      <Routes location={background || location}>
+        <Route index element={<HomePage />} />
+        <Route path={ORDER_FEED_LINK} element={<OrderFeedPage />} />
+
+        <Route
+          path={PROFILE_LINK}
+          element={<ProtectedRoute element={<ProfilePage />} />}
+        >
+          <Route path={PROFILE_LINK} element={<ProfileInfo />} />
+          <Route path={PROFILE_ORDERS_LINK} element={<OrderHistory />} />
+        </Route>
+
+        <Route path={INGREDIENT_PAGE_LINK} element={<IngredientPage />} />
+
+        {/* Authentication routes */}
+        <Route
+          path={LOGIN_LINK}
+          element={<ProtectedRoute onlyUnAuth element={<LoginPage />} />}
+        />
+        <Route
+          path={REGISTER_LINK}
+          element={<ProtectedRoute onlyUnAuth element={<RegisterPage />} />}
+        />
+        <Route
+          path={FORGOT_PASSWORD_LINK}
+          element={
+            <ProtectedRoute onlyUnAuth element={<ForgotPasswordPage />} />
+          }
+        />
+        <Route
+          path={RESET_PASSWORD_LINK}
+          element={
+            <ProtectedRoute onlyUnAuth element={<ResetPasswordPage />} />
+          }
+        />
+
+        {/* Not Found Page */}
+        <Route path={NOT_FOUND_LINK} element={<NotFoundPage />} />
+      </Routes>
+      {background && (
+        <Routes>
+          <Route path={INGREDIENT_PAGE_LINK} element={<IngredientDetails />} />
+          <Route path={ORDER_LINK} element={<OrderDetails />} />
+        </Routes>
+      )}
     </>
   )
 }
 
-export default App
+export default React.memo(App)
