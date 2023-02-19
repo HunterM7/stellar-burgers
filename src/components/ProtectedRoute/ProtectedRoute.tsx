@@ -2,8 +2,7 @@ import React, { ReactElement } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 
 // Redux
-import { useDispatch, useSelector } from 'redux/store'
-import { getUser } from 'redux/actions'
+import { useSelector } from 'redux/store'
 import {
   authIsLoggedInSelector,
   authSelector,
@@ -25,18 +24,9 @@ const ProtectedRoute: React.FC<TProtectedRoute> = ({
   element,
   onlyUnAuth = false,
 }) => {
-  const dispatch = useDispatch()
   const location: TUseLocation = useLocation()
   const isLoggedIn = useSelector(authIsLoggedInSelector)
   const { isLoading, hasError } = useSelector(authSelector)
-
-  const init = React.useCallback(() => {
-    dispatch(getUser())
-  }, [dispatch])
-
-  React.useEffect(() => {
-    init()
-  }, [init])
 
   if (isLoading) return <Loader />
 

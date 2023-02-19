@@ -15,6 +15,9 @@ import {
   RESET_PASSWORD_LINK,
 } from 'utils/constants'
 
+// Redux
+import { useDispatch } from 'redux/store'
+
 // Components and Pages
 import {
   AppHeader,
@@ -38,12 +41,19 @@ import {
 
 // Utils
 import { TUseLocation } from 'utils/types'
+import { getUser } from 'redux/actions'
 
 const App: React.FC = () => {
-  // useLocation
   const location: TUseLocation = useLocation()
+  const dispatch = useDispatch()
 
+  // useLocation
   const background = location.state && location.state.background
+
+  // Checking the freshness of tokens
+  React.useEffect(() => {
+    dispatch(getUser())
+  }, [dispatch])
 
   return (
     <>
