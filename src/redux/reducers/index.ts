@@ -1,5 +1,7 @@
+// Redux
 import { combineReducers } from 'redux'
 
+// Reducers
 import { dataReducer } from './dataReducer'
 import { cartReducer } from './cartReducer'
 import { orderReducer } from './orderReducer'
