@@ -10,7 +10,7 @@ import {
 
 // Routes
 import { HOME_LINK, LOGIN_LINK } from 'utils/constants'
-import { TUseLocation } from 'utils/types'
+import { IUseLocation } from 'utils/types'
 
 // Components
 import { Loader } from 'components'
@@ -24,7 +24,7 @@ const ProtectedRoute: React.FC<TProtectedRoute> = ({
   element,
   onlyUnAuth = false,
 }) => {
-  const location: TUseLocation = useLocation()
+  const location: IUseLocation = useLocation()
   const isLoggedIn = useSelector(authIsLoggedInSelector)
   const { isLoading } = useSelector(authSelector)
 

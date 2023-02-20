@@ -6,13 +6,13 @@ import {
 
 import { PROFILE_LINK, HOME_LINK, ORDER_FEED_LINK } from 'utils/constants'
 
-interface TLinkList {
+interface ILinkList {
   title: string
   path: string
   icon: React.ReactElement
 }
 
-export const linksList: TLinkList[] = [
+export const linksList: ILinkList[] = [
   {
     title: 'Конструктор',
     path: HOME_LINK,

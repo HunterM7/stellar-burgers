@@ -7,7 +7,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Utils
-import { TUseLocation } from 'utils/types'
+import { IUseLocation } from 'utils/types'
 import { resetPassword } from 'utils/auth/resetPassword'
 
 // Routes
@@ -18,7 +18,7 @@ import { AuthLink } from 'components'
 
 const ResetPasswordPage: React.FC = () => {
   const navigate = useNavigate()
-  const location: TUseLocation = useLocation()
+  const location: IUseLocation = useLocation()
 
   React.useEffect(() => {
     !location?.state?.resetPassword && navigate(FORGOT_PASSWORD_LINK)

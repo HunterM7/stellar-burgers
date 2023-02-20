@@ -1,12 +1,12 @@
 /* eslint-disable */
 
-interface TProps {
+interface IProps {
   path?: string
   expires?: Date | string | number
   [propName: string]: any
 }
 
-export function setCookie(name: string, value: string, options?: TProps) {
+export function setCookie(name: string, value: string, options?: IProps) {
   options = { path: '/', ...options }
 
   let exp = options.expires

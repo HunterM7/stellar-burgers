@@ -1,4 +1,4 @@
-export interface TUseLocation {
+export interface IUseLocation {
   hash: string
   key: string
   pathname: string

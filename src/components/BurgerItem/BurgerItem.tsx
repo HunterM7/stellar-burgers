@@ -19,11 +19,11 @@ import { INGREDIENT_LINK } from 'utils/constants'
 // Styles
 import styles from './BurgerItem.module.scss'
 
-interface BurgerItemT {
+interface IBurgerItem {
   ingredient: TIngredient
 }
 
-const BurgerItem: React.FC<BurgerItemT> = ({ ingredient }) => {
+const BurgerItem: React.FC<IBurgerItem> = ({ ingredient }) => {
   const location = useLocation()
 
   // Count of BurgerItem

@@ -14,7 +14,7 @@ import {
   REGISTER_LINK,
   RESET_PASSWORD_LINK,
 } from 'utils/constants'
-import { TUseLocation } from 'utils/types'
+import { IUseLocation } from 'utils/types'
 
 // Pages
 import {
@@ -40,7 +40,7 @@ import {
 
 const Router: React.FC = () => {
   // useLocation
-  const location: TUseLocation = useLocation()
+  const location: IUseLocation = useLocation()
   const background = location.state && location.state.background
 
   return (

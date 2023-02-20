@@ -5,7 +5,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Utils
 import useKeyPress from 'hooks/useKeyPress'
-import { TUseLocation } from 'utils/types'
+import { IUseLocation } from 'utils/types'
 
 // Components
 import { ModalOverlay } from 'components'
@@ -13,13 +13,13 @@ import { ModalOverlay } from 'components'
 // Styles
 import styles from './Modal.module.scss'
 
-interface TModal {
+interface IModal {
   title?: string
   children?: React.ReactElement
 }
 
-const Modal: React.FC<PropsWithChildren<TModal>> = ({ title, children }) => {
-  const location: TUseLocation = useLocation()
+const Modal: React.FC<PropsWithChildren<IModal>> = ({ title, children }) => {
+  const location: IUseLocation = useLocation()
 
   // Heading in modal window
   const heading = React.useMemo(
