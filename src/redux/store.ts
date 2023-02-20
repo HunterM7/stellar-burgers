@@ -1,28 +1,16 @@
+import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from 'redux'
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
   useSelector as selectorHook,
 } from 'react-redux'
-import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+
+// RootReducer
+import { rootReducer } from 'redux/reducers'
 
 // Actions
-import { TAppActions } from './actions'
-
-// Reducers
-import { dataReducer } from './reducers/dataReducer'
-import { cartReducer } from './reducers/cartReducer'
-import { orderReducer } from './reducers/orderReducer'
-import { ingredientDetailsReducer } from './reducers/ingredientDetailsReducer'
-import { authReducer } from './reducers/authReducer'
-
-const rootReducer = combineReducers({
-  data: dataReducer,
-  cart: cartReducer,
-  order: orderReducer,
-  ingredientDetails: ingredientDetailsReducer,
-  auth: authReducer,
-})
+import { TAppActions } from 'redux/actions'
 
 // Redux DevTools
 declare global {
@@ -34,8 +22,7 @@ declare global {
 const composeWithDevTools =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-// --- --- --- --- --- --- --- ---
-
+// Store
 export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk)),

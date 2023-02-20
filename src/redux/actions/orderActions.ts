@@ -1,13 +1,15 @@
-import { API_URL_ORDER } from 'utils/constants'
-import { OrderFetchStatus } from 'redux/actionTypes'
-import { checkReponse } from 'utils/checkReponse'
+// Redux
 import { AppDispatch, AppThunk } from 'redux/store'
+import { OrderFetchStatus } from 'redux/actionTypes'
 import {
   setErrorOrderStatus,
   setRequestOrderStatus,
   setSuccessOrderStatus,
 } from 'redux/actionCreators'
-import { TErrorResponse } from './authActions'
+
+// Utils
+import { API_URL_ORDER } from 'utils/constants'
+import { checkReponse } from 'utils/checkReponse'
 import { requestCreator } from 'utils/requestCreator'
 
 export interface setRequestOrderStatusA {

@@ -9,11 +9,7 @@ import {
 import { useDispatch, useSelector } from 'redux/store'
 import { setTotalPrice } from 'redux/actionCreators'
 import { setOrder } from 'redux/actions'
-import {
-  cartSelector,
-  dataIngreientsSelector,
-  authIsLoggedInSelector,
-} from 'redux/selectors'
+import { cartSelector, authIsLoggedInSelector } from 'redux/selectors'
 
 // Routes
 import { LOGIN_LINK, ORDER_LINK } from 'utils/constants'

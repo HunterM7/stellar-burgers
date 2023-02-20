@@ -1,13 +1,15 @@
+// Redux
 import { AppDispatch, AppThunk } from 'redux/store'
-import { checkReponse } from 'utils/checkReponse'
-import { API_URL_INGREDIENTS } from 'utils/constants'
 import { TIngredient, IngredientFetchStatus } from 'redux/actionTypes'
 import {
   setErrorStatus,
   setRequestStatus,
   setSuccessStatus,
 } from 'redux/actionCreators'
-import { TErrorResponse } from './authActions'
+
+// Utils
+import { checkReponse } from 'utils/checkReponse'
+import { API_URL_INGREDIENTS } from 'utils/constants'
 
 export interface setRequestStatusA {
   type: typeof IngredientFetchStatus.INGREDIENT_REQUEST

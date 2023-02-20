@@ -1,16 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 
 // Store
 import { store } from 'redux/store'
 
+// Components
+import { App } from 'components'
+
 // Styles
 import './scss/index.scss'
-
-// Components
-import { App } from './components'
 
 // Tests
 import reportWebVitals from './reportWebVitals'

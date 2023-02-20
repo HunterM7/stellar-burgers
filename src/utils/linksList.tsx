@@ -4,7 +4,7 @@ import {
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { PROFILE_LINK, HOME_LINK, ORDER_FEED_LINK } from './constants'
+import { PROFILE_LINK, HOME_LINK, ORDER_FEED_LINK } from 'utils/constants'
 
 interface TLinkList {
   title: string
