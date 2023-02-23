@@ -39,8 +39,8 @@ const ForgotPasswordPage = () => {
             state: { resetPassword: true },
           }),
         )
-        .catch(err => {
-          console.log('error')
+        .catch(error => {
+          throw new Error('Error on submitting ForgotPasswordPage form')
         })
     },
     [form, navigate],

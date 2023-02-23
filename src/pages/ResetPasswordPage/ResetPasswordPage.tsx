@@ -59,8 +59,8 @@ const ResetPasswordPage: React.FC = () => {
 
       resetPassword(form)
         .then(res => navigate(LOGIN_LINK))
-        .catch(err => {
-          console.log('error')
+        .catch(error => {
+          throw new Error('Error on submitting ResetPasswordPage form')
         })
     },
     [form, navigate],
