@@ -11,7 +11,7 @@ import { useDispatch } from 'redux/store'
 import { handleRegister } from 'redux/actions'
 
 // Routes
-import { LOGIN_LINK } from 'utils/constants'
+import { LOGIN_LINK } from 'utils/data/constants'
 
 // Components
 import { AuthLink } from 'components'
@@ -29,7 +29,7 @@ const RegisterPage: React.FC = () => {
   // Name input function
   const onChangeName = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setRegisterForm((prev) => ({ ...prev, name: e.target.value }))
+      setRegisterForm(prev => ({ ...prev, name: e.target.value }))
     },
     [setRegisterForm],
   )
@@ -37,7 +37,7 @@ const RegisterPage: React.FC = () => {
   // Email input function
   const onChangeEmail = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setRegisterForm((prev) => ({ ...prev, email: e.target.value }))
+      setRegisterForm(prev => ({ ...prev, email: e.target.value }))
     },
     [setRegisterForm],
   )
@@ -45,7 +45,7 @@ const RegisterPage: React.FC = () => {
   // Password input function
   const onChangePassword = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setRegisterForm((prev) => ({ ...prev, password: e.target.value }))
+      setRegisterForm(prev => ({ ...prev, password: e.target.value }))
     },
     [setRegisterForm],
   )

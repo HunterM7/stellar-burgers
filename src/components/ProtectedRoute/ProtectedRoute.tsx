@@ -9,7 +9,7 @@ import {
 } from 'redux/selectors/authSelectors'
 
 // Routes
-import { HOME_LINK, LOGIN_LINK } from 'utils/constants'
+import { HOME_LINK, LOGIN_LINK } from 'utils/data/constants'
 import { IUseLocation } from 'utils/types'
 
 // Components

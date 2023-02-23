@@ -10,7 +10,7 @@ import { useDispatch } from 'redux/store'
 import { handleLogin } from 'redux/actions'
 
 // Routes
-import { FORGOT_PASSWORD_LINK, REGISTER_LINK } from 'utils/constants'
+import { FORGOT_PASSWORD_LINK, REGISTER_LINK } from 'utils/data/constants'
 
 // Components
 import { AuthLink } from 'components'
@@ -27,7 +27,7 @@ const LoginPage: React.FC = () => {
   // Email input function
   const onChangeEmail = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setLoginForm((prev) => ({ ...prev, email: e.target.value }))
+      setLoginForm(prev => ({ ...prev, email: e.target.value }))
     },
     [setLoginForm],
   )
@@ -35,7 +35,7 @@ const LoginPage: React.FC = () => {
   // Password input function
   const onChangePassword = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setLoginForm((prev) => ({ ...prev, password: e.target.value }))
+      setLoginForm(prev => ({ ...prev, password: e.target.value }))
     },
     [setLoginForm],
   )

@@ -8,9 +8,9 @@ import {
 } from 'redux/actionCreators'
 
 // Utils
-import { API_URL_ORDER } from 'utils/constants'
-import { checkReponse } from 'utils/checkReponse'
-import { requestCreator } from 'utils/requestCreator'
+import { API_URL_ORDER } from 'utils/data/constants'
+import { checkReponse } from 'utils/api/checkReponse'
+import { requestCreator } from 'utils/api/requestCreator'
 
 export interface setRequestOrderStatusA {
   type: typeof OrderFetchStatus.ORDER_REQUEST
@@ -39,12 +39,15 @@ export const setOrder =
   (dispatch: AppDispatch) => {
     dispatch(setRequestOrderStatus())
 
-    const requestOptions = requestCreator('POST', {}, { ingredients })
+    const requestOptions = requestCreator({
+      method: 'POST',
+      body: { ingredients },
+    })
 
     fetch(API_URL_ORDER, requestOptions)
-      .then((res) => checkReponse<TOrderResponse>(res))
-      .then((res) => dispatch(setSuccessOrderStatus(res)))
-      .catch((err) => {
+      .then(res => checkReponse<TOrderResponse>(res))
+      .then(res => dispatch(setSuccessOrderStatus(res)))
+      .catch(err => {
         dispatch(setErrorOrderStatus())
       })
   }

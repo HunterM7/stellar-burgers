@@ -14,7 +14,7 @@ import { cartSelector } from 'redux/selectors'
 import { useDrag } from 'react-dnd'
 
 // Routes
-import { INGREDIENT_LINK } from 'utils/constants'
+import { INGREDIENT_LINK } from 'utils/data/constants'
 
 // Styles
 import styles from './BurgerItem.module.scss'
@@ -34,14 +34,14 @@ const BurgerItem: React.FC<IBurgerItem> = ({ ingredient }) => {
       ? bun?._id === ingredient._id
         ? 2
         : 0
-      : ingredients.filter((item) => item._id === ingredient._id).length
+      : ingredients.filter(item => item._id === ingredient._id).length
   }, [ingredient, bun, ingredients])
 
   // DnD
   const [{ isDragging }, dragRef, dragPreviewRef] = useDrag(() => ({
     type: 'INGREDIENT',
     item: { id: ingredient._id },
-    collect: (monitor) => ({
+    collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
   }))

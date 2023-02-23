@@ -34,13 +34,13 @@ import {
   API_AUTH_REGISTER,
   API_AUTH_USER,
   API_AUTH_LOGOUT,
-} from 'utils/constants'
+} from 'utils/data/constants'
 
 // Functions
-import { checkReponse } from 'utils/checkReponse'
+import { checkReponse } from 'utils/api/checkReponse'
 import { deleteCookie, getCookie } from 'utils/cookie'
 import { refreshToken } from 'utils/auth/refreshToken'
-import { requestCreator } from 'utils/requestCreator'
+import { requestCreator } from 'utils/api/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
 
 export type TRegisterResponse = {
@@ -179,16 +179,19 @@ export const handleRegister =
   (dispatch: AppDispatch) => {
     dispatch(registerRequest())
 
-    const requestOptions = requestCreator('POST', {}, { name, email, password })
+    const requestOptions = requestCreator({
+      method: 'POST',
+      body: { name, email, password },
+    })
 
     fetch(API_AUTH_REGISTER, requestOptions)
-      .then((res) => checkReponse<TRegisterResponse>(res))
-      .then((res) => {
+      .then(res => checkReponse<TRegisterResponse>(res))
+      .then(res => {
         saveTokens(res.accessToken, res.refreshToken)
 
         dispatch(registerSuccess(res))
       })
-      .catch((err) => dispatch(registerError()))
+      .catch(err => dispatch(registerError()))
   }
 
 export const handleLogin =
@@ -196,16 +199,19 @@ export const handleLogin =
   (dispatch: AppDispatch) => {
     dispatch(loginRequest())
 
-    const requestOptions = requestCreator('POST', {}, { email, password })
+    const requestOptions = requestCreator({
+      method: 'POST',
+      body: { email, password },
+    })
 
     fetch(API_AUTH_LOGIN, requestOptions)
-      .then((res) => checkReponse<TLoginResponse>(res))
-      .then((res) => {
+      .then(res => checkReponse<TLoginResponse>(res))
+      .then(res => {
         saveTokens(res.accessToken, res.refreshToken)
 
         dispatch(loginSuccess(res))
       })
-      .catch((err) => {
+      .catch(err => {
         dispatch(loginError())
       })
   }
@@ -213,21 +219,20 @@ export const handleLogin =
 export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(logoutRequest())
 
-  const requestOptions = requestCreator(
-    'POST',
-    {},
-    { token: localStorage.getItem('refreshToken') },
-  )
+  const requestOptions = requestCreator({
+    method: 'POST',
+    body: { token: localStorage.getItem('refreshToken') },
+  })
 
   fetch(API_AUTH_LOGOUT, requestOptions)
-    .then((res) => checkReponse<TLogoutResponse>(res))
-    .then((res) => {
+    .then(res => checkReponse<TLogoutResponse>(res))
+    .then(res => {
       deleteCookie('token')
       localStorage.removeItem('refreshToken')
 
       dispatch(logoutSuccess(res))
     })
-    .catch((err) => {
+    .catch(err => {
       dispatch(logoutError())
     })
 }
@@ -235,13 +240,16 @@ export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
 export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(getUserRequest())
 
-  const requestOptions = requestCreator('GET', {
-    Authorization: 'Bearer '.concat(getCookie('token') || ''),
+  const requestOptions = requestCreator({
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer '.concat(getCookie('token') || ''),
+    },
   })
 
   fetch(API_AUTH_USER, requestOptions)
-    .then((res) => checkReponse<TUserResponse>(res))
-    .then((res) => dispatch(getUserSuccess(res)))
+    .then(res => checkReponse<TUserResponse>(res))
+    .then(res => dispatch(getUserSuccess(res)))
     .catch((err: TErrorResponse) => {
       if (err.message === 'jwt expired') {
         refreshToken().then(() => dispatch(getUser()))
@@ -256,15 +264,15 @@ export const setUser =
   (dispatch: AppDispatch) => {
     dispatch(setUserRequest())
 
-    const requestOptions = requestCreator(
-      'PATCH',
-      { Authorization: 'Bearer '.concat(getCookie('token') || '') },
-      { name, email, password },
-    )
+    const requestOptions = requestCreator({
+      method: 'PATCH',
+      headers: { Authorization: 'Bearer '.concat(getCookie('token') || '') },
+      body: { name, email, password },
+    })
 
     fetch(API_AUTH_USER, requestOptions)
-      .then((res) => checkReponse<TUserResponse>(res))
-      .then((res) => dispatch(setUserSuccess(res)))
+      .then(res => checkReponse<TUserResponse>(res))
+      .then(res => dispatch(setUserSuccess(res)))
       .catch((err: TErrorResponse) => {
         if (err.message === 'jwt expired') {
           refreshToken().then(() =>

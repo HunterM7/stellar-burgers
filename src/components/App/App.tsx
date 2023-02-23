@@ -2,8 +2,6 @@ import React from 'react'
 
 // Redux
 import { useDispatch } from 'redux/store'
-
-// Utils
 import { getUser } from 'redux/actions'
 
 // Components

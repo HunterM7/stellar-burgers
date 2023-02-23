@@ -13,7 +13,7 @@ import {
   PROFILE_ORDERS_LINK,
   REGISTER_LINK,
   RESET_PASSWORD_LINK,
-} from 'utils/constants'
+} from 'utils/data/constants'
 import { IUseLocation } from 'utils/types'
 
 // Pages

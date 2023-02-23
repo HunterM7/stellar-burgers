@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Utils
-import { linksList } from 'utils/linksList'
-import { HOME_LINK } from 'utils/constants'
+import { linksList } from 'utils/data/linksList'
+import { HOME_LINK } from 'utils/data/constants'
 
 // Components
 import { AppHeaderLink } from 'components'
@@ -15,7 +15,7 @@ import styles from './AppHeader.module.scss'
 const AppHeader: React.FC = () => {
   // List of header links
   const headerLinks = React.useMemo(
-    () => linksList.map((link, i) => <AppHeaderLink key={i} {...link} />),
+    () => linksList.map(link => <AppHeaderLink key={link.path} {...link} />),
     [],
   )
 

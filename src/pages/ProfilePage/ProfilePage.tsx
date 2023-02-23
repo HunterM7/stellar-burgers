@@ -6,7 +6,7 @@ import { useDispatch } from 'redux/store'
 import { handleLogout } from 'redux/actions'
 
 // Routes
-import { PROFILE_LINK, PROFILE_ORDERS_LINK } from 'utils/constants'
+import { PROFILE_LINK, PROFILE_ORDERS_LINK } from 'utils/data/constants'
 
 // Styles
 import styles from './ProfilePage.module.scss'

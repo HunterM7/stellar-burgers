@@ -11,7 +11,7 @@ import { IUseLocation } from 'utils/types'
 import { resetPassword } from 'utils/auth/resetPassword'
 
 // Routes
-import { FORGOT_PASSWORD_LINK, LOGIN_LINK } from 'utils/constants'
+import { FORGOT_PASSWORD_LINK, LOGIN_LINK } from 'utils/data/constants'
 
 // Components
 import { AuthLink } from 'components'
@@ -33,7 +33,7 @@ const ResetPasswordPage: React.FC = () => {
   // Password input function
   const onChangePassword = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm((prev) => ({
+      setForm(prev => ({
         ...prev,
         password: e.target.value,
       }))
@@ -44,7 +44,7 @@ const ResetPasswordPage: React.FC = () => {
   // Password input function
   const onChangeCode = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm((prev) => ({
+      setForm(prev => ({
         ...prev,
         token: e.target.value,
       }))
@@ -58,8 +58,8 @@ const ResetPasswordPage: React.FC = () => {
       e.preventDefault()
 
       resetPassword(form)
-        .then((res) => navigate(LOGIN_LINK))
-        .catch((err) => {
+        .then(res => navigate(LOGIN_LINK))
+        .catch(err => {
           console.log('error')
         })
     },

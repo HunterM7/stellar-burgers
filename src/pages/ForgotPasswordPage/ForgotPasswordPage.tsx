@@ -9,7 +9,7 @@ import {
 import { forgotPassword } from 'utils/auth/forgotPassword'
 
 // Routes
-import { LOGIN_LINK, RESET_PASSWORD_LINK } from 'utils/constants'
+import { LOGIN_LINK, RESET_PASSWORD_LINK } from 'utils/data/constants'
 
 // Components
 import { AuthLink } from 'components'
@@ -39,7 +39,7 @@ const ForgotPasswordPage = () => {
             state: { resetPassword: true },
           }),
         )
-        .catch((err) => {
+        .catch(err => {
           console.log('error')
         })
     },
