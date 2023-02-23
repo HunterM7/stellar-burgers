@@ -23,14 +23,16 @@ export const refreshToken = async () => {
     body: { token: localStorage.getItem('refreshToken') },
   })
 
-  await fetch(API_AUTH_TOKEN, requestOptions)
+  const result = await fetch(API_AUTH_TOKEN, requestOptions)
     .then(res => checkReponse<TRefreshTokenResponse>(res))
     .then(res => {
       saveTokens(res.accessToken, res.refreshToken)
 
       return res
     })
-    .catch((err: TErrorResponse) => {
-      console.log('refresh token error')
+    .catch((error: TErrorResponse) => {
+      return error
     })
+
+  return result
 }

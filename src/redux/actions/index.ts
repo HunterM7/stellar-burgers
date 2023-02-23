@@ -3,14 +3,7 @@ import { DataActions } from './dataActions'
 import { CartActions } from './cartActions'
 import { OrderActions } from './orderActions'
 import { IngredientDetailsActions } from './ingredientDetailsActions'
-import { AuthActions, getUser } from './authActions'
-
-// Thunk actions
-import { getIngredients } from './dataActions'
-import { setOrder } from './orderActions'
-import { handleRegister } from './authActions'
-import { handleLogin } from './authActions'
-import { handleLogout } from './authActions'
+import { AuthActions } from './authActions'
 
 export type TAppActions =
   | DataActions
@@ -19,11 +12,9 @@ export type TAppActions =
   | IngredientDetailsActions
   | AuthActions
 
-export {
-  getIngredients,
-  setOrder,
-  handleRegister,
-  handleLogin,
-  handleLogout,
-  getUser,
-}
+// Thunk actions
+export * from './dataActions'
+export * from './orderActions'
+export * from './authActions'
+export * from './authActions'
+export * from './authActions'

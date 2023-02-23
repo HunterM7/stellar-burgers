@@ -27,7 +27,7 @@ const IngredientPage: React.FC = () => {
   const { id } = useParams()
   const ingredients = useSelector(dataIngreientsSelector)
   const ingredient = React.useMemo(
-    () => ingredients.find((el) => el._id === id),
+    () => ingredients.find(el => el._id === id),
     [id, ingredients],
   )
 

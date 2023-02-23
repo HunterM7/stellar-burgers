@@ -57,7 +57,7 @@ const BurgerIngredients: React.FC = () => {
           key={i}
           id={`ingredients-block-${++i}`}
           title={item.title}
-          data={ingredients.filter((el) => el.type === item.type)}
+          data={ingredients.filter(el => el.type === item.type)}
         />
       )),
     [ingredients],

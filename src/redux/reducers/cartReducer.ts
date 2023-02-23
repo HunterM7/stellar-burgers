@@ -35,7 +35,7 @@ export const cartReducer = (
       return {
         ...state,
         ingredients: [...state.ingredients].filter(
-          (item) => item.uuid !== action.id,
+          item => item.uuid !== action.id,
         ),
       }
 

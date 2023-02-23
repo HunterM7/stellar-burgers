@@ -33,14 +33,14 @@ const ConstructorBody: React.FC = () => {
   const [{ isHover }, dropRef] = useDrop(() => ({
     accept: 'INGREDIENT',
     drop: ({ id }: { id: string }) => dropIngredient(id),
-    collect: (monitor) => ({
+    collect: monitor => ({
       isHover: monitor.isOver(),
     }),
   }))
 
   const dropIngredient = React.useCallback(
     (id: string) => {
-      const ingredient = allIngredients.find((el) => el._id === id)
+      const ingredient = allIngredients.find(el => el._id === id)
 
       if (ingredient) {
         ingredient.type === 'bun'

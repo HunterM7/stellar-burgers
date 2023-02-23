@@ -35,7 +35,7 @@ const ProfileInfo = () => {
 
   // Name input function
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
+    setForm(prev => ({
       ...prev,
       name: e.target.value,
     }))
@@ -43,7 +43,7 @@ const ProfileInfo = () => {
 
   // Email input function
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
+    setForm(prev => ({
       ...prev,
       email: e.target.value,
     }))
@@ -51,7 +51,7 @@ const ProfileInfo = () => {
 
   // Password input function
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
+    setForm(prev => ({
       ...prev,
       password: e.target.value,
     }))

@@ -1,47 +1,22 @@
-import App from './App/App'
-import AppHeader from './AppHeader/AppHeader'
-import AppHeaderLink from './AppHeader/AppHeaderLink/AppHeaderLink'
-import BurgerConstructor from './BurgerConstructor/BurgerConstructor'
-import ConstructorPlug from './BurgerConstructor/ConstructorPlug/ConstructorPlug'
-import BurgerIngredients from './BurgerIngredients/BurgerIngredients'
-import BurgerItem from './BurgerItem/BurgerItem'
-import ConstructorItem from './ConstructorItem/ConstructorItem'
-import IngredientsGroup from './IngredientsGroup/IngredientsGroup'
-import IngredientDetails from './IngredientDetails/IngredientDetails'
-import IngredientInfo from './IngredientInfo/IngredientInfo'
-import Loader from './Loader/Loader'
-import Modal from './Modal/Modal'
-import ModalOverlay from './Modal/ModalOverlay/ModalOverlay'
-import OrderDetails from './OrderDetails/OrderDetails'
-import OrderHistory from './OrderHistory/OrderHistory'
-import PopupHint from './PopupHint/PopupHint'
-import ProfileInfo from './ProfileInfo/ProfileInfo'
-import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
-import AuthLink from './AuthLink/AuthLink'
-import ConstructorBody from './BurgerConstructor/ConstructorBody/ConstructorBody'
-import Router from './Router/Router'
-
-export {
-  App,
-  AppHeader,
-  AppHeaderLink,
-  BurgerConstructor,
-  ConstructorPlug,
-  BurgerIngredients,
-  BurgerItem,
-  ConstructorItem,
-  IngredientDetails,
-  IngredientsGroup,
-  Loader,
-  Modal,
-  ModalOverlay,
-  OrderDetails,
-  PopupHint,
-  ProfileInfo,
-  OrderHistory,
-  ProtectedRoute,
-  IngredientInfo,
-  AuthLink,
-  ConstructorBody,
-  Router,
-}
+export { default as App } from './App/App'
+export { default as AppHeader } from './AppHeader/AppHeader'
+export { default as AppHeaderLink } from './AppHeader/AppHeaderLink/AppHeaderLink'
+export { default as BurgerConstructor } from './BurgerConstructor/BurgerConstructor'
+export { default as ConstructorPlug } from './BurgerConstructor/ConstructorPlug/ConstructorPlug'
+export { default as BurgerIngredients } from './BurgerIngredients/BurgerIngredients'
+export { default as BurgerItem } from './BurgerItem/BurgerItem'
+export { default as ConstructorItem } from './ConstructorItem/ConstructorItem'
+export { default as IngredientsGroup } from './IngredientsGroup/IngredientsGroup'
+export { default as IngredientDetails } from './IngredientDetails/IngredientDetails'
+export { default as IngredientInfo } from './IngredientInfo/IngredientInfo'
+export { default as Loader } from './Loader/Loader'
+export { default as Modal } from './Modal/Modal'
+export { default as ModalOverlay } from './Modal/ModalOverlay/ModalOverlay'
+export { default as OrderDetails } from './OrderDetails/OrderDetails'
+export { default as OrderHistory } from './OrderHistory/OrderHistory'
+export { default as PopupHint } from './PopupHint/PopupHint'
+export { default as ProfileInfo } from './ProfileInfo/ProfileInfo'
+export { default as ProtectedRoute } from './ProtectedRoute/ProtectedRoute'
+export { default as AuthLink } from './AuthLink/AuthLink'
+export { default as ConstructorBody } from './BurgerConstructor/ConstructorBody/ConstructorBody'
+export { default as Router } from './Router/Router'

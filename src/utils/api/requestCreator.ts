@@ -1,5 +1,5 @@
 export type TMethod = 'GET' | 'POST' | 'PATCH'
-export type THeaders = object
+export type THeaders = { [name: string]: string }
 export type TBody = object
 
 export interface IRequestCreator {

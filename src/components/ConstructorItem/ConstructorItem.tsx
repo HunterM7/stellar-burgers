@@ -42,7 +42,7 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
       ingredient,
       orderId,
     },
-    collect: (monitor) => ({
+    collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
   })
