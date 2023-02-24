@@ -1,19 +1,11 @@
 // Redux
 import { AppThunk, AppDispatch } from 'redux/store'
-import { TAuthLogin, TAuthRegister } from 'redux/reducers/authReducer'
-import {
-  GetUserFetchStatus,
-  LoginFetchStatus,
-  LogoutFetchStatus,
-  RegisterFetchStatus,
-  SetUserFetchStatus,
-} from 'redux/actionTypes'
+import { TAuthLogin, TAuthRegister } from 'redux/reducers'
+import { AuthFetchStatus } from 'redux/actionTypes'
 import {
   registerError,
   registerRequest,
   registerSuccess,
-} from 'redux/actionCreators'
-import {
   getUserError,
   getUserRequest,
   getUserSuccess,
@@ -26,7 +18,7 @@ import {
   setUserError,
   setUserRequest,
   setUserSuccess,
-} from 'redux/actionCreators/authActionCreators'
+} from 'redux/actionCreators'
 
 // API Endpoints
 import {
@@ -89,71 +81,71 @@ export type TErrorResponse = {
 
 // Register actions
 export interface registerRequestA {
-  type: typeof RegisterFetchStatus.REGISTER_REQUEST
+  type: typeof AuthFetchStatus.REGISTER_REQUEST
 }
 
 export interface registerErrorA {
-  type: typeof RegisterFetchStatus.REGISTER_ERROR
+  type: typeof AuthFetchStatus.REGISTER_ERROR
 }
 
 export interface registerSuccessA {
-  type: typeof RegisterFetchStatus.REGISTER_SUCCESS
+  type: typeof AuthFetchStatus.REGISTER_SUCCESS
   response: TRegisterResponse
 }
 
 // Login actions
 export interface loginRequestA {
-  type: typeof LoginFetchStatus.LOGIN_REQUEST
+  type: typeof AuthFetchStatus.LOGIN_REQUEST
 }
 
 export interface loginErrorA {
-  type: typeof LoginFetchStatus.LOGIN_ERROR
+  type: typeof AuthFetchStatus.LOGIN_ERROR
 }
 
 export interface loginSuccessA {
-  type: typeof LoginFetchStatus.LOGIN_SUCCESS
+  type: typeof AuthFetchStatus.LOGIN_SUCCESS
   response: TLoginResponse
 }
 
 // Logout actions
 export interface logoutRequestA {
-  type: typeof LogoutFetchStatus.LOGOUT_REQUEST
+  type: typeof AuthFetchStatus.LOGOUT_REQUEST
 }
 
 export interface logoutErrorA {
-  type: typeof LogoutFetchStatus.LOGOUT_ERROR
+  type: typeof AuthFetchStatus.LOGOUT_ERROR
 }
 
 export interface logoutSuccessA {
-  type: typeof LogoutFetchStatus.LOGOUT_SUCCESS
+  type: typeof AuthFetchStatus.LOGOUT_SUCCESS
   response: TLogoutResponse
 }
 
 // Get user actions
 export interface getUserRequestA {
-  type: typeof GetUserFetchStatus.GET_USER_REQUEST
+  type: typeof AuthFetchStatus.GET_USER_REQUEST
 }
 
 export interface getUserErrorA {
-  type: typeof GetUserFetchStatus.GET_USER_ERROR
+  type: typeof AuthFetchStatus.GET_USER_ERROR
 }
 
 export interface getUserSuccessA {
-  type: typeof GetUserFetchStatus.GET_USER_SUCCESS
+  type: typeof AuthFetchStatus.GET_USER_SUCCESS
   response: TUserResponse
 }
 
 // Set user actions
 export interface setUserRequestA {
-  type: typeof SetUserFetchStatus.SET_USER_REQUEST
+  type: typeof AuthFetchStatus.SET_USER_REQUEST
 }
 
 export interface setUserErrorA {
-  type: typeof SetUserFetchStatus.SET_USER_ERROR
+  type: typeof AuthFetchStatus.SET_USER_ERROR
 }
 
 export interface setUserSuccessA {
-  type: typeof SetUserFetchStatus.SET_USER_SUCCESS
+  type: typeof AuthFetchStatus.SET_USER_SUCCESS
   response: TUserResponse
 }
 

@@ -1,6 +1,6 @@
 // Redux
 import { AppDispatch, AppThunk } from 'redux/store'
-import { TIngredient, IngredientFetchStatus } from 'redux/actionTypes'
+import { TIngredient, IngredientsFetchStatus } from 'redux/actionTypes'
 import {
   setErrorStatus,
   setRequestStatus,
@@ -12,13 +12,13 @@ import { checkReponse } from 'utils/api/checkReponse'
 import { API_URL_INGREDIENTS } from 'utils/data/constants'
 
 export interface setRequestStatusA {
-  type: typeof IngredientFetchStatus.INGREDIENT_REQUEST
+  type: typeof IngredientsFetchStatus.INGREDIENTS_REQUEST
 }
 export interface setErrorStatusA {
-  type: typeof IngredientFetchStatus.INGREDIENT_ERROR
+  type: typeof IngredientsFetchStatus.INGREDIENTS_ERROR
 }
 export interface setSuccessStatusA {
-  type: typeof IngredientFetchStatus.INGREDIENT_SUCCESS
+  type: typeof IngredientsFetchStatus.INGREDIENTS_SUCCESS
   ingredients: TIngredient[]
 }
 

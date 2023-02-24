@@ -15,3 +15,10 @@ export const rootReducer = combineReducers({
   ingredientDetails: ingredientDetailsReducer,
   auth: authReducer,
 })
+
+// Export Reducers
+export * from './dataReducer'
+export * from './cartReducer'
+export * from './orderReducer'
+export * from './ingredientDetailsReducer'
+export * from './authReducer'

@@ -1,10 +1,4 @@
-import {
-  GetUserFetchStatus,
-  LoginFetchStatus,
-  LogoutFetchStatus,
-  RegisterFetchStatus,
-  SetUserFetchStatus,
-} from 'redux/actionTypes'
+import { AuthFetchStatus } from 'redux/actionTypes'
 import {
   TRegisterResponse,
   registerRequestA,
@@ -29,72 +23,72 @@ import {
 
 // Register action creators
 export const registerRequest = (): registerRequestA => ({
-  type: RegisterFetchStatus.REGISTER_REQUEST,
+  type: AuthFetchStatus.REGISTER_REQUEST,
 })
 
 export const registerError = (): registerErrorA => ({
-  type: RegisterFetchStatus.REGISTER_ERROR,
+  type: AuthFetchStatus.REGISTER_ERROR,
 })
 
 export const registerSuccess = (
   response: TRegisterResponse,
 ): registerSuccessA => ({
-  type: RegisterFetchStatus.REGISTER_SUCCESS,
+  type: AuthFetchStatus.REGISTER_SUCCESS,
   response,
 })
 
 // Login action creators
 export const loginRequest = (): loginRequestA => ({
-  type: LoginFetchStatus.LOGIN_REQUEST,
+  type: AuthFetchStatus.LOGIN_REQUEST,
 })
 
 export const loginError = (): loginErrorA => ({
-  type: LoginFetchStatus.LOGIN_ERROR,
+  type: AuthFetchStatus.LOGIN_ERROR,
 })
 
 export const loginSuccess = (response: TLoginResponse): loginSuccessA => ({
-  type: LoginFetchStatus.LOGIN_SUCCESS,
+  type: AuthFetchStatus.LOGIN_SUCCESS,
   response,
 })
 
 // Logout action creators
 export const logoutRequest = (): logoutRequestA => ({
-  type: LogoutFetchStatus.LOGOUT_REQUEST,
+  type: AuthFetchStatus.LOGOUT_REQUEST,
 })
 
 export const logoutError = (): logoutErrorA => ({
-  type: LogoutFetchStatus.LOGOUT_ERROR,
+  type: AuthFetchStatus.LOGOUT_ERROR,
 })
 
 export const logoutSuccess = (response: TLogoutResponse): logoutSuccessA => ({
-  type: LogoutFetchStatus.LOGOUT_SUCCESS,
+  type: AuthFetchStatus.LOGOUT_SUCCESS,
   response,
 })
 
 // Getting user action creators
 export const getUserRequest = (): getUserRequestA => ({
-  type: GetUserFetchStatus.GET_USER_REQUEST,
+  type: AuthFetchStatus.GET_USER_REQUEST,
 })
 
 export const getUserError = (): getUserErrorA => ({
-  type: GetUserFetchStatus.GET_USER_ERROR,
+  type: AuthFetchStatus.GET_USER_ERROR,
 })
 
 export const getUserSuccess = (response: TUserResponse): getUserSuccessA => ({
-  type: GetUserFetchStatus.GET_USER_SUCCESS,
+  type: AuthFetchStatus.GET_USER_SUCCESS,
   response,
 })
 
 // Setting user action creators
 export const setUserRequest = (): setUserRequestA => ({
-  type: SetUserFetchStatus.SET_USER_REQUEST,
+  type: AuthFetchStatus.SET_USER_REQUEST,
 })
 
 export const setUserError = (): setUserErrorA => ({
-  type: SetUserFetchStatus.SET_USER_ERROR,
+  type: AuthFetchStatus.SET_USER_ERROR,
 })
 
 export const setUserSuccess = (response: TUserResponse): setUserSuccessA => ({
-  type: SetUserFetchStatus.SET_USER_SUCCESS,
+  type: AuthFetchStatus.SET_USER_SUCCESS,
   response,
 })

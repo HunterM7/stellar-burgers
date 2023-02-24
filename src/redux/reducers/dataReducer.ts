@@ -1,4 +1,4 @@
-import { TDataState, IngredientFetchStatus } from 'redux/actionTypes'
+import { TDataState, IngredientsFetchStatus } from 'redux/actionTypes'
 import { DataActions } from 'redux/actions'
 
 const initialState: TDataState = {
@@ -12,21 +12,21 @@ export const dataReducer = (
   action: DataActions,
 ): TDataState => {
   switch (action.type) {
-    case IngredientFetchStatus.INGREDIENT_REQUEST: {
+    case IngredientsFetchStatus.INGREDIENTS_REQUEST: {
       return {
         ...state,
         isLoading: true,
         hasError: false,
       }
     }
-    case IngredientFetchStatus.INGREDIENT_SUCCESS: {
+    case IngredientsFetchStatus.INGREDIENTS_SUCCESS: {
       return {
         ingredients: action.ingredients,
         isLoading: false,
         hasError: false,
       }
     }
-    case IngredientFetchStatus.INGREDIENT_ERROR: {
+    case IngredientsFetchStatus.INGREDIENTS_ERROR: {
       return {
         ...initialState,
         isLoading: false,
