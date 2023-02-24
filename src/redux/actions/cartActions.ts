@@ -1,30 +1,28 @@
-import { TIngredient, TIngredientCart } from 'redux/actionTypes'
-
-export const SET_BUN = 'SET_BUN'
-export const SET_INGREDIENT = 'SET_INGREDIENT'
-export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
-export const REORDER_INGREDIENTS = 'REORDER_INGREDIENTS'
-export const SET_TOTAL_PRICE = 'SET_TOTAL_PRICE'
+import {
+  CartActionTypes,
+  TIngredient,
+  TIngredientCart,
+} from 'redux/actionTypes'
 
 // Actions
 export interface setBunA {
-  type: typeof SET_BUN
+  type: typeof CartActionTypes.SET_BUN
   ingredient: TIngredient
 }
 export interface setIngredientA {
-  type: typeof SET_INGREDIENT
+  type: typeof CartActionTypes.SET_INGREDIENT
   ingredient: TIngredientCart
 }
 export interface removeIngredientA {
-  type: typeof REMOVE_INGREDIENT
+  type: typeof CartActionTypes.REMOVE_INGREDIENT
   id: string
 }
 export interface reorderIngredientsA {
-  type: typeof REORDER_INGREDIENTS
+  type: typeof CartActionTypes.REORDER_INGREDIENTS
   ingredients: TIngredientCart[]
 }
 export interface setTotalPriceA {
-  type: typeof SET_TOTAL_PRICE
+  type: typeof CartActionTypes.SET_TOTAL_PRICE
 }
 
 export type CartActions =

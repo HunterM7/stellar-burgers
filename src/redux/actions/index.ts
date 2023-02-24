@@ -14,7 +14,7 @@ export type TAppActions =
 
 // Thunk actions
 export * from './dataActions'
+export * from './cartActions'
 export * from './orderActions'
-export * from './authActions'
-export * from './authActions'
+export * from './ingredientDetailsActions'
 export * from './authActions'

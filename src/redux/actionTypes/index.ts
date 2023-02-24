@@ -58,6 +58,20 @@ export enum OrderFetchStatus {
   ORDER_ERROR = 'ORDER_ERROR',
 }
 
+// Action types
+export enum CartActionTypes {
+  SET_BUN = 'SET_BUN',
+  SET_INGREDIENT = 'SET_INGREDIENT',
+  REMOVE_INGREDIENT = 'REMOVE_INGREDIENT',
+  REORDER_INGREDIENTS = 'REORDER_INGREDIENTS',
+  SET_TOTAL_PRICE = 'SET_TOTAL_PRICE',
+}
+
+export enum IngredientDetailsActionTypes {
+  SET_INGREDIENT_DETAILS = 'SET_INGREDIENT_DETAILS',
+  RESET_INGREDIENT_DETAILS = 'RESET_INGREDIENT_DETAILS',
+}
+
 export interface TDataState {
   ingredients: TIngredient[]
   isLoading: boolean

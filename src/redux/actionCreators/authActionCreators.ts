@@ -25,7 +25,7 @@ import {
   setUserErrorA,
   setUserSuccessA,
   TUserResponse,
-} from 'redux/actions/authActions'
+} from 'redux/actions'
 
 // Register action creators
 export const registerRequest = (): registerRequestA => ({

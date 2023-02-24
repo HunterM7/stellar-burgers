@@ -9,7 +9,7 @@ import React from 'react'
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
 import { authUserSelector } from 'redux/selectors'
-import { setUser } from 'redux/actions/authActions'
+import { setUser } from 'redux/actions'
 
 // Styles
 import styles from './ProfileInfo.module.scss'

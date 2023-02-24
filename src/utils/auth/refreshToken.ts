@@ -6,7 +6,7 @@ import { requestCreator } from 'utils/api/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
 
 // Redux
-import { TErrorResponse } from 'redux/actions/authActions'
+import { TErrorResponse } from 'redux/actions'
 
 // API Routes
 import { API_AUTH_TOKEN } from 'utils/data/constants'

@@ -1,12 +1,5 @@
-import { TCartState } from 'redux/actionTypes'
-import {
-  CartActions,
-  SET_INGREDIENT,
-  REMOVE_INGREDIENT,
-  SET_TOTAL_PRICE,
-  REORDER_INGREDIENTS,
-  SET_BUN,
-} from 'redux/actions/cartActions'
+import { CartActionTypes, TCartState } from 'redux/actionTypes'
+import { CartActions } from 'redux/actions'
 
 const initialState: TCartState = {
   bun: null,
@@ -19,19 +12,19 @@ export const cartReducer = (
   action: CartActions,
 ): TCartState => {
   switch (action.type) {
-    case SET_BUN:
+    case CartActionTypes.SET_BUN:
       return {
         ...state,
         bun: action.ingredient,
       }
 
-    case SET_INGREDIENT:
+    case CartActionTypes.SET_INGREDIENT:
       return {
         ...state,
         ingredients: [...state.ingredients, action.ingredient],
       }
 
-    case REMOVE_INGREDIENT:
+    case CartActionTypes.REMOVE_INGREDIENT:
       return {
         ...state,
         ingredients: [...state.ingredients].filter(
@@ -39,13 +32,13 @@ export const cartReducer = (
         ),
       }
 
-    case REORDER_INGREDIENTS:
+    case CartActionTypes.REORDER_INGREDIENTS:
       return {
         ...state,
         ingredients: action.ingredients,
       }
 
-    case SET_TOTAL_PRICE: {
+    case CartActionTypes.SET_TOTAL_PRICE: {
       const bunPrice = state.bun ? state.bun.price * 2 : 0
       const ingredientsPrice = state.ingredients.reduce(
         (sum, item) => sum + item.price,

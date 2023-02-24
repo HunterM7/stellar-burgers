@@ -1,4 +1,4 @@
-import { AuthActions } from 'redux/actions/authActions'
+import { AuthActions } from 'redux/actions'
 import {
   GetUserFetchStatus,
   LoginFetchStatus,
