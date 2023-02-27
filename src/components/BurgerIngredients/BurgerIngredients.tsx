@@ -7,7 +7,7 @@ import { useSelector } from 'redux/store'
 import { dataIngreientsSelector } from 'redux/selectors'
 
 // Utils
-import { ingredientGroups } from 'utils/ingredientGroups'
+import { ingredientGroups } from 'utils/data/ingredientGroups'
 
 // Components
 import { IngredientsGroup } from 'components'

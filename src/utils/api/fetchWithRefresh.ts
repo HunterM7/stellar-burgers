@@ -13,20 +13,21 @@ export const fetchWithRefresh = async <T>(
 
     const res = await fetch(url, requestOptions)
 
-    return await checkReponse<T>(res)
+    return checkReponse<T>(res)
   } catch (error) {
     if (error instanceof Error && error.message === 'jwt expired') {
       const freshData = await refreshToken()
-      if (!freshData.success) return Promise.reject(freshData)
+
+      if (!freshData) return Promise.reject(error)
 
       const requestOptions = requestCreator({
         ...options,
-        headers: { ...options.headers, Authorization: '' },
+        headers: { ...options.headers, Authorization: 'freshData.accessToken' },
       })
 
       const res = await fetch(url, requestOptions)
 
-      return await checkReponse<T>(res)
+      return checkReponse<T>(res)
     } else {
       return Promise.reject(error)
     }

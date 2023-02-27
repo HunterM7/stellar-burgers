@@ -15,7 +15,6 @@ import styles from './Modal.module.scss'
 
 interface IModal {
   title?: string
-  children?: React.ReactElement
 }
 
 const Modal: React.FC<PropsWithChildren<IModal>> = ({ title, children }) => {

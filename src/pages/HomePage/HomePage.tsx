@@ -16,21 +16,21 @@ import { Loader, BurgerIngredients, BurgerConstructor } from 'components'
 import styles from './HomePage.module.scss'
 
 const HomePage: React.FC = () => {
-  const { isLoading, hasError } = useSelector(dataSelector)
-
   const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(getIngredients())
   }, [dispatch])
 
+  const { isLoading, hasError } = useSelector(dataSelector)
+
   return (
     <main className={`container ${styles.wrapper}`}>
-      {isLoading ? (
-        <Loader />
-      ) : hasError ? (
-        <h2>Что-то пошло не так</h2>
-      ) : (
+      {isLoading && <Loader />}
+
+      {hasError && <h2>Что-то пошло не так</h2>}
+
+      {!isLoading && !hasError && (
         <DndProvider backend={HTML5Backend}>
           <h2 className={styles.title}>Соберите бургер</h2>
           <BurgerIngredients />

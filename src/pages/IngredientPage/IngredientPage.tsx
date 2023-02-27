@@ -53,7 +53,6 @@ const IngredientPage: React.FC = () => {
         <h2>Что-то пошло не так...</h2>
       ) : (
         <>
-          {' '}
           <h2>Детали ингредиента</h2>
           <IngredientInfo />
         </>

@@ -1,18 +1,18 @@
 export const SET_ORDER_ID = 'SET_ORDER_ID'
 
 // API links
-export const API_URL = 'https://norma.nomoreparties.space/api/'
-export const API_URL_INGREDIENTS = `${API_URL}ingredients/`
-export const API_URL_ORDER = `${API_URL}orders/`
-export const API_URL_PASSWORD_RESET = `${API_URL}password-reset/`
-export const API_URL_PASSWORD_RESET_REQUEST = `${API_URL}password-reset/reset/`
+export const API_URL = 'https://norma.nomoreparties.space/api'
+export const API_URL_INGREDIENTS = `${API_URL}/ingredients`
+export const API_URL_ORDER = `${API_URL}/orders`
+export const API_URL_PASSWORD_RESET = `${API_URL}/password-reset`
+export const API_URL_PASSWORD_RESET_REQUEST = `${API_URL}/password-reset/reset`
 
 // API Auth Endpoints
-export const API_AUTH_USER = `${API_URL}auth/user` // эндпоинт получения и обновления данных пользователя.
-export const API_AUTH_LOGIN = `${API_URL}auth/login` // эндпоинт для авторизации.
-export const API_AUTH_LOGOUT = `${API_URL}auth/logout` // эндпоинт для выхода из системы.
-export const API_AUTH_REGISTER = `${API_URL}auth/register` // эндпоинт для регистрации пользователя.
-export const API_AUTH_TOKEN = `${API_URL}auth/token` // эндпоинт обновления токена.
+export const API_AUTH_USER = `${API_URL}/auth/user` // эндпоинт получения и обновления данных пользователя.
+export const API_AUTH_LOGIN = `${API_URL}/auth/login` // эндпоинт для авторизации.
+export const API_AUTH_LOGOUT = `${API_URL}/auth/logout` // эндпоинт для выхода из системы.
+export const API_AUTH_REGISTER = `${API_URL}/auth/register` // эндпоинт для регистрации пользователя.
+export const API_AUTH_TOKEN = `${API_URL}/auth/token` // эндпоинт обновления токена.
 
 // Routes
 export const NOT_FOUND_LINK = '*'
