@@ -8,7 +8,7 @@ import {
 import {
   CartActionTypes,
   TIngredient,
-  TIngredientCart,
+  TCartIngredient,
 } from 'redux/actionTypes'
 
 export const setBun = (ingredient: TIngredient): setBunA => ({
@@ -27,7 +27,7 @@ export const removeIngredient = (id: string): removeIngredientA => ({
 })
 
 export const reorderIngredients = (
-  ingredients: TIngredientCart[],
+  ingredients: TCartIngredient[],
 ): reorderIngredientsA => ({
   type: CartActionTypes.REORDER_INGREDIENTS,
   ingredients,

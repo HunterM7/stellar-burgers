@@ -10,7 +10,7 @@ import {
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
-import { TIngredientCart } from 'redux/actionTypes'
+import { TCartIngredient } from 'redux/actionTypes'
 import { removeIngredient, reorderIngredients } from 'redux/actionCreators'
 import { cartIngredientsSelector } from 'redux/selectors'
 
@@ -21,7 +21,7 @@ import { sortFunc } from 'utils/sortFunc'
 import styles from './ConstructorItem.module.scss'
 
 type TConstructorItem = {
-  ingredient: TIngredientCart
+  ingredient: TCartIngredient
   orderId: number
 }
 
@@ -96,7 +96,7 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
       // Time to actually perform the action
       dispatch(
         reorderIngredients(
-          sortFunc<TIngredientCart>(ingredients, dragIndex, hoverIndex),
+          sortFunc<TCartIngredient>(ingredients, dragIndex, hoverIndex),
         ),
       )
 

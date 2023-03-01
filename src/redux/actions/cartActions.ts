@@ -1,7 +1,7 @@
 import {
   CartActionTypes,
   TIngredient,
-  TIngredientCart,
+  TCartIngredient,
 } from 'redux/actionTypes'
 
 // Actions
@@ -11,7 +11,7 @@ export interface setBunA {
 }
 export interface setIngredientA {
   type: typeof CartActionTypes.SET_INGREDIENT
-  ingredient: TIngredientCart
+  ingredient: TCartIngredient
 }
 export interface removeIngredientA {
   type: typeof CartActionTypes.REMOVE_INGREDIENT
@@ -19,7 +19,7 @@ export interface removeIngredientA {
 }
 export interface reorderIngredientsA {
   type: typeof CartActionTypes.REORDER_INGREDIENTS
-  ingredients: TIngredientCart[]
+  ingredients: TCartIngredient[]
 }
 export interface setTotalPriceA {
   type: typeof CartActionTypes.SET_TOTAL_PRICE

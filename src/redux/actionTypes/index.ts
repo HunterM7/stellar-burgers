@@ -1,7 +1,7 @@
 export interface TIngredient {
   _id: string
   name: string
-  type: string
+  type: 'bun' | 'sauce' | 'main'
   proteins: number
   fat: number
   carbohydrates: number
@@ -12,7 +12,7 @@ export interface TIngredient {
   image_large: string
 }
 
-export interface TIngredientCart extends TIngredient {
+export interface TCartIngredient extends TIngredient {
   uuid: string
 }
 
@@ -24,7 +24,7 @@ export interface TDataState {
 
 export interface TCartState {
   bun: TIngredient | null
-  ingredients: TIngredientCart[]
+  ingredients: TCartIngredient[]
   totalPrice: number
 }
 
