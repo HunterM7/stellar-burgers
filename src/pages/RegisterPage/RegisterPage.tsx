@@ -20,7 +20,7 @@ const RegisterPage: React.FC = () => {
   const dispatch = useDispatch()
 
   // Form state
-  const [registerForm, setRegisterForm] = React.useState({
+  const [form, setForm] = React.useState({
     name: '',
     email: '',
     password: '',
@@ -29,25 +29,25 @@ const RegisterPage: React.FC = () => {
   // Name input function
   const onChangeName = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setRegisterForm(prev => ({ ...prev, name: e.target.value }))
+      setForm(prev => ({ ...prev, name: e.target.value }))
     },
-    [setRegisterForm],
+    [setForm],
   )
 
   // Email input function
   const onChangeEmail = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setRegisterForm(prev => ({ ...prev, email: e.target.value }))
+      setForm(prev => ({ ...prev, email: e.target.value }))
     },
-    [setRegisterForm],
+    [setForm],
   )
 
   // Password input function
   const onChangePassword = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setRegisterForm(prev => ({ ...prev, password: e.target.value }))
+      setForm(prev => ({ ...prev, password: e.target.value }))
     },
-    [setRegisterForm],
+    [setForm],
   )
 
   // Submit form
@@ -55,9 +55,9 @@ const RegisterPage: React.FC = () => {
     (e: React.FormEvent) => {
       e.preventDefault()
 
-      dispatch(handleRegister(registerForm))
+      dispatch(handleRegister(form))
     },
-    [dispatch, registerForm],
+    [dispatch, form],
   )
 
   return (
@@ -69,7 +69,7 @@ const RegisterPage: React.FC = () => {
           type="text"
           placeholder="Имя"
           onChange={onChangeName}
-          value={registerForm.name}
+          value={form.name}
           name="name"
           error={false}
           errorText="Ошибка"
@@ -80,17 +80,22 @@ const RegisterPage: React.FC = () => {
         <EmailInput
           name="email"
           placeholder="E-mail"
-          value={registerForm.email}
+          value={form.email}
           onChange={onChangeEmail}
         />
 
         <PasswordInput
           onChange={onChangePassword}
-          value={registerForm.password}
+          value={form.password}
           name={'password'}
         />
 
-        <Button htmlType="submit" type="primary" size="large">
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="large"
+          disabled={!form.email || !form.name || !form.password}
+        >
           Зарегистрироваться
         </Button>
       </form>

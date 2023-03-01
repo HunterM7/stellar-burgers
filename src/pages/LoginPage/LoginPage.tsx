@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
   const dispatch = useDispatch()
 
   // Form state
-  const [loginForm, setLoginForm] = React.useState({
+  const [form, setForm] = React.useState({
     email: '',
     password: '',
   })
@@ -27,17 +27,17 @@ const LoginPage: React.FC = () => {
   // Email input function
   const onChangeEmail = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setLoginForm(prev => ({ ...prev, email: e.target.value }))
+      setForm(prev => ({ ...prev, email: e.target.value }))
     },
-    [setLoginForm],
+    [setForm],
   )
 
   // Password input function
   const onChangePassword = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setLoginForm(prev => ({ ...prev, password: e.target.value }))
+      setForm(prev => ({ ...prev, password: e.target.value }))
     },
-    [setLoginForm],
+    [setForm],
   )
 
   // Submit form
@@ -45,9 +45,9 @@ const LoginPage: React.FC = () => {
     (e: React.FormEvent) => {
       e.preventDefault()
 
-      dispatch(handleLogin(loginForm))
+      dispatch(handleLogin(form))
     },
-    [dispatch, loginForm],
+    [dispatch, form],
   )
 
   return (
@@ -58,18 +58,23 @@ const LoginPage: React.FC = () => {
         <EmailInput
           name="email"
           placeholder="E-mail"
-          value={loginForm.email}
+          value={form.email}
           onChange={onChangeEmail}
           autoFocus
         />
 
         <PasswordInput
           onChange={onChangePassword}
-          value={loginForm.password}
+          value={form.password}
           name={'password'}
         />
 
-        <Button htmlType="submit" type="primary" size="large">
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="large"
+          disabled={!form.email || !form.password}
+        >
           Войти
         </Button>
       </form>

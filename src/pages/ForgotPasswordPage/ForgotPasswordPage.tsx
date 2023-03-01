@@ -59,7 +59,12 @@ const ForgotPasswordPage = () => {
           autoFocus
         />
 
-        <Button htmlType="submit" type="primary" size="large">
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="large"
+          disabled={!form.email}
+        >
           Восстановить
         </Button>
       </form>

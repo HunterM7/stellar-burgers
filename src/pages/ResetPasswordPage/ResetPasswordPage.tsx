@@ -90,7 +90,12 @@ const ResetPasswordPage: React.FC = () => {
           size="default"
         />
 
-        <Button htmlType="submit" type="primary" size="large">
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="large"
+          disabled={!form.password || !form.token}
+        >
           Восстановить
         </Button>
       </form>
