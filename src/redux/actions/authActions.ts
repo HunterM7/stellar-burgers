@@ -31,7 +31,7 @@ import {
 // Functions
 import { checkReponse } from 'utils/api/checkReponse'
 import { deleteCookie, getCookie } from 'utils/cookie'
-import { refreshToken } from 'utils/auth/refreshToken'
+import { refreshTokens } from 'utils/auth/refreshTokens'
 import { requestCreator } from 'utils/api/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
 
@@ -211,22 +211,26 @@ export const handleLogin =
 export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(logoutRequest())
 
-  const requestOptions = requestCreator({
-    method: 'POST',
-    body: { token: localStorage.getItem('refreshToken') },
-  })
+  const refreshToken = localStorage.getItem('refreshToken')
 
-  fetch(API_AUTH_LOGOUT, requestOptions)
-    .then(res => checkReponse<TLogoutResponse>(res))
-    .then(res => {
-      deleteCookie('token')
-      localStorage.removeItem('refreshToken')
+  if (refreshToken) {
+    const requestOptions = requestCreator({
+      method: 'POST',
+      body: { token: refreshToken },
+    })
 
-      dispatch(logoutSuccess(res))
-    })
-    .catch(err => {
-      dispatch(logoutError())
-    })
+    fetch(API_AUTH_LOGOUT, requestOptions)
+      .then(res => checkReponse<TLogoutResponse>(res))
+      .then(res => {
+        deleteCookie('token')
+        localStorage.removeItem('refreshToken')
+
+        dispatch(logoutSuccess(res))
+      })
+      .catch(err => {
+        dispatch(logoutError())
+      })
+  }
 }
 
 export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
@@ -244,7 +248,7 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
     .then(res => dispatch(getUserSuccess(res)))
     .catch((err: TErrorResponse) => {
       if (err.message === 'jwt expired') {
-        refreshToken().then(() => dispatch(getUser()))
+        refreshTokens().then(() => dispatch(getUser()))
       } else {
         dispatch(getUserError())
       }
@@ -267,7 +271,7 @@ export const setUser =
       .then(res => dispatch(setUserSuccess(res)))
       .catch((err: TErrorResponse) => {
         if (err.message === 'jwt expired') {
-          refreshToken().then(() =>
+          refreshTokens().then(() =>
             dispatch(setUser({ name, email, password })),
           )
         } else {

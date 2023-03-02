@@ -2,7 +2,7 @@
 
 import { checkReponse } from 'utils/api/checkReponse'
 import { IRequestCreator, requestCreator } from 'utils/api/requestCreator'
-import { refreshToken } from 'utils/auth/refreshToken'
+import { refreshTokens } from 'utils/auth/refreshTokens'
 
 export const fetchWithRefresh = async <T>(
   url: string,
@@ -16,7 +16,7 @@ export const fetchWithRefresh = async <T>(
     return checkReponse<T>(res)
   } catch (error) {
     if (error instanceof Error && error.message === 'jwt expired') {
-      const freshData = await refreshToken()
+      const freshData = await refreshTokens()
 
       if (!freshData) return Promise.reject(error)
 
