@@ -6,6 +6,7 @@
 	@include font-digits-large;
 	@include glow;
 
+	padding-top: 16px;
 	margin-bottom: 32px;
 }
 
@@ -23,4 +24,5 @@
 
 .desc {
 	color: $text-secondary;
+	padding-bottom: 60px;
 }

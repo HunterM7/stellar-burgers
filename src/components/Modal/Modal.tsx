@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react'
-import { createPortal } from 'react-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -8,7 +7,7 @@ import useKeyPress from 'hooks/useKeyPress'
 import { IUseLocation } from 'utils/types'
 
 // Components
-import { ModalOverlay } from 'components'
+import { Portal, ModalOverlay } from 'components'
 
 // Styles
 import styles from './Modal.module.scss'
@@ -18,17 +17,10 @@ interface IModal {
 }
 
 const Modal: React.FC<PropsWithChildren<IModal>> = ({ title, children }) => {
+  const navigate = useNavigate()
   const location: IUseLocation = useLocation()
 
-  // Heading in modal window
-  const heading = React.useMemo(
-    () => <h2 className={styles.title}>{title}</h2>,
-    [title],
-  )
-
   // Close function
-  const navigate = useNavigate()
-
   const closeFunc = React.useCallback(() => {
     location?.state?.background && navigate(location.state.background)
   }, [location.state, navigate])
@@ -36,28 +28,14 @@ const Modal: React.FC<PropsWithChildren<IModal>> = ({ title, children }) => {
   // Handling Escape press
   useKeyPress('Escape', closeFunc)
 
-  // Root where we render modal window
-  const modalRoot = React.useMemo(
-    () => document.getElementById('modal') as HTMLElement,
-    [],
-  )
-
-  // If there is no root container we don't render modal window
-  if (!modalRoot) return null
-
-  return createPortal(
-    <div className={styles.wrapper}>
-      <div
-        className={`
-				${styles.modal}
-				${title ? styles.modal_withHeading : ''}
-			`}
-      >
+  return (
+    <Portal>
+      <div className={styles.modal}>
         <div className={styles.header}>
-          {title && heading}
+          {title && <h2 className={styles.title}>{title}</h2>}
 
-          <button className={styles.closeBtn}>
-            <CloseIcon type="primary" onClick={closeFunc} />
+          <button className={styles.closeBtn} onClick={closeFunc}>
+            <CloseIcon type="primary" />
           </button>
         </div>
 
@@ -65,8 +43,7 @@ const Modal: React.FC<PropsWithChildren<IModal>> = ({ title, children }) => {
       </div>
 
       <ModalOverlay closeFunc={closeFunc} />
-    </div>,
-    modalRoot,
+    </Portal>
   )
 }
 

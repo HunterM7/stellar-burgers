@@ -20,3 +20,4 @@ export { default as ProtectedRoute } from './Router/ProtectedRoute/ProtectedRout
 export { default as AuthLink } from './AuthLink/AuthLink'
 export { default as ConstructorBody } from './BurgerConstructor/ConstructorBody/ConstructorBody'
 export { default as Router } from './Router/Router'
+export { default as Portal } from './Portal/Portal'
