@@ -84,7 +84,7 @@ const Router: React.FC = () => {
         {/* Not Found Page */}
         <Route path={NOT_FOUND_LINK} element={<NotFoundPage />} />
       </Routes>
-      {background && (
+      {!!background && (
         <Routes>
           <Route path={INGREDIENT_PAGE_LINK} element={<IngredientDetails />} />
           <Route path={ORDER_LINK} element={<OrderDetails />} />

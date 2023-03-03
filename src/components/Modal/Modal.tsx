@@ -32,7 +32,7 @@ const Modal: React.FC<PropsWithChildren<IModal>> = ({ title, children }) => {
     <Portal>
       <div className={styles.modal}>
         <div className={styles.header}>
-          {title && <h2 className={styles.title}>{title}</h2>}
+          {!!title && <h2 className={styles.title}>{title}</h2>}
 
           <button className={styles.closeBtn} onClick={closeFunc}>
             <CloseIcon type="primary" />

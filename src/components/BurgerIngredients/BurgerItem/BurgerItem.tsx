@@ -74,7 +74,7 @@ const BurgerItem: React.FC<IBurgerItem> = ({ ingredient }) => {
         <p className={styles.title}>{ingredient.name}</p>
       </Link>
 
-      {count ? <Counter count={count} size="default" /> : null}
+      {!!count && <Counter count={count} size="default" />}
     </li>
   )
 }
