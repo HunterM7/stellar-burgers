@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { Identifier, XYCoord } from 'dnd-core'
+import classNames from 'classnames'
 
 // Yandex components
 import {
@@ -114,10 +115,10 @@ const ConstructorItem: React.FC<TConstructorItem> = ({
     <li
       ref={itemRef}
       data-handler-id={handlerId}
-      className={`
-				${styles.wrapper}
-				${isDragging ? styles.wrapper_draggable : ''}
-			`}
+      className={classNames(
+        styles.wrapper,
+        isDragging && styles.wrapper_draggable,
+      )}
     >
       <div className={styles.dragIcon}>
         <DragIcon type="primary" />

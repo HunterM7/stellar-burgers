@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDrop } from 'react-dnd'
+import classNames from 'classnames'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
@@ -52,10 +53,7 @@ const ConstructorBody: React.FC = () => {
   return (
     <div
       ref={dropRef}
-      className={`
-				${styles.wrapper}
-				${isHover ? styles.wrapper_hover : ''}
-			`}
+      className={classNames(styles.wrapper, isHover && styles.wrapper_hover)}
     >
       <ConstructorBun position="top" />
 

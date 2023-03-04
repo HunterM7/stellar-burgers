@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import classNames from 'classnames'
 import {
   Counter,
   CurrencyIcon,
@@ -48,10 +49,10 @@ const BurgerItem: React.FC<IBurgerItem> = ({ ingredient }) => {
 
   return (
     <li
-      className={`
-			${styles.wrapper}
-			${isDragging ? styles.wrapper_onDrag : ''}
-		`}
+      className={classNames(
+        styles.wrapper,
+        isDragging && styles.wrapper_onDrag,
+      )}
       ref={dragRef}
     >
       <Link

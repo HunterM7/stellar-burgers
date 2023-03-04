@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import classNames from 'classnames'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
@@ -46,7 +47,7 @@ const IngredientPage: React.FC = () => {
   }, [dispatch, ingredient])
 
   return (
-    <div className={`container ${styles.wrapper}`}>
+    <div className={classNames('container', styles.wrapper)}>
       {isLoading ? (
         <Loader />
       ) : hasError ? (

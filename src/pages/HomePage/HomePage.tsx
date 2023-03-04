@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 // DnD
 import { DndProvider } from 'react-dnd'
@@ -25,7 +26,7 @@ const HomePage: React.FC = () => {
   const { isLoading, hasError } = useSelector(dataSelector)
 
   return (
-    <main className={`container ${styles.wrapper}`}>
+    <main className={classNames('container', styles.wrapper)}>
       {isLoading && <Loader />}
 
       {hasError && <h2>Что-то пошло не так</h2>}

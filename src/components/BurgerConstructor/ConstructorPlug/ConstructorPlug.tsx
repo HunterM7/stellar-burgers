@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 // Styles
 import styles from './ConstructorPlug.module.scss'
@@ -10,12 +11,7 @@ type ConstructorPlugT = {
 
 const ConstructorPlug: React.FC<ConstructorPlugT> = ({ title, position }) => {
   return (
-    <p
-      className={`
-				${styles.wrapper}
-				${position ? styles[position] : ''}
-			`}
-    >
+    <p className={classNames(styles.wrapper, position && styles[position])}>
       {title}
     </p>
   )
