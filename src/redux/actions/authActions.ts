@@ -1,7 +1,15 @@
 // Redux
 import { AppThunk, AppDispatch } from 'redux/store'
 import { TAuthLogin, TAuthRegister } from 'redux/reducers'
-import { AuthFetchStatus } from 'redux/actionTypes'
+import {
+  AuthFetchStatus,
+  IErrorResponse,
+  ILoginResponse,
+  ILogoutResponse,
+  IRegisterResponse,
+  ISetUser,
+  IUserResponse,
+} from 'redux/actionTypes'
 import {
   registerError,
   registerRequest,
@@ -28,56 +36,12 @@ import {
   API_AUTH_LOGOUT,
 } from 'utils/data/constants'
 
-// Functions
+// Utils
 import { checkReponse } from 'utils/api/checkReponse'
 import { deleteCookie, getCookie } from 'utils/cookie'
 import { refreshTokens } from 'utils/auth/refreshTokens'
 import { requestCreator } from 'utils/api/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
-
-export type TRegisterResponse = {
-  success: boolean
-  user: {
-    email: string
-    name: string
-  }
-  accessToken: string
-  refreshToken: string
-}
-
-export type TLoginResponse = {
-  success: boolean
-  user: {
-    email: string
-    name: string
-  }
-  accessToken: string
-  refreshToken: string
-}
-
-export type TUserResponse = {
-  success: boolean
-  user: {
-    email: string
-    name: string
-  }
-}
-
-export type TSetUser = {
-  name: string
-  email: string
-  password: string
-}
-
-export type TLogoutResponse = {
-  success: boolean
-  message: string
-}
-
-export type TErrorResponse = {
-  success: boolean
-  message: string
-}
 
 // Register actions
 export interface registerRequestA {
@@ -90,7 +54,7 @@ export interface registerErrorA {
 
 export interface registerSuccessA {
   type: typeof AuthFetchStatus.REGISTER_SUCCESS
-  response: TRegisterResponse
+  response: IRegisterResponse
 }
 
 // Login actions
@@ -104,7 +68,7 @@ export interface loginErrorA {
 
 export interface loginSuccessA {
   type: typeof AuthFetchStatus.LOGIN_SUCCESS
-  response: TLoginResponse
+  response: ILoginResponse
 }
 
 // Logout actions
@@ -118,7 +82,7 @@ export interface logoutErrorA {
 
 export interface logoutSuccessA {
   type: typeof AuthFetchStatus.LOGOUT_SUCCESS
-  response: TLogoutResponse
+  response: ILogoutResponse
 }
 
 // Get user actions
@@ -132,7 +96,7 @@ export interface getUserErrorA {
 
 export interface getUserSuccessA {
   type: typeof AuthFetchStatus.GET_USER_SUCCESS
-  response: TUserResponse
+  response: IUserResponse
 }
 
 // Set user actions
@@ -146,7 +110,7 @@ export interface setUserErrorA {
 
 export interface setUserSuccessA {
   type: typeof AuthFetchStatus.SET_USER_SUCCESS
-  response: TUserResponse
+  response: IUserResponse
 }
 
 export type AuthActions =
@@ -166,6 +130,7 @@ export type AuthActions =
   | setUserErrorA
   | setUserSuccessA
 
+// Thunk
 export const handleRegister =
   ({ name, email, password }: TAuthRegister): AppThunk =>
   (dispatch: AppDispatch) => {
@@ -177,7 +142,7 @@ export const handleRegister =
     })
 
     fetch(API_AUTH_REGISTER, requestOptions)
-      .then(res => checkReponse<TRegisterResponse>(res))
+      .then(res => checkReponse<IRegisterResponse>(res))
       .then(res => {
         saveTokens(res.accessToken, res.refreshToken)
 
@@ -197,7 +162,7 @@ export const handleLogin =
     })
 
     fetch(API_AUTH_LOGIN, requestOptions)
-      .then(res => checkReponse<TLoginResponse>(res))
+      .then(res => checkReponse<ILoginResponse>(res))
       .then(res => {
         saveTokens(res.accessToken, res.refreshToken)
 
@@ -220,7 +185,7 @@ export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
     })
 
     fetch(API_AUTH_LOGOUT, requestOptions)
-      .then(res => checkReponse<TLogoutResponse>(res))
+      .then(res => checkReponse<ILogoutResponse>(res))
       .then(res => {
         deleteCookie('token')
         localStorage.removeItem('refreshToken')
@@ -244,9 +209,9 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
   })
 
   fetch(API_AUTH_USER, requestOptions)
-    .then(res => checkReponse<TUserResponse>(res))
+    .then(res => checkReponse<IUserResponse>(res))
     .then(res => dispatch(getUserSuccess(res)))
-    .catch((err: TErrorResponse) => {
+    .catch((err: IErrorResponse) => {
       if (err.message === 'jwt expired') {
         refreshTokens().then(() => dispatch(getUser()))
       } else {
@@ -256,7 +221,7 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
 }
 
 export const setUser =
-  ({ name, email, password }: TSetUser): AppThunk =>
+  ({ name, email, password }: ISetUser): AppThunk =>
   (dispatch: AppDispatch) => {
     dispatch(setUserRequest())
 
@@ -267,9 +232,9 @@ export const setUser =
     })
 
     fetch(API_AUTH_USER, requestOptions)
-      .then(res => checkReponse<TUserResponse>(res))
+      .then(res => checkReponse<IUserResponse>(res))
       .then(res => dispatch(setUserSuccess(res)))
-      .catch((err: TErrorResponse) => {
+      .catch((err: IErrorResponse) => {
         if (err.message === 'jwt expired') {
           refreshTokens().then(() =>
             dispatch(setUser({ name, email, password })),

@@ -12,7 +12,7 @@ export interface TIngredient {
   image_large: string
 }
 
-export interface TDataState {
+export interface IDataState {
   ingredients: TIngredient[]
   isLoading: boolean
   hasError: boolean

@@ -1,24 +1,27 @@
-import { AuthFetchStatus } from 'redux/actionTypes'
+// Redux
 import {
-  TRegisterResponse,
+  AuthFetchStatus,
+  ILoginResponse,
+  ILogoutResponse,
+  IRegisterResponse,
+  IUserResponse,
+} from 'redux/actionTypes'
+import {
   registerRequestA,
   registerErrorA,
   registerSuccessA,
   loginRequestA,
   loginErrorA,
   loginSuccessA,
-  TLoginResponse,
   getUserRequestA,
   getUserErrorA,
   getUserSuccessA,
   logoutRequestA,
   logoutErrorA,
   logoutSuccessA,
-  TLogoutResponse,
   setUserRequestA,
   setUserErrorA,
   setUserSuccessA,
-  TUserResponse,
 } from 'redux/actions'
 
 // Register action creators
@@ -31,7 +34,7 @@ export const registerError = (): registerErrorA => ({
 })
 
 export const registerSuccess = (
-  response: TRegisterResponse,
+  response: IRegisterResponse,
 ): registerSuccessA => ({
   type: AuthFetchStatus.REGISTER_SUCCESS,
   response,
@@ -46,7 +49,7 @@ export const loginError = (): loginErrorA => ({
   type: AuthFetchStatus.LOGIN_ERROR,
 })
 
-export const loginSuccess = (response: TLoginResponse): loginSuccessA => ({
+export const loginSuccess = (response: ILoginResponse): loginSuccessA => ({
   type: AuthFetchStatus.LOGIN_SUCCESS,
   response,
 })
@@ -60,7 +63,7 @@ export const logoutError = (): logoutErrorA => ({
   type: AuthFetchStatus.LOGOUT_ERROR,
 })
 
-export const logoutSuccess = (response: TLogoutResponse): logoutSuccessA => ({
+export const logoutSuccess = (response: ILogoutResponse): logoutSuccessA => ({
   type: AuthFetchStatus.LOGOUT_SUCCESS,
   response,
 })
@@ -74,7 +77,7 @@ export const getUserError = (): getUserErrorA => ({
   type: AuthFetchStatus.GET_USER_ERROR,
 })
 
-export const getUserSuccess = (response: TUserResponse): getUserSuccessA => ({
+export const getUserSuccess = (response: IUserResponse): getUserSuccessA => ({
   type: AuthFetchStatus.GET_USER_SUCCESS,
   response,
 })
@@ -88,7 +91,7 @@ export const setUserError = (): setUserErrorA => ({
   type: AuthFetchStatus.SET_USER_ERROR,
 })
 
-export const setUserSuccess = (response: TUserResponse): setUserSuccessA => ({
+export const setUserSuccess = (response: IUserResponse): setUserSuccessA => ({
   type: AuthFetchStatus.SET_USER_SUCCESS,
   response,
 })

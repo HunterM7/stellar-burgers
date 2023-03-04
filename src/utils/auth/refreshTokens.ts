@@ -1,14 +1,10 @@
-// Check response function
-import { checkReponse } from 'utils/api/checkReponse'
+// Redux
+import { IErrorResponse } from 'redux/actionTypes'
 
 // Utils
-import { requestCreator } from 'utils/api/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
-
-// Redux
-import { TErrorResponse } from 'redux/actions'
-
-// API Routes
+import { checkReponse } from 'utils/api/checkReponse'
+import { requestCreator } from 'utils/api/requestCreator'
 import { API_AUTH_TOKEN } from 'utils/data/constants'
 
 export type TRefreshTokenResponse = {
@@ -33,7 +29,7 @@ export const refreshTokens = async () => {
 
         return res
       })
-      .catch((error: TErrorResponse) => {
+      .catch((error: IErrorResponse) => {
         return error
       })
 

@@ -1,7 +1,7 @@
-import { TOrderState, OrderFetchStatus } from 'redux/actionTypes'
+import { IOrderState, OrderFetchStatus } from 'redux/actionTypes'
 import { OrderActions } from 'redux/actions'
 
-const initialState: TOrderState = {
+const initialState: IOrderState = {
   orderInfo: {
     name: 'Идентификатор заказа',
     order: 0,
@@ -13,7 +13,7 @@ const initialState: TOrderState = {
 export const orderReducer = (
   state = initialState,
   action: OrderActions,
-): TOrderState => {
+): IOrderState => {
   switch (action.type) {
     case OrderFetchStatus.ORDER_REQUEST: {
       return {

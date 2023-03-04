@@ -1,4 +1,4 @@
-export interface TOrderState {
+export interface IOrderState {
   orderInfo: {
     name: string
     order: number
