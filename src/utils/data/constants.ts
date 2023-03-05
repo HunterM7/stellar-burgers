@@ -1,11 +1,14 @@
-export const SET_ORDER_ID = 'SET_ORDER_ID'
+const BASE_URL = 'norma.nomoreparties.space'
 
 // API links
-export const API_URL = 'https://norma.nomoreparties.space/api'
+export const API_URL = `https://${BASE_URL}/api`
 export const API_URL_INGREDIENTS = `${API_URL}/ingredients`
 export const API_URL_ORDER = `${API_URL}/orders`
 export const API_URL_PASSWORD_RESET = `${API_URL}/password-reset`
 export const API_URL_PASSWORD_RESET_REQUEST = `${API_URL}/password-reset/reset`
+
+// WebSockets
+export const WS_BASE = `wss://${BASE_URL}`
 
 // API Auth Endpoints
 export const API_AUTH_USER = `${API_URL}/auth/user` // эндпоинт получения и обновления данных пользователя.
