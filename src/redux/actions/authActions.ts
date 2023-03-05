@@ -37,7 +37,7 @@ import {
 } from 'utils/data/constants'
 
 // Utils
-import { checkReponse } from 'utils/api/checkReponse'
+import { checkResponse } from 'utils/api/checkResponse'
 import { deleteCookie, getCookie } from 'utils/cookie'
 import { refreshTokens } from 'utils/auth/refreshTokens'
 import { requestCreator } from 'utils/api/requestCreator'
@@ -142,7 +142,7 @@ export const handleRegister =
     })
 
     fetch(API_AUTH_REGISTER, requestOptions)
-      .then(res => checkReponse<IRegisterResponse>(res))
+      .then(res => checkResponse<IRegisterResponse>(res))
       .then(res => {
         saveTokens(res.accessToken, res.refreshToken)
 
@@ -162,7 +162,7 @@ export const handleLogin =
     })
 
     fetch(API_AUTH_LOGIN, requestOptions)
-      .then(res => checkReponse<ILoginResponse>(res))
+      .then(res => checkResponse<ILoginResponse>(res))
       .then(res => {
         saveTokens(res.accessToken, res.refreshToken)
 
@@ -185,7 +185,7 @@ export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
     })
 
     fetch(API_AUTH_LOGOUT, requestOptions)
-      .then(res => checkReponse<ILogoutResponse>(res))
+      .then(res => checkResponse<ILogoutResponse>(res))
       .then(res => {
         deleteCookie('token')
         localStorage.removeItem('refreshToken')
@@ -209,7 +209,7 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
   })
 
   fetch(API_AUTH_USER, requestOptions)
-    .then(res => checkReponse<IUserResponse>(res))
+    .then(res => checkResponse<IUserResponse>(res))
     .then(res => dispatch(getUserSuccess(res)))
     .catch((err: IErrorResponse) => {
       if (err.message === 'jwt expired') {
@@ -232,7 +232,7 @@ export const setUser =
     })
 
     fetch(API_AUTH_USER, requestOptions)
-      .then(res => checkReponse<IUserResponse>(res))
+      .then(res => checkResponse<IUserResponse>(res))
       .then(res => dispatch(setUserSuccess(res)))
       .catch((err: IErrorResponse) => {
         if (err.message === 'jwt expired') {

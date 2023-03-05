@@ -2,7 +2,7 @@
 import { API_URL_PASSWORD_RESET_REQUEST } from 'utils/data/constants'
 
 // Utils
-import { checkReponse } from 'utils/api/checkReponse'
+import { checkResponse } from 'utils/api/checkResponse'
 import { requestCreator } from 'utils/api/requestCreator'
 
 // Types
@@ -16,6 +16,6 @@ export const resetPassword = async (form: TForm) => {
   const requestOptions = requestCreator({ method: 'POST', body: { ...form } })
 
   await fetch(API_URL_PASSWORD_RESET_REQUEST, requestOptions)
-    .then(res => checkReponse<TResetPasswordResponse>(res))
+    .then(res => checkResponse<TResetPasswordResponse>(res))
     .then(res => res)
 }

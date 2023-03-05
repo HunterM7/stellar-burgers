@@ -8,7 +8,7 @@ import {
 } from 'redux/actionCreators'
 
 // Utils
-import { checkReponse } from 'utils/api/checkReponse'
+import { checkResponse } from 'utils/api/checkResponse'
 import { API_URL_INGREDIENTS } from 'utils/data/constants'
 
 export interface setRequestStatusA {
@@ -31,7 +31,7 @@ export const getIngredients = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(setRequestStatus())
 
   fetch(API_URL_INGREDIENTS)
-    .then(res => checkReponse<{ data: TIngredient[] }>(res))
+    .then(res => checkResponse<{ data: TIngredient[] }>(res))
     .then(res => {
       dispatch(setSuccessStatus(res.data))
     })

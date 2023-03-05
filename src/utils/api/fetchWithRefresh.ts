@@ -1,6 +1,6 @@
 // !TODO ДОДЕЛАТЬ Fetch
 
-import { checkReponse } from 'utils/api/checkReponse'
+import { checkResponse } from 'utils/api/checkResponse'
 import { IRequestCreator, requestCreator } from 'utils/api/requestCreator'
 import { refreshTokens } from 'utils/auth/refreshTokens'
 
@@ -13,7 +13,7 @@ export const fetchWithRefresh = async <T>(
 
     const res = await fetch(url, requestOptions)
 
-    return checkReponse<T>(res)
+    return checkResponse<T>(res)
   } catch (error) {
     if (error instanceof Error && error.message === 'jwt expired') {
       const freshData = await refreshTokens()
@@ -27,7 +27,7 @@ export const fetchWithRefresh = async <T>(
 
       const res = await fetch(url, requestOptions)
 
-      return checkReponse<T>(res)
+      return checkResponse<T>(res)
     } else {
       return Promise.reject(error)
     }

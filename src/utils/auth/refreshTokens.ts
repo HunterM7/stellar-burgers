@@ -3,7 +3,7 @@ import { IErrorResponse } from 'redux/actionTypes'
 
 // Utils
 import { saveTokens } from 'utils/auth/saveTokens'
-import { checkReponse } from 'utils/api/checkReponse'
+import { checkResponse } from 'utils/api/checkResponse'
 import { requestCreator } from 'utils/api/requestCreator'
 import { API_AUTH_TOKEN } from 'utils/data/constants'
 
@@ -23,7 +23,7 @@ export const refreshTokens = async () => {
     })
 
     const result = await fetch(API_AUTH_TOKEN, requestOptions)
-      .then(res => checkReponse<TRefreshTokenResponse>(res))
+      .then(res => checkResponse<TRefreshTokenResponse>(res))
       .then(res => {
         saveTokens(res.accessToken, res.refreshToken)
 

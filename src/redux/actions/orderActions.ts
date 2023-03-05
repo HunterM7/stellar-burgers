@@ -9,7 +9,7 @@ import {
 
 // Utils
 import { API_URL_ORDER } from 'utils/data/constants'
-import { checkReponse } from 'utils/api/checkReponse'
+import { checkResponse } from 'utils/api/checkResponse'
 import { requestCreator } from 'utils/api/requestCreator'
 
 export interface setRequestOrderStatusA {
@@ -45,7 +45,7 @@ export const setOrder =
     })
 
     fetch(API_URL_ORDER, requestOptions)
-      .then(res => checkReponse<TOrderResponse>(res))
+      .then(res => checkResponse<TOrderResponse>(res))
       .then(res => dispatch(setSuccessOrderStatus(res)))
       .catch(err => {
         dispatch(setErrorOrderStatus())
