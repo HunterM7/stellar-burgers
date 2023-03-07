@@ -1,5 +1,5 @@
-// 
-import { IErrorResponse } from 'redux/actionTypes'
+// Utils
+import { IErrorResponse } from 'utils/types'
 import { checkResponse } from 'utils/api/checkResponse'
 import { IRequestCreator, requestCreator } from 'utils/api/requestCreator'
 import { refreshTokens } from 'utils/auth/refreshTokens'
@@ -8,35 +8,33 @@ export const fetchWithRefresh = async <T>(
   url: string,
   options: IRequestCreator,
 ) => {
+  const requestOptions = requestCreator(options)
 
   try {
-    const requestOptions = requestCreator(options)
+    const fetchResponse = await fetch(url, requestOptions)
 
-    const res = await fetch(url, requestOptions)
-
-    const data = await checkResponse<T>(res)
-
-    return data
-  }
-  
-  catch (err) {
+    return await checkResponse<T>(fetchResponse)
+  } catch (err) {
     const error = err as IErrorResponse
 
     if (error.message === 'jwt expired') {
       const freshData = await refreshTokens()
 
-      if (!freshData) return Promise.reject(error)
+      if (freshData) {
+        const freshRequestOptions = {
+          ...requestOptions,
+          headers: {
+            ...requestOptions.headers,
+            Authorization: freshData.accessToken,
+          },
+        }
 
-      const requestOptions = requestCreator({
-        ...options,
-        headers: { ...options.headers, Authorization: freshData.accessToken },
-      })
+        const fetchResponse = await fetch(url, freshRequestOptions)
 
-      const res = await fetch(url, requestOptions)
-
-      return checkResponse<T>(res)
-    } else {
-      return Promise.reject(error)
+        return await checkResponse<T>(fetchResponse)
+      }
     }
+
+    return Promise.reject(error)
   }
 }

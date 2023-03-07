@@ -1,11 +1,5 @@
 // Redux
-import {
-  AuthFetchStatus,
-  ILoginResponse,
-  ILogoutResponse,
-  IRegisterResponse,
-  IUserResponse,
-} from 'redux/actionTypes'
+import { AuthFetchStatus } from 'redux/actionTypes'
 import {
   registerRequestA,
   registerErrorA,
@@ -23,6 +17,14 @@ import {
   setUserErrorA,
   setUserSuccessA,
 } from 'redux/actions'
+
+// Utils
+import {
+  ILoginResponse,
+  ILogoutResponse,
+  IRegisterResponse,
+  IUserResponse,
+} from 'utils/types'
 
 // Register action creators
 export const registerRequest = (): registerRequestA => ({

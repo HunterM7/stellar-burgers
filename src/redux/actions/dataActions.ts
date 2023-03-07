@@ -8,7 +8,8 @@ import {
 } from 'redux/actionCreators'
 
 // Utils
-import { checkResponse } from 'utils/api/checkResponse'
+import { customFetch } from 'utils/api/customFetch'
+import { IIngredientsRespose } from 'utils/types'
 import { API_URL_INGREDIENTS } from 'utils/data/constants'
 
 export interface setRequestStatusA {
@@ -30,12 +31,7 @@ export type DataActions =
 export const getIngredients = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(setRequestStatus())
 
-  fetch(API_URL_INGREDIENTS)
-    .then(res => checkResponse<{ data: TIngredient[] }>(res))
-    .then(res => {
-      dispatch(setSuccessStatus(res.data))
-    })
-    .catch(err => {
-      dispatch(setErrorStatus())
-    })
+  customFetch<IIngredientsRespose>(API_URL_INGREDIENTS)
+    .then(res => dispatch(setSuccessStatus(res.data)))
+    .catch(() => dispatch(setErrorStatus()))
 }

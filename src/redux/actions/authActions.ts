@@ -1,15 +1,7 @@
 // Redux
 import { AppThunk, AppDispatch } from 'redux/store'
 import { TAuthLogin, TAuthRegister } from 'redux/reducers'
-import {
-  AuthFetchStatus,
-  IErrorResponse,
-  ILoginResponse,
-  ILogoutResponse,
-  IRegisterResponse,
-  ISetUser,
-  IUserResponse,
-} from 'redux/actionTypes'
+import { AuthFetchStatus } from 'redux/actionTypes'
 import {
   registerError,
   registerRequest,
@@ -39,10 +31,16 @@ import {
 // Utils
 import { checkResponse } from 'utils/api/checkResponse'
 import { deleteCookie, getCookie } from 'utils/cookie'
-import { refreshTokens } from 'utils/auth/refreshTokens'
-import { requestCreator } from 'utils/api/requestCreator'
+import { IRequestCreator, requestCreator } from 'utils/api/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
 import { fetchWithRefresh } from 'utils/api/fetchWithRefresh'
+import {
+  ILoginResponse,
+  ILogoutResponse,
+  IRegisterResponse,
+  ISetUser,
+  IUserResponse,
+} from 'utils/types'
 
 // Register actions
 export interface registerRequestA {
@@ -202,32 +200,16 @@ export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
 export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(getUserRequest())
 
-  const requestOptions = requestCreator({
+  const requestOptions: IRequestCreator = {
     method: 'GET',
     headers: {
       Authorization: 'Bearer '.concat(getCookie('token') || ''),
     },
-  })
+  }
 
-  fetchWithRefresh<IUserResponse>(API_AUTH_USER, {
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer '.concat(getCookie('token') || ''),
-    },
-  })
+  fetchWithRefresh<IUserResponse>(API_AUTH_USER, requestOptions)
     .then(res => dispatch(getUserSuccess(res)))
     .catch(() => dispatch(getUserError()))
-
-  // fetch(API_AUTH_USER, requestOptions)
-  //   .then(res => checkResponse<IUserResponse>(res))
-  //   .then(res => dispatch(getUserSuccess(res)))
-  //   .catch((err: IErrorResponse) => {
-  //     if (err.message === 'jwt expired') {
-  //       refreshTokens().then(() => dispatch(getUser()))
-  //     } else {
-  //       dispatch(getUserError())
-  //     }
-  //   })
 }
 
 export const setUser =
@@ -235,22 +217,13 @@ export const setUser =
   (dispatch: AppDispatch) => {
     dispatch(setUserRequest())
 
-    const requestOptions = requestCreator({
+    const requestOptions: IRequestCreator = {
       method: 'PATCH',
       headers: { Authorization: 'Bearer '.concat(getCookie('token') || '') },
       body: { name, email, password },
-    })
+    }
 
-    fetch(API_AUTH_USER, requestOptions)
-      .then(res => checkResponse<IUserResponse>(res))
+    fetchWithRefresh<IUserResponse>(API_AUTH_USER, requestOptions)
       .then(res => dispatch(setUserSuccess(res)))
-      .catch((err: IErrorResponse) => {
-        if (err.message === 'jwt expired') {
-          refreshTokens().then(() =>
-            dispatch(setUser({ name, email, password })),
-          )
-        } else {
-          dispatch(setUserError())
-        }
-      })
+      .catch(() => dispatch(setUserError()))
   }

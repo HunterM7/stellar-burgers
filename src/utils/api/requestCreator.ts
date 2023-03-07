@@ -3,12 +3,16 @@ export type THeaders = { [name: string]: string }
 export type TBody = { [name: string]: string | Array<string> }
 
 export interface IRequestCreator {
-  method: TMethod
+  method?: TMethod
   headers?: THeaders
   body?: TBody
 }
 
-export const requestCreator = ({ method, headers, body }: IRequestCreator) => {
+export const requestCreator = ({
+  method = 'GET',
+  headers,
+  body,
+}: IRequestCreator) => {
   return {
     method,
     headers: { 'Content-Type': 'application/json', ...headers },
