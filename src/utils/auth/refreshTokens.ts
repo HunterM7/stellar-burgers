@@ -30,7 +30,7 @@ export const refreshTokens = async () => {
         return res
       })
       .catch((error: IErrorResponse) => {
-        return error
+        Promise.reject(error)
       })
 
     return result

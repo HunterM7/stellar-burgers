@@ -42,6 +42,7 @@ import { deleteCookie, getCookie } from 'utils/cookie'
 import { refreshTokens } from 'utils/auth/refreshTokens'
 import { requestCreator } from 'utils/api/requestCreator'
 import { saveTokens } from 'utils/auth/saveTokens'
+import { fetchWithRefresh } from 'utils/api/fetchWithRefresh'
 
 // Register actions
 export interface registerRequestA {
@@ -208,16 +209,25 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
     },
   })
 
-  fetch(API_AUTH_USER, requestOptions)
-    .then(res => checkResponse<IUserResponse>(res))
+  fetchWithRefresh<IUserResponse>(API_AUTH_USER, {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer '.concat(getCookie('token') || ''),
+    },
+  })
     .then(res => dispatch(getUserSuccess(res)))
-    .catch((err: IErrorResponse) => {
-      if (err.message === 'jwt expired') {
-        refreshTokens().then(() => dispatch(getUser()))
-      } else {
-        dispatch(getUserError())
-      }
-    })
+    .catch(() => dispatch(getUserError()))
+
+  // fetch(API_AUTH_USER, requestOptions)
+  //   .then(res => checkResponse<IUserResponse>(res))
+  //   .then(res => dispatch(getUserSuccess(res)))
+  //   .catch((err: IErrorResponse) => {
+  //     if (err.message === 'jwt expired') {
+  //       refreshTokens().then(() => dispatch(getUser()))
+  //     } else {
+  //       dispatch(getUserError())
+  //     }
+  //   })
 }
 
 export const setUser =
