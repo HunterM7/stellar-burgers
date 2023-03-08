@@ -58,8 +58,8 @@ const ResetPasswordPage: React.FC = () => {
       e.preventDefault()
 
       resetPassword(form)
-        .then(res => navigate(LOGIN_LINK))
-        .catch(error => {
+        .then(() => navigate(LOGIN_LINK))
+        .catch(() => {
           throw new Error('Error on submitting ResetPasswordPage form')
         })
     },

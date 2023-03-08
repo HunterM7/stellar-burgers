@@ -146,7 +146,7 @@ export const handleRegister =
 
         dispatch(registerSuccess(res))
       })
-      .catch(err => dispatch(registerError()))
+      .catch(() => dispatch(registerError()))
   }
 
 export const handleLogin =
@@ -165,7 +165,7 @@ export const handleLogin =
 
         dispatch(loginSuccess(res))
       })
-      .catch(err => {
+      .catch(() => {
         dispatch(loginError())
       })
   }
@@ -188,7 +188,7 @@ export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
 
         dispatch(logoutSuccess(res))
       })
-      .catch(err => {
+      .catch(() => {
         dispatch(logoutError())
       })
   }

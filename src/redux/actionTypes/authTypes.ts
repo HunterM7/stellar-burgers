@@ -1,5 +1,3 @@
-
-
 export enum AuthFetchStatus {
   REGISTER_REQUEST = 'REGISTER_REQUEST',
   REGISTER_SUCCESS = 'REGISTER_SUCCESS',

@@ -29,9 +29,9 @@ export const refreshTokens = async () => {
 
       return fetchResponse
     } catch (error) {
-      Promise.reject(error)
+      return Promise.reject(error)
     }
   }
 
-  Promise.reject('There is no refreshToken in LocalStorage')
+  return Promise.reject('There is no refreshToken in LocalStorage')
 }

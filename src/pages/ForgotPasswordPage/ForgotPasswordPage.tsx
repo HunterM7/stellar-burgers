@@ -39,7 +39,7 @@ const ForgotPasswordPage = () => {
             state: { resetPassword: true },
           }),
         )
-        .catch(error => {
+        .catch(() => {
           throw new Error('Error on submitting ForgotPasswordPage form')
         })
     },
