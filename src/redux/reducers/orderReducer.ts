@@ -17,9 +17,7 @@ export const orderReducer = (
   switch (action.type) {
     case OrderFetchStatus.ORDER_REQUEST: {
       return {
-        ...state,
-        isLoading: true,
-        hasError: false,
+        ...initialState,
       }
     }
     case OrderFetchStatus.ORDER_SUCCESS: {

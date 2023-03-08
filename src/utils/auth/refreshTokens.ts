@@ -1,8 +1,8 @@
 // Utils
 import { saveTokens } from 'utils/auth/saveTokens'
-import { checkResponse } from 'utils/api/checkResponse'
-import { requestCreator } from 'utils/api/requestCreator'
+import { IRequestCreator } from 'utils/api/requestCreator'
 import { API_AUTH_TOKEN } from 'utils/data/constants'
+import { customFetch } from 'utils/api/customFetch'
 
 export interface IRefreshTokensResponse {
   success: boolean
@@ -14,20 +14,20 @@ export const refreshTokens = async () => {
   const refreshToken = localStorage.getItem('refreshToken')
 
   if (refreshToken) {
-    const requestOptions = requestCreator({
+    const requestOptions: IRequestCreator = {
       method: 'POST',
       body: { token: refreshToken },
-    })
+    }
 
     try {
-      const fetchResponse = await fetch(API_AUTH_TOKEN, requestOptions)
-      const checkedResponse = await checkResponse<IRefreshTokensResponse>(
-        fetchResponse,
+      const fetchResponse = await customFetch<IRefreshTokensResponse>(
+        API_AUTH_TOKEN,
+        requestOptions,
       )
 
-      saveTokens(checkedResponse.accessToken, checkedResponse.refreshToken)
+      saveTokens(fetchResponse.accessToken, fetchResponse.refreshToken)
 
-      return checkedResponse
+      return fetchResponse
     } catch (error) {
       Promise.reject(error)
     }

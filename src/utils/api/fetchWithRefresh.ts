@@ -1,19 +1,15 @@
 // Utils
 import { IErrorResponse } from 'utils/types'
-import { checkResponse } from 'utils/api/checkResponse'
-import { IRequestCreator, requestCreator } from 'utils/api/requestCreator'
+import { IRequestCreator } from 'utils/api/requestCreator'
 import { refreshTokens } from 'utils/auth/refreshTokens'
+import { customFetch } from 'utils/api/customFetch'
 
 export const fetchWithRefresh = async <T>(
   url: string,
   options: IRequestCreator,
 ) => {
-  const requestOptions = requestCreator(options)
-
   try {
-    const fetchResponse = await fetch(url, requestOptions)
-
-    return await checkResponse<T>(fetchResponse)
+    return await customFetch<T>(url, options)
   } catch (err) {
     const error = err as IErrorResponse
 
@@ -21,17 +17,15 @@ export const fetchWithRefresh = async <T>(
       const freshData = await refreshTokens()
 
       if (freshData) {
-        const freshRequestOptions = {
-          ...requestOptions,
+        const freshOptions = {
+          ...options,
           headers: {
-            ...requestOptions.headers,
+            ...options.headers,
             Authorization: freshData.accessToken,
           },
         }
 
-        const fetchResponse = await fetch(url, freshRequestOptions)
-
-        return await checkResponse<T>(fetchResponse)
+        return await customFetch<T>(url, freshOptions)
       }
     }
 

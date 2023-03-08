@@ -29,11 +29,6 @@ import {
 } from 'utils/data/constants'
 
 // Utils
-import { checkResponse } from 'utils/api/checkResponse'
-import { deleteCookie, getCookie } from 'utils/cookie'
-import { IRequestCreator, requestCreator } from 'utils/api/requestCreator'
-import { saveTokens } from 'utils/auth/saveTokens'
-import { fetchWithRefresh } from 'utils/api/fetchWithRefresh'
 import {
   ILoginResponse,
   ILogoutResponse,
@@ -41,6 +36,11 @@ import {
   ISetUser,
   IUserResponse,
 } from 'utils/types'
+import { IRequestCreator } from 'utils/api/requestCreator'
+import { customFetch } from 'utils/api/customFetch'
+import { fetchWithRefresh } from 'utils/api/fetchWithRefresh'
+import { saveTokens } from 'utils/auth/saveTokens'
+import { getCookie, deleteCookie } from 'utils/cookie'
 
 // Register actions
 export interface registerRequestA {
@@ -135,13 +135,12 @@ export const handleRegister =
   (dispatch: AppDispatch) => {
     dispatch(registerRequest())
 
-    const requestOptions = requestCreator({
+    const requestOptions: IRequestCreator = {
       method: 'POST',
       body: { name, email, password },
-    })
+    }
 
-    fetch(API_AUTH_REGISTER, requestOptions)
-      .then(res => checkResponse<IRegisterResponse>(res))
+    customFetch<IRegisterResponse>(API_AUTH_REGISTER, requestOptions)
       .then(res => {
         saveTokens(res.accessToken, res.refreshToken)
 
@@ -155,13 +154,12 @@ export const handleLogin =
   (dispatch: AppDispatch) => {
     dispatch(loginRequest())
 
-    const requestOptions = requestCreator({
+    const requestOptions: IRequestCreator = {
       method: 'POST',
       body: { email, password },
-    })
+    }
 
-    fetch(API_AUTH_LOGIN, requestOptions)
-      .then(res => checkResponse<ILoginResponse>(res))
+    customFetch<ILoginResponse>(API_AUTH_LOGIN, requestOptions)
       .then(res => {
         saveTokens(res.accessToken, res.refreshToken)
 
@@ -178,15 +176,14 @@ export const handleLogout = (): AppThunk => (dispatch: AppDispatch) => {
   const refreshToken = localStorage.getItem('refreshToken')
 
   if (refreshToken) {
-    const requestOptions = requestCreator({
+    const requestOptions: IRequestCreator = {
       method: 'POST',
       body: { token: refreshToken },
-    })
+    }
 
-    fetch(API_AUTH_LOGOUT, requestOptions)
-      .then(res => checkResponse<ILogoutResponse>(res))
+    customFetch<ILogoutResponse>(API_AUTH_LOGOUT, requestOptions)
       .then(res => {
-        deleteCookie('token')
+        deleteCookie('accessToken')
         localStorage.removeItem('refreshToken')
 
         dispatch(logoutSuccess(res))
@@ -203,7 +200,7 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
   const requestOptions: IRequestCreator = {
     method: 'GET',
     headers: {
-      Authorization: 'Bearer '.concat(getCookie('token') || ''),
+      Authorization: 'Bearer '.concat(getCookie('accessToken') || ''),
     },
   }
 
@@ -219,7 +216,9 @@ export const setUser =
 
     const requestOptions: IRequestCreator = {
       method: 'PATCH',
-      headers: { Authorization: 'Bearer '.concat(getCookie('token') || '') },
+      headers: {
+        Authorization: 'Bearer '.concat(getCookie('accessToken') || ''),
+      },
       body: { name, email, password },
     }
 

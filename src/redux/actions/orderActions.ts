@@ -9,8 +9,9 @@ import {
 
 // Utils
 import { API_URL_ORDER } from 'utils/data/constants'
-import { checkResponse } from 'utils/api/checkResponse'
-import { requestCreator } from 'utils/api/requestCreator'
+import { IRequestCreator } from 'utils/api/requestCreator'
+import { customFetch } from 'utils/api/customFetch'
+import { getCookie } from 'utils/cookie'
 
 export interface setRequestOrderStatusA {
   type: typeof OrderFetchStatus.ORDER_REQUEST
@@ -39,15 +40,15 @@ export const setOrder =
   (dispatch: AppDispatch) => {
     dispatch(setRequestOrderStatus())
 
-    const requestOptions = requestCreator({
+    const requestOptions: IRequestCreator = {
       method: 'POST',
+      headers: {
+        Authorization: 'Bearer '.concat(getCookie('accessToken') || ''),
+      },
       body: { ingredients },
-    })
+    }
 
-    fetch(API_URL_ORDER, requestOptions)
-      .then(res => checkResponse<TOrderResponse>(res))
+    customFetch<TOrderResponse>(API_URL_ORDER, requestOptions)
       .then(res => dispatch(setSuccessOrderStatus(res)))
-      .catch(err => {
-        dispatch(setErrorOrderStatus())
-      })
+      .catch(() => dispatch(setErrorOrderStatus()))
   }
