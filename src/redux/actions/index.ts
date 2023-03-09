@@ -3,7 +3,7 @@ import { CartActions } from './cartActions'
 import { OrderActions } from './orderActions'
 import { IngredientDetailsActions } from './ingredientDetailsActions'
 import { AuthActions } from './authActions'
-import { WSActions } from './wsActions'
+import { WSActions } from './webSocketActions'
 
 // Actions
 export type TAppActions =
@@ -20,4 +20,4 @@ export * from './cartActions'
 export * from './orderActions'
 export * from './ingredientDetailsActions'
 export * from './authActions'
-export * from './wsActions'
+export * from './webSocketActions'
