@@ -4,16 +4,23 @@ import { IWSOrder, WSActionTypes } from 'redux/actionTypes'
 interface IWSInitialState {
   wsConnected: boolean
   orders: IWSOrder[]
+  total: number
+  totalToday: number
 
-  error?: Event
+  error?: Event | undefined
 }
 
 const initialState: IWSInitialState = {
   wsConnected: false,
   orders: [],
+  total: 0,
+  totalToday: 0,
 }
 
-export const webSocketReducer = (state = initialState, action: WSActions) => {
+export const webSocketReducer = (
+  state = initialState,
+  action: WSActions,
+): IWSInitialState => {
   switch (action.type) {
     // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
     // Установим флаг wsConnected в состояние true

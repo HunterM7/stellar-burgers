@@ -1,0 +1,20 @@
+//? === Feed Page ===
+
+@import 'scss/vars';
+
+.wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas:
+		'header header'
+		'feed info';
+	gap: 20px 60px;
+}
+
+.title {
+	grid-area: header;
+}
+
+.block {
+}

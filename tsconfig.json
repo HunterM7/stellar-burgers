@@ -18,7 +18,7 @@
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
     // "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
     "noUnusedParameters": true,
     "useUnknownInCatchVariables": true,
     "baseUrl": "src",
