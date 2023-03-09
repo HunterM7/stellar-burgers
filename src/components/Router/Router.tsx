@@ -23,7 +23,7 @@ import {
   IngredientPage,
   LoginPage,
   NotFoundPage,
-  OrderFeedPage,
+  FeedPage,
   ProfilePage,
   RegisterPage,
   ResetPasswordPage,
@@ -47,7 +47,7 @@ const Router: React.FC = () => {
     <>
       <Routes location={background || location}>
         <Route index element={<HomePage />} />
-        <Route path={ORDER_FEED_LINK} element={<OrderFeedPage />} />
+        <Route path={ORDER_FEED_LINK} element={<FeedPage />} />
 
         <Route
           path={PROFILE_LINK}

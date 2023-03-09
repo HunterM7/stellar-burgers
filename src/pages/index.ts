@@ -1,6 +1,6 @@
 // Header link pages
 export { default as HomePage } from './HomePage/HomePage'
-export { default as OrderFeedPage } from './OrderFeedPage/OrderFeedPage'
+export { default as FeedPage } from './FeedPage/FeedPage'
 export { default as ProfilePage } from './ProfilePage/ProfilePage'
 
 // Authentication pages
