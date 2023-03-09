@@ -14,8 +14,8 @@ const OrderFeed = () => {
   return (
     <div className={styles.wrapper}>
       <ul className={styles.list}>
-        {orders.map(el => (
-          <OrderItemCard key={el._id} {...el} />
+        {orders.slice(0, 10).map(el => (
+          <OrderItemCard key={el._id} order={el} />
         ))}
       </ul>
     </div>

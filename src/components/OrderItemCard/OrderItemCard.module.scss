@@ -10,7 +10,7 @@
 	display: grid;
 	grid-template-columns: auto auto;
 	grid-template-rows: auto auto 64px;
-	grid-template-areas: 'orderId timing' 'title title';
+	grid-template-areas: 'orderId timing' 'title title' 'footer footer';
 
 	gap: 24px;
 
@@ -30,6 +30,7 @@
 
 .timing {
 	@include font-plain-text;
+	white-space: nowrap;
 	color: $text-secondary;
 
 	justify-self: flex-end;
@@ -40,4 +41,8 @@
 	@include font-display-small;
 
 	grid-area: title;
+}
+
+.footer {
+	grid-area: footer;
 }

@@ -11,22 +11,54 @@ import { OrderItemCardIngredients } from 'components'
 // Styles
 import styles from './OrderItemCard.module.scss'
 
-const OrderItemCard: React.FC<IWSOrder> = order => {
+interface IOrderItemCard {
+  order: IWSOrder
+}
+
+const OrderItemCard: React.FC<IOrderItemCard> = ({ order }) => {
   const allIngredients = useSelector(dataIngreientsSelector)
 
   const currentIngredients = allIngredients.filter(el =>
     order.ingredients.includes(el._id),
   )
 
+  const orderDate = new Date(order.createdAt)
+  const currentDate = new Date()
+  const differenceDate = currentDate.getDay() - orderDate.getDay()
+
+  const date = (() => {
+    switch (differenceDate) {
+      case 0:
+        return 'Сегодня'
+      case 1:
+        return 'Вчера'
+      case 2:
+        return '2 дня назад'
+
+      default:
+        return `0${orderDate.getDay()}.0${
+          orderDate.getMonth() + 1
+        }.${orderDate.getFullYear()}`
+    }
+  })()
+
+  const time = `${orderDate.getHours()}:${
+    orderDate.getMinutes() > 9 ? '' : 0
+  }${orderDate.getMinutes()}`
+
+  const displayDate = `${date}, ${time}`
+
   return (
     <div className={styles.wrapper}>
       <h4 className={styles.suptitle}>#{order.number}</h4>
 
-      <span className={styles.timing}>{order.createdAt}</span>
+      <span className={styles.timing}>{displayDate}</span>
 
       <h3 className={styles.title}>{order.name}</h3>
 
-      <OrderItemCardIngredients ingredients={currentIngredients} />
+      <div className={styles.footer}>
+        <OrderItemCardIngredients ingredients={currentIngredients} />
+      </div>
     </div>
   )
 }
