@@ -9,6 +9,7 @@ export const API_URL_PASSWORD_RESET_REQUEST = `${API_URL}/password-reset/reset`
 
 // WebSockets
 export const WS_BASE = `wss://${BASE_URL}`
+export const WS_ALL_ORDERS = `${WS_BASE}/orders/all`
 
 // API Auth Endpoints
 export const API_AUTH_USER = `${API_URL}/auth/user` // эндпоинт получения и обновления данных пользователя.

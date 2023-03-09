@@ -22,6 +22,7 @@
     "noUnusedParameters": true,
     "useUnknownInCatchVariables": true,
     "baseUrl": "src",
+    "resolveJsonModule": true,
 
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -29,7 +30,6 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
