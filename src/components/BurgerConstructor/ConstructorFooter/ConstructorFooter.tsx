@@ -1,9 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import {
-  Button,
-  CurrencyIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
@@ -15,7 +12,7 @@ import { setTotalPrice } from 'redux/actionCreators'
 import { LOGIN_LINK, ORDER_LINK } from 'utils/data/constants'
 
 // Components
-import { PopupHint } from 'components'
+import { PopupHint, PriceCard } from 'components'
 
 // Styles
 import styles from './ConstructorFooter.module.scss'
@@ -26,7 +23,7 @@ const ConstructorFooter: React.FC = () => {
   const dispatch = useDispatch()
 
   // Redux
-  const { bun, ingredients, totalPrice } = useSelector(cartSelector)
+  const { bun, ingredients } = useSelector(cartSelector)
 
   React.useEffect(() => {
     dispatch(setTotalPrice())
@@ -81,10 +78,10 @@ const ConstructorFooter: React.FC = () => {
 
   return (
     <div className={styles.orderBox}>
-      <div className={styles.price}>
-        <span>{totalPrice}</span>
-        <CurrencyIcon type="primary" />
-      </div>
+      <PriceCard
+        size="medium"
+        ingredients={bun ? [bun, ...ingredients] : ingredients}
+      />
 
       <Button
         htmlType="button"

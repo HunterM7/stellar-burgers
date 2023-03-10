@@ -2,14 +2,14 @@ import React from 'react'
 
 // Redux
 import { IWSOrder } from 'redux/actionTypes'
-import { dataIngreientsSelector } from 'redux/selectors'
 import { useSelector } from 'redux/store'
+import { dataIngreientsSelector } from 'redux/selectors'
 
 // Utils
 import { dataConverter } from 'utils/dataConverter'
 
 // Components
-import { OrderCardList } from 'components'
+import { OrderCardList, PriceCard } from 'components'
 
 // Styles
 import styles from './OrderCard.module.scss'
@@ -40,6 +40,7 @@ const OrderCard: React.FC<IOrderCard> = ({ order }) => {
 
       <div className={styles.footer}>
         <OrderCardList ingredients={currentIngredients} />
+        <PriceCard size="small" ingredients={currentIngredients} />
       </div>
     </div>
   )

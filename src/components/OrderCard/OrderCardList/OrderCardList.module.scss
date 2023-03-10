@@ -5,6 +5,11 @@
 .list {
 	display: flex;
 	flex-direction: row;
+	flex: 1;
+
+	height: 64px;
+
+	position: relative;
 }
 
 .item {

@@ -1,0 +1,28 @@
+//? === Price Card ===
+
+@import 'scss/vars';
+
+.price {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 8px;
+}
+
+.small {
+	@include font-digits-small;
+
+	svg {
+		width: 24px;
+		height: 24px;
+	}
+}
+
+.medium {
+	@include font-digits-medium;
+
+	svg {
+		width: 36px;
+		height: 36px;
+	}
+}

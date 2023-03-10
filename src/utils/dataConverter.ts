@@ -10,26 +10,23 @@ export function dataConverter(initialDate: string) {
     `${dateFormat(consideredDate.getMonth() + 1)}.` +
     `${consideredDate.getFullYear()}`
 
-  let date = ''
+  const date = (() => {
+    if (timeDifference < 259200000) {
+      switch (dayDifference) {
+        case 0:
+          return 'Сегодня'
+        case 1:
+          return 'Вчера'
+        case 2:
+          return '2 дня назад'
 
-  if (timeDifference < 259200000) {
-    switch (dayDifference) {
-      case 0:
-        date = 'Сегодня'
-        break
-      case 1:
-        date = 'Вчера'
-        break
-      case 2:
-        date = '2 дня назад'
-        break
-
-      default:
-        date = fullFormatDate
+        default:
+          return fullFormatDate
+      }
+    } else {
+      return fullFormatDate
     }
-  } else {
-    date = fullFormatDate
-  }
+  })()
 
   const time =
     `${dateFormat(consideredDate.getHours())}:` +

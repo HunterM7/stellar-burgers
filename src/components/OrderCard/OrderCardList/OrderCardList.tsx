@@ -20,7 +20,7 @@ const OrderCardList: React.FC<IOrderCardList> = ({ ingredients }) => {
     <li
       key={i}
       className={styles.item}
-      style={{ position: 'relative', right: i * 16, zIndex: maxLength - i }}
+      style={{ position: 'absolute', left: i * 48, zIndex: maxLength - i }}
     >
       <IngredientIcon
         image={el.image_mobile}
