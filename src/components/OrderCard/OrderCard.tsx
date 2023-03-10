@@ -6,16 +6,16 @@ import { dataIngreientsSelector } from 'redux/selectors'
 import { useSelector } from 'redux/store'
 
 // Components
-import { OrderItemCardIngredients } from 'components'
+import { OrderCardList } from 'components'
 
 // Styles
-import styles from './OrderItemCard.module.scss'
+import styles from './OrderCard.module.scss'
 
-interface IOrderItemCard {
+interface IOrderCard {
   order: IWSOrder
 }
 
-const OrderItemCard: React.FC<IOrderItemCard> = ({ order }) => {
+const OrderCard: React.FC<IOrderCard> = ({ order }) => {
   const allIngredients = useSelector(dataIngreientsSelector)
 
   const currentIngredients = allIngredients.filter(el =>
@@ -57,10 +57,10 @@ const OrderItemCard: React.FC<IOrderItemCard> = ({ order }) => {
       <h3 className={styles.title}>{order.name}</h3>
 
       <div className={styles.footer}>
-        <OrderItemCardIngredients ingredients={currentIngredients} />
+        <OrderCardList ingredients={currentIngredients} />
       </div>
     </div>
   )
 }
 
-export default OrderItemCard
+export default OrderCard
