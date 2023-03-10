@@ -7,15 +7,30 @@
 
 	padding: 24px;
 
-	display: grid;
-	grid-template-columns: auto auto;
-	grid-template-rows: auto auto 64px;
-	grid-template-areas: 'orderId timing' 'title title' 'footer footer';
+	display: flex;
+	flex-direction: column;
+	row-gap: 24px;
 
-	gap: 24px;
+	// display: grid;
+	// grid-template-columns: auto auto;
+	// grid-template-rows: auto auto 64px;
+	// grid-template-areas: 'orderId timing' 'title title' 'footer footer';
+
+	// gap: 24px;
 
 	border-radius: 40px;
 	background-color: $bg-modal;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.footer {
+	grid-area: footer;
 }
 
 .suptitle {
@@ -41,8 +56,4 @@
 	@include font-display-small;
 
 	grid-area: title;
-}
-
-.footer {
-	grid-area: footer;
 }

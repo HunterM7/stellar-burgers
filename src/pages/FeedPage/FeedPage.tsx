@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { useDispatch, useSelector } from 'redux/store'
 import { startWSConnection } from 'redux/actionCreators'
 import { webSocketSelector } from 'redux/selectors'
+import { getIngredients } from 'redux/actions'
 
 // Components
 import { OrderFeed } from 'components'
@@ -18,6 +19,7 @@ const FeedPage: React.FC = () => {
   const { orders } = useSelector(webSocketSelector)
 
   React.useEffect(() => {
+    dispatch(getIngredients())
     dispatch(startWSConnection())
   }, [dispatch])
 

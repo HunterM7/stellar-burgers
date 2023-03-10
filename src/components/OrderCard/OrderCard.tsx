@@ -5,6 +5,9 @@ import { IWSOrder } from 'redux/actionTypes'
 import { dataIngreientsSelector } from 'redux/selectors'
 import { useSelector } from 'redux/store'
 
+// Utils
+import { dataConverter } from 'utils/dataConverter'
+
 // Components
 import { OrderCardList } from 'components'
 
@@ -22,37 +25,16 @@ const OrderCard: React.FC<IOrderCard> = ({ order }) => {
     order.ingredients.includes(el._id),
   )
 
-  const orderDate = new Date(order.createdAt)
-  const currentDate = new Date()
-  const differenceDate = currentDate.getDay() - orderDate.getDay()
-
-  const date = (() => {
-    switch (differenceDate) {
-      case 0:
-        return 'Сегодня'
-      case 1:
-        return 'Вчера'
-      case 2:
-        return '2 дня назад'
-
-      default:
-        return `0${orderDate.getDay()}.0${
-          orderDate.getMonth() + 1
-        }.${orderDate.getFullYear()}`
-    }
-  })()
-
-  const time = `${orderDate.getHours()}:${
-    orderDate.getMinutes() > 9 ? '' : 0
-  }${orderDate.getMinutes()}`
-
-  const displayDate = `${date}, ${time}`
+  // Date
+  const displayedDate = dataConverter(order.createdAt)
 
   return (
     <div className={styles.wrapper}>
-      <h4 className={styles.suptitle}>#{order.number}</h4>
+      <div className={styles.header}>
+        <h4 className={styles.suptitle}>#{order.number}</h4>
 
-      <span className={styles.timing}>{displayDate}</span>
+        <span className={styles.timing}>{displayedDate}</span>
+      </div>
 
       <h3 className={styles.title}>{order.name}</h3>
 
