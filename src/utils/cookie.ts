@@ -36,7 +36,7 @@ export function setCookie(name: string, value: string, options?: IProps) {
   document.cookie = updatedCookie
 }
 
-export const getCookie = (name: string) => {
+export function getCookie(name: string) {
   const matches = document.cookie.match(
     new RegExp(
       '(?:^|; )' +
@@ -47,7 +47,7 @@ export const getCookie = (name: string) => {
   return matches ? decodeURIComponent(matches[1]) : undefined
 }
 
-export const deleteCookie = (name: string) => {
+export function deleteCookie(name: string) {
   setCookie(name, '', {
     'max-age': -1,
   })

@@ -1,4 +1,5 @@
 export function dataConverter(initialDate: string) {
+  const dayInMS = 86400000
   const currentDate = new Date()
   const consideredDate = new Date(initialDate)
   const dayDifference = Math.abs(currentDate.getDay() - consideredDate.getDay())
@@ -11,13 +12,13 @@ export function dataConverter(initialDate: string) {
     `${consideredDate.getFullYear()}`
 
   const date = (() => {
-    if (timeDifference < 86400000)
+    if (timeDifference < dayInMS)
       return dayDifference === 0 ? 'Сегодня' : 'Вчера'
 
-    if (timeDifference < 172800000)
+    if (timeDifference < dayInMS * 2)
       return dayDifference === 1 ? 'Вчера' : '2 дня назад'
 
-    if (timeDifference < 259200000)
+    if (timeDifference < dayInMS * 3)
       return dayDifference === 2 ? '2 дня назад' : fullFormatDate
 
     return fullFormatDate
