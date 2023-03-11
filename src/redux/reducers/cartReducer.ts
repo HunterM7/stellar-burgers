@@ -4,7 +4,6 @@ import { CartActions } from 'redux/actions'
 const initialState: TCartState = {
   bun: null,
   ingredients: [],
-  totalPrice: 0,
 }
 
 export const cartReducer = (
@@ -37,18 +36,6 @@ export const cartReducer = (
         ...state,
         ingredients: action.ingredients,
       }
-
-    case CartActionTypes.SET_TOTAL_PRICE: {
-      const bunPrice = state.bun ? state.bun.price * 2 : 0
-      const ingredientsPrice = state.ingredients.reduce(
-        (sum, item) => sum + item.price,
-        0,
-      )
-      return {
-        ...state,
-        totalPrice: bunPrice + ingredientsPrice,
-      }
-    }
 
     default:
       return state

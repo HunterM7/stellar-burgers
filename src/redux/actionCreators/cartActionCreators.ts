@@ -3,7 +3,6 @@ import {
   setIngredientA,
   removeIngredientA,
   reorderIngredientsA,
-  setTotalPriceA,
 } from 'redux/actions'
 import {
   CartActionTypes,
@@ -31,8 +30,4 @@ export const reorderIngredients = (
 ): reorderIngredientsA => ({
   type: CartActionTypes.REORDER_INGREDIENTS,
   ingredients,
-})
-
-export const setTotalPrice = (): setTotalPriceA => ({
-  type: CartActionTypes.SET_TOTAL_PRICE,
 })

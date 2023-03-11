@@ -21,13 +21,9 @@ export interface reorderIngredientsA {
   type: typeof CartActionTypes.REORDER_INGREDIENTS
   ingredients: TCartIngredient[]
 }
-export interface setTotalPriceA {
-  type: typeof CartActionTypes.SET_TOTAL_PRICE
-}
 
 export type CartActions =
   | setBunA
   | setIngredientA
   | removeIngredientA
   | reorderIngredientsA
-  | setTotalPriceA

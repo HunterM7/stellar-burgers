@@ -6,7 +6,6 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'redux/store'
 import { authIsLoggedInSelector, cartSelector } from 'redux/selectors'
 import { setOrder } from 'redux/actions'
-import { setTotalPrice } from 'redux/actionCreators'
 
 // Utils
 import { LOGIN_LINK, ORDER_LINK } from 'utils/data/constants'
@@ -24,10 +23,6 @@ const ConstructorFooter: React.FC = () => {
 
   // Redux
   const { bun, ingredients } = useSelector(cartSelector)
-
-  React.useEffect(() => {
-    dispatch(setTotalPrice())
-  }, [bun, ingredients, dispatch])
 
   const isUserLoggedIn = useSelector(authIsLoggedInSelector)
 
