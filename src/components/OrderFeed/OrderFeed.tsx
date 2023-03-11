@@ -12,13 +12,13 @@ const OrderFeed = () => {
   const orders = useSelector(webSocketOrdersSelector)
 
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <ul className={styles.list}>
         {orders.map(el => (
           <OrderCard key={el._id} order={el} />
         ))}
       </ul>
-    </div>
+    </section>
   )
 }
 

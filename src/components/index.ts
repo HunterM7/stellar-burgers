@@ -28,3 +28,5 @@ export { default as ConstructorBun } from './BurgerConstructor/ConstructorBun/Co
 export { default as OrderCardList } from './OrderCard/OrderCardList/OrderCardList'
 export { default as IngredientIcon } from './OrderCard/IngredientIcon/IngredientIcon'
 export { default as PriceCard } from './PriceCard/PriceCard'
+export { default as OrderInfo } from './OrderInfo/OrderInfo'
+export { default as OrderCount } from './OrderInfo/OrderCount/OrderCount'

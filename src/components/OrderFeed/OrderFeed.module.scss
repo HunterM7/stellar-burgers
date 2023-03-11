@@ -17,12 +17,12 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	bottom: 60px;
+	bottom: 0;
 	left: 0;
 
-	padding: 0 8px;
+	padding: 0 8px 60px;
 
-	@include scrollbar;
+	@include scrollbar-with-margin;
 	overflow-y: auto;
 	overflow-x: hidden;
 }

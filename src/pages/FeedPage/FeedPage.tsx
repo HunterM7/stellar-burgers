@@ -8,7 +8,7 @@ import { webSocketSelector } from 'redux/selectors'
 import { getIngredients } from 'redux/actions'
 
 // Components
-import { OrderFeed } from 'components'
+import { OrderFeed, OrderInfo } from 'components'
 
 // Styles
 import styles from './FeedPage.module.scss'
@@ -24,19 +24,17 @@ const FeedPage: React.FC = () => {
   }, [dispatch])
 
   return (
-    <section className={classNames('container', styles.wrapper)}>
+    <main className={classNames('container', styles.wrapper)}>
       {!orders.length ? (
         <h2>Loading</h2>
       ) : (
         <>
           <h2 className={styles.title}>Лента заказов</h2>
-          <div className={styles.block}>
-            <OrderFeed />
-          </div>
-          <div className={styles.block}></div>
+          <OrderFeed />
+          <OrderInfo />
         </>
       )}
-    </section>
+    </main>
   )
 }
 

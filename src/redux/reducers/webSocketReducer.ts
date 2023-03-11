@@ -4,6 +4,8 @@ import { IWSOrder, WSActionTypes } from 'redux/actionTypes'
 interface IWSInitialState {
   wsConnected: boolean
   orders: IWSOrder[]
+  onworkOrders: number[]
+  doneOrders: number[]
   total: number
   totalToday: number
 
@@ -13,6 +15,8 @@ interface IWSInitialState {
 const initialState: IWSInitialState = {
   wsConnected: false,
   orders: [],
+  onworkOrders: [],
+  doneOrders: [],
   total: 0,
   totalToday: 0,
 }
@@ -55,6 +59,9 @@ export const webSocketReducer = (
     case WSActionTypes.WS_GET_ALL_ORDERS:
       return {
         ...state,
+        // onworkOrders: [],
+        // doneOrders: [],
+
         error: undefined,
         ...action.payload,
       }

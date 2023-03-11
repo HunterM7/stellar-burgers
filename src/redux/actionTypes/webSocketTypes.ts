@@ -3,14 +3,15 @@ export interface IWSOrder {
   _id: string
   name: string
   number: number
-  status: 'done'
-  createdAt: '2021-06-23T14:43:22.587Z'
-  updatedAt: '2021-06-23T14:43:22.603Z'
+  status: 'pending' | 'created' | 'done'
+  createdAt: string
+  updatedAt: string
 }
 
 export interface IAllOrders {
-  success: boolean
   orders: IWSOrder[]
+  onworkOrders: number[]
+  doneOrders: number[]
   total: number
   totalToday: number
 }

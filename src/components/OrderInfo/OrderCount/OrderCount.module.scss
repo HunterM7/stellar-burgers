@@ -1,0 +1,11 @@
+//? === Order Count ===
+
+@import 'scss/vars';
+
+.title {
+}
+
+.count {
+	@include font-digits-large;
+	@include glow;
+}
