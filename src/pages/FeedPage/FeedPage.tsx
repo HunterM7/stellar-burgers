@@ -3,12 +3,12 @@ import classNames from 'classnames'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
-import { startWSConnection } from 'redux/actionCreators'
 import { webSocketSelector } from 'redux/selectors'
 import { getIngredients } from 'redux/actions'
+import { startWSConnection } from 'redux/actionCreators'
 
 // Components
-import { OrderFeed, OrderInfo } from 'components'
+import { Loader, OrderFeed, OrderInfo } from 'components'
 
 // Styles
 import styles from './FeedPage.module.scss'
@@ -26,7 +26,7 @@ const FeedPage: React.FC = () => {
   return (
     <main className={classNames('container', styles.wrapper)}>
       {!orders.length ? (
-        <h2>Loading</h2>
+        <Loader />
       ) : (
         <>
           <h2 className={styles.title}>Лента заказов</h2>

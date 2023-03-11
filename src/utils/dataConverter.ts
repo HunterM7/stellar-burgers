@@ -11,21 +11,16 @@ export function dataConverter(initialDate: string) {
     `${consideredDate.getFullYear()}`
 
   const date = (() => {
-    if (timeDifference < 259200000) {
-      switch (dayDifference) {
-        case 0:
-          return 'Сегодня'
-        case 1:
-          return 'Вчера'
-        case 2:
-          return '2 дня назад'
+    if (timeDifference < 86400000)
+      return dayDifference === 0 ? 'Сегодня' : 'Вчера'
 
-        default:
-          return fullFormatDate
-      }
-    } else {
-      return fullFormatDate
-    }
+    if (timeDifference < 172800000)
+      return dayDifference === 1 ? 'Вчера' : '2 дня назад'
+
+    if (timeDifference < 259200000)
+      return dayDifference === 2 ? '2 дня назад' : fullFormatDate
+
+    return fullFormatDate
   })()
 
   const time =

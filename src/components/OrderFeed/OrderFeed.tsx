@@ -13,13 +13,14 @@ import styles from './OrderFeed.module.scss'
 const OrderFeed: React.FC = () => {
   const orders = useSelector(webSocketOrdersSelector)
 
+  const orderList = React.useMemo(
+    () => orders.slice(0, 12).map(el => <OrderCard key={el._id} order={el} />),
+    [orders],
+  )
+
   return (
     <section className={styles.wrapper}>
-      <ul className={styles.list}>
-        {orders.slice(0, 12).map(el => (
-          <OrderCard key={el._id} order={el} />
-        ))}
-      </ul>
+      <ul className={styles.list}>{orderList}</ul>
     </section>
   )
 }
