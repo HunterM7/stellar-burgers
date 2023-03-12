@@ -34,7 +34,7 @@
 	@include noselect;
 
 	&_small {
-		font-size: 28px;
+		@include font-digits-small;
 	}
 }
 
@@ -55,7 +55,7 @@
 
 .content {
 	width: 100%;
-	max-width: 520px;
+	max-width: 640px;
 
 	margin: 0 auto;
 

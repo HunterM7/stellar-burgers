@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import classNames from 'classnames'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Utils
@@ -11,7 +12,6 @@ import { Portal, ModalOverlay } from 'components'
 
 // Styles
 import styles from './Modal.module.scss'
-import classNames from 'classnames'
 
 interface IModal {
   title?: string
