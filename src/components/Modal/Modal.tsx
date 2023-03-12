@@ -11,12 +11,18 @@ import { Portal, ModalOverlay } from 'components'
 
 // Styles
 import styles from './Modal.module.scss'
+import classNames from 'classnames'
 
 interface IModal {
   title?: string
+  titleSize?: 'small' | 'medium'
 }
 
-const Modal: React.FC<PropsWithChildren<IModal>> = ({ title, children }) => {
+const Modal: React.FC<PropsWithChildren<IModal>> = ({
+  title,
+  titleSize = 'medium',
+  children,
+}) => {
   const navigate = useNavigate()
   const location: IUseLocation = useLocation()
 
@@ -32,7 +38,13 @@ const Modal: React.FC<PropsWithChildren<IModal>> = ({ title, children }) => {
     <Portal>
       <div className={styles.modal}>
         <div className={styles.header}>
-          {!!title && <h2 className={styles.title}>{title}</h2>}
+          {!!title && (
+            <h2
+              className={classNames(styles.title, styles[`title_${titleSize}`])}
+            >
+              {title}
+            </h2>
+          )}
 
           <button className={styles.closeBtn} onClick={closeFunc}>
             <CloseIcon type="primary" />

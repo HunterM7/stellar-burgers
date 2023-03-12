@@ -7,6 +7,7 @@ import {
   INGREDIENT_PAGE_LINK,
   LOGIN_LINK,
   NOT_FOUND_LINK,
+  ORDER_FEED_ID_LINK,
   ORDER_FEED_LINK,
   ORDER_LINK,
   PROFILE_LINK,
@@ -27,15 +28,17 @@ import {
   ProfilePage,
   RegisterPage,
   ResetPasswordPage,
+  OrderPage,
 } from 'pages'
 
 // Components
 import {
   IngredientDetails,
-  OrderDetails,
+  OrderSummary,
   OrderHistory,
   ProfileInfo,
   ProtectedRoute,
+  OrderDetailsModal,
 } from 'components'
 
 const Router: React.FC = () => {
@@ -48,6 +51,7 @@ const Router: React.FC = () => {
       <Routes location={background || location}>
         <Route index element={<HomePage />} />
         <Route path={ORDER_FEED_LINK} element={<FeedPage />} />
+        <Route path={ORDER_FEED_ID_LINK} element={<OrderPage />} />
 
         <Route
           path={PROFILE_LINK}
@@ -87,7 +91,9 @@ const Router: React.FC = () => {
       {!!background && (
         <Routes>
           <Route path={INGREDIENT_PAGE_LINK} element={<IngredientDetails />} />
-          <Route path={ORDER_LINK} element={<OrderDetails />} />
+          <Route path={ORDER_LINK} element={<OrderSummary />} />
+
+          <Route path={ORDER_FEED_ID_LINK} element={<OrderDetailsModal />} />
         </Routes>
       )}
     </>

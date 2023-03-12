@@ -10,3 +10,6 @@ export { default as ForgotPasswordPage } from './ForgotPasswordPage/ForgotPasswo
 export { default as ResetPasswordPage } from './ResetPasswordPage/ResetPasswordPage'
 export { default as NotFoundPage } from './NotFoundPage/NotFoundPage'
 export { default as IngredientPage } from './IngredientPage/IngredientPage'
+
+// Other pages
+export { default as OrderPage } from './OrderPage/OrderPage'

@@ -9,19 +9,35 @@ import { TIngredient } from 'redux/actionTypes'
 import styles from './PriceCard.module.scss'
 
 interface IPriceCard {
-  ingredients: TIngredient[]
-  size: 'small' | 'medium'
+  ingredients?: TIngredient[]
+  price?: number
+  size?: 'small' | 'medium'
+  prefix?: number
 }
 
-const PriceCard: React.FC<IPriceCard> = ({ size, ingredients }) => {
-  const totalPrice = ingredients.reduce(
-    (sum, el) => (el.type === 'bun' ? sum + el.price * 2 : sum + el.price),
-    0,
-  )
+const PriceCard: React.FC<IPriceCard> = ({
+  ingredients,
+  price,
+  size = 'small',
+  prefix,
+}) => {
+  let totalPrice = 0
+
+  if (ingredients) {
+    totalPrice = ingredients.reduce(
+      (sum, el) => (el.type === 'bun' ? sum + el.price * 2 : sum + el.price),
+      0,
+    )
+  }
+
+  if (price) totalPrice = price
 
   return (
     <div className={classNames(styles.price, styles[size])}>
-      <span>{totalPrice}</span>
+      <span>
+        {prefix && `${prefix} x `}
+        {totalPrice}
+      </span>
       <CurrencyIcon type="primary" />
     </div>
   )

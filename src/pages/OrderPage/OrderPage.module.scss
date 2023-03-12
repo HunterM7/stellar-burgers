@@ -1,0 +1,11 @@
+//? === Order Page ===
+
+@import 'scss/vars';
+
+.wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	padding-top: 80px;
+}

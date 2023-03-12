@@ -32,6 +32,10 @@
 	flex: 1;
 
 	@include noselect;
+
+	&_small {
+		font-size: 28px;
+	}
 }
 
 .closeBtn {

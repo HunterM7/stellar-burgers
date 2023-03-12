@@ -1,28 +1,50 @@
-//? === Order Info ===
+//? === Order Details ===
 
 @import 'scss/vars';
 
-.orderId {
-	@include font-digits-large;
-	@include glow;
-
-	padding-top: 16px;
-	margin-bottom: 32px;
+.wrapper {
+	width: 100%;
+	max-width: 640px;
+	text-align: left;
 }
 
-.title {
+.name {
+	margin-bottom: 12px;
+}
+
+.status {
+	color: $success;
+
 	margin-bottom: 60px;
 }
 
-.img {
-	margin-bottom: 60px;
+.composition {
+	margin-bottom: 24px;
 }
 
-.subtitle {
-	margin-bottom: 8px;
+.ingredients {
+	max-height: 320px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+	margin-bottom: 40px;
+	padding-right: 24px;
+
+	@include scrollbar;
 }
 
-.desc {
+.footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.timing {
+	@include font-plain-text;
+	white-space: nowrap;
 	color: $text-secondary;
-	padding-bottom: 60px;
+
+	justify-self: flex-end;
+	grid-area: timing;
 }

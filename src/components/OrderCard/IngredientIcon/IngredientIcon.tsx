@@ -5,7 +5,7 @@ import styles from './IngredientIcon.module.scss'
 
 interface IIngredientIcon {
   image: string
-  counter: number
+  counter?: number
 }
 
 const IngredientIcon: React.FC<IIngredientIcon> = ({ image, counter = 0 }) => {

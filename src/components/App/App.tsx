@@ -5,7 +5,8 @@ import { useDispatch } from 'redux/store'
 import { getUser } from 'redux/actions'
 
 // Components
-import { AppHeader, Router } from 'components'
+import Router from 'Router'
+import { AppHeader } from 'components'
 
 const App: React.FC = () => {
   const dispatch = useDispatch()

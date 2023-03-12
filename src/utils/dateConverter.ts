@@ -1,4 +1,4 @@
-export function dataConverter(initialDate: string) {
+export function dateConverter(initialDate: string) {
   const dayInMS = 86400000
   const currentDate = new Date()
   const consideredDate = new Date(initialDate)

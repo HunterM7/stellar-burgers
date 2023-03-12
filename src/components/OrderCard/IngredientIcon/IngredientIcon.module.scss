@@ -3,9 +3,10 @@
 @import 'scss/vars';
 
 .wrapper {
+	height: 64px;
 	aspect-ratio: 1/1;
 
-	padding: 3%;
+	padding: 2px;
 
 	flex-shrink: 0;
 
