@@ -60,8 +60,8 @@ const Router: React.FC = () => {
         >
           <Route path={PROFILE_LINK} element={<ProfileInfo />} />
           <Route path={PROFILE_ORDERS_LINK} element={<OrderHistory />} />
-          <Route path={PROFILE_ORDERS_ID_LINK} element={<OrderPage />} />
         </Route>
+        <Route path={PROFILE_ORDERS_ID_LINK} element={<OrderPage />} />
 
         <Route path={INGREDIENT_PAGE_LINK} element={<IngredientPage />} />
 

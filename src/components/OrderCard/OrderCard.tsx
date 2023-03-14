@@ -7,7 +7,7 @@ import { useSelector } from 'redux/store'
 import { dataIngreientsSelector } from 'redux/selectors'
 
 // Utils
-import { OrderStatus, ORDER_FEED_LINK } from 'utils/data/constants'
+import { OrderStatus } from 'utils/data/constants'
 import { dateConverter } from 'utils/dateConverter'
 import { getIngredientsList } from 'utils/getIngredientsList'
 
