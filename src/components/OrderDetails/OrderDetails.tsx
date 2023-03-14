@@ -4,57 +4,24 @@ import { useParams } from 'react-router-dom'
 // Redux
 import { useSelector } from 'redux/store'
 import { dataIngreientsSelector } from 'redux/selectors'
-import { IWSOrder, TIngredient } from 'redux/actionTypes'
+import { TIngredient } from 'redux/actionTypes'
 
 // Utils
-import { API_URL_ORDERS, OrderStatus } from 'utils/data/constants'
+import { useFetchOrder } from 'hooks/useFetchOrder'
+import { OrderStatus } from 'utils/data/constants'
 import { dateConverter } from 'utils/dateConverter'
 import { getIngredientsList } from 'utils/getIngredientsList'
-import { customFetch } from 'utils/api/customFetch'
 
 // Components
-import { PriceCard, OrderRow, Loader } from 'components'
+import { Loader, OrderRow, PriceCard } from 'components'
 
 // Styles
 import styles from './OrderDetails.module.scss'
 
-interface IOrderFetch {
-  success: boolean
-  orders: IWSOrder[]
-}
-
-interface IOrderState {
-  isLoading: boolean
-  hasError: boolean
-  order: IWSOrder | null
-}
-
 const OrderDetails: React.FC = () => {
   // Getting order
   const { id = '' } = useParams()
-
-  const initialState: IOrderState = {
-    isLoading: true,
-    hasError: false,
-    order: null,
-  }
-
-  const [{ isLoading, hasError, order }, setOrder] =
-    React.useState<IOrderState>(initialState)
-
-  React.useEffect(() => {
-    customFetch<IOrderFetch>(`${API_URL_ORDERS}/${id}`).then(res => {
-      if (res.success) {
-        setOrder(prev => ({
-          ...prev,
-          isLoading: false,
-          order: res.orders[0],
-        }))
-      } else {
-        setOrder({ isLoading: false, hasError: true, order: null })
-      }
-    })
-  }, [id])
+  const { order, isLoading, hasError } = useFetchOrder(id)
 
   // Order creation date
   const date = order ? dateConverter(order.createdAt) : ''
