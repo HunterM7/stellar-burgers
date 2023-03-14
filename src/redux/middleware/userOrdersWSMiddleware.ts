@@ -21,7 +21,7 @@ export const userOrdersWSMiddleware = (wsUrl: string): Middleware =>
 
       const accessToken = getCookie('accessToken') || ''
 
-      if (action.type === userOrdersWSActionTypes.WS_CONNECTION_START) {
+      if (action.type === userOrdersWSActionTypes.START) {
         socket = new WebSocket(`${wsUrl}?token=${accessToken}`)
       }
       if (socket) {

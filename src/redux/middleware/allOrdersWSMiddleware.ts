@@ -18,12 +18,14 @@ export const allOrdersWSMiddleware = (wsUrl: string): Middleware =>
     return next => (action: TAppActions) => {
       const { dispatch } = store
 
-      if (action.type === allOrdersWSActionTypes.WS_CONNECTION_START) {
+      if (action.type === allOrdersWSActionTypes.START) {
         socket = new WebSocket(wsUrl)
       }
       if (socket) {
         // функция, которая вызывается при открытии сокета
         socket.onopen = event => {
+          console.log('open connection')
+
           dispatch(successAllOrdersWSConnection(event))
         }
 
@@ -38,6 +40,8 @@ export const allOrdersWSMiddleware = (wsUrl: string): Middleware =>
         }
         // функция, которая вызывается при закрытии соединения
         socket.onclose = event => {
+          console.log('close connection')
+
           dispatch(closedAllOrdersWSConnection(event))
         }
 

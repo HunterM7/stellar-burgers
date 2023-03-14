@@ -8,27 +8,27 @@ import {
 } from 'redux/actions'
 
 export const startAllOrdersWSConnection = (): startAllOrdersWSConnectionA => ({
-  type: allOrdersWSActionTypes.WS_CONNECTION_START,
+  type: allOrdersWSActionTypes.START,
 })
 
 export const successAllOrdersWSConnection = (
   event: Event,
 ): successAllOrdersWSConnectionA => ({
-  type: allOrdersWSActionTypes.WS_CONNECTION_SUCCESS,
+  type: allOrdersWSActionTypes.SUCCESS,
   payload: event,
 })
 
 export const closedAllOrdersWSConnection = (
   event: Event,
 ): closedAllOrdersWSConnectionA => ({
-  type: allOrdersWSActionTypes.WS_CONNECTION_CLOSED,
+  type: allOrdersWSActionTypes.CLOSED,
   payload: event,
 })
 
 export const errorAllOrdersWSConnection = (
   event: Event,
 ): errorAllOrdersWSConnectionA => ({
-  type: allOrdersWSActionTypes.WS_CONNECTION_ERROR,
+  type: allOrdersWSActionTypes.ERROR,
   payload: event,
 })
 
@@ -40,11 +40,11 @@ export const getAllOrders = (event: MessageEvent): getAllOrdersA => {
     .map(el => el.number)
 
   const onworkOrders = data.orders
-    .filter(el => el.status === 'created')
+    .filter(el => el.status === 'pending')
     .map(el => el.number)
 
   return {
-    type: allOrdersWSActionTypes.WS_GET_ALL_ORDERS,
+    type: allOrdersWSActionTypes.GET_ORDERS,
     payload: {
       orders: data.orders,
       total: data.total,

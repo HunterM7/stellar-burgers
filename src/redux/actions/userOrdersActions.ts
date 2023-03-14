@@ -1,22 +1,22 @@
 import { IAllOrders, userOrdersWSActionTypes } from 'redux/actionTypes'
 
 export interface startUserOrdersWSConnectionA {
-  type: userOrdersWSActionTypes.WS_CONNECTION_START
+  type: userOrdersWSActionTypes.START
 }
 export interface successUserOrdersWSConnectionA {
-  type: userOrdersWSActionTypes.WS_CONNECTION_SUCCESS
+  type: userOrdersWSActionTypes.SUCCESS
   payload: Event
 }
 export interface closedUserOrdersWSConnectionA {
-  type: userOrdersWSActionTypes.WS_CONNECTION_CLOSED
+  type: userOrdersWSActionTypes.CLOSED
   payload: Event
 }
 export interface errorUserOrdersWSConnectionA {
-  type: userOrdersWSActionTypes.WS_CONNECTION_ERROR
+  type: userOrdersWSActionTypes.ERROR
   payload: Event
 }
 export interface getUserOrdersA {
-  type: userOrdersWSActionTypes.WS_GET_ALL_ORDERS
+  type: userOrdersWSActionTypes.GET_ORDERS
   payload: IAllOrders
 }
 

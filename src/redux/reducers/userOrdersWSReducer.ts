@@ -22,28 +22,28 @@ export const userOrdersWSReducer = (
   action: userOrdersWSActions,
 ): IWSInitialState => {
   switch (action.type) {
-    case userOrdersWSActionTypes.WS_CONNECTION_SUCCESS:
+    case userOrdersWSActionTypes.SUCCESS:
       return {
         ...state,
         wsConnected: true,
         error: undefined,
       }
 
-    case userOrdersWSActionTypes.WS_CONNECTION_ERROR:
+    case userOrdersWSActionTypes.ERROR:
       return {
         ...state,
         error: action.payload,
         wsConnected: false,
       }
 
-    case userOrdersWSActionTypes.WS_CONNECTION_CLOSED:
+    case userOrdersWSActionTypes.CLOSED:
       return {
         ...state,
         error: undefined,
         wsConnected: false,
       }
 
-    case userOrdersWSActionTypes.WS_GET_ALL_ORDERS:
+    case userOrdersWSActionTypes.GET_ORDERS:
       return {
         ...state,
         error: undefined,

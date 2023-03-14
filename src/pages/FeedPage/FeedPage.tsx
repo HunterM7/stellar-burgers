@@ -5,7 +5,10 @@ import classNames from 'classnames'
 import { useDispatch, useSelector } from 'redux/store'
 import { webSocketSelector } from 'redux/selectors'
 import { getIngredients } from 'redux/actions'
-import { startAllOrdersWSConnection } from 'redux/actionCreators'
+import {
+  closedAllOrdersWSConnection,
+  startAllOrdersWSConnection,
+} from 'redux/actionCreators'
 import { ORDER_FEED_LINK } from 'utils/data/constants'
 
 // Components
