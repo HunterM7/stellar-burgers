@@ -15,6 +15,9 @@
 	transform: translate(-50%, -50%);
 	z-index: 1;
 
+	display: flex;
+	flex-direction: column;
+
 	border-radius: 40px;
 	background-color: $bg-modal;
 }
@@ -56,6 +59,9 @@
 .content {
 	width: 100%;
 	max-width: 640px;
+
+	position: relative;
+	flex-grow: 1;
 
 	margin: 0 auto;
 

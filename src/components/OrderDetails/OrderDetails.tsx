@@ -83,7 +83,7 @@ const OrderDetails: React.FC = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {isLoading && <Loader size="small" />}
 
       {hasError && <h1>Что-то пошло не так...</h1>}
 
