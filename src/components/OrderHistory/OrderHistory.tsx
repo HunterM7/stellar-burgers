@@ -2,18 +2,19 @@ import React from 'react'
 
 // Components
 import { Loader, OrderFeed } from 'components'
-import { webSocketSelector } from 'redux/selectors'
 import { useDispatch, useSelector } from 'redux/store'
 import { getIngredients } from 'redux/actions'
-import { startWSConnection } from 'redux/actionCreators'
+import { startUserOrdersWSConnection } from 'redux/actionCreators'
+import { userOrdersSelector } from 'redux/selectors/userOrdersWSSelectors'
+import { PROFILE_ORDERS_LINK } from 'utils/data/constants'
 
 const OrderHistory: React.FC = () => {
   const dispatch = useDispatch()
-  const { orders } = useSelector(webSocketSelector)
+  const orders = useSelector(userOrdersSelector)
 
   React.useEffect(() => {
     dispatch(getIngredients())
-    dispatch(startWSConnection())
+    dispatch(startUserOrdersWSConnection())
   }, [dispatch])
 
   return (
@@ -21,7 +22,11 @@ const OrderHistory: React.FC = () => {
       {!orders.length ? (
         <Loader />
       ) : (
-        <OrderFeed orders={orders} isStatusShown />
+        <OrderFeed
+          orders={[...orders].reverse()}
+          isStatusShown
+          modalPath={PROFILE_ORDERS_LINK}
+        />
       )}
     </>
   )

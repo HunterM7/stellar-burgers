@@ -12,17 +12,27 @@ import styles from './OrderFeed.module.scss'
 interface IOrderFeed {
   orders: IWSOrder[]
   isStatusShown?: boolean
+  modalPath: string
 }
 
-const OrderFeed: React.FC<IOrderFeed> = ({ orders, isStatusShown = false }) => {
+const OrderFeed: React.FC<IOrderFeed> = ({
+  orders,
+  isStatusShown = false,
+  modalPath,
+}) => {
   const orderList = React.useMemo(
     () =>
       orders
         .slice(0, 12)
         .map(el => (
-          <OrderCard isStatusShown={isStatusShown} key={el._id} order={el} />
+          <OrderCard
+            isStatusShown={isStatusShown}
+            key={el._id}
+            order={el}
+            modalPath={modalPath}
+          />
         )),
-    [isStatusShown, orders],
+    [isStatusShown, modalPath, orders],
   )
 
   return (

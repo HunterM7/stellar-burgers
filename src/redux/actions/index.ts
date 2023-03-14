@@ -3,7 +3,8 @@ import { CartActions } from './cartActions'
 import { OrderActions } from './orderActions'
 import { IngredientDetailsActions } from './ingredientDetailsActions'
 import { AuthActions } from './authActions'
-import { WSActions } from './webSocketActions'
+import { allOrdersWSActions } from './allOrdersWSActions'
+import { userOrdersWSActions } from './userOrdersActions'
 
 // Actions
 export type TAppActions =
@@ -12,7 +13,8 @@ export type TAppActions =
   | OrderActions
   | IngredientDetailsActions
   | AuthActions
-  | WSActions
+  | allOrdersWSActions
+  | userOrdersWSActions
 
 // export actions
 export * from './dataActions'
@@ -20,4 +22,5 @@ export * from './cartActions'
 export * from './orderActions'
 export * from './ingredientDetailsActions'
 export * from './authActions'
-export * from './webSocketActions'
+export * from './allOrdersWSActions'
+export * from './userOrdersActions'

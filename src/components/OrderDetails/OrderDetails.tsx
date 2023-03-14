@@ -1,66 +1,110 @@
 import React from 'react'
-import { IWSOrder, TIngredient } from 'redux/actionTypes'
+import { useParams } from 'react-router-dom'
 
 // Redux
 import { useSelector } from 'redux/store'
 import { dataIngreientsSelector } from 'redux/selectors'
+import { IWSOrder, TIngredient } from 'redux/actionTypes'
 
 // Utils
-import { OrderStatus } from 'utils/data/constants'
+import { API_URL_ORDERS, OrderStatus } from 'utils/data/constants'
 import { dateConverter } from 'utils/dateConverter'
 import { getIngredientsList } from 'utils/getIngredientsList'
+import { customFetch } from 'utils/api/customFetch'
 
 // Components
-import { PriceCard, OrderRow } from 'components'
+import { PriceCard, OrderRow, Loader } from 'components'
 
 // Styles
 import styles from './OrderDetails.module.scss'
 
-interface IOrderDetails {
-  order: IWSOrder
+interface IOrderFetch {
+  success: boolean
+  orders: IWSOrder[]
 }
 
-const OrderDetails: React.FC<IOrderDetails> = ({
-  order: { name, status, createdAt, ingredients },
-}) => {
+interface IOrderState {
+  isLoading: boolean
+  hasError: boolean
+  order: IWSOrder | null
+}
+
+const OrderDetails: React.FC = () => {
+  // Getting order
+  const { id = '' } = useParams()
+
+  const initialState: IOrderState = {
+    isLoading: true,
+    hasError: false,
+    order: null,
+  }
+
+  const [{ isLoading, hasError, order }, setOrder] =
+    React.useState<IOrderState>(initialState)
+
+  React.useEffect(() => {
+    customFetch<IOrderFetch>(`${API_URL_ORDERS}/${id}`).then(res => {
+      if (res.success) {
+        setOrder(prev => ({
+          ...prev,
+          isLoading: false,
+          order: res.orders[0],
+        }))
+      } else {
+        setOrder({ isLoading: false, hasError: true, order: null })
+      }
+    })
+  }, [id])
+
   // Order creation date
-  const date = dateConverter(createdAt)
+  const date = order ? dateConverter(order.createdAt) : ''
 
   // Ingredients List
   const allIngredients = useSelector(dataIngreientsSelector)
 
-  const currentIngredients: TIngredient[] = getIngredientsList(
-    ingredients,
-    allIngredients,
-  )
+  const currentIngredients: TIngredient[] | null = order
+    ? getIngredientsList(order.ingredients, allIngredients)
+    : null
 
   const ingredientsList = [...new Set(currentIngredients)].map(ingredient => {
     const count =
       ingredient.type === 'bun'
         ? 2
-        : currentIngredients.filter(el => el._id === ingredient._id).length
+        : currentIngredients?.filter(el => el._id === ingredient._id).length
 
     return (
-      <OrderRow count={count} ingredient={ingredient} key={ingredient._id} />
+      <OrderRow
+        count={count || 0}
+        ingredient={ingredient}
+        key={ingredient._id}
+      />
     )
   })
 
   return (
-    <div className={styles.wrapper}>
-      <h3 className={styles.name}>{name}</h3>
+    <>
+      {isLoading && <Loader />}
 
-      <p className={styles.status}>{OrderStatus[status]}</p>
+      {hasError && <h1>Что-то пошло не так...</h1>}
 
-      <h3 className={styles.composition}>Состав:</h3>
+      {order && (
+        <div className={styles.wrapper}>
+          <h3 className={styles.name}>{order.name}</h3>
 
-      <ul className={styles.ingredients}>{ingredientsList}</ul>
+          <p className={styles.status}>{OrderStatus[order.status]}</p>
 
-      <div className={styles.footer}>
-        <span className={styles.timing}>{date}</span>
+          <h3 className={styles.composition}>Состав:</h3>
 
-        <PriceCard size="small" ingredients={currentIngredients} />
-      </div>
-    </div>
+          <ul className={styles.ingredients}>{ingredientsList}</ul>
+
+          <div className={styles.footer}>
+            <span className={styles.timing}>{date}</span>
+
+            <PriceCard size="small" ingredients={currentIngredients || []} />
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 

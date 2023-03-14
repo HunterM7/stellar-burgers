@@ -20,9 +20,14 @@ import styles from './OrderCard.module.scss'
 interface IOrderCard {
   order: IWSOrder
   isStatusShown: boolean
+  modalPath: string
 }
 
-const OrderCard: React.FC<IOrderCard> = ({ order, isStatusShown }) => {
+const OrderCard: React.FC<IOrderCard> = ({
+  order,
+  isStatusShown,
+  modalPath,
+}) => {
   const location = useLocation()
   const allIngredients = useSelector(dataIngreientsSelector)
 
@@ -42,7 +47,7 @@ const OrderCard: React.FC<IOrderCard> = ({ order, isStatusShown }) => {
     <Link
       className={styles.wrapper}
       state={{ background: location }}
-      to={`${ORDER_FEED_LINK}/${order.number}`}
+      to={`${modalPath}/${order.number}`}
     >
       <div className={styles.header}>
         <h4 className={styles.suptitle}>#{order.number}</h4>

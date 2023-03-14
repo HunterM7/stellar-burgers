@@ -96,6 +96,10 @@ const Router: React.FC = () => {
           <Route path={ORDER_LINK} element={<OrderSummary />} />
 
           <Route path={ORDER_FEED_ID_LINK} element={<OrderDetailsModal />} />
+          <Route
+            path={PROFILE_ORDERS_ID_LINK}
+            element={<OrderDetailsModal />}
+          />
         </Routes>
       )}
     </>

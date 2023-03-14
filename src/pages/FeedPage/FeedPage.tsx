@@ -5,7 +5,8 @@ import classNames from 'classnames'
 import { useDispatch, useSelector } from 'redux/store'
 import { webSocketSelector } from 'redux/selectors'
 import { getIngredients } from 'redux/actions'
-import { startWSConnection } from 'redux/actionCreators'
+import { startAllOrdersWSConnection } from 'redux/actionCreators'
+import { ORDER_FEED_LINK } from 'utils/data/constants'
 
 // Components
 import { Loader, OrderFeed, OrderInfo } from 'components'
@@ -20,7 +21,7 @@ const FeedPage: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(getIngredients())
-    dispatch(startWSConnection())
+    dispatch(startAllOrdersWSConnection())
   }, [dispatch])
 
   return (
@@ -30,7 +31,7 @@ const FeedPage: React.FC = () => {
       ) : (
         <>
           <h2 className={styles.title}>Лента заказов</h2>
-          <OrderFeed orders={orders} />
+          <OrderFeed orders={orders} modalPath={ORDER_FEED_LINK} />
           <OrderInfo />
         </>
       )}

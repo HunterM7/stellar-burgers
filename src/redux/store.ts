@@ -11,8 +11,11 @@ import { rootReducer } from 'redux/reducers'
 
 // Actions
 import { TAppActions } from 'redux/actions'
-import { WS_ALL_ORDERS } from 'utils/data/constants'
-import { socketMiddleware } from 'redux/middleware/socketMiddleware'
+import { WS_ALL_ORDERS, WS_USER_ORDERS } from 'utils/data/constants'
+
+// Middleware
+import { allOrdersWSMiddleware } from 'redux/middleware/allOrdersWSMiddleware'
+import { userOrdersWSMiddleware } from 'redux/middleware/userOrdersWSMiddleware'
 
 // Redux DevTools
 declare global {
@@ -27,7 +30,13 @@ const composeWithDevTools =
 // Store
 export const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk, socketMiddleware(WS_ALL_ORDERS))),
+  composeWithDevTools(
+    applyMiddleware(
+      thunk,
+      allOrdersWSMiddleware(WS_ALL_ORDERS),
+      userOrdersWSMiddleware(WS_USER_ORDERS),
+    ),
+  ),
 )
 
 export type TRootState = ReturnType<typeof rootReducer>
