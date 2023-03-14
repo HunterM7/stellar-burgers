@@ -1,9 +1,9 @@
 // API Endpoints
-import { API_URL_PASSWORD_RESET_REQUEST } from 'utils/constants'
+import { API_URL_PASSWORD_RESET_REQUEST } from 'utils/data/constants'
 
 // Utils
-import { checkReponse } from 'utils/checkReponse'
-import { requestCreator } from 'utils/requestCreator'
+import { customFetch } from 'utils/api/customFetch'
+import { IRequestCreator } from 'utils/api/requestCreator'
 
 // Types
 type TForm = { password: string; token: string }
@@ -13,9 +13,10 @@ type TResetPasswordResponse = {
   message: string
 }
 export const resetPassword = async (form: TForm) => {
-  const requestOptions = requestCreator('POST', {}, form)
+  const requestOptions: IRequestCreator = { method: 'POST', body: { ...form } }
 
-  await fetch(API_URL_PASSWORD_RESET_REQUEST, requestOptions)
-    .then((res) => checkReponse<TResetPasswordResponse>(res))
-    .then((res) => res)
+  await customFetch<TResetPasswordResponse>(
+    API_URL_PASSWORD_RESET_REQUEST,
+    requestOptions,
+  )
 }

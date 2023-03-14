@@ -9,7 +9,7 @@ import {
 import { forgotPassword } from 'utils/auth/forgotPassword'
 
 // Routes
-import { LOGIN_LINK, RESET_PASSWORD_LINK } from 'utils/constants'
+import { LOGIN_LINK, RESET_PASSWORD_LINK } from 'utils/data/constants'
 
 // Components
 import { AuthLink } from 'components'
@@ -39,8 +39,8 @@ const ForgotPasswordPage = () => {
             state: { resetPassword: true },
           }),
         )
-        .catch((err) => {
-          console.log('error')
+        .catch(() => {
+          throw new Error('Error on submitting ForgotPasswordPage form')
         })
     },
     [form, navigate],
@@ -59,7 +59,12 @@ const ForgotPasswordPage = () => {
           autoFocus
         />
 
-        <Button htmlType="submit" type="primary" size="large">
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="large"
+          disabled={!form.email}
+        >
           Восстановить
         </Button>
       </form>

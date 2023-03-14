@@ -5,13 +5,13 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 // Styles
 import styles from './AuthLink.module.scss'
 
-interface TAuthLink {
+interface IAuthLink {
   title: string
   buttonName: string
   path: string
 }
 
-const AuthLink: React.FC<TAuthLink> = ({ title, buttonName, path }) => {
+const AuthLink: React.FC<IAuthLink> = ({ title, buttonName, path }) => {
   const navigate = useNavigate()
 
   return (

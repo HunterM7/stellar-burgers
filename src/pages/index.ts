@@ -1,24 +1,15 @@
 // Header link pages
-import HomePage from './HomePage/HomePage'
-import OrderFeedPage from './OrderFeedPage/OrderFeedPage'
-import ProfilePage from './ProfilePage/ProfilePage'
+export { default as HomePage } from './HomePage/HomePage'
+export { default as FeedPage } from './FeedPage/FeedPage'
+export { default as ProfilePage } from './ProfilePage/ProfilePage'
 
 // Authentication pages
-import LoginPage from './LoginPage/LoginPage'
-import RegisterPage from './RegisterPage/RegisterPage'
-import ForgotPasswordPage from './ForgotPasswordPage/ForgotPasswordPage'
-import ResetPasswordPage from './ResetPasswordPage/ResetPasswordPage'
-import NotFoundPage from './NotFoundPage/NotFoundPage'
-import IngredientPage from './IngredientPage/IngredientPage'
+export { default as LoginPage } from './LoginPage/LoginPage'
+export { default as RegisterPage } from './RegisterPage/RegisterPage'
+export { default as ForgotPasswordPage } from './ForgotPasswordPage/ForgotPasswordPage'
+export { default as ResetPasswordPage } from './ResetPasswordPage/ResetPasswordPage'
+export { default as NotFoundPage } from './NotFoundPage/NotFoundPage'
+export { default as IngredientPage } from './IngredientPage/IngredientPage'
 
-export {
-  HomePage,
-  OrderFeedPage,
-  ProfilePage,
-  LoginPage,
-  RegisterPage,
-  ForgotPasswordPage,
-  ResetPasswordPage,
-  NotFoundPage,
-  IngredientPage,
-}
+// Other pages
+export { default as OrderPage } from './OrderPage/OrderPage'

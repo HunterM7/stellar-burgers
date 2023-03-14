@@ -1,11 +1,5 @@
-import { AuthActions } from 'redux/actions/authActions'
-import {
-  GetUserFetchStatus,
-  LoginFetchStatus,
-  LogoutFetchStatus,
-  RegisterFetchStatus,
-  SetUserFetchStatus,
-} from 'redux/actionTypes'
+import { AuthActions } from 'redux/actions'
+import { AuthFetchStatus } from 'redux/actionTypes'
 
 export type TAuthUser = {
   name: string
@@ -46,10 +40,10 @@ export const authReducer = (
 ): TAuthState => {
   switch (action.type) {
     // Register logic
-    case RegisterFetchStatus.REGISTER_REQUEST:
+    case AuthFetchStatus.REGISTER_REQUEST:
       return { ...state, isLoading: true, hasError: false }
 
-    case RegisterFetchStatus.REGISTER_SUCCESS:
+    case AuthFetchStatus.REGISTER_SUCCESS:
       return {
         ...state,
         user: {
@@ -61,14 +55,14 @@ export const authReducer = (
         isLoading: false,
       }
 
-    case RegisterFetchStatus.REGISTER_ERROR:
+    case AuthFetchStatus.REGISTER_ERROR:
       return { ...state, isLoading: false, hasError: true }
 
     // Login logic
-    case LoginFetchStatus.LOGIN_REQUEST:
+    case AuthFetchStatus.LOGIN_REQUEST:
       return { ...state, isLoading: true, hasError: false }
 
-    case LoginFetchStatus.LOGIN_SUCCESS:
+    case AuthFetchStatus.LOGIN_SUCCESS:
       return {
         ...state,
         user: {
@@ -80,27 +74,27 @@ export const authReducer = (
         isLoading: false,
       }
 
-    case LoginFetchStatus.LOGIN_ERROR:
+    case AuthFetchStatus.LOGIN_ERROR:
       return { ...state, isLoading: false, hasError: true }
 
     // Logout logic
-    case LogoutFetchStatus.LOGOUT_REQUEST:
+    case AuthFetchStatus.LOGOUT_REQUEST:
       return { ...state, isLoading: true, hasError: false }
 
-    case LogoutFetchStatus.LOGOUT_SUCCESS:
+    case AuthFetchStatus.LOGOUT_SUCCESS:
       return {
         ...state,
         ...initialState,
       }
 
-    case LogoutFetchStatus.LOGOUT_ERROR:
+    case AuthFetchStatus.LOGOUT_ERROR:
       return { ...state, isLoading: false, hasError: true }
 
     // Get user logic
-    case GetUserFetchStatus.GET_USER_REQUEST:
+    case AuthFetchStatus.GET_USER_REQUEST:
       return { ...state, isLoading: true, hasError: false }
 
-    case GetUserFetchStatus.GET_USER_SUCCESS:
+    case AuthFetchStatus.GET_USER_SUCCESS:
       return {
         ...state,
         user: {
@@ -112,7 +106,7 @@ export const authReducer = (
         isLoading: false,
       }
 
-    case GetUserFetchStatus.GET_USER_ERROR:
+    case AuthFetchStatus.GET_USER_ERROR:
       return {
         ...initialState,
         isLoading: false,
@@ -120,10 +114,10 @@ export const authReducer = (
       }
 
     // Set user logic
-    case SetUserFetchStatus.SET_USER_REQUEST:
+    case AuthFetchStatus.SET_USER_REQUEST:
       return { ...state, isLoading: true, hasError: false }
 
-    case SetUserFetchStatus.SET_USER_SUCCESS:
+    case AuthFetchStatus.SET_USER_SUCCESS:
       return {
         ...state,
         user: {
@@ -134,7 +128,7 @@ export const authReducer = (
         isLoading: false,
       }
 
-    case SetUserFetchStatus.SET_USER_ERROR:
+    case AuthFetchStatus.SET_USER_ERROR:
       return {
         ...initialState,
         isLoading: false,

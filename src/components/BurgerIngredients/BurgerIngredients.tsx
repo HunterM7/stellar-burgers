@@ -7,7 +7,7 @@ import { useSelector } from 'redux/store'
 import { dataIngreientsSelector } from 'redux/selectors'
 
 // Utils
-import { ingredientGroups } from 'utils/ingredientGroups'
+import { ingredientGroups } from 'utils/data/ingredientGroups'
 
 // Components
 import { IngredientsGroup } from 'components'
@@ -57,7 +57,7 @@ const BurgerIngredients: React.FC = () => {
           key={i}
           id={`ingredients-block-${++i}`}
           title={item.title}
-          data={ingredients.filter((el) => el.type === item.type)}
+          data={ingredients.filter(el => el.type === item.type)}
         />
       )),
     [ingredients],

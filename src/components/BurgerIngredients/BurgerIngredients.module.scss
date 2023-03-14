@@ -38,6 +38,6 @@
 		position: absolute;
 		inset: 0;
 
-		@include scrollbar;
+		@include scrollbar-with-margin;
 	}
 }

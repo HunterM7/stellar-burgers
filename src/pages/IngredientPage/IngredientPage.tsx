@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import classNames from 'classnames'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
@@ -27,7 +28,7 @@ const IngredientPage: React.FC = () => {
   const { id } = useParams()
   const ingredients = useSelector(dataIngreientsSelector)
   const ingredient = React.useMemo(
-    () => ingredients.find((el) => el._id === id),
+    () => ingredients.find(el => el._id === id),
     [id, ingredients],
   )
 
@@ -46,14 +47,13 @@ const IngredientPage: React.FC = () => {
   }, [dispatch, ingredient])
 
   return (
-    <div className={`container ${styles.wrapper}`}>
+    <div className={classNames('container', styles.wrapper)}>
       {isLoading ? (
         <Loader />
       ) : hasError ? (
         <h2>Что-то пошло не так...</h2>
       ) : (
         <>
-          {' '}
           <h2>Детали ингредиента</h2>
           <IngredientInfo />
         </>

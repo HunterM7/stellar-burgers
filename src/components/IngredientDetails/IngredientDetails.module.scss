@@ -1,3 +1,9 @@
 //? === Ingredient Card ===
 
 @import 'scss/vars';
+
+.container {
+	width: 100%;
+	max-width: 520px;
+	margin: 0 auto;
+}

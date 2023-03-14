@@ -22,7 +22,7 @@ const IngredientInfo: React.FC = () => {
   const { id } = useParams()
 
   const ingredient = useSelector(dataIngreientsSelector).find(
-    (el) => el._id === id,
+    el => el._id === id,
   )
 
   const { isLoading, hasError } = useSelector(dataSelector)

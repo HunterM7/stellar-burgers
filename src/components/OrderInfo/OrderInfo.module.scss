@@ -1,0 +1,65 @@
+//? === Order Info ===
+
+@import 'scss/vars';
+
+.wrapper {
+	width: 100%;
+	height: 100%;
+
+	position: relative;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto auto 1fr;
+	grid-template-areas:
+		'doneOrders onworkOrders'
+		'allOrders allOrders'
+		'todayOrders todayOrders';
+	gap: 60px 36px;
+
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	padding-bottom: 60px;
+
+	@include scrollbar-with-margin;
+}
+
+.orders {
+	display: flex;
+	flex-direction: column;
+	row-gap: 24px;
+
+	&__title {
+	}
+
+	&__list {
+		column-count: 2;
+		column-gap: 20px;
+	}
+
+	&__item {
+		@include font-digits-small;
+
+		&_done {
+			color: $success;
+		}
+
+		&:not(:nth-child(6n)) {
+			margin-bottom: 8px;
+		}
+	}
+}
+
+.allOrders {
+	grid-area: allOrders;
+}
+
+.todayOrders {
+	grid-area: todayOrders;
+}

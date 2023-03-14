@@ -1,35 +1,32 @@
 import React, { PropsWithChildren } from 'react'
-import { createPortal } from 'react-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
+import classNames from 'classnames'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Utils
 import useKeyPress from 'hooks/useKeyPress'
-import { TUseLocation } from 'utils/types'
+import { IUseLocation } from 'utils/types'
 
 // Components
-import { ModalOverlay } from 'components'
+import { Portal, ModalOverlay } from 'components'
 
 // Styles
 import styles from './Modal.module.scss'
 
-interface TModal {
+interface IModal {
   title?: string
-  children?: React.ReactElement
+  titleSize?: 'small' | 'medium'
 }
 
-const Modal: React.FC<PropsWithChildren<TModal>> = ({ title, children }) => {
-  const location: TUseLocation = useLocation()
-
-  // Heading in modal window
-  const heading = React.useMemo(
-    () => <h2 className={styles.title}>{title}</h2>,
-    [title],
-  )
+const Modal: React.FC<PropsWithChildren<IModal>> = ({
+  title,
+  titleSize = 'medium',
+  children,
+}) => {
+  const navigate = useNavigate()
+  const location: IUseLocation = useLocation()
 
   // Close function
-  const navigate = useNavigate()
-
   const closeFunc = React.useCallback(() => {
     location?.state?.background && navigate(location.state.background)
   }, [location.state, navigate])
@@ -37,28 +34,20 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({ title, children }) => {
   // Handling Escape press
   useKeyPress('Escape', closeFunc)
 
-  // Root where we render modal window
-  const modalRoot = React.useMemo(
-    () => document.getElementById('modal') as HTMLElement,
-    [],
-  )
-
-  // If there is no root container we don't render modal window
-  if (!modalRoot) return null
-
-  return createPortal(
-    <div onClick={(e) => e.stopPropagation()} className={styles.wrapper}>
-      <div
-        className={`
-				${styles.modal}
-				${title ? styles.modal_withHeading : ''}
-			`}
-      >
+  return (
+    <Portal>
+      <div className={styles.modal}>
         <div className={styles.header}>
-          {title && heading}
+          {!!title && (
+            <h2
+              className={classNames(styles.title, styles[`title_${titleSize}`])}
+            >
+              {title}
+            </h2>
+          )}
 
-          <button className={styles.closeBtn}>
-            <CloseIcon type="primary" onClick={closeFunc} />
+          <button className={styles.closeBtn} onClick={closeFunc}>
+            <CloseIcon type="primary" />
           </button>
         </div>
 
@@ -66,8 +55,7 @@ const Modal: React.FC<PropsWithChildren<TModal>> = ({ title, children }) => {
       </div>
 
       <ModalOverlay closeFunc={closeFunc} />
-    </div>,
-    modalRoot,
+    </Portal>
   )
 }
 

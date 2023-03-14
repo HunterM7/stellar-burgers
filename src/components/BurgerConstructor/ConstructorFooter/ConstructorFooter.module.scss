@@ -1,0 +1,27 @@
+//? === Constructor Footer ===
+
+@import 'scss/vars';
+
+.orderBox {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	column-gap: 40px;
+
+	padding: 0 16px;
+}
+
+.price {
+	@include font-digits-medium;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 8px;
+
+	svg {
+		width: 33px;
+		height: 33px;
+	}
+}

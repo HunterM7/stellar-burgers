@@ -70,6 +70,14 @@ $trans-medium: 0.8s $cubic;
 	}
 }
 
+@mixin scrollbar-with-margin {
+	@include scrollbar;
+
+	&::-webkit-scrollbar-track {
+		margin-block-end: 60px;
+	}
+}
+
 @mixin glow {
 	text-shadow: $glow-strong;
 }

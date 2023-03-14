@@ -7,18 +7,18 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Utils
-import { TUseLocation } from 'utils/types'
+import { IUseLocation } from 'utils/types'
 import { resetPassword } from 'utils/auth/resetPassword'
 
 // Routes
-import { FORGOT_PASSWORD_LINK, LOGIN_LINK } from 'utils/constants'
+import { FORGOT_PASSWORD_LINK, LOGIN_LINK } from 'utils/data/constants'
 
 // Components
 import { AuthLink } from 'components'
 
 const ResetPasswordPage: React.FC = () => {
   const navigate = useNavigate()
-  const location: TUseLocation = useLocation()
+  const location: IUseLocation = useLocation()
 
   React.useEffect(() => {
     !location?.state?.resetPassword && navigate(FORGOT_PASSWORD_LINK)
@@ -33,7 +33,7 @@ const ResetPasswordPage: React.FC = () => {
   // Password input function
   const onChangePassword = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm((prev) => ({
+      setForm(prev => ({
         ...prev,
         password: e.target.value,
       }))
@@ -44,7 +44,7 @@ const ResetPasswordPage: React.FC = () => {
   // Password input function
   const onChangeCode = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm((prev) => ({
+      setForm(prev => ({
         ...prev,
         token: e.target.value,
       }))
@@ -58,9 +58,9 @@ const ResetPasswordPage: React.FC = () => {
       e.preventDefault()
 
       resetPassword(form)
-        .then((res) => navigate(LOGIN_LINK))
-        .catch((err) => {
-          console.log('error')
+        .then(() => navigate(LOGIN_LINK))
+        .catch(() => {
+          throw new Error('Error on submitting ResetPasswordPage form')
         })
     },
     [form, navigate],
@@ -90,7 +90,12 @@ const ResetPasswordPage: React.FC = () => {
           size="default"
         />
 
-        <Button htmlType="submit" type="primary" size="large">
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="large"
+          disabled={!form.password || !form.token}
+        >
           Восстановить
         </Button>
       </form>

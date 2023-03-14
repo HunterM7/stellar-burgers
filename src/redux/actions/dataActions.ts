@@ -1,22 +1,25 @@
+// Redux
 import { AppDispatch, AppThunk } from 'redux/store'
-import { checkReponse } from 'utils/checkReponse'
-import { API_URL_INGREDIENTS } from 'utils/constants'
-import { TIngredient, IngredientFetchStatus } from 'redux/actionTypes'
+import { TIngredient, IngredientsFetchStatus } from 'redux/actionTypes'
 import {
   setErrorStatus,
   setRequestStatus,
   setSuccessStatus,
 } from 'redux/actionCreators'
-import { TErrorResponse } from './authActions'
+
+// Utils
+import { customFetch } from 'utils/api/customFetch'
+import { IIngredientsRespose } from 'utils/types'
+import { API_URL_INGREDIENTS } from 'utils/data/constants'
 
 export interface setRequestStatusA {
-  type: typeof IngredientFetchStatus.INGREDIENT_REQUEST
+  type: typeof IngredientsFetchStatus.INGREDIENTS_REQUEST
 }
 export interface setErrorStatusA {
-  type: typeof IngredientFetchStatus.INGREDIENT_ERROR
+  type: typeof IngredientsFetchStatus.INGREDIENTS_ERROR
 }
 export interface setSuccessStatusA {
-  type: typeof IngredientFetchStatus.INGREDIENT_SUCCESS
+  type: typeof IngredientsFetchStatus.INGREDIENTS_SUCCESS
   ingredients: TIngredient[]
 }
 
@@ -28,12 +31,7 @@ export type DataActions =
 export const getIngredients = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch(setRequestStatus())
 
-  fetch(API_URL_INGREDIENTS)
-    .then((res) => checkReponse<{ data: TIngredient[] }>(res))
-    .then((res) => {
-      dispatch(setSuccessStatus(res.data))
-    })
-    .catch((err) => {
-      dispatch(setErrorStatus())
-    })
+  customFetch<IIngredientsRespose>(API_URL_INGREDIENTS)
+    .then(res => dispatch(setSuccessStatus(res.data)))
+    .catch(() => dispatch(setErrorStatus()))
 }

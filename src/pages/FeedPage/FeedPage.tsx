@@ -1,0 +1,42 @@
+import React from 'react'
+import classNames from 'classnames'
+
+// Redux
+import { useDispatch, useSelector } from 'redux/store'
+import { webSocketSelector } from 'redux/selectors'
+import { getIngredients } from 'redux/actions'
+import { startAllOrdersWSConnection } from 'redux/actionCreators'
+import { ORDER_FEED_LINK } from 'utils/data/constants'
+
+// Components
+import { Loader, OrderFeed, OrderInfo } from 'components'
+
+// Styles
+import styles from './FeedPage.module.scss'
+
+const FeedPage: React.FC = () => {
+  const dispatch = useDispatch()
+
+  const { orders } = useSelector(webSocketSelector)
+
+  React.useEffect(() => {
+    dispatch(getIngredients())
+    dispatch(startAllOrdersWSConnection())
+  }, [dispatch])
+
+  return (
+    <main className={classNames('container', styles.wrapper)}>
+      {!orders.length ? (
+        <Loader />
+      ) : (
+        <>
+          <h2 className={styles.title}>Лента заказов</h2>
+          <OrderFeed orders={orders} modalPath={ORDER_FEED_LINK} />
+          <OrderInfo />
+        </>
+      )}
+    </main>
+  )
+}
+
+export default React.memo(FeedPage)
