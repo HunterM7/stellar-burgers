@@ -11,6 +11,7 @@ import {
   ORDER_FEED_LINK,
   ORDER_LINK,
   PROFILE_LINK,
+  PROFILE_ORDERS_ID_LINK,
   PROFILE_ORDERS_LINK,
   REGISTER_LINK,
   RESET_PASSWORD_LINK,
@@ -59,6 +60,7 @@ const Router: React.FC = () => {
         >
           <Route path={PROFILE_LINK} element={<ProfileInfo />} />
           <Route path={PROFILE_ORDERS_LINK} element={<OrderHistory />} />
+          <Route path={PROFILE_ORDERS_ID_LINK} element={<OrderPage />} />
         </Route>
 
         <Route path={INGREDIENT_PAGE_LINK} element={<IngredientPage />} />

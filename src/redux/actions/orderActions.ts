@@ -8,7 +8,7 @@ import {
 } from 'redux/actionCreators'
 
 // Utils
-import { API_URL_ORDER } from 'utils/data/constants'
+import { API_URL_ORDERS } from 'utils/data/constants'
 import { IRequestCreator } from 'utils/api/requestCreator'
 import { customFetch } from 'utils/api/customFetch'
 import { getCookie } from 'utils/cookie'
@@ -48,7 +48,7 @@ export const setOrder =
       body: { ingredients },
     }
 
-    customFetch<TOrderResponse>(API_URL_ORDER, requestOptions)
+    customFetch<TOrderResponse>(API_URL_ORDERS, requestOptions)
       .then(res => dispatch(setSuccessOrderStatus(res)))
       .catch(() => dispatch(setErrorOrderStatus()))
   }
