@@ -50,10 +50,9 @@ const Router: React.FC = () => {
   return (
     <>
       <Routes location={background || location}>
+        {/* Header routes */}
         <Route index element={<HomePage />} />
         <Route path={ORDER_FEED_LINK} element={<FeedPage />} />
-        <Route path={ORDER_FEED_ID_LINK} element={<OrderPage />} />
-
         <Route
           path={PROFILE_LINK}
           element={<ProtectedRoute element={<ProfilePage />} />}
@@ -61,9 +60,13 @@ const Router: React.FC = () => {
           <Route path={PROFILE_LINK} element={<ProfileInfo />} />
           <Route path={PROFILE_ORDERS_LINK} element={<OrderHistory />} />
         </Route>
-        <Route path={PROFILE_ORDERS_ID_LINK} element={<OrderPage />} />
 
+        {/* Ingredient details in a separate page */}
         <Route path={INGREDIENT_PAGE_LINK} element={<IngredientPage />} />
+
+        {/* Orders in a separate page */}
+        <Route path={ORDER_FEED_ID_LINK} element={<OrderPage />} />
+        <Route path={PROFILE_ORDERS_ID_LINK} element={<OrderPage />} />
 
         {/* Authentication routes */}
         <Route
