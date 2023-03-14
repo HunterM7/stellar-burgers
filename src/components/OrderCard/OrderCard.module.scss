@@ -52,7 +52,16 @@
 }
 
 .title {
-	@include font-display-small;
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+	h3 {
+		@include font-display-small;
+	}
+
+	&_done {
+		color: $success;
+	}
 
 	grid-area: title;
 }

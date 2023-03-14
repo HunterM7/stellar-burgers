@@ -35,3 +35,9 @@ export const INGREDIENT_PAGE_LINK = `${INGREDIENT_LINK}/:id`
 export const ORDER_FEED_LINK = '/feed'
 export const ORDER_FEED_ID_LINK = `${ORDER_FEED_LINK}/:id`
 export const ORDER_LINK = '/order'
+
+export enum OrderStatus {
+  created = 'Создание заказа',
+  pending = 'Готовим',
+  done = 'Выполнен',
+}

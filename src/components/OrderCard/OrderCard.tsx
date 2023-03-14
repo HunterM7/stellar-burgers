@@ -7,7 +7,7 @@ import { useSelector } from 'redux/store'
 import { dataIngreientsSelector } from 'redux/selectors'
 
 // Utils
-import { ORDER_FEED_LINK } from 'utils/data/constants'
+import { OrderStatus, ORDER_FEED_LINK } from 'utils/data/constants'
 import { dateConverter } from 'utils/dateConverter'
 import { getIngredientsList } from 'utils/getIngredientsList'
 
@@ -19,9 +19,10 @@ import styles from './OrderCard.module.scss'
 
 interface IOrderCard {
   order: IWSOrder
+  isStatusShown: boolean
 }
 
-const OrderCard: React.FC<IOrderCard> = ({ order }) => {
+const OrderCard: React.FC<IOrderCard> = ({ order, isStatusShown }) => {
   const location = useLocation()
   const allIngredients = useSelector(dataIngreientsSelector)
 
@@ -49,7 +50,15 @@ const OrderCard: React.FC<IOrderCard> = ({ order }) => {
         <span className={styles.timing}>{displayedDate}</span>
       </div>
 
-      <h3 className={styles.title}>{order.name}</h3>
+      <div className={styles.title}>
+        <h3>{order.name}</h3>
+
+        {isStatusShown && (
+          <p className={styles[`title_${order.status}`]}>
+            {OrderStatus[order.status]}
+          </p>
+        )}
+      </div>
 
       <div className={styles.footer}>
         <OrderCardList ingredients={uniqIngredients} />

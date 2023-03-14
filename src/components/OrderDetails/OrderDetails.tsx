@@ -6,6 +6,7 @@ import { useSelector } from 'redux/store'
 import { dataIngreientsSelector } from 'redux/selectors'
 
 // Utils
+import { OrderStatus } from 'utils/data/constants'
 import { dateConverter } from 'utils/dateConverter'
 import { getIngredientsList } from 'utils/getIngredientsList'
 
@@ -14,12 +15,6 @@ import { PriceCard, OrderRow } from 'components'
 
 // Styles
 import styles from './OrderDetails.module.scss'
-
-enum OrderStatus {
-  pending = 'Создание заказа',
-  created = 'Готовим',
-  done = 'Выполнен',
-}
 
 interface IOrderDetails {
   order: IWSOrder

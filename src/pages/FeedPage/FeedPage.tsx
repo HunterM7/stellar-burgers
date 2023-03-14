@@ -30,7 +30,7 @@ const FeedPage: React.FC = () => {
       ) : (
         <>
           <h2 className={styles.title}>Лента заказов</h2>
-          <OrderFeed />
+          <OrderFeed orders={orders} />
           <OrderInfo />
         </>
       )}

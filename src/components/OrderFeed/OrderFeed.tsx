@@ -1,8 +1,7 @@
 import React from 'react'
 
 // Redux
-import { useSelector } from 'redux/store'
-import { webSocketOrdersSelector } from 'redux/selectors'
+import { IWSOrder } from 'redux/actionTypes'
 
 // Components
 import { OrderCard } from 'components'
@@ -10,12 +9,20 @@ import { OrderCard } from 'components'
 // Styles
 import styles from './OrderFeed.module.scss'
 
-const OrderFeed: React.FC = () => {
-  const orders = useSelector(webSocketOrdersSelector)
+interface IOrderFeed {
+  orders: IWSOrder[]
+  isStatusShown?: boolean
+}
 
+const OrderFeed: React.FC<IOrderFeed> = ({ orders, isStatusShown = false }) => {
   const orderList = React.useMemo(
-    () => orders.slice(0, 12).map(el => <OrderCard key={el._id} order={el} />),
-    [orders],
+    () =>
+      orders
+        .slice(0, 12)
+        .map(el => (
+          <OrderCard isStatusShown={isStatusShown} key={el._id} order={el} />
+        )),
+    [isStatusShown, orders],
   )
 
   return (
