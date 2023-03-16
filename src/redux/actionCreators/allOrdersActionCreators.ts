@@ -1,6 +1,7 @@
 import { IAllOrders, allOrdersWSActionTypes } from 'redux/actionTypes'
 import {
   startAllOrdersWSConnectionA,
+  stopAllOrdersWSConnectionA,
   successAllOrdersWSConnectionA,
   closedAllOrdersWSConnectionA,
   errorAllOrdersWSConnectionA,
@@ -9,6 +10,10 @@ import {
 
 export const startAllOrdersWSConnection = (): startAllOrdersWSConnectionA => ({
   type: allOrdersWSActionTypes.START,
+})
+
+export const stopAllOrdersWSConnection = (): stopAllOrdersWSConnectionA => ({
+  type: allOrdersWSActionTypes.STOP,
 })
 
 export const successAllOrdersWSConnection = (

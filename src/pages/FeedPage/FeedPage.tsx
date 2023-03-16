@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'redux/store'
 import { webSocketSelector } from 'redux/selectors'
 import { getIngredients } from 'redux/actions'
 import {
-  closedAllOrdersWSConnection,
   startAllOrdersWSConnection,
+  stopAllOrdersWSConnection,
 } from 'redux/actionCreators'
 import { ORDER_FEED_LINK } from 'utils/data/constants'
 
@@ -25,6 +25,10 @@ const FeedPage: React.FC = () => {
   React.useEffect(() => {
     dispatch(getIngredients())
     dispatch(startAllOrdersWSConnection())
+
+    return () => {
+      dispatch(stopAllOrdersWSConnection())
+    }
   }, [dispatch])
 
   return (

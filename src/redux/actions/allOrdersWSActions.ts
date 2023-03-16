@@ -3,6 +3,9 @@ import { IAllOrders, allOrdersWSActionTypes } from 'redux/actionTypes'
 export interface startAllOrdersWSConnectionA {
   type: allOrdersWSActionTypes.START
 }
+export interface stopAllOrdersWSConnectionA {
+  type: allOrdersWSActionTypes.STOP
+}
 export interface successAllOrdersWSConnectionA {
   type: allOrdersWSActionTypes.SUCCESS
   payload: Event
@@ -22,6 +25,7 @@ export interface getAllOrdersA {
 
 export type allOrdersWSActions =
   | startAllOrdersWSConnectionA
+  | stopAllOrdersWSConnectionA
   | successAllOrdersWSConnectionA
   | closedAllOrdersWSConnectionA
   | errorAllOrdersWSConnectionA

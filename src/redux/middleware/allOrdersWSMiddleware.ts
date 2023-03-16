@@ -22,6 +22,11 @@ export const allOrdersWSMiddleware = (wsUrl: string): Middleware =>
         socket = new WebSocket(wsUrl)
       }
       if (socket) {
+        // Stop connection to WS
+        if (action.type === allOrdersWSActionTypes.STOP) {
+          console.log('stop connection')
+          socket.close()
+        }
         // функция, которая вызывается при открытии сокета
         socket.onopen = event => {
           console.log('open connection')
@@ -44,12 +49,6 @@ export const allOrdersWSMiddleware = (wsUrl: string): Middleware =>
 
           dispatch(closedAllOrdersWSConnection(event))
         }
-
-        // if (action.type === allOrdersWSActionTypes.WS_SEND_MESSAGE) {
-        //   const message = action.payload
-        // функция для отправки сообщения на сервер
-        //   socket.send(JSON.stringify(message))
-        // }
       }
 
       next(action)

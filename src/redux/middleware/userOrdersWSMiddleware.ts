@@ -25,6 +25,11 @@ export const userOrdersWSMiddleware = (wsUrl: string): Middleware =>
         socket = new WebSocket(`${wsUrl}?token=${accessToken}`)
       }
       if (socket) {
+        // Stop connection to WS
+        if (action.type === userOrdersWSActionTypes.STOP) {
+          console.log('stop connection')
+          socket.close()
+        }
         // функция, которая вызывается при открытии сокета
         socket.onopen = event => {
           dispatch(successUserOrdersWSConnection(event))

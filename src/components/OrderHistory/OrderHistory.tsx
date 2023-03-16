@@ -4,7 +4,10 @@ import React from 'react'
 import { Loader, OrderFeed } from 'components'
 import { useDispatch, useSelector } from 'redux/store'
 import { getIngredients } from 'redux/actions'
-import { startUserOrdersWSConnection } from 'redux/actionCreators'
+import {
+  startUserOrdersWSConnection,
+  stopUserOrdersWSConnection,
+} from 'redux/actionCreators'
 import { userOrdersSelector } from 'redux/selectors/userOrdersWSSelectors'
 import { PROFILE_ORDERS_LINK } from 'utils/data/constants'
 
@@ -15,6 +18,10 @@ const OrderHistory: React.FC = () => {
   React.useEffect(() => {
     dispatch(getIngredients())
     dispatch(startUserOrdersWSConnection())
+
+    return () => {
+      dispatch(stopUserOrdersWSConnection())
+    }
   }, [dispatch])
 
   return (
