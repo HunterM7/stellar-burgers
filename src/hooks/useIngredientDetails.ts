@@ -3,7 +3,10 @@ import React from 'react'
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
 import { getIngredients } from 'redux/actions'
-import { setIngredientDetails } from 'redux/actionCreators'
+import {
+  setIngredientDetails,
+  resetIngredientDetails,
+} from 'redux/actionCreators'
 import {
   dataIngreientsSelector,
   ingredientDetailsSelector,
@@ -31,6 +34,10 @@ const useIngredientDetails = (id: string | undefined) => {
       )
     } else {
       dispatch(getIngredients())
+    }
+
+    return () => {
+      dispatch(resetIngredientDetails())
     }
   }, [dispatch, ingredient])
 

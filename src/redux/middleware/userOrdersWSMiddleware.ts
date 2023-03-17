@@ -24,36 +24,27 @@ export const userOrdersWSMiddleware = (): Middleware =>
       if (action.type === userOrdersWSActionTypes.START) {
         socket = new WebSocket(`${action.payload}?token=${accessToken}`)
       }
+
       if (socket) {
-        // Stop connection to WS
         if (action.type === userOrdersWSActionTypes.STOP) {
-          // console.log('stop connection')
           socket.close()
         }
-        // функция, которая вызывается при открытии сокета
+
         socket.onopen = event => {
           dispatch(successUserOrdersWSConnection(event))
         }
 
-        // функция, которая вызывается при ошибке соединения
         socket.onerror = event => {
           dispatch(errorUserOrdersWSConnection(event))
         }
 
-        // функция, которая вызывается при получения события от сервера
         socket.onmessage = event => {
           dispatch(getUserOrders(event))
         }
-        // функция, которая вызывается при закрытии соединения
+
         socket.onclose = event => {
           dispatch(closedUserOrdersWSConnection(event))
         }
-
-        // if (action.type === UserOrdersWSActionTypes.WS_SEND_MESSAGE) {
-        //   const message = action.payload
-        // функция для отправки сообщения на сервер
-        //   socket.send(JSON.stringify(message))
-        // }
       }
 
       next(action)
