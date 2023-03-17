@@ -11,25 +11,28 @@ import {
   successAllOrdersWSConnection,
 } from 'redux/actionCreators'
 
-export const allOrdersWSMiddleware = (wsUrl: string): Middleware =>
+export const allOrdersWSMiddleware = (): Middleware =>
   ((store: MiddlewareAPI<AppDispatch, TRootState>) => {
     let socket: WebSocket | null = null
 
     return next => (action: TAppActions) => {
       const { dispatch } = store
 
+      // console.log('action.type: ', action.type)
+
       if (action.type === allOrdersWSActionTypes.START) {
-        socket = new WebSocket(wsUrl)
+        // console.log('middleware allOrders inside if')
+
+        socket = new WebSocket(action.payload)
       }
       if (socket) {
         // Stop connection to WS
         if (action.type === allOrdersWSActionTypes.STOP) {
-          console.log('stop connection')
           socket.close()
         }
         // функция, которая вызывается при открытии сокета
         socket.onopen = event => {
-          console.log('open connection')
+          // console.log('open connection: ', event)
 
           dispatch(successAllOrdersWSConnection(event))
         }
@@ -45,7 +48,7 @@ export const allOrdersWSMiddleware = (wsUrl: string): Middleware =>
         }
         // функция, которая вызывается при закрытии соединения
         socket.onclose = event => {
-          console.log('close connection')
+          // console.log('close connection')
 
           dispatch(closedAllOrdersWSConnection(event))
         }

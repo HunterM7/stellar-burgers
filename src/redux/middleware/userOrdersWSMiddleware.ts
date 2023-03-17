@@ -12,7 +12,7 @@ import {
 } from 'redux/actionCreators'
 import { getCookie } from 'utils/cookie'
 
-export const userOrdersWSMiddleware = (wsUrl: string): Middleware =>
+export const userOrdersWSMiddleware = (): Middleware =>
   ((store: MiddlewareAPI<AppDispatch, TRootState>) => {
     let socket: WebSocket | null = null
 
@@ -22,12 +22,12 @@ export const userOrdersWSMiddleware = (wsUrl: string): Middleware =>
       const accessToken = getCookie('accessToken') || ''
 
       if (action.type === userOrdersWSActionTypes.START) {
-        socket = new WebSocket(`${wsUrl}?token=${accessToken}`)
+        socket = new WebSocket(`${action.payload}?token=${accessToken}`)
       }
       if (socket) {
         // Stop connection to WS
         if (action.type === userOrdersWSActionTypes.STOP) {
-          console.log('stop connection')
+          // console.log('stop connection')
           socket.close()
         }
         // функция, которая вызывается при открытии сокета

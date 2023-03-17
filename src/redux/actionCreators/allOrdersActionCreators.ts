@@ -8,8 +8,11 @@ import {
   getAllOrdersA,
 } from 'redux/actions'
 
-export const startAllOrdersWSConnection = (): startAllOrdersWSConnectionA => ({
+export const startAllOrdersWSConnection = (
+  url: string,
+): startAllOrdersWSConnectionA => ({
   type: allOrdersWSActionTypes.START,
+  payload: url,
 })
 
 export const stopAllOrdersWSConnection = (): stopAllOrdersWSConnectionA => ({

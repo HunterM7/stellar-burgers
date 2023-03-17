@@ -1,4 +1,4 @@
-export interface TIngredientDetails {
+export interface IIngredientDetails {
   title: string
   image: string
   calories: number

@@ -2,6 +2,7 @@ import { IAllOrders, userOrdersWSActionTypes } from 'redux/actionTypes'
 
 export interface startUserOrdersWSConnectionA {
   type: userOrdersWSActionTypes.START
+  payload: string
 }
 export interface stopUserOrdersWSConnectionA {
   type: userOrdersWSActionTypes.STOP

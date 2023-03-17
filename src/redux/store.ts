@@ -11,7 +11,6 @@ import { rootReducer } from 'redux/reducers'
 
 // Actions
 import { TAppActions } from 'redux/actions'
-import { WS_ALL_ORDERS, WS_USER_ORDERS } from 'utils/data/constants'
 
 // Middleware
 import { allOrdersWSMiddleware } from 'redux/middleware/allOrdersWSMiddleware'
@@ -31,11 +30,7 @@ const composeWithDevTools =
 export const store = createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(
-      thunk,
-      allOrdersWSMiddleware(WS_ALL_ORDERS),
-      userOrdersWSMiddleware(WS_USER_ORDERS),
-    ),
+    applyMiddleware(thunk, allOrdersWSMiddleware(), userOrdersWSMiddleware()),
   ),
 )
 

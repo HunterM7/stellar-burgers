@@ -1,7 +1,7 @@
 import { setIngredientDetailsA, resetIngredientDetailsA } from 'redux/actions'
 import {
   IngredientDetailsActionTypes,
-  TIngredientDetails,
+  IIngredientDetails,
 } from 'redux/actionTypes'
 
 export const resetIngredientDetails = (): resetIngredientDetailsA => ({
@@ -9,7 +9,7 @@ export const resetIngredientDetails = (): resetIngredientDetailsA => ({
 })
 
 export const setIngredientDetails = (
-  details: TIngredientDetails,
+  details: IIngredientDetails,
 ): setIngredientDetailsA => ({
   type: IngredientDetailsActionTypes.SET_INGREDIENT_DETAILS,
   details,

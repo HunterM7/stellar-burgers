@@ -1,26 +1,20 @@
 import { IngredientDetailsActions } from 'redux/actions'
 import {
   IngredientDetailsActionTypes,
-  TIngredientDetails,
+  IIngredientDetails,
 } from 'redux/actionTypes'
 
-const initialState: TIngredientDetails = {
-  title: '',
-  image: '',
-  calories: 0,
-  proteins: 0,
-  fat: 0,
-  carbohydrates: 0,
-}
+type IIngredientDetailsState = IIngredientDetails | null
+
+const initialState: IIngredientDetailsState = null
 
 export const ingredientDetailsReducer = (
-  state = initialState,
+  state: IIngredientDetailsState = initialState,
   action: IngredientDetailsActions,
-) => {
+): IIngredientDetailsState => {
   switch (action.type) {
     case IngredientDetailsActionTypes.SET_INGREDIENT_DETAILS:
       return {
-        ...state,
         ...action.details,
       }
 

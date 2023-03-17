@@ -9,7 +9,7 @@ import {
   stopUserOrdersWSConnection,
 } from 'redux/actionCreators'
 import { userOrdersSelector } from 'redux/selectors/userOrdersWSSelectors'
-import { PROFILE_ORDERS_LINK } from 'utils/data/constants'
+import { PROFILE_ORDERS_LINK, WS_USER_ORDERS } from 'utils/data/constants'
 
 const OrderHistory: React.FC = () => {
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const OrderHistory: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(getIngredients())
-    dispatch(startUserOrdersWSConnection())
+    dispatch(startUserOrdersWSConnection(WS_USER_ORDERS))
 
     return () => {
       dispatch(stopUserOrdersWSConnection())

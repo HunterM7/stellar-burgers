@@ -22,16 +22,7 @@
     "noUnusedParameters": true,
     "useUnknownInCatchVariables": true,
     "resolveJsonModule": true,
-
-    // Paths
     "baseUrl": "src",
-    "paths": {
-      "@utils/*": ["./utils/*"],
-      "@redux/*": ["./redux/*"],
-      "@components/*": ["./components/*"],
-      "@router/*": ["./Router/*"]
-    },
-    //  --- --- --- ---
 
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

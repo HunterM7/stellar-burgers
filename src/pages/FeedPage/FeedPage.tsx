@@ -9,7 +9,7 @@ import {
   startAllOrdersWSConnection,
   stopAllOrdersWSConnection,
 } from 'redux/actionCreators'
-import { ORDER_FEED_LINK } from 'utils/data/constants'
+import { ORDER_FEED_LINK, WS_ALL_ORDERS } from 'utils/data/constants'
 
 // Components
 import { Loader, OrderFeed, OrderInfo } from 'components'
@@ -24,7 +24,7 @@ const FeedPage: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(getIngredients())
-    dispatch(startAllOrdersWSConnection())
+    dispatch(startAllOrdersWSConnection(WS_ALL_ORDERS))
 
     return () => {
       dispatch(stopAllOrdersWSConnection())

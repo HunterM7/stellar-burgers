@@ -8,10 +8,12 @@ import {
   getUserOrdersA,
 } from 'redux/actions'
 
-export const startUserOrdersWSConnection =
-  (): startUserOrdersWSConnectionA => ({
-    type: userOrdersWSActionTypes.START,
-  })
+export const startUserOrdersWSConnection = (
+  url: string,
+): startUserOrdersWSConnectionA => ({
+  type: userOrdersWSActionTypes.START,
+  payload: url,
+})
 
 export const stopUserOrdersWSConnection = (): stopUserOrdersWSConnectionA => ({
   type: userOrdersWSActionTypes.STOP,
