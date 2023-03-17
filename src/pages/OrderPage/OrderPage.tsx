@@ -1,10 +1,5 @@
 import React from 'react'
 import classNames from 'classnames'
-import { useParams } from 'react-router-dom'
-
-// Redux
-import { useDispatch } from 'redux/store'
-import { getIngredients } from 'redux/actions'
 
 // Components
 import { OrderDetails } from 'components'
@@ -12,14 +7,7 @@ import { OrderDetails } from 'components'
 // Styles
 import styles from './OrderPage.module.scss'
 
-const OrderPage = () => {
-  const dispatch = useDispatch()
-  const { id = '' } = useParams()
-
-  React.useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch, id])
-
+const OrderPage: React.FC = () => {
   return (
     <main className={classNames('container', styles.wrapper)}>
       <OrderDetails />
@@ -27,4 +15,4 @@ const OrderPage = () => {
   )
 }
 
-export default OrderPage
+export default React.memo(OrderPage)

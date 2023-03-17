@@ -3,7 +3,6 @@ import React from 'react'
 // Components
 import { Loader, OrderFeed } from 'components'
 import { useDispatch, useSelector } from 'redux/store'
-import { getIngredients } from 'redux/actions'
 import {
   startUserOrdersWSConnection,
   stopUserOrdersWSConnection,
@@ -16,7 +15,6 @@ const OrderHistory: React.FC = () => {
   const orders = useSelector(userOrdersSelector)
 
   React.useEffect(() => {
-    dispatch(getIngredients())
     dispatch(startUserOrdersWSConnection(WS_USER_ORDERS))
 
     return () => {

@@ -2,7 +2,6 @@ import React from 'react'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
-import { getIngredients } from 'redux/actions'
 import {
   setIngredientDetails,
   resetIngredientDetails,
@@ -21,7 +20,7 @@ const useIngredientDetails = (id: string | undefined) => {
   )
 
   React.useEffect(() => {
-    if (ingredient) {
+    ingredient &&
       dispatch(
         setIngredientDetails({
           title: ingredient.name,
@@ -32,9 +31,6 @@ const useIngredientDetails = (id: string | undefined) => {
           carbohydrates: ingredient.carbohydrates,
         }),
       )
-    } else {
-      dispatch(getIngredients())
-    }
 
     return () => {
       dispatch(resetIngredientDetails())

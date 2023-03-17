@@ -6,9 +6,8 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
 // Redux
-import { useDispatch, useSelector } from 'redux/store'
+import { useSelector } from 'redux/store'
 import { dataSelector } from 'redux/selectors'
-import { getIngredients } from 'redux/actions'
 
 // Components
 import { Loader, BurgerIngredients, BurgerConstructor } from 'components'
@@ -17,12 +16,6 @@ import { Loader, BurgerIngredients, BurgerConstructor } from 'components'
 import styles from './HomePage.module.scss'
 
 const HomePage: React.FC = () => {
-  const dispatch = useDispatch()
-
-  React.useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch])
-
   const { isLoading, hasError } = useSelector(dataSelector)
 
   return (

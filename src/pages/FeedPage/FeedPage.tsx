@@ -4,7 +4,6 @@ import classNames from 'classnames'
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
 import { webSocketSelector } from 'redux/selectors'
-import { getIngredients } from 'redux/actions'
 import {
   startAllOrdersWSConnection,
   stopAllOrdersWSConnection,
@@ -23,7 +22,6 @@ const FeedPage: React.FC = () => {
   const { orders } = useSelector(webSocketSelector)
 
   React.useEffect(() => {
-    dispatch(getIngredients())
     dispatch(startAllOrdersWSConnection(WS_ALL_ORDERS))
 
     return () => {

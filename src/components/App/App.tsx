@@ -2,7 +2,7 @@ import React from 'react'
 
 // Redux
 import { useDispatch } from 'redux/store'
-import { getUser } from 'redux/actions'
+import { getUser, getIngredients } from 'redux/actions'
 
 // Components
 import Router from 'Router'
@@ -14,6 +14,7 @@ const App: React.FC = () => {
   // Checking the freshness of tokens
   React.useEffect(() => {
     dispatch(getUser())
+    dispatch(getIngredients())
   }, [dispatch])
 
   return (
