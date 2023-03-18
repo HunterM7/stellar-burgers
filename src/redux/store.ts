@@ -13,8 +13,11 @@ import { rootReducer } from 'redux/reducers'
 import { TAppActions } from 'redux/actions'
 
 // Middleware
-import { allOrdersWSMiddleware } from 'redux/middleware/allOrdersWSMiddleware'
-import { userOrdersWSMiddleware } from 'redux/middleware/userOrdersWSMiddleware'
+import { WebSocketMiddleware } from 'redux/middleware/WebSocketMiddleware'
+import {
+  allOrdersMiddlewareProp,
+  userOrdersMiddlewareProp,
+} from 'redux/actionTypes'
 
 // Redux DevTools
 declare global {
@@ -30,7 +33,11 @@ const composeWithDevTools =
 export const store = createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(thunk, allOrdersWSMiddleware(), userOrdersWSMiddleware()),
+    applyMiddleware(
+      thunk,
+      WebSocketMiddleware(allOrdersMiddlewareProp),
+      WebSocketMiddleware(userOrdersMiddlewareProp),
+    ),
   ),
 )
 

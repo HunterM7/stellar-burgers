@@ -1,3 +1,14 @@
+import {
+  closedAllOrdersWSConnection,
+  closedUserOrdersWSConnection,
+  errorAllOrdersWSConnection,
+  errorUserOrdersWSConnection,
+  getAllOrders,
+  getUserOrders,
+  successAllOrdersWSConnection,
+  successUserOrdersWSConnection,
+} from 'redux/actionCreators'
+
 export interface IWSOrder {
   ingredients: string[]
   _id: string
@@ -32,4 +43,22 @@ export enum userOrdersWSActionTypes {
   CLOSED = 'WS_USER_ORDERS_CONNECTION_CLOSED',
   ERROR = 'WS_USER_ORDERS_CONNECTION_ERROR',
   GET_ORDERS = 'WS_USER_ORDERS_GET_ALL_ORDERS',
+}
+
+export const allOrdersMiddlewareProp = {
+  wsStart: allOrdersWSActionTypes.START,
+  wsStop: allOrdersWSActionTypes.STOP,
+  onOpen: successAllOrdersWSConnection,
+  onMessage: getAllOrders,
+  onError: errorAllOrdersWSConnection,
+  onClose: closedAllOrdersWSConnection,
+}
+
+export const userOrdersMiddlewareProp = {
+  wsStart: userOrdersWSActionTypes.START,
+  wsStop: userOrdersWSActionTypes.STOP,
+  onOpen: successUserOrdersWSConnection,
+  onMessage: getUserOrders,
+  onError: errorUserOrdersWSConnection,
+  onClose: closedUserOrdersWSConnection,
 }
