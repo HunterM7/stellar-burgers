@@ -30,7 +30,7 @@ const initialState: TAuthState = {
     email: '',
     isLoggedIn: false,
   },
-  isLoading: false,
+  isLoading: true,
   hasError: false,
 }
 
@@ -75,7 +75,7 @@ export const authReducer = (
       }
 
     case AuthFetchStatus.LOGIN_ERROR:
-      return { ...state, isLoading: false, hasError: true }
+      return { ...initialState, isLoading: false, hasError: true }
 
     // Logout logic
     case AuthFetchStatus.LOGOUT_REQUEST:
@@ -83,8 +83,8 @@ export const authReducer = (
 
     case AuthFetchStatus.LOGOUT_SUCCESS:
       return {
-        ...state,
         ...initialState,
+        isLoading: false,
       }
 
     case AuthFetchStatus.LOGOUT_ERROR:
