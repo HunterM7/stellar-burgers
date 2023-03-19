@@ -6,6 +6,9 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Hooks
+import { useForm } from 'hooks/useForm'
+
 // Utils
 import { IUseLocation } from 'utils/types'
 import { resetPassword } from 'utils/auth/resetPassword'
@@ -25,32 +28,10 @@ const ResetPasswordPage: React.FC = () => {
   }, [location.state, navigate])
 
   // Form state
-  const [form, setForm] = React.useState({
+  const { form, handleForm } = useForm({
     password: '',
     token: '',
   })
-
-  // Password input function
-  const onChangePassword = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm(prev => ({
-        ...prev,
-        password: e.target.value,
-      }))
-    },
-    [setForm],
-  )
-
-  // Password input function
-  const onChangeCode = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm(prev => ({
-        ...prev,
-        token: e.target.value,
-      }))
-    },
-    [setForm],
-  )
 
   // Submit form
   const submitForm = React.useCallback(
@@ -72,19 +53,19 @@ const ResetPasswordPage: React.FC = () => {
 
       <form className="auth__form" onSubmit={submitForm}>
         <PasswordInput
-          onChange={onChangePassword}
-          value={form.password}
           name={'password'}
+          value={form.password}
+          onChange={handleForm}
           placeholder="Введите новый пароль"
           autoFocus
         />
 
         <Input
+          name="token"
+          value={form.token}
+          onChange={handleForm}
           type="text"
           placeholder="Введите код из письма"
-          onChange={onChangeCode}
-          value={form.token}
-          name="name"
           error={false}
           errorText="Ошибка"
           size="default"

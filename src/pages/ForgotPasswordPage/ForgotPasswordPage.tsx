@@ -5,11 +5,14 @@ import {
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-// Utils
-import { forgotPassword } from 'utils/auth/forgotPassword'
+// Hooks
+import { useForm } from 'hooks/useForm'
 
 // Routes
 import { LOGIN_LINK, RESET_PASSWORD_LINK } from 'utils/data/constants'
+
+// Utils
+import { forgotPassword } from 'utils/auth/forgotPassword'
 
 // Components
 import { AuthLink } from 'components'
@@ -18,15 +21,7 @@ const ForgotPasswordPage = () => {
   const navigate = useNavigate()
 
   // Form state
-  const [form, setForm] = React.useState({ email: '' })
-
-  // Email input function
-  const onChangeEmail = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm({ email: e.target.value })
-    },
-    [],
-  )
+  const { form, handleForm } = useForm({ email: '' })
 
   // Submit form
   const submitForm = React.useCallback(
@@ -55,7 +50,7 @@ const ForgotPasswordPage = () => {
           name="email"
           placeholder="Укажите e-mail"
           value={form.email}
-          onChange={onChangeEmail}
+          onChange={handleForm}
           autoFocus
         />
 

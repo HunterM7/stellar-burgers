@@ -6,6 +6,9 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Hooks
+import { useForm } from 'hooks/useForm'
+
 // Redux
 import { useDispatch } from 'redux/store'
 import { handleRegister } from 'redux/actions'
@@ -20,35 +23,11 @@ const RegisterPage: React.FC = () => {
   const dispatch = useDispatch()
 
   // Form state
-  const [form, setForm] = React.useState({
+  const { form, handleForm } = useForm({
     name: '',
     email: '',
     password: '',
   })
-
-  // Name input function
-  const onChangeName = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm(prev => ({ ...prev, name: e.target.value }))
-    },
-    [setForm],
-  )
-
-  // Email input function
-  const onChangeEmail = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm(prev => ({ ...prev, email: e.target.value }))
-    },
-    [setForm],
-  )
-
-  // Password input function
-  const onChangePassword = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm(prev => ({ ...prev, password: e.target.value }))
-    },
-    [setForm],
-  )
 
   // Submit form
   const submitForm = React.useCallback(
@@ -68,7 +47,7 @@ const RegisterPage: React.FC = () => {
         <Input
           type="text"
           placeholder="Имя"
-          onChange={onChangeName}
+          onChange={handleForm}
           value={form.name}
           name="name"
           error={false}
@@ -81,11 +60,11 @@ const RegisterPage: React.FC = () => {
           name="email"
           placeholder="E-mail"
           value={form.email}
-          onChange={onChangeEmail}
+          onChange={handleForm}
         />
 
         <PasswordInput
-          onChange={onChangePassword}
+          onChange={handleForm}
           value={form.password}
           name={'password'}
         />
