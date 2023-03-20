@@ -1,0 +1,20 @@
+//? === Order Item Card Ingredients ===
+
+@import 'scss/vars';
+
+.list {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+
+	height: 64px;
+
+	position: relative;
+}
+
+.item {
+	width: 64px;
+	height: 64px;
+
+	flex-shrink: 0;
+}

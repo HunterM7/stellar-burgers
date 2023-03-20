@@ -1,11 +1,16 @@
+import classNames from 'classnames'
 import React from 'react'
 
 // Styles
 import styles from './Loader.module.scss'
 
-const Loader: React.FC = () => {
+interface ILoader {
+  size?: 'small' | 'medium'
+}
+
+const Loader: React.FC<ILoader> = ({ size = 'medium' }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={classNames(styles.wrapper, styles[size])}>
       <div className={styles.ring}></div>
       <span className={styles.text}>загрузка...</span>
     </div>

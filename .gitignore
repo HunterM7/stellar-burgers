@@ -10,7 +10,11 @@
 
 # production
 /build
+
+# Firebase
 /.firebase
+firebase.json
+.firebaserc
 
 # misc
 .DS_Store

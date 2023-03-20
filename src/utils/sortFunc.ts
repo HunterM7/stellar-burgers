@@ -1,8 +1,4 @@
-export const sortFunc = <T>(
-  arr: T[],
-  dragIndex: number,
-  hoverIndex: number,
-) => {
+export function sortFunc<T>(arr: T[], dragIndex: number, hoverIndex: number) {
   const newArr = [...arr]
   const item = arr[dragIndex]
 

@@ -1,0 +1,14 @@
+//? === Order Row ===
+
+@import 'scss/vars';
+
+.wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 16px;
+}
+
+.title {
+	flex-grow: 1;
+}

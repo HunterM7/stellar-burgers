@@ -1,18 +1,16 @@
+import { setIngredientDetailsA, resetIngredientDetailsA } from 'redux/actions'
 import {
-  SET_INGREDIENT_DETAILS,
-  RESET_INGREDIENT_DETAILS,
-  setIngredientDetailsA,
-  resetIngredientDetailsA,
-} from 'redux/actions/ingredientDetailsActions'
-import { TIngredientDetails } from 'redux/actionTypes'
+  IngredientDetailsActionTypes,
+  IIngredientDetails,
+} from 'redux/actionTypes'
 
 export const resetIngredientDetails = (): resetIngredientDetailsA => ({
-  type: RESET_INGREDIENT_DETAILS,
+  type: IngredientDetailsActionTypes.RESET_INGREDIENT_DETAILS,
 })
 
 export const setIngredientDetails = (
-  details: TIngredientDetails,
+  details: IIngredientDetails,
 ): setIngredientDetailsA => ({
-  type: SET_INGREDIENT_DETAILS,
+  type: IngredientDetailsActionTypes.SET_INGREDIENT_DETAILS,
   details,
 })

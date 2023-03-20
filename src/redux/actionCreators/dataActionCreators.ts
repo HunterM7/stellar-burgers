@@ -2,20 +2,20 @@ import {
   setErrorStatusA,
   setRequestStatusA,
   setSuccessStatusA,
-} from 'redux/actions/dataActions'
-import { TIngredient, IngredientFetchStatus } from 'redux/actionTypes'
+} from 'redux/actions'
+import { TIngredient, IngredientsFetchStatus } from 'redux/actionTypes'
 
 export const setRequestStatus = (): setRequestStatusA => ({
-  type: IngredientFetchStatus.INGREDIENT_REQUEST,
+  type: IngredientsFetchStatus.INGREDIENTS_REQUEST,
 })
 
 export const setErrorStatus = (): setErrorStatusA => ({
-  type: IngredientFetchStatus.INGREDIENT_ERROR,
+  type: IngredientsFetchStatus.INGREDIENTS_ERROR,
 })
 
 export const setSuccessStatus = (
   ingredients: TIngredient[],
 ): setSuccessStatusA => ({
-  type: IngredientFetchStatus.INGREDIENT_SUCCESS,
+  type: IngredientsFetchStatus.INGREDIENTS_SUCCESS,
   ingredients,
 })

@@ -69,7 +69,8 @@
         "jsxSingleQuote": false,
         "prettier.semi": false,
         "trailingComma": "all",
-        "jsxBracketSameLine": false
+        "jsxBracketSameLine": false,
+        "arrowParens": "avoid"
       }
     ],
     "import/order": [

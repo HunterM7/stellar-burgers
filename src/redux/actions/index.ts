@@ -1,29 +1,26 @@
-// Actions
 import { DataActions } from './dataActions'
 import { CartActions } from './cartActions'
 import { OrderActions } from './orderActions'
 import { IngredientDetailsActions } from './ingredientDetailsActions'
-import { AuthActions, getUser } from './authActions'
+import { AuthActions } from './authActions'
+import { allOrdersWSActions } from './allOrdersWSActions'
+import { userOrdersWSActions } from './userOrdersActions'
 
-// Thunk actions
-import { getIngredients } from './dataActions'
-import { setOrder } from './orderActions'
-import { handleRegister } from './authActions'
-import { handleLogin } from './authActions'
-import { handleLogout } from './authActions'
-
+// Actions
 export type TAppActions =
   | DataActions
   | CartActions
   | OrderActions
   | IngredientDetailsActions
   | AuthActions
+  | allOrdersWSActions
+  | userOrdersWSActions
 
-export {
-  getIngredients,
-  setOrder,
-  handleRegister,
-  handleLogin,
-  handleLogout,
-  getUser,
-}
+// export actions
+export * from './dataActions'
+export * from './cartActions'
+export * from './orderActions'
+export * from './ingredientDetailsActions'
+export * from './authActions'
+export * from './allOrdersWSActions'
+export * from './userOrdersActions'

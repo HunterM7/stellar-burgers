@@ -1,14 +1,17 @@
-import { API_URL_ORDER } from 'utils/constants'
-import { OrderFetchStatus } from 'redux/actionTypes'
-import { checkReponse } from 'utils/checkReponse'
+// Redux
 import { AppDispatch, AppThunk } from 'redux/store'
+import { OrderFetchStatus } from 'redux/actionTypes'
 import {
   setErrorOrderStatus,
   setRequestOrderStatus,
   setSuccessOrderStatus,
 } from 'redux/actionCreators'
-import { TErrorResponse } from './authActions'
-import { requestCreator } from 'utils/requestCreator'
+
+// Utils
+import { API_URL_ORDERS } from 'utils/data/constants'
+import { IRequestCreator } from 'utils/api/requestCreator'
+import { customFetch } from 'utils/api/customFetch'
+import { getCookie } from 'utils/cookie'
 
 export interface setRequestOrderStatusA {
   type: typeof OrderFetchStatus.ORDER_REQUEST
@@ -37,12 +40,15 @@ export const setOrder =
   (dispatch: AppDispatch) => {
     dispatch(setRequestOrderStatus())
 
-    const requestOptions = requestCreator('POST', {}, { ingredients })
+    const requestOptions: IRequestCreator = {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer '.concat(getCookie('accessToken') || ''),
+      },
+      body: { ingredients },
+    }
 
-    fetch(API_URL_ORDER, requestOptions)
-      .then((res) => checkReponse<TOrderResponse>(res))
-      .then((res) => dispatch(setSuccessOrderStatus(res)))
-      .catch((err) => {
-        dispatch(setErrorOrderStatus())
-      })
+    customFetch<TOrderResponse>(API_URL_ORDERS, requestOptions)
+      .then(res => dispatch(setSuccessOrderStatus(res)))
+      .catch(() => dispatch(setErrorOrderStatus()))
   }
