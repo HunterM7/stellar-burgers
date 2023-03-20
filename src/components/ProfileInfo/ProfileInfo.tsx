@@ -6,6 +6,9 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react'
 
+// Hooks
+import { useForm } from 'hooks/useForm'
+
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
 import { authUserSelector } from 'redux/selectors'
@@ -19,48 +22,16 @@ const ProfileInfo = () => {
   const { name, email } = useSelector(authUserSelector)
 
   // Form state
-  const formInitial = {
+  const initialForm = {
     name,
     email,
     password: '',
   }
 
-  const [form, setForm] = React.useState(formInitial)
+  const { form, handleForm, resetForm } = useForm(initialForm)
 
   // Display buttons
-  const isEdit = React.useMemo(
-    () => form.name !== name || form.email !== email || !!form.password,
-    [name, email, form],
-  )
-
-  // Name input function
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm(prev => ({
-      ...prev,
-      name: e.target.value,
-    }))
-  }
-
-  // Email input function
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm(prev => ({
-      ...prev,
-      email: e.target.value,
-    }))
-  }
-
-  // Password input function
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm(prev => ({
-      ...prev,
-      password: e.target.value,
-    }))
-  }
-
-  // Cancel function
-  const handleCancelButton = () => {
-    setForm(formInitial)
-  }
+  const isEdit = JSON.stringify(initialForm) !== JSON.stringify(form)
 
   // Submit function
   const submitForm = (e: React.FormEvent) => {
@@ -74,7 +45,7 @@ const ProfileInfo = () => {
       <Input
         type="text"
         placeholder="Имя"
-        onChange={onChangeName}
+        onChange={handleForm}
         value={form.name}
         name="name"
         error={false}
@@ -85,16 +56,16 @@ const ProfileInfo = () => {
 
       <EmailInput
         name="email"
-        placeholder="E-mail"
         value={form.email}
-        onChange={onChangeEmail}
+        onChange={handleForm}
+        placeholder="E-mail"
         isIcon
       />
 
       <PasswordInput
-        onChange={onChangePassword}
-        value={form.password}
         name={'password'}
+        value={form.password}
+        onChange={handleForm}
         icon="EditIcon"
       />
 
@@ -104,7 +75,7 @@ const ProfileInfo = () => {
             htmlType="button"
             type="secondary"
             size="medium"
-            onClick={handleCancelButton}
+            onClick={resetForm}
           >
             Отмена
           </Button>

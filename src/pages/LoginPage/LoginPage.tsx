@@ -5,6 +5,9 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+// Hooks
+import { useForm } from 'hooks/useForm'
+
 // Redux
 import { useDispatch } from 'redux/store'
 import { handleLogin } from 'redux/actions'
@@ -19,26 +22,7 @@ const LoginPage: React.FC = () => {
   const dispatch = useDispatch()
 
   // Form state
-  const [form, setForm] = React.useState({
-    email: '',
-    password: '',
-  })
-
-  // Email input function
-  const onChangeEmail = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm(prev => ({ ...prev, email: e.target.value }))
-    },
-    [setForm],
-  )
-
-  // Password input function
-  const onChangePassword = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm(prev => ({ ...prev, password: e.target.value }))
-    },
-    [setForm],
-  )
+  const { form, handleForm } = useForm({ email: '', password: '' })
 
   // Submit form
   const submitForm = React.useCallback(
@@ -59,12 +43,12 @@ const LoginPage: React.FC = () => {
           name="email"
           placeholder="E-mail"
           value={form.email}
-          onChange={onChangeEmail}
+          onChange={handleForm}
           autoFocus
         />
 
         <PasswordInput
-          onChange={onChangePassword}
+          onChange={handleForm}
           value={form.password}
           name={'password'}
         />

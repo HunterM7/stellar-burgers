@@ -24,8 +24,12 @@ const PriceCard: React.FC<IPriceCard> = ({
   let totalPrice = 0
 
   if (ingredients) {
-    totalPrice = ingredients.reduce(
-      (sum, el) => (el.type === 'bun' ? sum + el.price * 2 : sum + el.price),
+    const bun = ingredients.find(el => el.type === 'bun')
+    const ingredientsList = ingredients.filter(el => el.type !== 'bun')
+    const totalIngredientsList = [bun, ...ingredientsList, bun]
+
+    totalPrice = totalIngredientsList.reduce(
+      (sum, el) => sum + (el ? el.price : 0),
       0,
     )
   }
