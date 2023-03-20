@@ -56,7 +56,11 @@ const ConstructorFooter: React.FC = () => {
     else if (!ingredients.length) handlePopup('Выберите хотя бы 1 ингридиент!')
     else if (!isUserLoggedIn) navigate(LOGIN_LINK)
     else {
-      const orderIngridietns = [bun._id, ...ingredients.map(el => el._id)]
+      const orderIngridietns = [
+        bun._id,
+        ...ingredients.map(el => el._id),
+        bun._id,
+      ]
 
       dispatch(setOrder(orderIngridietns))
       navigate(ORDER_LINK, { state: { background: location } })
