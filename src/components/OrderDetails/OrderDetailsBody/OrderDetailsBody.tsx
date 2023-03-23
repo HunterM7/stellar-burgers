@@ -1,11 +1,18 @@
-import { PriceCard, OrderRow } from 'components'
-import { useIngredientsByIds } from 'hooks/useIngredientsByIds'
 import React from 'react'
 
 // Types
 import { IWSOrder } from 'redux/actionTypes'
+
+// Utils
 import { OrderStatus } from 'utils/data/constants'
 import { dateConverter } from 'utils/dateConverter'
+
+// Hooks
+import { useIngredientsByIds } from 'hooks/useIngredientsByIds'
+
+// Components
+import { PriceCard } from 'ui'
+import { OrderRow } from 'components'
 
 // Styles
 import styles from './OrderDetailsBody.module.scss'

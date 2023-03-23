@@ -11,7 +11,8 @@ import { setOrder } from 'redux/actions'
 import { LOGIN_LINK, ORDER_LINK } from 'utils/data/constants'
 
 // Components
-import { PopupHint, PriceCard } from 'components'
+import { PriceCard } from 'ui'
+import { PopupHint } from 'components'
 
 // Styles
 import styles from './ConstructorFooter.module.scss'

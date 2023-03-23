@@ -12,7 +12,7 @@ import { dateConverter } from 'utils/dateConverter'
 import { useIngredientsByIds } from 'hooks/useIngredientsByIds'
 
 // Components
-import { OrderCardList, PriceCard } from 'components'
+import { PriceCard, IngredientsList } from 'ui'
 
 // Styles
 import styles from './OrderCard.module.scss'
@@ -58,7 +58,7 @@ const OrderCard: React.FC<IOrderCard> = ({
       </div>
 
       <div className={styles.footer}>
-        <OrderCardList ingredients={uniqueIngredientsList} />
+        <IngredientsList ingredients={uniqueIngredientsList} />
         <PriceCard size="small" ingredients={currentIngredients} />
       </div>
     </Link>

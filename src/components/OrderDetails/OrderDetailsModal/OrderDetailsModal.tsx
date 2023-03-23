@@ -1,8 +1,8 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 // Components
 import { Modal, OrderDetails } from 'components'
-import { useParams } from 'react-router-dom'
 
 const OrderDetailsModal: React.FC = () => {
   const { id = '' } = useParams()
@@ -14,4 +14,4 @@ const OrderDetailsModal: React.FC = () => {
   )
 }
 
-export default React.memo(OrderDetailsModal)
+export default OrderDetailsModal

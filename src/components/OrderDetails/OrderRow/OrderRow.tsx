@@ -4,7 +4,7 @@ import React from 'react'
 import { TIngredient } from 'redux/actionTypes'
 
 // Components
-import { IngredientIcon, PriceCard } from 'components'
+import { IngredientIcon, PriceCard } from 'ui'
 
 // Styles
 import styles from './OrderRow.module.scss'

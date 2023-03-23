@@ -4,7 +4,7 @@ import React from 'react'
 import { IWSOrder } from 'redux/actionTypes'
 
 // Components
-import { OrderCard } from 'components'
+import { OrderCard } from 'ui'
 
 // Styles
 import styles from './OrderFeed.module.scss'

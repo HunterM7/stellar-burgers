@@ -7,10 +7,10 @@ import { TIngredient } from 'redux/actionTypes'
 
 // Utils
 import { countPrice } from 'utils/countPrice'
+import { sortIngredientsList } from 'utils/sortIngredientsList'
 
 // Styles
 import styles from './PriceCard.module.scss'
-import { sortIngredientsList } from 'utils/sortIngredientsList'
 
 interface IPriceCard {
   ingredients?: TIngredient[]

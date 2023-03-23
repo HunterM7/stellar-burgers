@@ -2,16 +2,16 @@ import React from 'react'
 import { TIngredient } from 'redux/actionTypes'
 
 // Components
-import { IngredientIcon } from 'components'
+import { IngredientIcon } from 'ui'
 
 // Styles
-import styles from './OrderCardList.module.scss'
+import styles from './IngredientsList.module.scss'
 
-interface IOrderCardList {
+interface IIngredientsList {
   ingredients: TIngredient[]
 }
 
-const OrderCardList: React.FC<IOrderCardList> = ({ ingredients }) => {
+const IngredientsList: React.FC<IIngredientsList> = ({ ingredients }) => {
   const maxLength = 6
   const currentLength = ingredients.length
   const counter = currentLength > maxLength ? currentLength - maxLength : 0
@@ -32,4 +32,4 @@ const OrderCardList: React.FC<IOrderCardList> = ({ ingredients }) => {
   return <ul className={styles.list}>{images}</ul>
 }
 
-export default React.memo(OrderCardList)
+export default React.memo(IngredientsList)

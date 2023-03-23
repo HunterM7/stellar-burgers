@@ -8,7 +8,8 @@ import { setBun, setIngredient } from 'redux/actionCreators'
 import { cartSelector, dataIngreientsSelector } from 'redux/selectors'
 
 // Components
-import { ConstructorBun, ConstructorItem, ConstructorPlug } from 'components'
+import { ConstructorItem } from 'ui'
+import { ConstructorBun, ConstructorPlug } from 'components'
 
 // Styles
 import styles from './ConstructorBody.module.scss'

@@ -10,7 +10,6 @@ export { default as AuthLink } from './AuthLink/AuthLink'
 // BurgerConstructor
 export { default as BurgerConstructor } from './BurgerConstructor/BurgerConstructor'
 export { default as ConstructorBody } from './BurgerConstructor/ConstructorBody/ConstructorBody'
-export { default as ConstructorItem } from './BurgerConstructor/ConstructorItem/ConstructorItem'
 export { default as ConstructorBun } from './BurgerConstructor/ConstructorBun/ConstructorBun'
 export { default as ConstructorPlug } from './BurgerConstructor/ConstructorPlug/ConstructorPlug'
 export { default as ConstructorFooter } from './BurgerConstructor/ConstructorFooter/ConstructorFooter'
@@ -18,7 +17,6 @@ export { default as ConstructorFooter } from './BurgerConstructor/ConstructorFoo
 // BurgerIngredients
 export { default as BurgerIngredients } from './BurgerIngredients/BurgerIngredients'
 export { default as IngredientsGroup } from './BurgerIngredients/IngredientsGroup/IngredientsGroup'
-export { default as BurgerItem } from './BurgerIngredients/BurgerItem/BurgerItem'
 
 // IngredientsDetails
 export { default as IngredientDetails } from './IngredientDetails/IngredientDetails'
@@ -30,14 +28,12 @@ export { default as IngredientInfoCard } from './IngredientInfo/IngredientInfoCa
 // Loader
 export { default as Loader } from './Loader/Loader'
 
-// Modal
-export { default as Modal } from './Modal/Modal'
-export { default as ModalOverlay } from './Modal/ModalOverlay/ModalOverlay'
+// Portal
+export { default as Portal } from './Portal/Portal'
 
-// OrderCard
-export { default as OrderCard } from './OrderCard/OrderCard'
-export { default as OrderCardList } from './OrderCard/OrderCardList/OrderCardList'
-export { default as IngredientIcon } from './OrderCard/IngredientIcon/IngredientIcon'
+// Modal
+export { default as Modal } from '../components/Modal/Modal'
+export { default as ModalOverlay } from '../components/Modal/ModalOverlay/ModalOverlay'
 
 // OrderDetails
 export { default as OrderDetails } from './OrderDetails/OrderDetails'
@@ -60,12 +56,6 @@ export { default as OrderSummary } from './OrderSummary/OrderSummary'
 
 // PopupHint
 export { default as PopupHint } from './PopupHint/PopupHint'
-
-// Portal
-export { default as Portal } from './Portal/Portal'
-
-// PriceCard
-export { default as PriceCard } from './PriceCard/PriceCard'
 
 // ProfileInfo
 export { default as ProfileInfo } from './ProfileInfo/ProfileInfo'
