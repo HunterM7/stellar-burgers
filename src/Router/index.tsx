@@ -32,13 +32,15 @@ import {
   OrderPage,
 } from 'pages'
 
+// Router
+import ProtectedRoute from 'Router/ProtectedRoute/ProtectedRoute'
+
 // Components
 import {
   IngredientDetails,
   OrderSummary,
   OrderHistory,
   ProfileInfo,
-  ProtectedRoute,
   OrderDetailsModal,
 } from 'components'
 
