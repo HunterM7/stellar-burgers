@@ -2,8 +2,8 @@ import { IDataState, IngredientsFetchStatus } from 'redux/actionTypes'
 import { DataActions } from 'redux/actions'
 
 const initialState: IDataState = {
-  ingredients: [],
-  isLoading: true,
+  ingredients: null,
+  isLoading: false,
   hasError: false,
 }
 
@@ -14,22 +14,19 @@ export const dataReducer = (
   switch (action.type) {
     case IngredientsFetchStatus.INGREDIENTS_REQUEST: {
       return {
-        ...state,
+        ...initialState,
         isLoading: true,
-        hasError: false,
       }
     }
     case IngredientsFetchStatus.INGREDIENTS_SUCCESS: {
       return {
+        ...initialState,
         ingredients: action.ingredients,
-        isLoading: false,
-        hasError: false,
       }
     }
     case IngredientsFetchStatus.INGREDIENTS_ERROR: {
       return {
         ...initialState,
-        isLoading: false,
         hasError: true,
       }
     }

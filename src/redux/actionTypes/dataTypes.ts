@@ -13,7 +13,7 @@ export interface TIngredient {
 }
 
 export interface IDataState {
-  ingredients: TIngredient[]
+  ingredients: TIngredient[] | null
   isLoading: boolean
   hasError: boolean
 }
