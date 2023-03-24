@@ -10,7 +10,7 @@ import {
 // Reducer
 import { dataReducer as reducer } from './dataReducer'
 
-describe('todos reducer', () => {
+describe('Data reducer', () => {
   const initialState = {
     ingredients: [],
     isLoading: true,
@@ -18,7 +18,7 @@ describe('todos reducer', () => {
   }
 
   it('should return the initial state', () => {
-    expect(reducer(undefined, {} as DataActions)).toEqual(initialState)
+    expect(reducer(initialState, {} as DataActions)).toEqual(initialState)
   })
 
   it('should handle INGREDIENTS_REQUEST', () => {

@@ -1,13 +1,13 @@
 import React from 'react'
 
 // Types
-import { IIngredientDetails } from '../../../redux/actionTypes/ingredientDetailsTypes'
+import { TIngredient } from 'redux/actionTypes'
 
 // Styles
 import styles from './IngredientInfoCard.module.scss'
 
 interface IIngredientInfoCard {
-  ingredient: IIngredientDetails
+  ingredient: TIngredient
 }
 
 const IngredientInfoCard: React.FC<IIngredientInfoCard> = ({ ingredient }) => {
@@ -37,10 +37,10 @@ const IngredientInfoCard: React.FC<IIngredientInfoCard> = ({ ingredient }) => {
       <img
         className={styles.img}
         src={ingredient.image}
-        alt={ingredient.title}
+        alt={ingredient.name}
       />
 
-      <h3 className={styles.title}>{ingredient.title}</h3>
+      <h3 className={styles.title}>{ingredient.name}</h3>
 
       <ul className={styles.nutrients}>{nutrients}</ul>
     </>

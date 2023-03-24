@@ -20,17 +20,7 @@ const useIngredientDetails = (id: string | undefined) => {
   )
 
   React.useEffect(() => {
-    ingredient &&
-      dispatch(
-        setIngredientDetails({
-          title: ingredient.name,
-          image: ingredient.image_large,
-          calories: ingredient.calories,
-          proteins: ingredient.proteins,
-          fat: ingredient.fat,
-          carbohydrates: ingredient.carbohydrates,
-        }),
-      )
+    ingredient && dispatch(setIngredientDetails(ingredient))
 
     return () => {
       dispatch(resetIngredientDetails())
