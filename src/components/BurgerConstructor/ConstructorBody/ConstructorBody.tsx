@@ -40,7 +40,7 @@ const ConstructorBody: React.FC = () => {
 
   const dropIngredient = React.useCallback(
     (id: string) => {
-      const ingredient = allIngredients.find(el => el._id === id)
+      const ingredient = allIngredients?.find(el => el._id === id)
 
       if (ingredient) {
         ingredient.type === 'bun'

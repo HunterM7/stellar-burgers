@@ -15,7 +15,7 @@ const useIngredientDetails = (id: string | undefined) => {
   const dispatch = useDispatch()
 
   // Searching ingredient in Ingredient storage
-  const ingredient = useSelector(dataIngreientsSelector).find(
+  const ingredient = useSelector(dataIngreientsSelector)?.find(
     el => el._id === id,
   )
 

@@ -50,18 +50,20 @@ const BurgerIngredients: React.FC = () => {
   )
 
   // IngredientsGroups
-  const IngredientsGroups = React.useMemo(
-    () =>
-      ingredientGroups.map((item, i) => (
+  const IngredientsGroups = React.useMemo(() => {
+    if (ingredients) {
+      return ingredientGroups.map((item, i) => (
         <IngredientsGroup
           key={i}
           id={`ingredients-block-${++i}`}
           title={item.title}
           data={ingredients.filter(el => el.type === item.type)}
         />
-      )),
-    [ingredients],
-  )
+      ))
+    } else {
+      return null
+    }
+  }, [ingredients])
 
   return (
     <section className={styles.wrapper}>
