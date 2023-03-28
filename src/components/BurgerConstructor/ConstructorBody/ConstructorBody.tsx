@@ -23,7 +23,7 @@ const ConstructorBody: React.FC = () => {
   // Burger content
   const burgerIngredients = React.useMemo(
     () =>
-      ingredients.map((item, i) => (
+      ingredients?.map((item, i) => (
         <ConstructorItem key={item.uuid} ingredient={item} orderId={i} />
       )),
     [ingredients],
@@ -59,7 +59,7 @@ const ConstructorBody: React.FC = () => {
       <ConstructorBun position="top" />
 
       <div className={styles.ingredients}>
-        {burgerIngredients.length ? (
+        {burgerIngredients ? (
           <ul className={styles.ingredients__list}>{burgerIngredients}</ul>
         ) : (
           <div className={styles.ingredients__plug}>

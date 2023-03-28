@@ -31,11 +31,13 @@ const IngredientCard: React.FC<IIngredientCard> = ({ ingredient }) => {
   const { bun, ingredients } = useSelector(cartSelector)
 
   const count = React.useMemo(() => {
-    return ingredient.type === 'bun'
-      ? bun?._id === ingredient._id
-        ? 2
-        : 0
-      : ingredients.filter(item => item._id === ingredient._id).length
+    if (ingredient.type === 'bun') {
+      return bun?._id === ingredient._id ? 2 : 0
+    } else {
+      if (!ingredients) return 0
+
+      return ingredients.filter(item => item._id === ingredient._id).length
+    }
   }, [ingredient, bun, ingredients])
 
   // DnD

@@ -25,6 +25,19 @@ const ConstructorFooter: React.FC = () => {
   // Redux
   const { bun, ingredients } = useSelector(cartSelector)
 
+  // Ingredients
+
+  const cartIngredients = (function () {
+    if (bun && ingredients) return [bun, ...ingredients]
+
+    if (bun) return [bun]
+
+    if (ingredients) return ingredients
+
+    return null
+  })()
+
+  // Auth checker
   const isUserLoggedIn = useSelector(authIsLoggedInSelector)
 
   // Popup Hint Modal
@@ -51,10 +64,10 @@ const ConstructorFooter: React.FC = () => {
 
   // Handle order click
   const handleOrderClick = React.useCallback(() => {
-    if (!bun && !ingredients.length)
+    if (!bun && !ingredients)
       handlePopup('Выберите булку и хотя бы 1 ингридиент!')
     else if (!bun) handlePopup('Выберите булку!')
-    else if (!ingredients.length) handlePopup('Выберите хотя бы 1 ингридиент!')
+    else if (!ingredients) handlePopup('Выберите хотя бы 1 ингридиент!')
     else if (!isUserLoggedIn) navigate(LOGIN_LINK)
     else {
       const orderIngridietns = [
@@ -78,10 +91,7 @@ const ConstructorFooter: React.FC = () => {
 
   return (
     <div className={styles.orderBox}>
-      <PriceCard
-        size="medium"
-        ingredients={bun ? [bun, ...ingredients] : ingredients}
-      />
+      <PriceCard size="medium" ingredients={cartIngredients || []} />
 
       <Button
         htmlType="button"

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Redux
-import { TIngredient } from 'redux/actionTypes'
+import { TIngredient, ICartIngredient } from 'redux/actionTypes'
 
 // Utils
 import { countPrice } from 'utils/countPrice'
@@ -13,7 +13,7 @@ import { sortIngredientsList } from 'utils/sortIngredientsList'
 import styles from './PriceCard.module.scss'
 
 interface IPriceCard {
-  ingredients?: TIngredient[]
+  ingredients?: TIngredient[] | ICartIngredient[]
   price?: number
   size?: 'small' | 'medium'
   prefix?: number

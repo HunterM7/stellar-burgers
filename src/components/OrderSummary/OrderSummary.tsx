@@ -19,7 +19,7 @@ const OrderSummary: React.FC = () => {
   return (
     <Modal>
       {isLoading ? (
-        <Loader />
+        <Loader size="small" />
       ) : hasError || !orderInfo ? (
         <h2>Что-то пошло не так</h2>
       ) : (

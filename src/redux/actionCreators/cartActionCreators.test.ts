@@ -57,7 +57,7 @@ describe('Cart action creators', () => {
 // })
 
 // export const reorderIngredients = (
-//   ingredients: TCartIngredient[],
+//   ingredients: ICartIngredient[],
 // ): reorderIngredientsA => ({
 //   type: CartActionTypes.REORDER_INGREDIENTS,
 //   ingredients,
