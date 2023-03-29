@@ -41,17 +41,19 @@ describe('Cart Reducer tests', function () {
     bun: mockBun,
   }
 
-  const setIngredientState = {
+  const ingredientState = {
     ...initialState,
-    ingredients: [{ ...mockMain, uuid: 'test value' }],
+    ingredients: [mockCartMain],
   }
 
-  const setIngredientsState = {
+  const ingredientsState = {
     ...initialState,
-    ingredients: [
-      { ...mockMain, uuid: 'test value' },
-      { ...mockSauce, uuid: 'test value 2' },
-    ],
+    ingredients: [mockCartMain, mockCartSauce],
+  }
+
+  const ingredientsRemoveState = {
+    ...initialState,
+    ingredients: [mockCartMain, { ...mockCartSauce, uuid: 'test value 2' }],
   }
 
   it('should return initialState', function () {
@@ -66,7 +68,11 @@ describe('Cart Reducer tests', function () {
     jest.spyOn(crypto, 'randomUUID').mockImplementation(() => 'test value')
 
     expect(reducer(initialState, setIngredient(mockMain))).toEqual(
-      setIngredientState,
+      ingredientState,
+    )
+
+    expect(reducer(ingredientState, setIngredient(mockSauce))).toEqual(
+      ingredientsState,
     )
   })
 
@@ -74,21 +80,21 @@ describe('Cart Reducer tests', function () {
     expect(reducer(initialState, removeIngredient('test value'))).toEqual(
       initialState,
     )
-    expect(reducer(setIngredientState, removeIngredient('test value'))).toEqual(
+    expect(reducer(ingredientState, removeIngredient('test value'))).toEqual(
       initialState,
     )
     expect(
-      reducer(setIngredientsState, removeIngredient('test value 2')),
-    ).toEqual(setIngredientState)
+      reducer(ingredientsRemoveState, removeIngredient('test value 2')),
+    ).toEqual(ingredientState)
   })
 
   it('should handle REORDER_INGREDIENTS', function () {
     const ingredients = [mockCartMain, mockCartSauce]
 
-    const expected = { ...setIngredientState, ingredients }
+    const expected = { ...ingredientState, ingredients }
 
-    expect(
-      reducer(setIngredientState, reorderIngredients(ingredients)),
-    ).toEqual(expected)
+    expect(reducer(ingredientState, reorderIngredients(ingredients))).toEqual(
+      expected,
+    )
   })
 })

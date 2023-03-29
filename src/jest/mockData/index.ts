@@ -49,6 +49,6 @@ function cartIngredientCreator(type: 'bun' | 'sauce' | 'main') {
     image: 'image link',
     image_mobile: 'image link',
     image_large: 'image link',
-    uuid: 'uuid',
+    uuid: 'test value',
   } as ICartIngredient
 }
