@@ -4,7 +4,6 @@ import { AuthFetchStatus } from 'redux/actionTypes'
 export type TAuthUser = {
   name: string
   email: string
-  isLoggedIn: boolean
 }
 
 export type TAuthRegister = {
@@ -19,17 +18,13 @@ export type TAuthLogin = {
 }
 
 export type TAuthState = {
-  user: TAuthUser
+  user: TAuthUser | null
   isLoading: boolean
   hasError: boolean
 }
 
 const initialState: TAuthState = {
-  user: {
-    name: '',
-    email: '',
-    isLoggedIn: false,
-  },
+  user: null,
   isLoading: true,
   hasError: false,
 }
@@ -41,16 +36,14 @@ export const authReducer = (
   switch (action.type) {
     // Register logic
     case AuthFetchStatus.REGISTER_REQUEST:
-      return { ...state, isLoading: true, hasError: false }
+      return initialState
 
     case AuthFetchStatus.REGISTER_SUCCESS:
       return {
         ...state,
         user: {
-          ...state.user,
           name: action.response.user.name,
           email: action.response.user.email,
-          isLoggedIn: true,
         },
         isLoading: false,
       }
@@ -60,16 +53,14 @@ export const authReducer = (
 
     // Login logic
     case AuthFetchStatus.LOGIN_REQUEST:
-      return { ...state, isLoading: true, hasError: false }
+      return initialState
 
     case AuthFetchStatus.LOGIN_SUCCESS:
       return {
         ...state,
         user: {
-          ...state.user,
           name: action.response.user.name,
           email: action.response.user.email,
-          isLoggedIn: true,
         },
         isLoading: false,
       }
@@ -79,7 +70,7 @@ export const authReducer = (
 
     // Logout logic
     case AuthFetchStatus.LOGOUT_REQUEST:
-      return { ...state, isLoading: true, hasError: false }
+      return initialState
 
     case AuthFetchStatus.LOGOUT_SUCCESS:
       return {
@@ -88,7 +79,7 @@ export const authReducer = (
       }
 
     case AuthFetchStatus.LOGOUT_ERROR:
-      return { ...state, isLoading: false, hasError: true }
+      return { ...initialState, isLoading: false, hasError: true }
 
     // Get user logic
     case AuthFetchStatus.GET_USER_REQUEST:
@@ -98,10 +89,8 @@ export const authReducer = (
       return {
         ...state,
         user: {
-          ...state.user,
           name: action.response.user.name,
           email: action.response.user.email,
-          isLoggedIn: true,
         },
         isLoading: false,
       }
@@ -121,7 +110,6 @@ export const authReducer = (
       return {
         ...state,
         user: {
-          ...state.user,
           name: action.response.user.name,
           email: action.response.user.email,
         },

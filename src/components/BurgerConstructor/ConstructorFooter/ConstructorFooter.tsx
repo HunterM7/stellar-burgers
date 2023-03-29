@@ -4,7 +4,7 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
-import { authIsLoggedInSelector, cartSelector } from 'redux/selectors'
+import { authUserSelector, cartSelector } from 'redux/selectors'
 import { setOrder } from 'redux/actions'
 
 // Utils
@@ -38,7 +38,7 @@ const ConstructorFooter: React.FC = () => {
   })()
 
   // Auth checker
-  const isUserLoggedIn = useSelector(authIsLoggedInSelector)
+  const user = useSelector(authUserSelector)
 
   // Popup Hint Modal
   const initialPopupState = React.useMemo(
@@ -68,7 +68,7 @@ const ConstructorFooter: React.FC = () => {
       handlePopup('Выберите булку и хотя бы 1 ингридиент!')
     else if (!bun) handlePopup('Выберите булку!')
     else if (!ingredients) handlePopup('Выберите хотя бы 1 ингридиент!')
-    else if (!isUserLoggedIn) navigate(LOGIN_LINK)
+    else if (!user) navigate(LOGIN_LINK)
     else {
       const orderIngridietns = [
         bun._id,
@@ -79,15 +79,7 @@ const ConstructorFooter: React.FC = () => {
       dispatch(setOrder(orderIngridietns))
       navigate(ORDER_LINK, { state: { background: location } })
     }
-  }, [
-    bun,
-    ingredients,
-    isUserLoggedIn,
-    location,
-    handlePopup,
-    navigate,
-    dispatch,
-  ])
+  }, [bun, ingredients, user, location, handlePopup, navigate, dispatch])
 
   return (
     <div className={styles.orderBox}>

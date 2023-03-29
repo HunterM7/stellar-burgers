@@ -19,12 +19,12 @@ import styles from './ProfileInfo.module.scss'
 
 const ProfileInfo = () => {
   const dispatch = useDispatch()
-  const { name, email } = useSelector(authUserSelector)
+  const user = useSelector(authUserSelector)
 
   // Form state
   const initialForm = {
-    name,
-    email,
+    name: user?.name || '',
+    email: user?.email || '',
     password: '',
   }
 
