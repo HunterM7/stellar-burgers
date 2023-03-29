@@ -15,7 +15,13 @@ import {
 import { cartReducer as reducer } from 'redux/reducers'
 
 // MockData
-import { mockBun, mockMain, mockCartMain, mockCartSauce } from 'jest/mockData'
+import {
+  mockBun,
+  mockMain,
+  mockCartMain,
+  mockCartSauce,
+  mockSauce,
+} from 'jest/mockData'
 
 // Settings for crypto method
 Object.defineProperty(global.self, 'crypto', {
@@ -40,6 +46,14 @@ describe('Cart Reducer tests', function () {
     ingredients: [{ ...mockMain, uuid: 'test value' }],
   }
 
+  const setIngredientsState = {
+    ...initialState,
+    ingredients: [
+      { ...mockMain, uuid: 'test value' },
+      { ...mockSauce, uuid: 'test value 2' },
+    ],
+  }
+
   it('should return initialState', function () {
     expect(reducer(initialState, {} as CartActions)).toEqual(initialState)
   })
@@ -57,9 +71,15 @@ describe('Cart Reducer tests', function () {
   })
 
   it('should handle REMOVE_INGREDIENT', function () {
+    expect(reducer(initialState, removeIngredient('test value'))).toEqual(
+      initialState,
+    )
     expect(reducer(setIngredientState, removeIngredient('test value'))).toEqual(
       initialState,
     )
+    expect(
+      reducer(setIngredientsState, removeIngredient('test value 2')),
+    ).toEqual(setIngredientState)
   })
 
   it('should handle REORDER_INGREDIENTS', function () {

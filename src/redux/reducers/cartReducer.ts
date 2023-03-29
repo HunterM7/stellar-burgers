@@ -33,6 +33,8 @@ export const cartReducer = (
 
         if (ingredients.length !== 0) {
           return { ...state, ingredients }
+        } else {
+          return { ...state, ingredients: null }
         }
       }
 
