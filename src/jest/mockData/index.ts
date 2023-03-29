@@ -1,11 +1,22 @@
 /* istanbul ignore file */
 import { ICartIngredient, TIngredient } from 'redux/actionTypes'
+import { IWSOrder } from 'redux/actionTypes'
 
 export const mockBun: TIngredient = ingredientCreator('bun')
 export const mockMain: TIngredient = ingredientCreator('main')
 export const mockSauce: TIngredient = ingredientCreator('sauce')
 export const mockCartMain: ICartIngredient = cartIngredientCreator('main')
 export const mockCartSauce: ICartIngredient = cartIngredientCreator('sauce')
+
+export const mockOrder: IWSOrder = {
+  ingredients: ['ingredient 1', 'ingredient 2', 'ingredient 3'],
+  _id: '_id',
+  name: 'name',
+  number: 1337,
+  status: 'done',
+  createdAt: 'date',
+  updatedAt: 'date',
+}
 
 function ingredientCreator(type: 'bun' | 'sauce' | 'main') {
   return {

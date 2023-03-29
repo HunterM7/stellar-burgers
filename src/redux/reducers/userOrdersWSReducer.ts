@@ -1,14 +1,14 @@
 import { userOrdersWSActions } from 'redux/actions'
 import { IWSOrder, userOrdersWSActionTypes } from 'redux/actionTypes'
 
-export interface IWSInitialState {
+export interface IWSUserState {
   wsConnected: boolean
   orders: IWSOrder[] | null
 
   error?: Event | undefined
 }
 
-const initialState: IWSInitialState = {
+const initialState: IWSUserState = {
   wsConnected: false,
   orders: null,
 }
@@ -16,7 +16,7 @@ const initialState: IWSInitialState = {
 export const userOrdersWSReducer = (
   state = initialState,
   action: userOrdersWSActions,
-): IWSInitialState => {
+): IWSUserState => {
   switch (action.type) {
     case userOrdersWSActionTypes.SUCCESS:
       return {
