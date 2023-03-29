@@ -1,20 +1,16 @@
 import { userOrdersWSActions } from 'redux/actions'
 import { IWSOrder, userOrdersWSActionTypes } from 'redux/actionTypes'
 
-interface IWSInitialState {
+export interface IWSInitialState {
   wsConnected: boolean
-  orders: IWSOrder[]
-  total: number
-  totalToday: number
+  orders: IWSOrder[] | null
 
   error?: Event | undefined
 }
 
 const initialState: IWSInitialState = {
   wsConnected: false,
-  orders: [],
-  total: 0,
-  totalToday: 0,
+  orders: null,
 }
 
 export const userOrdersWSReducer = (
@@ -24,31 +20,26 @@ export const userOrdersWSReducer = (
   switch (action.type) {
     case userOrdersWSActionTypes.SUCCESS:
       return {
-        ...state,
+        ...initialState,
         wsConnected: true,
-        error: undefined,
       }
 
     case userOrdersWSActionTypes.ERROR:
       return {
-        ...state,
-        error: action.payload,
+        ...initialState,
         wsConnected: false,
+        error: action.payload,
       }
 
     case userOrdersWSActionTypes.CLOSED:
-      return {
-        ...state,
-        error: undefined,
-        wsConnected: false,
-      }
+      return initialState
 
     case userOrdersWSActionTypes.GET_ORDERS:
       return {
         ...state,
-        error: undefined,
-        ...action.payload,
+        orders: action.payload.orders,
       }
+
     default:
       return state
   }
