@@ -15,7 +15,7 @@ const OrderInfo: React.FC = () => {
   const { total, totalToday, onworkOrders, doneOrders } =
     useSelector(webSocketSelector)
 
-  const doneOrdersList = doneOrders.slice(0, 12).map(id => (
+  const doneOrdersList = doneOrders?.slice(0, 12).map(id => (
     <li
       key={id}
       className={classNames(styles.orders__item, styles.orders__item_done)}
@@ -24,7 +24,7 @@ const OrderInfo: React.FC = () => {
     </li>
   ))
 
-  const onworkOrdersList = onworkOrders.slice(0, 12).map(id => (
+  const onworkOrdersList = onworkOrders?.slice(0, 12).map(id => (
     <li key={id} className={styles.orders__item}>
       {id}
     </li>

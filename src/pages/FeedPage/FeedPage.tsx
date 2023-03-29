@@ -31,7 +31,7 @@ const FeedPage: React.FC = () => {
 
   return (
     <main className={classNames('container', styles.wrapper)}>
-      {!orders.length ? (
+      {!orders ? (
         <Loader />
       ) : (
         <>
