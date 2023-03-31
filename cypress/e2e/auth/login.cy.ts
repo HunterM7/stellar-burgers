@@ -1,20 +1,30 @@
-describe('Login test', function () {
-  const email = 'test'
-  const password = 'test'
+import { email, password } from '../../fixtures/loginRequest.json'
 
+describe('Login test', function () {
   beforeEach(() => {
-    // cy.intercept('GET', "api/auth/login", {fixture: })
+    // Interception of requests
+    cy.intercept('POST', 'api/auth/login', {
+      fixture: 'userResponse.json',
+    }).as('loginRequest')
+    cy.intercept('GET', 'api/auth/user', { fixture: 'loginResponse.json' })
+
+    // Go to Profile page
     cy.visit('http://localhost:3000/profile/')
+
+    // Filling the form
     cy.get('[name=email]').type(`${email}{enter}`)
     cy.get('[name=password]').type(`${password}{enter}`)
   })
 
   it('should login and show profile info', function () {
+    cy.wait('@loginRequest')
+      .its('request.body')
+      .should('deep.equal', { email, password })
     cy.get('[name=email]').should('have.value', email)
   })
 
   it('should logout', function () {
-    cy.get('button').click()
+    cy.get('button').contains('Выход').click()
     cy.get('.auth__form').should('exist')
   })
 })
