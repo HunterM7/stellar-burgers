@@ -1,12 +1,12 @@
-import { email, password } from '../../fixtures/loginRequest.json'
+import { email, password } from '../../fixtures/auth/loginRequest.json'
 
 describe('Login test', function () {
   beforeEach(() => {
     // Interception of requests
     cy.intercept('POST', 'api/auth/login', {
-      fixture: 'userResponse.json',
+      fixture: 'auth/userResponse.json',
     }).as('loginRequest')
-    cy.intercept('GET', 'api/auth/user', { fixture: 'loginResponse.json' })
+    cy.intercept('GET', 'api/auth/user', { fixture: 'auth/loginResponse.json' })
 
     // Go to Profile page
     cy.visit('http://localhost:3000/profile/')
