@@ -58,7 +58,7 @@
     "cypress": "^12.8.1",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-cypress": "^2.13.0",
+    "eslint-plugin-cypress": "^2.13.2",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
     "fetch-mock": "^9.11.0",
