@@ -2,7 +2,6 @@ export { default as App } from './App/App'
 
 // AppHeader
 export { default as AppHeader } from './AppHeader/AppHeader'
-export { default as AppHeaderLink } from './AppHeader/AppHeaderLink/AppHeaderLink'
 
 // AuthLink
 export { default as AuthLink } from './AuthLink/AuthLink'
