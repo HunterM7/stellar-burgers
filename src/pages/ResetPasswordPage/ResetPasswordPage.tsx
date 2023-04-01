@@ -17,7 +17,7 @@ import { resetPassword } from 'utils/auth/resetPassword'
 import { FORGOT_PASSWORD_LINK, LOGIN_LINK } from 'utils/data/constants'
 
 // Components
-import { AuthLink } from 'components'
+import { AuthLink } from 'ui'
 
 const ResetPasswordPage: React.FC = () => {
   const navigate = useNavigate()

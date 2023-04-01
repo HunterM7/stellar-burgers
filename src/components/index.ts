@@ -3,9 +3,6 @@ export { default as App } from './App/App'
 // AppHeader
 export { default as AppHeader } from './AppHeader/AppHeader'
 
-// AuthLink
-export { default as AuthLink } from './AuthLink/AuthLink'
-
 // BurgerConstructor
 export { default as BurgerConstructor } from './BurgerConstructor/BurgerConstructor'
 export { default as ConstructorBody } from './BurgerConstructor/ConstructorBody/ConstructorBody'

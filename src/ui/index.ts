@@ -18,3 +18,6 @@ export { default as ConstructorItem } from './ConstructorItem/ConstructorItem'
 
 // App Header Link
 export { default as AppHeaderLink } from './AppHeaderLink/AppHeaderLink'
+
+// Auth Link
+export { default as AuthLink } from './AuthLink/AuthLink'
