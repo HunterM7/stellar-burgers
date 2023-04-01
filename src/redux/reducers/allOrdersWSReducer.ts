@@ -1,22 +1,22 @@
 import { allOrdersWSActions } from 'redux/actions/allOrdersWSActions'
 import { IWSOrder, allOrdersWSActionTypes } from 'redux/actionTypes'
 
-interface IWSInitialState {
+export interface IWSAllOrdersState {
   wsConnected: boolean
-  orders: IWSOrder[]
-  onworkOrders: number[]
-  doneOrders: number[]
+  orders: IWSOrder[] | null
+  onworkOrders: number[] | null
+  doneOrders: number[] | null
   total: number
   totalToday: number
 
   error?: Event | undefined
 }
 
-const initialState: IWSInitialState = {
+const initialState: IWSAllOrdersState = {
   wsConnected: false,
-  orders: [],
-  onworkOrders: [],
-  doneOrders: [],
+  orders: null,
+  onworkOrders: null,
+  doneOrders: null,
   total: 0,
   totalToday: 0,
 }
@@ -24,32 +24,30 @@ const initialState: IWSInitialState = {
 export const allOrdersWSReducer = (
   state = initialState,
   action: allOrdersWSActions,
-): IWSInitialState => {
+): IWSAllOrdersState => {
   switch (action.type) {
     // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
     // Установим флаг wsConnected в состояние true
     case allOrdersWSActionTypes.SUCCESS:
       return {
-        ...state,
+        ...initialState,
         wsConnected: true,
-        error: undefined,
       }
 
     // Опишем обработку экшена с типом WS_CONNECTION_ERROR
     // Установим флаг wsConnected в состояние false и передадим ошибку из action.payload
     case allOrdersWSActionTypes.ERROR:
       return {
-        ...state,
-        error: action.payload,
+        ...initialState,
         wsConnected: false,
+        error: action.payload,
       }
 
     // Опишем обработку экшена с типом WS_CONNECTION_CLOSED, когда соединение закрывается
     // Установим флаг wsConnected в состояние false
     case allOrdersWSActionTypes.CLOSED:
       return {
-        ...state,
-        error: undefined,
+        ...initialState,
         wsConnected: false,
       }
 
@@ -59,7 +57,6 @@ export const allOrdersWSReducer = (
     case allOrdersWSActionTypes.GET_ORDERS:
       return {
         ...state,
-        error: undefined,
         ...action.payload,
       }
     default:

@@ -27,6 +27,10 @@ export interface IAllOrders {
   totalToday: number
 }
 
+export interface IUserOrders {
+  orders: IWSOrder[]
+}
+
 export enum allOrdersWSActionTypes {
   START = 'WS_ALL_ORDERS_CONNECTION_START',
   STOP = 'WS_ALL_ORDERS_CONNECTION_STOP',

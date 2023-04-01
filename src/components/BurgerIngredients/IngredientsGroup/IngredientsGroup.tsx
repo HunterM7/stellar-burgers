@@ -4,7 +4,7 @@ import React from 'react'
 import { TIngredient } from 'redux/actionTypes'
 
 // Components
-import { BurgerItem } from 'components'
+import { IngredientCard } from 'ui'
 
 // Styles
 import styles from './IngredientsGroup.module.scss'
@@ -18,7 +18,7 @@ type IngredientsGroupT = {
 const IngredientsGroup: React.FC<IngredientsGroupT> = ({ id, title, data }) => {
   // Ingredients
   const ingredients = React.useMemo(
-    () => data.map((item, i) => <BurgerItem key={i} ingredient={item} />),
+    () => data.map((item, i) => <IngredientCard key={i} ingredient={item} />),
     [data],
   )
 

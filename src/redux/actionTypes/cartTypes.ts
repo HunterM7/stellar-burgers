@@ -1,12 +1,12 @@
 import { TIngredient } from 'redux/actionTypes'
 
-export interface TCartIngredient extends TIngredient {
+export interface ICartIngredient extends TIngredient {
   uuid: string
 }
 
-export interface TCartState {
+export interface ICartState {
   bun: TIngredient | null
-  ingredients: TCartIngredient[]
+  ingredients: ICartIngredient[] | null
 }
 
 export enum CartActionTypes {

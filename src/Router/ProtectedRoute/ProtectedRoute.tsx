@@ -3,10 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom'
 
 // Redux
 import { useSelector } from 'redux/store'
-import {
-  authIsLoggedInSelector,
-  authSelector,
-} from 'redux/selectors/authSelectors'
+import { authSelector } from 'redux/selectors'
 
 // Routes
 import { HOME_LINK, LOGIN_LINK } from 'utils/data/constants'
@@ -25,15 +22,14 @@ const ProtectedRoute: React.FC<TProtectedRoute> = ({
   onlyUnAuth = false,
 }) => {
   const location: IUseLocation = useLocation()
-  const { isLoading } = useSelector(authSelector)
-  const isLoggedIn = useSelector(authIsLoggedInSelector)
+  const { user, isLoading } = useSelector(authSelector)
 
   if (isLoading) return <Loader />
 
-  if (onlyUnAuth && isLoggedIn)
+  if (onlyUnAuth && user)
     return <Navigate to={location.state?.target || HOME_LINK} replace />
 
-  if (!onlyUnAuth && !isLoggedIn)
+  if (!onlyUnAuth && !user)
     return <Navigate to={LOGIN_LINK} state={{ target: location }} replace />
 
   return element

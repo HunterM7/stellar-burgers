@@ -8,7 +8,8 @@ import { setBun, setIngredient } from 'redux/actionCreators'
 import { cartSelector, dataIngreientsSelector } from 'redux/selectors'
 
 // Components
-import { ConstructorBun, ConstructorItem, ConstructorPlug } from 'components'
+import { ConstructorItem } from 'ui'
+import { ConstructorBun, ConstructorPlug } from 'components'
 
 // Styles
 import styles from './ConstructorBody.module.scss'
@@ -22,7 +23,7 @@ const ConstructorBody: React.FC = () => {
   // Burger content
   const burgerIngredients = React.useMemo(
     () =>
-      ingredients.map((item, i) => (
+      ingredients?.map((item, i) => (
         <ConstructorItem key={item.uuid} ingredient={item} orderId={i} />
       )),
     [ingredients],
@@ -39,7 +40,7 @@ const ConstructorBody: React.FC = () => {
 
   const dropIngredient = React.useCallback(
     (id: string) => {
-      const ingredient = allIngredients.find(el => el._id === id)
+      const ingredient = allIngredients?.find(el => el._id === id)
 
       if (ingredient) {
         ingredient.type === 'bun'
@@ -58,11 +59,11 @@ const ConstructorBody: React.FC = () => {
       <ConstructorBun position="top" />
 
       <div className={styles.ingredients}>
-        {burgerIngredients.length ? (
+        {burgerIngredients ? (
           <ul className={styles.ingredients__list}>{burgerIngredients}</ul>
         ) : (
           <div className={styles.ingredients__plug}>
-            <ConstructorPlug title="Добавьте ингридиенты" />
+            <ConstructorPlug title="Добавьте ингредиенты" />
           </div>
         )}
       </div>

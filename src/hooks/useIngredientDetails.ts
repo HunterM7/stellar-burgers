@@ -15,22 +15,12 @@ const useIngredientDetails = (id: string | undefined) => {
   const dispatch = useDispatch()
 
   // Searching ingredient in Ingredient storage
-  const ingredient = useSelector(dataIngreientsSelector).find(
+  const ingredient = useSelector(dataIngreientsSelector)?.find(
     el => el._id === id,
   )
 
   React.useEffect(() => {
-    ingredient &&
-      dispatch(
-        setIngredientDetails({
-          title: ingredient.name,
-          image: ingredient.image_large,
-          calories: ingredient.calories,
-          proteins: ingredient.proteins,
-          fat: ingredient.fat,
-          carbohydrates: ingredient.carbohydrates,
-        }),
-      )
+    ingredient && dispatch(setIngredientDetails(ingredient))
 
     return () => {
       dispatch(resetIngredientDetails())

@@ -55,6 +55,7 @@ export const WebSocketMiddleware = (WSActions: IWSActions): Middleware =>
 
           if (!data.success && data.message === 'Invalid or missing token') {
             socket?.close()
+
             refreshTokens().then(() =>
               dispatch({
                 type: action.type,

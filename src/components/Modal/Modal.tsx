@@ -4,8 +4,10 @@ import classNames from 'classnames'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Utils
-import useKeyPress from 'hooks/useKeyPress'
 import { IUseLocation } from 'utils/types'
+
+// Hooks
+import useKeyPress from 'hooks/useKeyPress'
 
 // Components
 import { Portal, ModalOverlay } from 'components'
@@ -28,7 +30,7 @@ const Modal: React.FC<PropsWithChildren<IModal>> = ({
 
   // Close function
   const closeFunc = React.useCallback(() => {
-    location?.state?.background && navigate(location.state.background)
+    if (location.state?.background) navigate(location.state.background)
   }, [location.state, navigate])
 
   // Handling Escape press
@@ -59,4 +61,4 @@ const Modal: React.FC<PropsWithChildren<IModal>> = ({
   )
 }
 
-export default React.memo(Modal)
+export default Modal

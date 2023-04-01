@@ -1,4 +1,4 @@
-import { IAllOrders, userOrdersWSActionTypes } from 'redux/actionTypes'
+import { IUserOrders, userOrdersWSActionTypes } from 'redux/actionTypes'
 
 export interface startUserOrdersWSConnectionA {
   type: userOrdersWSActionTypes.START
@@ -21,7 +21,7 @@ export interface errorUserOrdersWSConnectionA {
 }
 export interface getUserOrdersA {
   type: userOrdersWSActionTypes.GET_ORDERS
-  payload: IAllOrders
+  payload: IUserOrders
 }
 
 export type userOrdersWSActions =

@@ -1,4 +1,4 @@
-import { IAllOrders, userOrdersWSActionTypes } from 'redux/actionTypes'
+import { IUserOrders, userOrdersWSActionTypes } from 'redux/actionTypes'
 import {
   startUserOrdersWSConnectionA,
   stopUserOrdersWSConnectionA,
@@ -41,24 +41,14 @@ export const errorUserOrdersWSConnection = (
 })
 
 export const getUserOrders = (event: MessageEvent): getUserOrdersA => {
-  const data: IAllOrders = JSON.parse(event.data as string) as IAllOrders
-
-  const doneOrders = data.orders
-    .filter(el => el.status === 'done')
-    .map(el => el.number)
-
-  const onworkOrders = data.orders
-    .filter(el => el.status === 'created')
-    .map(el => el.number)
+  const { orders }: IUserOrders = JSON.parse(
+    event.data as string,
+  ) as IUserOrders
 
   return {
     type: userOrdersWSActionTypes.GET_ORDERS,
     payload: {
-      orders: data.orders,
-      total: data.total,
-      totalToday: data.totalToday,
-      doneOrders,
-      onworkOrders,
+      orders,
     },
   }
 }

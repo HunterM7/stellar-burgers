@@ -3,16 +3,16 @@ import { Link, useLocation } from 'react-router-dom'
 
 // Redux
 import { IWSOrder } from 'redux/actionTypes'
-import { useSelector } from 'redux/store'
-import { dataIngreientsSelector } from 'redux/selectors'
 
 // Utils
 import { OrderStatus } from 'utils/data/constants'
 import { dateConverter } from 'utils/dateConverter'
-import { getIngredientsList } from 'utils/getIngredientsList'
+
+// Hooks
+import { useIngredientsByIds } from 'hooks/useIngredientsByIds'
 
 // Components
-import { OrderCardList, PriceCard } from 'components'
+import { PriceCard, IngredientsList } from 'ui'
 
 // Styles
 import styles from './OrderCard.module.scss'
@@ -29,16 +29,8 @@ const OrderCard: React.FC<IOrderCard> = ({
   modalPath,
 }) => {
   const location = useLocation()
-  const allIngredients = useSelector(dataIngreientsSelector)
-
-  const uniqIngredients = allIngredients.filter(el =>
-    order.ingredients.includes(el._id),
-  )
-
-  const currentIngredients = getIngredientsList(
-    order.ingredients,
-    allIngredients,
-  )
+  const currentIngredients = useIngredientsByIds(order.ingredients)
+  const uniqueIngredientsList = [...new Set(currentIngredients)]
 
   // Date
   const displayedDate = dateConverter(order.createdAt)
@@ -66,7 +58,7 @@ const OrderCard: React.FC<IOrderCard> = ({
       </div>
 
       <div className={styles.footer}>
-        <OrderCardList ingredients={uniqIngredients} />
+        <IngredientsList ingredients={uniqueIngredientsList} />
         <PriceCard size="small" ingredients={currentIngredients} />
       </div>
     </Link>

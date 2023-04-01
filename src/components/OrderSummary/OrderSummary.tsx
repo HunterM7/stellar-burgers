@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import { Modal } from 'components'
+import { Loader, Modal } from 'components'
 
 // Redux
 import { useSelector } from 'redux/store'
@@ -18,7 +18,9 @@ const OrderSummary: React.FC = () => {
 
   return (
     <Modal>
-      {hasError ? (
+      {isLoading ? (
+        <Loader size="small" />
+      ) : hasError || !orderInfo ? (
         <h2>Что-то пошло не так</h2>
       ) : (
         <>

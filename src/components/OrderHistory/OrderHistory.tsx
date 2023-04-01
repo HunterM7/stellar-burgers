@@ -28,7 +28,7 @@ const OrderHistory: React.FC = () => {
 
   return (
     <>
-      {!orders.length ? (
+      {!orders ? (
         <Loader />
       ) : (
         <OrderFeed

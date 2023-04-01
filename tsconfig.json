@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2016",
+    "types": ["node", "cypress"],
     "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
@@ -24,7 +25,7 @@
     "resolveJsonModule": true,
     "baseUrl": "src",
 
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["es5", "dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -33,6 +34,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
+    // "checkJs": false
   },
-  "include": ["src"]
+  "include": ["src", "cypress"]
 }

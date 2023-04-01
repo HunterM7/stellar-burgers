@@ -4,14 +4,15 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 // Redux
 import { useDispatch, useSelector } from 'redux/store'
-import { authIsLoggedInSelector, cartSelector } from 'redux/selectors'
+import { authUserSelector, cartSelector } from 'redux/selectors'
 import { setOrder } from 'redux/actions'
 
 // Utils
 import { LOGIN_LINK, ORDER_LINK } from 'utils/data/constants'
 
 // Components
-import { PopupHint, PriceCard } from 'components'
+import { PriceCard } from 'ui'
+import { PopupHint } from 'components'
 
 // Styles
 import styles from './ConstructorFooter.module.scss'
@@ -24,7 +25,20 @@ const ConstructorFooter: React.FC = () => {
   // Redux
   const { bun, ingredients } = useSelector(cartSelector)
 
-  const isUserLoggedIn = useSelector(authIsLoggedInSelector)
+  // Ingredients
+
+  const cartIngredients = (function () {
+    if (bun && ingredients) return [bun, ...ingredients]
+
+    if (bun) return [bun]
+
+    if (ingredients) return ingredients
+
+    return null
+  })()
+
+  // Auth checker
+  const user = useSelector(authUserSelector)
 
   // Popup Hint Modal
   const initialPopupState = React.useMemo(
@@ -50,11 +64,11 @@ const ConstructorFooter: React.FC = () => {
 
   // Handle order click
   const handleOrderClick = React.useCallback(() => {
-    if (!bun && !ingredients.length)
+    if (!bun && !ingredients)
       handlePopup('Выберите булку и хотя бы 1 ингридиент!')
     else if (!bun) handlePopup('Выберите булку!')
-    else if (!ingredients.length) handlePopup('Выберите хотя бы 1 ингридиент!')
-    else if (!isUserLoggedIn) navigate(LOGIN_LINK)
+    else if (!ingredients) handlePopup('Выберите хотя бы 1 ингридиент!')
+    else if (!user) navigate(LOGIN_LINK)
     else {
       const orderIngridietns = [
         bun._id,
@@ -65,22 +79,11 @@ const ConstructorFooter: React.FC = () => {
       dispatch(setOrder(orderIngridietns))
       navigate(ORDER_LINK, { state: { background: location } })
     }
-  }, [
-    bun,
-    ingredients,
-    isUserLoggedIn,
-    location,
-    handlePopup,
-    navigate,
-    dispatch,
-  ])
+  }, [bun, ingredients, user, location, handlePopup, navigate, dispatch])
 
   return (
     <div className={styles.orderBox}>
-      <PriceCard
-        size="medium"
-        ingredients={bun ? [bun, ...ingredients] : ingredients}
-      />
+      <PriceCard size="medium" ingredients={cartIngredients || []} />
 
       <Button
         htmlType="button"

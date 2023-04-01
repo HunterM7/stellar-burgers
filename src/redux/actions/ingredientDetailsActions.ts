@@ -1,12 +1,9 @@
-import {
-  IngredientDetailsActionTypes,
-  IIngredientDetails,
-} from 'redux/actionTypes'
+import { TIngredient, IngredientDetailsActionTypes } from 'redux/actionTypes'
 
 // Actions
 export interface setIngredientDetailsA {
   type: typeof IngredientDetailsActionTypes.SET_INGREDIENT_DETAILS
-  details: IIngredientDetails
+  ingredient: TIngredient
 }
 export interface resetIngredientDetailsA {
   type: typeof IngredientDetailsActionTypes.RESET_INGREDIENT_DETAILS
