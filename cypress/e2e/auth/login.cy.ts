@@ -1,7 +1,7 @@
 import { email, password } from '../../fixtures/auth/loginRequest.json'
 
 describe('Login test', function () {
-  beforeEach(() => {
+  beforeEach(function () {
     // Interception of requests
     cy.intercept('POST', 'api/auth/login', {
       fixture: 'auth/userResponse.json',
