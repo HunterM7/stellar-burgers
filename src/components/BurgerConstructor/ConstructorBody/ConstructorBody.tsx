@@ -63,7 +63,7 @@ const ConstructorBody: React.FC = () => {
           <ul className={styles.ingredients__list}>{burgerIngredients}</ul>
         ) : (
           <div className={styles.ingredients__plug}>
-            <ConstructorPlug title="Добавьте ингридиенты" />
+            <ConstructorPlug title="Добавьте ингредиенты" />
           </div>
         )}
       </div>
