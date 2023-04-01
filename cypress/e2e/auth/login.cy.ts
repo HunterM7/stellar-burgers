@@ -9,7 +9,7 @@ describe('Login test', function () {
     cy.intercept('GET', 'api/auth/user', { fixture: 'auth/loginResponse.json' })
 
     // Go to Profile page
-    cy.visit('http://localhost:3000/profile/')
+    cy.visit('profile')
 
     // Filling the form
     cy.get('[name=email]').type(`${email}{enter}`)

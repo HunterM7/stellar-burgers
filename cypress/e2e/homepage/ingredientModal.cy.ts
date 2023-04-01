@@ -1,11 +1,10 @@
 import { email, password } from '../../fixtures/auth/loginRequest.json'
-
 import { ingredients } from '../../fixtures/homepage/orderRequest.json'
 
 describe('Test on open ingredient modal', function () {
   beforeEach(function () {
     // Visit Homepage
-    cy.visit('http://localhost:3000/')
+    cy.visit('')
 
     // Get ingredients
     cy.get('li[class^=IngredientCard_wrapper]').as('ingredients')
