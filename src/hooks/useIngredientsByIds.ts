@@ -1,20 +1,19 @@
+// Redux
 import { useSelector } from 'redux/store'
 import { dataIngreientsSelector } from 'redux/selectors'
+import { TIngredient } from 'redux/actionTypes/dataTypes'
+import { sortIngredientsList } from 'utils/sortIngredientsList'
 
 export function useIngredientsByIds(ids: string[]) {
   const allIngredients = useSelector(dataIngreientsSelector)
 
-  const result = []
+  const orderIngredients = ids.reduce<TIngredient[]>((acc, id) => {
+    const ingredient = allIngredients?.find(el => el._id === id)
 
-  if (allIngredients) {
-    for (const id of ids) {
-      const ingredient = allIngredients.find(
-        ingredient => ingredient._id === id,
-      )
+    if (ingredient) acc.push(ingredient)
 
-      if (ingredient) result.push(ingredient)
-    }
-  }
+    return acc
+  }, [])
 
-  return result
+  return sortIngredientsList(orderIngredients)
 }
