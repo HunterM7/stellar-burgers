@@ -11,7 +11,7 @@ import { AppHeader } from 'components'
 const App: React.FC = () => {
   const dispatch = useDispatch()
 
-  // Checking the freshness of tokens
+  // Checking the freshness of tokens and getting all the ingredients
   React.useEffect(() => {
     dispatch(getUser())
     dispatch(getIngredients())
@@ -25,4 +25,4 @@ const App: React.FC = () => {
   )
 }
 
-export default React.memo(App)
+export default App
