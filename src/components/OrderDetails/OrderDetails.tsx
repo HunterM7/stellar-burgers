@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom'
 import { useFetchOrder } from 'hooks/useFetchOrder'
 
 // Components
-import { Loader, OrderDetailsBody } from 'components'
+import { Loader } from 'ui'
+import { OrderDetailsBody } from 'components'
 
 const OrderDetails: React.FC = () => {
   // Getting order

@@ -1,7 +1,8 @@
 import React from 'react'
 
 // Components
-import { Loader, Modal } from 'components'
+import { Loader } from 'ui'
+import { Modal } from 'components'
 
 // Redux
 import { useSelector } from 'redux/store'

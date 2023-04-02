@@ -21,9 +21,6 @@ export { default as IngredientDetails } from './IngredientDetails/IngredientDeta
 export { default as IngredientInfo } from './IngredientInfo/IngredientInfo'
 export { default as IngredientInfoCard } from './IngredientInfo/IngredientInfoCard/IngredientInfoCard'
 
-// Loader
-export { default as Loader } from './Loader/Loader'
-
 // Portal
 export { default as Portal } from './Portal/Portal'
 
