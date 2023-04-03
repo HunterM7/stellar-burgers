@@ -26,11 +26,10 @@ const ConstructorFooter: React.FC = () => {
   const { bun, ingredients } = useSelector(cartSelector)
 
   // Ingredients
-
   const cartIngredients = (function () {
-    if (bun && ingredients) return [bun, ...ingredients]
+    if (bun && ingredients) return [bun, ...ingredients, bun]
 
-    if (bun) return [bun]
+    if (bun) return [bun, bun]
 
     if (ingredients) return ingredients
 
@@ -51,19 +50,16 @@ const ConstructorFooter: React.FC = () => {
 
   const [popupState, setPopupState] = React.useState(initialPopupState)
 
-  const handlePopup = React.useCallback(
-    (title: string) => {
+  // Handle order click
+  const handleOrderClick = React.useCallback(() => {
+    const handlePopup = (title: string) => {
       setPopupState({
         isPopupActive: true,
         title,
       })
       setTimeout(() => setPopupState(initialPopupState), 4000)
-    },
-    [initialPopupState],
-  )
+    }
 
-  // Handle order click
-  const handleOrderClick = React.useCallback(() => {
     if (!bun && !ingredients)
       handlePopup('Выберите булку и хотя бы 1 ингридиент!')
     else if (!bun) handlePopup('Выберите булку!')
@@ -79,7 +75,7 @@ const ConstructorFooter: React.FC = () => {
       dispatch(setOrder(orderIngridietns))
       navigate(ORDER_LINK, { state: { background: location } })
     }
-  }, [bun, ingredients, user, location, handlePopup, navigate, dispatch])
+  }, [bun, ingredients, user, navigate, initialPopupState, dispatch, location])
 
   return (
     <div className={styles.orderBox}>
@@ -99,4 +95,4 @@ const ConstructorFooter: React.FC = () => {
   )
 }
 
-export default React.memo(ConstructorFooter)
+export default ConstructorFooter
