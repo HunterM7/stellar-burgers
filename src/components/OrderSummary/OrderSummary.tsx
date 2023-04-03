@@ -1,15 +1,14 @@
 import React from 'react'
 
-// Components
-import { Loader } from 'ui'
-import { Modal } from 'components'
-
 // Redux
 import { useSelector } from 'redux/store'
 import { orderSelector } from 'redux/selectors'
 
 // Files and other
 import orderSVG from 'assets/images/orderDoneSVG.svg'
+
+// Components
+import { Loader, Modal } from 'ui'
 
 // Styles
 import styles from './OrderSummary.module.scss'

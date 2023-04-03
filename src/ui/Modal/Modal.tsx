@@ -10,7 +10,8 @@ import { IUseLocation } from 'utils/types'
 import useKeyPress from 'hooks/useKeyPress'
 
 // Components
-import { Portal, ModalOverlay } from 'components'
+import { ModalOverlay } from 'ui'
+import { Portal } from 'components'
 
 // Styles
 import styles from './Modal.module.scss'
@@ -28,6 +29,13 @@ const Modal: React.FC<PropsWithChildren<IModal>> = ({
   const navigate = useNavigate()
   const location: IUseLocation = useLocation()
 
+  // Modal heading
+  const heading = title ? (
+    <h2 className={classNames(styles.title, styles[`title_${titleSize}`])}>
+      {title}
+    </h2>
+  ) : null
+
   // Close function
   const closeFunc = React.useCallback(() => {
     if (location.state?.background) navigate(location.state.background)
@@ -37,16 +45,10 @@ const Modal: React.FC<PropsWithChildren<IModal>> = ({
   useKeyPress('Escape', closeFunc)
 
   return (
-    <Portal>
+    <Portal type="modal">
       <div className={styles.modal}>
         <div className={styles.header}>
-          {!!title && (
-            <h2
-              className={classNames(styles.title, styles[`title_${titleSize}`])}
-            >
-              {title}
-            </h2>
-          )}
+          {heading}
 
           <button className={styles.closeBtn} onClick={closeFunc}>
             <CloseIcon type="primary" />

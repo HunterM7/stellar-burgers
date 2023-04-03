@@ -37,6 +37,14 @@ $trans-fast: 0.4s $cubic;
 $trans-medium: 0.8s $cubic;
 
 // Mixins
+@mixin container {
+	width: 100%;
+	max-width: calc(1240px + 16px * 2);
+
+	margin: 0 auto;
+	padding: 0 16px;
+}
+
 @mixin noselect {
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none; /* Safari */

@@ -24,10 +24,6 @@ export { default as IngredientInfoCard } from './IngredientInfo/IngredientInfoCa
 // Portal
 export { default as Portal } from './Portal/Portal'
 
-// Modal
-export { default as Modal } from '../components/Modal/Modal'
-export { default as ModalOverlay } from '../components/Modal/ModalOverlay/ModalOverlay'
-
 // OrderDetails
 export { default as OrderDetails } from './OrderDetails/OrderDetails'
 export { default as OrderDetailsBody } from './OrderDetails/OrderDetailsBody/OrderDetailsBody'

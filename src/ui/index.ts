@@ -19,6 +19,10 @@ export { default as AuthLink } from './AuthLink/AuthLink'
 // Loader
 export { default as Loader } from './Loader/Loader'
 
+// Modal
+export { default as Modal } from './Modal/Modal'
+export { default as ModalOverlay } from './Modal/ModalOverlay/ModalOverlay'
+
 // OrderCard
 export { default as OrderCard } from './OrderCard/OrderCard'
 

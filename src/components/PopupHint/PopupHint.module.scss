@@ -3,10 +3,12 @@
 @import 'scss/vars';
 
 .wrapper {
-	position: fixed;
-	top: 100px;
-	right: 100px;
-	z-index: 10000;
+	// position: fixed;
+	// top: 100px;
+	// right: 100px;
+	// z-index: 10000;
+
+	width: fit-content;
 
 	padding: 16px;
 

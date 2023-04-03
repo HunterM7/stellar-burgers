@@ -1,7 +1,8 @@
 import React from 'react'
 
 // Components
-import { Modal, IngredientInfo } from 'components'
+import { Modal } from 'ui'
+import { IngredientInfo } from 'components'
 
 // Styles
 import styles from './IngredientDetails.module.scss'
