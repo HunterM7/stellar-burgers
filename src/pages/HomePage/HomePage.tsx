@@ -10,7 +10,8 @@ import { useSelector } from 'redux/store'
 import { dataSelector } from 'redux/selectors'
 
 // Components
-import { Loader, BurgerIngredients, BurgerConstructor } from 'components'
+import { Loader } from 'ui'
+import { BurgerIngredients, BurgerConstructor } from 'components'
 
 // Styles
 import styles from './HomePage.module.scss'

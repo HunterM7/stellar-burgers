@@ -16,13 +16,18 @@ const AppHeaderLink: React.FC<IAppHeaderLink> = ({ title, path, Icon }) => {
     return `${styles.wrapper} ${isActive ? styles.active : ''}`
   }
 
-  //! Решить вопрос со статичным типом у Icon
+  const content = ({ isActive }: { isActive: boolean }) => (
+    <>
+      <Icon type={`${isActive ? 'primary' : 'secondary'}`} />
+      <span className={styles.text}>{title}</span>
+    </>
+  )
+
   return (
     <NavLink to={path} className={className}>
-      <Icon type="primary" />
-      <span className={styles.text}>{title}</span>
+      {content}
     </NavLink>
   )
 }
 
-export default React.memo(AppHeaderLink)
+export default AppHeaderLink

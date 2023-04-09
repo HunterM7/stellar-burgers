@@ -17,7 +17,7 @@ import { handleRegister } from 'redux/actions'
 import { LOGIN_LINK } from 'utils/data/constants'
 
 // Components
-import { AuthLink } from 'components'
+import { AuthLink } from 'ui'
 
 const RegisterPage: React.FC = () => {
   const dispatch = useDispatch()

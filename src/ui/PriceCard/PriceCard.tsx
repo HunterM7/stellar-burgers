@@ -7,7 +7,6 @@ import { TIngredient, ICartIngredient } from 'redux/actionTypes'
 
 // Utils
 import { countPrice } from 'utils/countPrice'
-import { sortIngredientsList } from 'utils/sortIngredientsList'
 
 // Styles
 import styles from './PriceCard.module.scss'
@@ -29,7 +28,7 @@ const PriceCard: React.FC<IPriceCard> = ({
 
   if (price) totalPrice = price
 
-  if (ingredients) totalPrice = countPrice(sortIngredientsList(ingredients))
+  if (ingredients) totalPrice = countPrice(ingredients)
 
   return (
     <div className={classNames(styles.price, styles[size])}>

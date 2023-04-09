@@ -16,7 +16,7 @@ import { handleLogin } from 'redux/actions'
 import { FORGOT_PASSWORD_LINK, REGISTER_LINK } from 'utils/data/constants'
 
 // Components
-import { AuthLink } from 'components'
+import { AuthLink } from 'ui'
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch()

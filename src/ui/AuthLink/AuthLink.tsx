@@ -14,16 +14,18 @@ interface IAuthLink {
 const AuthLink: React.FC<IAuthLink> = ({ title, buttonName, path }) => {
   const navigate = useNavigate()
 
+  const handleButton = () => navigate(path)
+
   return (
     <div className={styles.wrapper}>
-      <p className={styles.title}>{title}</p>
+      <span className={styles.title}>{title}</span>
 
       <Button
         htmlType="button"
         type="secondary"
         size="large"
         extraClass={styles.button}
-        onClick={() => navigate(path)}
+        onClick={handleButton}
       >
         {buttonName}
       </Button>

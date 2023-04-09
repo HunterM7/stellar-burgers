@@ -10,11 +10,9 @@ type ConstructorPlugT = {
 }
 
 const ConstructorPlug: React.FC<ConstructorPlugT> = ({ title, position }) => {
-  return (
-    <p className={classNames(styles.wrapper, position && styles[position])}>
-      {title}
-    </p>
-  )
+  const className = classNames(styles.wrapper, position && styles[position])
+
+  return <p className={className}>{title}</p>
 }
 
-export default React.memo(ConstructorPlug)
+export default ConstructorPlug

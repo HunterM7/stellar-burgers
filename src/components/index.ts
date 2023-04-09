@@ -2,10 +2,6 @@ export { default as App } from './App/App'
 
 // AppHeader
 export { default as AppHeader } from './AppHeader/AppHeader'
-export { default as AppHeaderLink } from './AppHeader/AppHeaderLink/AppHeaderLink'
-
-// AuthLink
-export { default as AuthLink } from './AuthLink/AuthLink'
 
 // BurgerConstructor
 export { default as BurgerConstructor } from './BurgerConstructor/BurgerConstructor'
@@ -25,15 +21,8 @@ export { default as IngredientDetails } from './IngredientDetails/IngredientDeta
 export { default as IngredientInfo } from './IngredientInfo/IngredientInfo'
 export { default as IngredientInfoCard } from './IngredientInfo/IngredientInfoCard/IngredientInfoCard'
 
-// Loader
-export { default as Loader } from './Loader/Loader'
-
 // Portal
 export { default as Portal } from './Portal/Portal'
-
-// Modal
-export { default as Modal } from '../components/Modal/Modal'
-export { default as ModalOverlay } from '../components/Modal/ModalOverlay/ModalOverlay'
 
 // OrderDetails
 export { default as OrderDetails } from './OrderDetails/OrderDetails'

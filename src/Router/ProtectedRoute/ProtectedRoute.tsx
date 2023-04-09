@@ -10,7 +10,7 @@ import { HOME_LINK, LOGIN_LINK } from 'utils/data/constants'
 import { IUseLocation } from 'utils/types'
 
 // Components
-import { Loader } from 'components'
+import { Loader } from 'ui'
 
 type TProtectedRoute = {
   element: ReactElement

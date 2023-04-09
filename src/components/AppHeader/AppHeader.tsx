@@ -7,17 +7,16 @@ import { linksList } from 'utils/data/linksList'
 import { HOME_LINK } from 'utils/data/constants'
 
 // Components
-import { AppHeaderLink } from 'components'
+import { AppHeaderLink } from 'ui'
 
 // Styles
 import styles from './AppHeader.module.scss'
 
 const AppHeader: React.FC = () => {
   // List of header links
-  const headerLinks = React.useMemo(
-    () => linksList.map(link => <AppHeaderLink key={link.path} {...link} />),
-    [],
-  )
+  const headerLinks = linksList.map(link => (
+    <AppHeaderLink key={link.path} {...link} />
+  ))
 
   return (
     <header className={styles.header}>
@@ -32,4 +31,4 @@ const AppHeader: React.FC = () => {
   )
 }
 
-export default React.memo(AppHeader)
+export default AppHeader

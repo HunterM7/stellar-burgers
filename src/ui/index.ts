@@ -1,12 +1,6 @@
 // Ingredient Icon
 export { default as IngredientIcon } from './IngredientIcon/IngredientIcon'
 
-// PriceCard
-export { default as PriceCard } from './PriceCard/PriceCard'
-
-// OrderCard
-export { default as OrderCard } from '../ui/OrderCard/OrderCard'
-
 // Ingredients List
 export { default as IngredientsList } from './IngredientsList/IngredientsList'
 
@@ -15,3 +9,22 @@ export { default as IngredientCard } from './IngredientCard/IngredientCard'
 
 // Constructor Item
 export { default as ConstructorItem } from './ConstructorItem/ConstructorItem'
+
+// App Header Link
+export { default as AppHeaderLink } from './AppHeaderLink/AppHeaderLink'
+
+// Auth Link
+export { default as AuthLink } from './AuthLink/AuthLink'
+
+// Loader
+export { default as Loader } from './Loader/Loader'
+
+// Modal
+export { default as Modal } from './Modal/Modal'
+export { default as ModalOverlay } from './Modal/ModalOverlay/ModalOverlay'
+
+// OrderCard
+export { default as OrderCard } from './OrderCard/OrderCard'
+
+// PriceCard
+export { default as PriceCard } from './PriceCard/PriceCard'

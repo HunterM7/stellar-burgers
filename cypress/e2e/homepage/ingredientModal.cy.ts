@@ -47,6 +47,7 @@ describe('Test on open ingredient modal', function () {
 
     // DnD bun
     cy.get('@bun').drag('@dropTarget')
+    //! Добавить тест удаление и перемещения ингредиентов
 
     // Check for bun in constructor
     cy.get('@plugs').should('exist').and('have.length', 1)

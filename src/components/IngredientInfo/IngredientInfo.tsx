@@ -1,9 +1,12 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-// Components
-import { IngredientInfoCard, Loader } from 'components'
+// Hooks
 import useIngredientDetails from 'hooks/useIngredientDetails'
+
+// Components
+import { Loader } from 'ui'
+import { IngredientInfoCard } from 'components'
 
 const IngredientInfo: React.FC = () => {
   const { id } = useParams()

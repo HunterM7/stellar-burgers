@@ -1,15 +1,20 @@
 import React from 'react'
 
-// Components
-import { Loader, OrderFeed } from 'components'
+// Redux
 import { useDispatch, useSelector } from 'redux/store'
+import { userOrdersSelector } from 'redux/selectors'
 import {
   startUserOrdersWSConnection,
   stopUserOrdersWSConnection,
 } from 'redux/actionCreators'
-import { userOrdersSelector } from 'redux/selectors/userOrdersWSSelectors'
+
+// Utils
 import { PROFILE_ORDERS_LINK, WS_USER_ORDERS } from 'utils/data/constants'
 import { getCookie } from 'utils/cookie'
+
+// Components
+import { Loader } from 'ui'
+import { OrderFeed } from 'components'
 
 const OrderHistory: React.FC = () => {
   const dispatch = useDispatch()

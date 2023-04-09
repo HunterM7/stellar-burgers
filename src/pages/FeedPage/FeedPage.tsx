@@ -11,7 +11,8 @@ import {
 import { ORDER_FEED_LINK, WS_ALL_ORDERS } from 'utils/data/constants'
 
 // Components
-import { Loader, OrderFeed, OrderInfo } from 'components'
+import { Loader } from 'ui'
+import { OrderFeed, OrderInfo } from 'components'
 
 // Styles
 import styles from './FeedPage.module.scss'
