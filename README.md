@@ -1,7 +1,5 @@
 # Stellar Burgers (Звездная бургерная)
 
-# [Stellar Burgers (Звездная бургерная)](https://stellar-burgers.web.app/).
-
 ## Link: https://stellar-burgers.web.app/
 
 ## Описание
