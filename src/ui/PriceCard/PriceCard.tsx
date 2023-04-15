@@ -7,6 +7,7 @@ import { TIngredient, ICartIngredient } from 'redux/actionTypes'
 
 // Utils
 import { countPrice } from 'utils/countPrice'
+import { numberFormatter } from 'utils/numberFormatter'
 
 // Styles
 import styles from './PriceCard.module.scss'
@@ -24,11 +25,11 @@ const PriceCard: React.FC<IPriceCard> = ({
   size = 'small',
   prefix,
 }) => {
-  let totalPrice = 0
+  let totalPrice = '0'
 
-  if (price) totalPrice = price
+  if (price) totalPrice = numberFormatter(price)
 
-  if (ingredients) totalPrice = countPrice(ingredients)
+  if (ingredients) totalPrice = numberFormatter(countPrice(ingredients))
 
   return (
     <div className={classNames(styles.price, styles[size])}>

@@ -1,5 +1,8 @@
 import React from 'react'
 
+// Utils
+import { numberFormatter } from 'utils/numberFormatter'
+
 // Styles
 import styles from './OrderCount.module.scss'
 
@@ -9,10 +12,7 @@ interface IOrderCount {
 }
 
 const OrderCount: React.FC<IOrderCount> = ({ title, count }) => {
-  const modifiedCount = count
-    .toString()
-    .split(/(?=(?:...)*$)/)
-    .join(' ')
+  const modifiedCount = numberFormatter(count)
 
   return (
     <>
