@@ -3,7 +3,7 @@ import React from 'react'
 // Redux
 import { IWSOrder } from 'redux/actionTypes'
 
-// Urils
+// Utils
 import { API_URL_ORDERS } from 'utils/data/constants'
 import { customFetch } from 'utils/api/customFetch'
 
